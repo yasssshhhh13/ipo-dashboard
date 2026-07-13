@@ -1,0 +1,5 @@
+{
+  "updatedAt": null,
+  "note": "This file is overwritten automatically by .github/workflows/update-ipo-data.yml every 2 hours, scraping investorgain.com. Until the first successful run after deployment, the site uses the verified baseline snapshot inside src/App.jsx.",
+  "ipos": {}
+}

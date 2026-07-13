@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-6",
+        model: "claude-sonnet-5", // current-generation Sonnet — valid for the public Anthropic API
         max_tokens: Math.min(Number(max_tokens) || 800, 2000), // hard cap, protects against runaway cost
         system: typeof system === "string" ? system.slice(0, 20000) : undefined,
         messages,

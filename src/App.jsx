@@ -281,7 +281,11 @@ async function fetchLiveData(rawUrl) {
     if (!res.ok) return false;
     const json = await res.json();
     if (!json || typeof json.ipos !== "object") return false;
-    _liveOverlay = { updatedAt: json.updatedAt || new Date().toISOString(), byId: json.ipos };
+    // An empty/seed file (updatedAt still null, or no IPOs yet) means the
+    // GitHub Action hasn't completed a real scrape yet — treat that as "not
+    // synced" rather than fabricating a fresh timestamp.
+    if (!json.updatedAt || Object.keys(json.ipos).length === 0) return false;
+    _liveOverlay = { updatedAt: json.updatedAt, byId: json.ipos };
     return true;
   } catch {
     return false;
@@ -293,7 +297,7 @@ async function fetchLiveData(rawUrl) {
 function formatDataAsOf() {
   return _liveOverlay.updatedAt
     ? new Date(_liveOverlay.updatedAt).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
-    : `${DATA_AS_OF} baseline — connect Live Data for current figures`;
+    : `${DATA_AS_OF} baseline — live sync pending first Action run`;
 }
 
 const STATUS_COLOR = { Open: BRAND.green, Closed: "#94A3B8", Upcoming: "#F0A202", Listed: BRAND.blue };
@@ -350,8 +354,13 @@ async function askClaude(messages) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ max_tokens: 800, system: buildSystemPrompt(), messages }),
   });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data?.error || "Assistant request failed");
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    throw new Error(`Server returned an unreadable response (HTTP ${res.status}). The /api/chat function may not be deployed correctly.`);
+  }
+  if (!res.ok) throw new Error(data?.error || `Assistant request failed (HTTP ${res.status})`);
   return (data.content || []).map((b) => b.text || "").join("\n").trim() || "Sorry, I couldn't generate a response just now.";
 }
 
@@ -421,8 +430,10 @@ function AssistantPane({ embedded, tick }) {
       getFollowUpQuestions(withReply)
         .then(setSuggestions)
         .finally(() => setSuggestLoading(false));
-    } catch {
-      setMessages((m) => [...m, { role: "assistant", content: "Something went wrong reaching the assistant. Please try again." }]);
+    } catch (err) {
+      console.error("Assistant error:", err);
+      const msg = err?.message || "Unknown error";
+      setMessages((m) => [...m, { role: "assistant", content: `⚠️ Couldn't reach the assistant: ${msg}\n\nIf you're the site owner: check that ANTHROPIC_API_KEY is set in Vercel → Settings → Environment Variables, that you redeployed after adding it, and that your Anthropic account has billing/credits enabled at console.anthropic.com.` }]);
     } finally {
       setLoading(false);
     }
@@ -953,7 +964,7 @@ export default function App() {
   const [dark, setDark] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [tick, setTick] = useState(0); // bumped hourly + on manual refresh to force re-derive live status/data
-  const [dataUrl, setDataUrl] = useState("");
+  const [dataUrl, setDataUrl] = useState("/live-data.json"); // same-origin file this repo's GitHub Action keeps updated — works automatically, no setup needed
   const [showSourceInput, setShowSourceInput] = useState(false);
   const [lastSync, setLastSync] = useState(null);
   const [syncOk, setSyncOk] = useState(null);
@@ -1053,7 +1064,7 @@ export default function App() {
               <p className="text-[10px] text-slate-400">
                 {lastSync
                   ? `Data as of ${new Date(lastSync).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}`
-                  : `Baseline data (${DATA_AS_OF}) — connect Live Data above for current figures`}
+                  : `Baseline data (${DATA_AS_OF}) — live sync pending first Action run`}
               </p>
             </div>
           </div>
@@ -1076,24 +1087,27 @@ export default function App() {
               <button
                 onClick={() => setShowSourceInput((s) => !s)}
                 className="hidden sm:flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full"
-                style={{ background: dataUrl ? `${BRAND.green}22` : "rgba(148,163,184,0.18)", color: dataUrl ? "#3f6212" : "#64748b" }}
-                title={lastSync ? `Last synced ${new Date(lastSync).toLocaleString("en-IN")}` : "Click to connect your investorgain.com live-data source"}
+                style={{ background: syncOk === true ? `${BRAND.green}22` : "rgba(148,163,184,0.18)", color: syncOk === true ? "#3f6212" : "#64748b" }}
+                title={lastSync ? `Last synced ${new Date(lastSync).toLocaleString("en-IN")}` : "Auto-syncing from this repo's GitHub Action every hour — waiting for its first successful run"}
               >
-                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: dataUrl ? BRAND.green : "#94a3b8" }} />
-                {dataUrl ? (syncOk === false ? "Sync issue" : "Live Data") : "Static baseline"}
+                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: syncOk === true ? BRAND.green : "#94a3b8" }} />
+                {syncOk === true ? "Live Data" : "Awaiting first sync"}
               </button>
 
               {showSourceInput && (
                 <div className="absolute top-11 right-0 w-80 glass rounded-2xl p-4 z-30 shadow-xl">
-                  <p className="text-xs text-slate-500 mb-2">Paste your GitHub Action's <span className="font-mono">live-data.json</span> raw URL to enable hourly auto-refresh from investorgain.com.</p>
+                  <p className="text-xs text-slate-500 mb-2">
+                    This site auto-syncs from <span className="font-mono">/live-data.json</span>, kept fresh by this repo's GitHub Action (scrapes investorgain.com every 2 hours). No setup needed once the Action is enabled and has run once.
+                  </p>
+                  <p className="text-xs text-slate-500 mb-2">Only change this if you want to point at a different source:</p>
                   <input
                     defaultValue={dataUrl}
                     onKeyDown={(e) => e.key === "Enter" && saveDataUrl(e.currentTarget.value.trim())}
-                    placeholder="https://raw.githubusercontent.com/user/repo/main/public/live-data.json"
+                    placeholder="/live-data.json"
                     className="w-full glass-inset rounded-xl px-3 py-2 text-xs outline-none mb-2"
                   />
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] text-slate-400">{lastSync ? `Synced ${new Date(lastSync).toLocaleTimeString("en-IN")}` : "Not connected yet"}</span>
+                    <span className="text-[10px] text-slate-400">{lastSync ? `Synced ${new Date(lastSync).toLocaleTimeString("en-IN")}` : "No successful sync yet"}</span>
                     <button onClick={() => setShowSourceInput(false)} className="text-xs px-2.5 py-1 rounded-lg text-white" style={{ background: BRAND.blue }}>Done</button>
                   </div>
                 </div>
