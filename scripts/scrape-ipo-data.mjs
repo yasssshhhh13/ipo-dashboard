@@ -122,23 +122,32 @@ async function scrapeGmp(page) {
   await page.waitForTimeout(2000);
   const rows = await extractTable(page, "gmp");
 
-  // Expected columns (verify against the debug dump if this drifts):
+  if (rows.length > 0) {
+    console.log("[gmp] sample raw rows (for verifying column order):");
+    console.log(JSON.stringify(rows.slice(0, 2), null, 2));
+  }
+
+  // Expected columns (verify against the sample rows logged above if this drifts):
   // [0] IPO Name  [1] Price  [2] GMP  [3] Est Listing  [4] Est Gain % ...
+  // NOTE: we intentionally do NOT patch price/priceMax from this table —
+  // investorgain's column layout isn't consistent across all IPO rows
+  // (mainboard vs SME, pre- vs post-price-band-announcement), and guessing
+  // wrong here previously corrupted price bands (e.g. showed "398-153").
+  // Price band changes are applied manually to the baseline in src/App.jsx
+  // instead, which is safer than an unverified column index.
   const result = {};
   for (const cells of rows) {
     const rawName = cells[0]?.replace(/\s*IPO\s*$/i, "").trim();
     const id = resolveId(rawName || "");
     if (!id) continue;
 
-    const price = toNumber(cells[1]);
     const gmp = toNumber(cells[2]);
     const estListing = toNumber(cells[3]);
-    if (gmp === undefined && estListing === undefined && price === undefined) continue;
+    if (gmp === undefined && estListing === undefined) continue;
 
     result[id] = {
       ...(gmp !== undefined ? { gmp } : {}),
       ...(estListing !== undefined ? { estListing } : {}),
-      ...(price !== undefined ? { priceMax: price } : {}),
     };
   }
   return result;
@@ -148,6 +157,11 @@ async function scrapeSubscription(page) {
   await page.goto(SUB_URL, { waitUntil: "networkidle", timeout: 45000 });
   await page.waitForTimeout(2000);
   const rows = await extractTable(page, "sub");
+
+  if (rows.length > 0) {
+    console.log("[sub] sample raw rows (for verifying column order):");
+    console.log(JSON.stringify(rows.slice(0, 2), null, 2));
+  }
 
   // Expected columns: [0] IPO Name [1] QIB [2] NII/HNI [3] Retail [4] Total ...
   const result = {};
