@@ -1,5 +1,66 @@
 {
-  "updatedAt": null,
-  "note": "This file is overwritten automatically by .github/workflows/update-ipo-data.yml every 2 hours, scraping investorgain.com. Until the first successful run after deployment, the site uses the verified baseline snapshot inside src/App.jsx.",
-  "ipos": {}
+  "updatedAt": "2026-07-14T05:46:22.783Z",
+  "errors": [],
+  "ipos": {
+    "sbi-funds": {
+      "estListing": 0.13,
+      "priceMax": 92
+    },
+    "devson-catalyst": {
+      "estListing": 220.35,
+      "priceMax": 49
+    },
+    "happy-steels": {
+      "estListing": 77.81,
+      "priceMax": 8
+    },
+    "kusumgar": {
+      "estListing": 135.8,
+      "priceMax": 153
+    },
+    "ic-electricals": {
+      "estListing": 295.08,
+      "priceMax": 47
+    },
+    "knack-packaging": {
+      "estListing": 61.11,
+      "priceMax": 13
+    },
+    "sampark-logistics": {
+      "estListing": 3.47,
+      "priceMax": 2.5
+    },
+    "atharva-polyplast": {
+      "estListing": 7.54,
+      "priceMax": 10
+    },
+    "vinit-mobile": {
+      "estListing": 1.62,
+      "priceMax": 0
+    },
+    "kratikal-tech": {
+      "estListing": 154.97,
+      "priceMax": 78
+    },
+    "teja-engineering": {
+      "estListing": 1.37,
+      "priceMax": 36
+    },
+    "seemax-resources": {
+      "estListing": 3.62,
+      "priceMax": 0
+    },
+    "aastha-spintex": {
+      "estListing": 5.05,
+      "priceMax": 5
+    },
+    "adon-agro": {
+      "estListing": 1.35,
+      "priceMax": 0
+    },
+    "csm-technologies": {
+      "estListing": 1.18,
+      "priceMax": 0
+    }
+  }
 }
