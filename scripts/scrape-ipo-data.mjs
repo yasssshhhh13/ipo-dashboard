@@ -33,7 +33,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUTPUT_PATH = path.join(__dirname, "..", "public", "live-data.json");
 
 const GMP_URL = "https://www.investorgain.com/report/live-ipo-gmp/331/all/";
-const SUB_URL = "https://www.investorgain.com/report/ipo-subscription-live/68/all/";
+const SUB_URL = "https://www.investorgain.com/report/ipo-subscription-live/333/all/";
 
 const TABLE_SELECTOR_CANDIDATES = [
   "table.gmp_tbl",
