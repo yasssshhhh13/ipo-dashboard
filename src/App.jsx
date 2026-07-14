@@ -50,15 +50,15 @@ const IPOS_BASE = [
     risks: ["Concentrated government-client dependency", "Tender-based revenue is lumpy", "Working capital tied up in receivables"] },
 
   { id: "sbi-funds", name: "SBI Funds Management", company: "SBI Funds Management Ltd.", type: "Mainboard", status: "Upcoming",
-    open: "2026-07-14", close: "2026-07-16", listing: "2026-07-22", allotment: "2026-07-17", refund: "2026-07-21", demat: "2026-07-21",
-    priceMin: 0, priceMax: 0, faceValue: 10, lot: 0, issueSize: 0, freshIssue: 0, ofs: 0,
-    gmp: 91, trend: "down", estListing: 0, gmpHistory: [{ d: "Jun28", v: 90 }, { d: "Jul1", v: 101 }, { d: "Jul2", v: 101 }, { d: "Jul3", v: 91 }],
+    open: "2026-07-14", close: "2026-07-16", listing: "2026-07-21", allotment: "2026-07-17", refund: "2026-07-20", demat: "2026-07-20",
+    priceMin: 545, priceMax: 574, faceValue: 1, lot: 26, issueSize: 9813, freshIssue: 0, ofs: 9813,
+    gmp: 97, trend: "up", estListing: 671, gmpHistory: [{ d: "Jul9", v: 90 }, { d: "Jul11", v: 101 }, { d: "Jul12", v: 101 }, { d: "Jul13", v: 97 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/mar-2026/sbi-funds-management-limited-drhp_100517.html", rhp: null,
-    leadManager: "TBD", exchange: "BSE, NSE",
-    sub: null, fin: null,
-    about: "One of India's largest asset management companies (AUM > ₹10 lakh crore). Pure offer-for-sale by SBI & Amundi; price band not yet announced.",
+    leadManager: "Kotak Mahindra Capital", exchange: "BSE, NSE",
+    sub: null, fin: { revenue: 4976.11, pat: 3067.38, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null },
+    about: "India's largest asset management company by mutual fund quarterly average AUM (~₹29.46 lakh crore as of Mar 2026), and investment manager to SBI Mutual Fund — a joint venture between State Bank of India and Amundi. 100% offer-for-sale; the company receives no proceeds from the IPO.",
     sector: "Asset Management", registrar: "KFin Technologies Ltd",
-    strengths: ["Market-leading AUM scale", "Strong brand trust (SBI parentage)", "Diversified fund product mix"],
+    strengths: ["India's largest AMC by AUM", "Strong brand trust (SBI + Amundi parentage)", "Diversified fund product mix"],
     risks: ["Pure OFS — no fresh capital to the company", "AMC earnings sensitive to market cycles", "Fee-compression pressure industry-wide"] },
 
   { id: "kusumgar", name: "Kusumgar", company: "Kusumgar Ltd.", type: "Mainboard", status: "Upcoming",
@@ -580,7 +580,7 @@ function IPOCard({ ipo, onOpen, watchlist }) {
           <div className="flex items-center gap-1.5">
             <TrendIcon trend={ipo.trend} />
             <span className="font-mono text-sm font-medium" style={{ color: ipo.gmp > 0 ? "#0f9d68" : "#64748b" }}>{rupee(ipo.gmp)}</span>
-            <span className="text-[11px] text-slate-400">GMP · {gainPct(ipo).toFixed(1)}%</span>
+            <span className="text-sm font-bold font-mono" style={{ color: ipo.gmp > 0 ? "#0f9d68" : "#475569" }}>GMP · {gainPct(ipo).toFixed(1)}%</span>
           </div>
           <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ background: `${STATUS_COLOR[ipo.status]}22`, color: STATUS_COLOR[ipo.status] }}>{ipo.status}</span>
         </div>
@@ -741,7 +741,10 @@ function IPODetail({ ipo, onClose, watchlist }) {
               <SectionLabel icon={Landmark}>Financials (latest FY)</SectionLabel>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
                 {[["Revenue", cr(ipo.fin.revenue)], ["PAT", cr(ipo.fin.pat)], ["EBITDA", ipo.fin.ebitda ? cr(ipo.fin.ebitda) : "N/A"],
-                  ["Net worth", cr(ipo.fin.netWorth)], ["Debt", cr(ipo.fin.debt)], ["EPS", `₹${ipo.fin.eps}`], ["P/E", `${ipo.fin.pe}x`], ["ROE", `${ipo.fin.roe}%`]].map(([l, v]) => (
+                  ["Net worth", cr(ipo.fin.netWorth)], ["Debt", cr(ipo.fin.debt)],
+                  ["EPS", ipo.fin.eps != null ? `₹${ipo.fin.eps}` : "N/A"],
+                  ["P/E", ipo.fin.pe != null ? `${ipo.fin.pe}x` : "N/A"],
+                  ["ROE", ipo.fin.roe != null ? `${ipo.fin.roe}%` : "N/A"]].map(([l, v]) => (
                   <div key={l} className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">{l}</p><p className="font-mono text-slate-700">{v}</p></div>
                 ))}
               </div>
@@ -865,9 +868,9 @@ function FinancialsTab() {
           <div className="grid grid-cols-3 gap-2 text-xs">
             <div><p className="text-slate-400">Revenue</p><p className="font-mono text-slate-700">{cr(ipo.fin.revenue)}</p></div>
             <div><p className="text-slate-400">PAT</p><p className="font-mono text-slate-700">{cr(ipo.fin.pat)}</p></div>
-            <div><p className="text-slate-400">ROE</p><p className="font-mono text-slate-700">{ipo.fin.roe}%</p></div>
-            <div><p className="text-slate-400">EPS</p><p className="font-mono text-slate-700">₹{ipo.fin.eps}</p></div>
-            <div><p className="text-slate-400">P/E</p><p className="font-mono text-slate-700">{ipo.fin.pe}x</p></div>
+            <div><p className="text-slate-400">ROE</p><p className="font-mono text-slate-700">{ipo.fin.roe != null ? `${ipo.fin.roe}%` : "N/A"}</p></div>
+            <div><p className="text-slate-400">EPS</p><p className="font-mono text-slate-700">{ipo.fin.eps != null ? `₹${ipo.fin.eps}` : "N/A"}</p></div>
+            <div><p className="text-slate-400">P/E</p><p className="font-mono text-slate-700">{ipo.fin.pe != null ? `${ipo.fin.pe}x` : "N/A"}</p></div>
             <div><p className="text-slate-400">EBITDA</p><p className="font-mono text-slate-700">{ipo.fin.ebitda ? cr(ipo.fin.ebitda) : "N/A"}</p></div>
           </div>
         </div>
@@ -941,6 +944,11 @@ function StatCard({ icon: Icon, label, value, tint }) {
 /* =====================================================================
    MAIN APP
 ===================================================================== */
+// Single switch to turn the AI Assistant back on once Anthropic billing/
+// credits are set up (or a different provider is wired in) — no other code
+// needs to change, this just hides its nav entry and header shortcut.
+const AI_ASSISTANT_ENABLED = false;
+
 const NAV = [
   { id: "ai", label: "AI Assistant", icon: Sparkles },
   { id: "overview", label: "Overview", icon: LayoutGrid },
@@ -954,7 +962,7 @@ const NAV = [
   { id: "docs", label: "DRHP / RHP", icon: FileText },
   { id: "calculator", label: "Calculator", icon: CalcIcon },
   { id: "watchlist", label: "Watchlist", icon: Bookmark },
-];
+].filter((n) => n.id !== "ai" || AI_ASSISTANT_ENABLED);
 
 export default function App() {
   const [tab, setTab] = useState("overview");
@@ -1123,9 +1131,11 @@ export default function App() {
               <button onClick={() => setDark((d) => !d)} className="w-9 h-9 rounded-xl glass-inset flex items-center justify-center text-slate-500">
                 {dark ? <Sun size={15} /> : <Moon size={15} />}
               </button>
-              <button onClick={() => setTab("ai")} className="hidden sm:flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm text-white" style={{ background: BRAND.blue }}>
-                <MessageCircle size={14} /> Ask AI
-              </button>
+              {AI_ASSISTANT_ENABLED && (
+                <button onClick={() => setTab("ai")} className="hidden sm:flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm text-white" style={{ background: BRAND.blue }}>
+                  <MessageCircle size={14} /> Ask AI
+                </button>
+              )}
             </div>
           </header>
 
@@ -1166,7 +1176,7 @@ export default function App() {
             {tab === "docs" && <DocumentsTab />}
             {tab === "calculator" && <CalculatorTab />}
             {tab === "watchlist" && <WatchlistTab watchlist={watchlist} onOpen={setSelected} />}
-            {tab === "ai" && <div className="glass rounded-2xl p-5"><AssistantPane embedded tick={tick} /></div>}
+            {AI_ASSISTANT_ENABLED && tab === "ai" && <div className="glass rounded-2xl p-5"><AssistantPane embedded tick={tick} /></div>}
           </main>
         </div>
       </div>
