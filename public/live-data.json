@@ -1,10 +1,9 @@
 {
-  "updatedAt": "2026-07-14T05:53:04.386Z",
+  "updatedAt": "2026-07-14T06:03:08.431Z",
   "errors": [],
   "ipos": {
     "sbi-funds": {
       "estListing": 0.19,
-      "priceMax": 87,
       "sub": {
         "overall": 0.22,
         "qib": 0.19,
@@ -14,7 +13,6 @@
     },
     "devson-catalyst": {
       "estListing": 220.35,
-      "priceMax": 49,
       "sub": {
         "overall": 286.5,
         "qib": 220.35,
@@ -24,7 +22,6 @@
     },
     "happy-steels": {
       "estListing": 77.81,
-      "priceMax": 8,
       "sub": {
         "overall": 128.77,
         "qib": 77.81,
@@ -34,7 +31,6 @@
     },
     "kusumgar": {
       "estListing": 135.8,
-      "priceMax": 153,
       "sub": {
         "overall": 189.4,
         "qib": 135.8,
@@ -44,7 +40,6 @@
     },
     "ic-electricals": {
       "estListing": 295.08,
-      "priceMax": 47,
       "sub": {
         "overall": 936.7,
         "qib": 295.08,
@@ -54,7 +49,6 @@
     },
     "knack-packaging": {
       "estListing": 61.11,
-      "priceMax": 13,
       "sub": {
         "overall": 163.83,
         "qib": 61.11,
@@ -64,7 +58,6 @@
     },
     "sampark-logistics": {
       "estListing": 3.47,
-      "priceMax": 2.5,
       "sub": {
         "overall": 10.22,
         "qib": 3.47,
@@ -74,7 +67,6 @@
     },
     "atharva-polyplast": {
       "estListing": 7.54,
-      "priceMax": 10,
       "sub": {
         "overall": 22.44,
         "qib": 7.54,
@@ -84,7 +76,6 @@
     },
     "vinit-mobile": {
       "estListing": 1.62,
-      "priceMax": 0,
       "sub": {
         "overall": 0.88,
         "qib": 1.62,
@@ -94,7 +85,6 @@
     },
     "kratikal-tech": {
       "estListing": 154.97,
-      "priceMax": 78,
       "sub": {
         "overall": 375.29,
         "qib": 154.97,
@@ -104,7 +94,6 @@
     },
     "teja-engineering": {
       "estListing": 1.37,
-      "priceMax": 36,
       "sub": {
         "overall": 0,
         "qib": 1.37,
@@ -114,7 +103,6 @@
     },
     "seemax-resources": {
       "estListing": 3.62,
-      "priceMax": 0,
       "sub": {
         "overall": 3.62,
         "qib": 3.62,
@@ -124,7 +112,6 @@
     },
     "aastha-spintex": {
       "estListing": 5.05,
-      "priceMax": 5,
       "sub": {
         "overall": 9.11,
         "qib": 5.05,
@@ -134,7 +121,6 @@
     },
     "adon-agro": {
       "estListing": 1.35,
-      "priceMax": 0,
       "sub": {
         "overall": 1.82,
         "qib": 1.35,
@@ -144,7 +130,6 @@
     },
     "csm-technologies": {
       "estListing": 1.18,
-      "priceMax": 0,
       "sub": {
         "overall": 1.65,
         "qib": 1.18,
