@@ -1,66 +1,156 @@
 {
-  "updatedAt": "2026-07-14T05:46:22.783Z",
+  "updatedAt": "2026-07-14T05:53:04.386Z",
   "errors": [],
   "ipos": {
     "sbi-funds": {
-      "estListing": 0.13,
-      "priceMax": 92
+      "estListing": 0.19,
+      "priceMax": 87,
+      "sub": {
+        "overall": 0.22,
+        "qib": 0.19,
+        "hni": 0,
+        "retail": 0.38
+      }
     },
     "devson-catalyst": {
       "estListing": 220.35,
-      "priceMax": 49
+      "priceMax": 49,
+      "sub": {
+        "overall": 286.5,
+        "qib": 220.35,
+        "hni": 168.56,
+        "retail": 211.19
+      }
     },
     "happy-steels": {
       "estListing": 77.81,
-      "priceMax": 8
+      "priceMax": 8,
+      "sub": {
+        "overall": 128.77,
+        "qib": 77.81,
+        "hni": 59.01,
+        "retail": 83.26
+      }
     },
     "kusumgar": {
       "estListing": 135.8,
-      "priceMax": 153
+      "priceMax": 153,
+      "sub": {
+        "overall": 189.4,
+        "qib": 135.8,
+        "hni": 299.51,
+        "retail": 144.05
+      }
     },
     "ic-electricals": {
       "estListing": 295.08,
-      "priceMax": 47
+      "priceMax": 47,
+      "sub": {
+        "overall": 936.7,
+        "qib": 295.08,
+        "hni": 241.75,
+        "retail": 422.38
+      }
     },
     "knack-packaging": {
       "estListing": 61.11,
-      "priceMax": 13
+      "priceMax": 13,
+      "sub": {
+        "overall": 163.83,
+        "qib": 61.11,
+        "hni": 160.03,
+        "retail": 112.04
+      }
     },
     "sampark-logistics": {
       "estListing": 3.47,
-      "priceMax": 2.5
+      "priceMax": 2.5,
+      "sub": {
+        "overall": 10.22,
+        "qib": 3.47,
+        "hni": 1.55,
+        "retail": 9.89
+      }
     },
     "atharva-polyplast": {
       "estListing": 7.54,
-      "priceMax": 10
+      "priceMax": 10,
+      "sub": {
+        "overall": 22.44,
+        "qib": 7.54,
+        "hni": 3.58,
+        "retail": 11.91
+      }
     },
     "vinit-mobile": {
       "estListing": 1.62,
-      "priceMax": 0
+      "priceMax": 0,
+      "sub": {
+        "overall": 0.88,
+        "qib": 1.62,
+        "hni": 1,
+        "retail": 0.63
+      }
     },
     "kratikal-tech": {
       "estListing": 154.97,
-      "priceMax": 78
+      "priceMax": 78,
+      "sub": {
+        "overall": 375.29,
+        "qib": 154.97,
+        "hni": 145.82,
+        "retail": 223.33
+      }
     },
     "teja-engineering": {
       "estListing": 1.37,
-      "priceMax": 36
+      "priceMax": 36,
+      "sub": {
+        "overall": 0,
+        "qib": 1.37,
+        "hni": 0,
+        "retail": 0
+      }
     },
     "seemax-resources": {
       "estListing": 3.62,
-      "priceMax": 0
+      "priceMax": 0,
+      "sub": {
+        "overall": 3.62,
+        "qib": 3.62,
+        "hni": 17.19,
+        "retail": 5.01
+      }
     },
     "aastha-spintex": {
       "estListing": 5.05,
-      "priceMax": 5
+      "priceMax": 5,
+      "sub": {
+        "overall": 9.11,
+        "qib": 5.05,
+        "hni": 3.59,
+        "retail": 6.66
+      }
     },
     "adon-agro": {
       "estListing": 1.35,
-      "priceMax": 0
+      "priceMax": 0,
+      "sub": {
+        "overall": 1.82,
+        "qib": 1.35,
+        "hni": 22.47,
+        "retail": 0.57
+      }
     },
     "csm-technologies": {
       "estListing": 1.18,
-      "priceMax": 0
+      "priceMax": 0,
+      "sub": {
+        "overall": 1.65,
+        "qib": 1.18,
+        "hni": 1.02,
+        "retail": 1.33
+      }
     }
   }
 }
