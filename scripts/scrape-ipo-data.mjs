@@ -130,13 +130,15 @@ async function scrapeGmp(page) {
     const id = resolveId(rawName || "");
     if (!id) continue;
 
+    const price = toNumber(cells[1]);
     const gmp = toNumber(cells[2]);
     const estListing = toNumber(cells[3]);
-    if (gmp === undefined && estListing === undefined) continue;
+    if (gmp === undefined && estListing === undefined && price === undefined) continue;
 
     result[id] = {
       ...(gmp !== undefined ? { gmp } : {}),
       ...(estListing !== undefined ? { estListing } : {}),
+      ...(price !== undefined ? { priceMax: price } : {}),
     };
   }
   return result;
