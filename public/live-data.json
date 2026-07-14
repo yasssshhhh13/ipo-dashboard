@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-07-14T06:03:08.431Z",
+  "updatedAt": "2026-07-14T07:53:37.136Z",
   "errors": [],
   "ipos": {
     "sbi-funds": {
-      "estListing": 0.19,
+      "estListing": 0.39,
       "sub": {
-        "overall": 0.22,
-        "qib": 0.19,
-        "hni": 0,
-        "retail": 0.38
+        "overall": 0.54,
+        "qib": 0.39,
+        "hni": 0.06,
+        "retail": 0.75
       }
     },
     "devson-catalyst": {
