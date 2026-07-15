@@ -233,6 +233,7 @@ const investment = (i) => price(i) * i.lot;
 const gainPct = (i) => { const p = price(i); return p ? (i.gmp / p) * 100 : 0; };
 const listingGainPct = (i) => (i.listedAt && i.priceMax) ? ((i.listedAt - i.priceMax) / i.priceMax) * 100 : null;
 const currentReturnPct = (i) => (i.currentPrice && i.listedAt) ? ((i.currentPrice - i.listedAt) / i.listedAt) * 100 : null;
+const listingProfitLossPerLot = (i) => (i.listedAt && i.priceMax && i.lot) ? (i.listedAt - i.priceMax) * i.lot : null;
 
 // A few SME IPOs don't have a confirmed direct SEBI/exchange document URL yet —
 // for those we link to the exchange's official offer-documents portal instead
@@ -585,9 +586,20 @@ function IPOCard({ ipo, onOpen, watchlist }) {
 
         <div className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-1.5">
-            <TrendIcon trend={ipo.trend} />
-            <span className="font-mono text-sm font-medium" style={{ color: ipo.gmp > 0 ? "#0f9d68" : "#64748b" }}>{rupee(ipo.gmp)}</span>
-            <span className="text-sm font-bold font-mono" style={{ color: ipo.gmp > 0 ? "#0f9d68" : "#475569" }}>GMP · {gainPct(ipo).toFixed(1)}%</span>
+            {ipo.status === "Listed" && ipo.listedAt ? (
+              <>
+                {listingGainPct(ipo) >= 0 ? <ArrowUpRight size={13} style={{ color: BRAND.green }} /> : <ArrowDownRight size={13} className="text-rose-500" />}
+                <span className="text-sm font-bold font-mono" style={{ color: listingGainPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>Listed · {listingGainPct(ipo)?.toFixed(1)}%</span>
+              </>
+            ) : ipo.status === "Listed" ? (
+              <span className="text-sm font-medium text-slate-400">Listed</span>
+            ) : (
+              <>
+                <TrendIcon trend={ipo.trend} />
+                <span className="font-mono text-sm font-medium" style={{ color: ipo.gmp > 0 ? "#0f9d68" : "#64748b" }}>{rupee(ipo.gmp)}</span>
+                <span className="text-sm font-bold font-mono" style={{ color: ipo.gmp > 0 ? "#0f9d68" : "#475569" }}>GMP · {gainPct(ipo).toFixed(1)}%</span>
+              </>
+            )}
           </div>
           <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ background: `${STATUS_COLOR[ipo.status]}22`, color: STATUS_COLOR[ipo.status] }}>{ipo.status}</span>
         </div>
@@ -598,11 +610,35 @@ function IPOCard({ ipo, onOpen, watchlist }) {
           <div><p className="text-slate-400">Issue size</p><p className="font-mono text-slate-700">{ipo.issueSize ? `₹${ipo.issueSize} Cr` : "TBD"}</p></div>
         </div>
 
-        {ipo.lot > 0 && ipo.gmp > 0 && (
-          <div className="mt-3 flex items-center justify-between rounded-xl px-3 py-2" style={{ background: `${BRAND.green}22` }}>
-            <span className="text-[11px]" style={{ color: "#3f6212" }}>Est. profit / lot</span>
-            <span className="font-mono font-medium" style={{ color: "#3f6212" }}>+{rupee(profitPerLot(ipo))}</span>
-          </div>
+        {ipo.status === "Listed" ? (
+          ipo.listedAt ? (
+            <div className="mt-3 space-y-1.5">
+              <div className="flex items-center justify-between rounded-xl px-3 py-2" style={{ background: listingGainPct(ipo) >= 0 ? `${BRAND.green}22` : "rgba(225,29,72,0.10)" }}>
+                <span className="text-[11px]" style={{ color: listingGainPct(ipo) >= 0 ? "#3f6212" : "#be123c" }}>Listing gain</span>
+                <span className="font-mono font-medium flex items-center gap-1" style={{ color: listingGainPct(ipo) >= 0 ? "#3f6212" : "#be123c" }}>
+                  {listingGainPct(ipo) >= 0 ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
+                  {listingGainPct(ipo)?.toFixed(1)}% · {rupee(ipo.listedAt)}
+                </span>
+              </div>
+              <div className="flex items-center justify-between text-[11px] px-1">
+                <span className="text-slate-400">P&L / lot at listing</span>
+                <span className="font-mono font-medium" style={{ color: listingProfitLossPerLot(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>
+                  {listingProfitLossPerLot(ipo) >= 0 ? "+" : ""}{rupee(listingProfitLossPerLot(ipo))}
+                </span>
+              </div>
+            </div>
+          ) : (
+            <div className="mt-3 rounded-xl px-3 py-2 text-[11px] text-slate-400" style={{ background: "rgba(148,163,184,0.12)" }}>
+              Listed — actual listing price not yet recorded
+            </div>
+          )
+        ) : (
+          ipo.lot > 0 && ipo.gmp > 0 && (
+            <div className="mt-3 flex items-center justify-between rounded-xl px-3 py-2" style={{ background: `${BRAND.green}22` }}>
+              <span className="text-[11px]" style={{ color: "#3f6212" }}>Est. profit / lot</span>
+              <span className="font-mono font-medium" style={{ color: "#3f6212" }}>+{rupee(profitPerLot(ipo))}</span>
+            </div>
+          )
         )}
 
         {ipo.status === "Listed" && ipo.currentPrice && (
@@ -616,7 +652,7 @@ function IPOCard({ ipo, onOpen, watchlist }) {
         )}
 
         <div className="flex items-center justify-between mt-3 text-[11px] text-slate-400">
-          <span className="flex items-center gap-1"><Calendar size={11} /> {ipo.open} → {ipo.close}</span>
+          <span className="flex items-center gap-1"><Calendar size={11} /> {ipo.status === "Listed" ? `Listed ${ipo.listing}` : `${ipo.open} → ${ipo.close}`}</span>
           <span className="flex items-center gap-1" style={{ color: BRAND.blue }}>Details <ChevronRight size={12} /></span>
         </div>
       </button>
@@ -682,8 +718,8 @@ function IPODetail({ ipo, onClose, watchlist }) {
             </div>
           </div>
 
-          {/* Estimated profit */}
-          {ipo.lot > 0 && ipo.gmp > 0 && (
+          {/* Estimated profit — pre-listing only */}
+          {ipo.status !== "Listed" && ipo.lot > 0 && ipo.gmp > 0 && (
             <div className="rounded-2xl p-4" style={{ background: `${BRAND.green}1c`, border: `1px solid ${BRAND.green}55` }}>
               <p className="text-xs mb-2 font-medium" style={{ color: "#3f6212" }}>Estimated listing profit (1 lot)</p>
               <div className="grid grid-cols-3 gap-3 text-sm font-mono">
@@ -694,16 +730,29 @@ function IPODetail({ ipo, onClose, watchlist }) {
             </div>
           )}
 
-          {/* Listed performance */}
+          {/* Listed performance — actual results replace the estimate entirely */}
           {ipo.status === "Listed" && (
             <div>
               <SectionLabel icon={Activity}>Listing Performance</SectionLabel>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
-                <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Issue price</p><p className="font-mono text-slate-700">{rupee(ipo.priceMax)}</p></div>
-                <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Listing price</p><p className="font-mono text-slate-700">{rupee(ipo.listedAt)}</p></div>
-                <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Listing gain</p><p className="font-mono" style={{ color: listingGainPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>{listingGainPct(ipo)?.toFixed(1)}%</p></div>
-                <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Current / return</p><p className="font-mono" style={{ color: currentReturnPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>{rupee(ipo.currentPrice)} ({currentReturnPct(ipo)?.toFixed(1)}%)</p></div>
-              </div>
+              {ipo.listedAt ? (
+                <>
+                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 text-sm">
+                    <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Issue price</p><p className="font-mono text-slate-700">{rupee(ipo.priceMax)}</p></div>
+                    <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Listing price</p><p className="font-mono text-slate-700">{rupee(ipo.listedAt)}</p></div>
+                    <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Listing gain</p><p className="font-mono" style={{ color: listingGainPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>{listingGainPct(ipo)?.toFixed(1)}%</p></div>
+                    <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">P&L / lot</p><p className="font-mono" style={{ color: listingProfitLossPerLot(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>{listingProfitLossPerLot(ipo) >= 0 ? "+" : ""}{rupee(listingProfitLossPerLot(ipo))}</p></div>
+                    <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Listing date</p><p className="font-mono text-slate-700">{ipo.listing}</p></div>
+                  </div>
+                  {ipo.currentPrice && (
+                    <div className="mt-2 glass-inset rounded-xl p-2.5 inline-flex items-center gap-2">
+                      <p className="text-[10px] text-slate-400">Current / since listing</p>
+                      <p className="font-mono text-sm" style={{ color: currentReturnPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>{rupee(ipo.currentPrice)} ({currentReturnPct(ipo)?.toFixed(1)}%)</p>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="glass-inset rounded-xl p-3 text-xs text-slate-400">Listed on {ipo.listing} — actual listing price not yet recorded.</div>
+              )}
             </div>
           )}
 
@@ -1051,11 +1100,11 @@ export default function App() {
       }}>
         <style>{`
           .glass {
-            background: ${dark ? "rgba(255,255,255,0.045)" : "rgba(255,255,255,0.62)"};
+            background: ${dark ? "linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))" : "rgba(255,255,255,0.62)"};
             backdrop-filter: blur(16px) saturate(140%);
             -webkit-backdrop-filter: blur(16px) saturate(140%);
-            border: 1px solid ${dark ? "rgba(255,255,255,0.09)" : "rgba(255,255,255,0.75)"};
-            box-shadow: 0 1px 1px rgba(28,155,218,0.04), 0 8px 24px -8px ${dark ? "rgba(0,0,0,0.45)" : "rgba(28,155,218,0.14)"}, inset 0 1px 0 ${dark ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.9)"};
+            border: 1px solid ${dark ? "rgba(28,155,218,0.14)" : "rgba(255,255,255,0.75)"};
+            box-shadow: 0 1px 1px rgba(28,155,218,0.04), 0 10px 30px -10px ${dark ? "rgba(0,0,0,0.6)" : "rgba(28,155,218,0.14)"}, inset 0 1px 0 ${dark ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.9)"};
             transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
           }
           .glass-inset {
@@ -1078,6 +1127,22 @@ export default function App() {
           button, a { transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
           button:active { transform: scale(0.97); }
           input:focus, select:focus, textarea:focus { outline: none; box-shadow: 0 0 0 3px ${dark ? "rgba(28,155,218,0.28)" : "rgba(28,155,218,0.18)"}; border-color: ${BRAND.blue} !important; }
+
+          /* Dark-mode text contrast — the component tree uses light-mode
+             Tailwind slate classes throughout (text-slate-800 etc. never had
+             a dark: variant applied), so without this override dark mode
+             text is illegibly dim. Scoped under .dark (already applied to
+             the root wrapper) so light mode is completely unaffected. */
+          .dark .text-slate-800 { color: #f1f5f9; }
+          .dark .text-slate-700 { color: #e2e8f0; }
+          .dark .text-slate-600 { color: #cbd5e1; }
+          .dark .text-slate-500 { color: #94a3b8; }
+          .dark .text-slate-400 { color: #7c8ba1; }
+          .dark .text-slate-300 { color: #64748b; }
+          .dark .border-black\\/5 { border-color: rgba(255,255,255,0.08); }
+          .dark .border-black\\/10 { border-color: rgba(255,255,255,0.12); }
+          .dark .bg-white\\/70, .dark .bg-white\\/80, .dark .bg-white\\/5, .dark .bg-white\\/10 { background: rgba(255,255,255,0.06); }
+          .dark .hover\\:bg-white:hover { background: rgba(255,255,255,0.08) !important; }
         `}</style>
 
         {/* SIDEBAR */}
@@ -1087,8 +1152,8 @@ export default function App() {
             <div className="flex items-center gap-2.5 mb-1">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm tracking-tight" style={{ background: `linear-gradient(135deg, ${BRAND.blue}, ${BRAND.green})`, boxShadow: `0 4px 14px -2px ${BRAND.blue}55` }}>IQ</div>
               <div>
-                <p className="text-sm font-semibold" style={{ color: dark ? "#fff" : "#1e293b" }}>IPO Intelligence</p>
-                <p className="text-[10px] text-slate-400">AI-powered IPO analysis</p>
+                <p className="text-sm font-semibold" style={{ color: dark ? "#fff" : "#1e293b" }}>Calm Capital</p>
+                <p className="text-[10px] text-slate-400">Institutional-Grade IPO Analysis</p>
               </div>
             </div>
 

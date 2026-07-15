@@ -1,4 +1,4 @@
-# IPO Intelligence — Deployment Guide
+# Calm Capital — Deployment Guide
 
 This is a production-ready Vite + React app with one serverless function
 (`api/chat.js`) that keeps your Claude API key private. No CLI required —

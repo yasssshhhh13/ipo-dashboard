@@ -160,7 +160,8 @@ async function scrapeGmp(page) {
     if (!id) continue;
 
     const gmp = parseGmpCell(cells[1]);
-    const price = toNumber(cells[4]);
+    const priceRaw = toNumber(cells[4]);
+    const price = priceRaw && priceRaw > 0 ? priceRaw : undefined; // "0" means not-yet-announced on investorgain, not a real price
     if (gmp === undefined && price === undefined) continue;
 
     result[id] = {
@@ -174,8 +175,13 @@ async function scrapeGmp(page) {
 }
 
 async function scrapeSubscription(page) {
-  await page.goto(SUB_URL, { waitUntil: "networkidle", timeout: 45000 });
-  await page.waitForTimeout(2000);
+  // Uses "domcontentloaded" instead of "networkidle" — this page appears to
+  // poll continuously in the background (live subscription ticker), which
+  // means network activity never fully stops and "networkidle" reliably
+  // times out here. We wait for DOM load, then give the table extra time to
+  // render via JS instead of waiting for silence that never comes.
+  await page.goto(SUB_URL, { waitUntil: "domcontentloaded", timeout: 45000 });
+  await page.waitForTimeout(4000);
   const rows = await extractTable(page, "sub");
 
   if (rows.length > 0) {
