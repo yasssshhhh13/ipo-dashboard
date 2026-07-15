@@ -439,7 +439,7 @@ function NotificationBell({ hook, onOpenIpo }) {
 async function fetchLiveData(rawUrl) {
   if (!rawUrl) return false;
   try {
-    const res = await fetch(`${rawUrl}${rawUrl.includes("?") ? "&" : "?"}t=${Date.now()}`);
+    const res = await fetch(`${rawUrl}${rawUrl.includes("?") ? "&" : "?"}t=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) return false;
     const json = await res.json();
     if (!json || typeof json.ipos !== "object") return false;
@@ -1316,7 +1316,7 @@ export default function App() {
           style={{ borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)" }}>
           <div className="w-64 p-5 flex flex-col h-full">
             <div className="flex items-center gap-2.5 mb-1">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm tracking-tight" style={{ background: `linear-gradient(135deg, ${BRAND.blue}, ${BRAND.green})`, boxShadow: `0 4px 14px -2px ${BRAND.blue}55` }}>IQ</div>
+              <img src="/logo.png" alt="Calm Capital" className="w-10 h-10 rounded-xl" style={{ filter: `drop-shadow(0 4px 10px ${BRAND.blue}44)` }} />
               <div>
                 <p className="text-sm font-semibold" style={{ color: dark ? "#fff" : "#1e293b" }}>Calm Capital</p>
                 <p className="text-[10px] text-slate-400">Institutional-Grade IPO Analysis</p>
