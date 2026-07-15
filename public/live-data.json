@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-07-15T12:13:33.967Z",
+  "updatedAt": "2026-07-15T14:47:14.924Z",
   "errors": [],
   "ipos": {
     "sbi-funds": {
-      "gmp": 91,
+      "gmp": 90,
       "priceMax": 574,
-      "estListing": 665,
+      "estListing": 664,
       "sub": {
-        "overall": 2.81,
+        "overall": 2.82,
         "qib": 1.5,
-        "hni": 5.5,
-        "retail": 1.7
+        "hni": 5.53,
+        "retail": 1.71
       }
     },
     "devson-catalyst": {
