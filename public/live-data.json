@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-07-15T14:47:14.924Z",
+  "updatedAt": "2026-07-15T16:19:12.529Z",
   "errors": [],
   "ipos": {
     "sbi-funds": {
-      "gmp": 90,
+      "gmp": 89,
       "priceMax": 574,
-      "estListing": 664,
+      "estListing": 663,
       "sub": {
         "overall": 2.82,
         "qib": 1.5,
