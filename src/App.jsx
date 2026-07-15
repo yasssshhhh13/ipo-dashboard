@@ -24,7 +24,7 @@ const IPOS_BASE = [
   { id: "knack-packaging", name: "Knack Packaging", company: "Knack Packaging Ltd.", type: "Mainboard", status: "Open",
     open: "2026-07-01", close: "2026-07-03", listing: "2026-07-08", allotment: "2026-07-04", refund: "2026-07-07", demat: "2026-07-07",
     priceMin: 161, priceMax: 170, faceValue: 10, lot: 88, issueSize: 439.5, freshIssue: 439.5, ofs: 0,
-    gmp: 35, trend: "up", estListing: 205,
+    gmp: 35, trend: "up", estListing: 205, listedAt: 188, currentPrice: 188.20,
     gmpHistory: [{ d: "Jun24", v: 12 }, { d: "Jun28", v: 18 }, { d: "Jun30", v: 15 }, { d: "Jul1", v: 28 }, { d: "Jul2", v: 28 }, { d: "Jul3", v: 35 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/sep-2025/knack-packaging-limited-drhp_96482.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/knack-packaging-limited-prospectus_102599.html",
     leadManager: "Unistone Capital", exchange: "BSE, NSE",
@@ -38,7 +38,7 @@ const IPOS_BASE = [
   { id: "ic-electricals", name: "IC Electricals", company: "IC Electricals Co. Ltd.", type: "SME", status: "Open",
     open: "2026-07-03", close: "2026-07-07", listing: "2026-07-10", allotment: "2026-07-08", refund: "2026-07-09", demat: "2026-07-09",
     priceMin: 94, priceMax: 99, faceValue: 10, lot: 1200, issueSize: 47.91, freshIssue: 47.91, ofs: 0,
-    gmp: 44, trend: "up", estListing: 143,
+    gmp: 44, trend: "up", estListing: 143, listedAt: 166, currentPrice: 169,
     gmpHistory: [{ d: "Jun27", v: 20 }, { d: "Jun30", v: 30 }, { d: "Jul1", v: 35 }, { d: "Jul2", v: 40 }, { d: "Jul3", v: 44 }],
     drhp: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_30092025221533_DRHP_ICEL_30092025.pdf", rhp: null,
     leadManager: "Corpwis Advisors", exchange: "NSE Emerge",
@@ -64,7 +64,7 @@ const IPOS_BASE = [
   { id: "kusumgar", name: "Kusumgar", company: "Kusumgar Ltd.", type: "Mainboard", status: "Upcoming",
     open: "2026-07-08", close: "2026-07-10", listing: "2026-07-15", allotment: "2026-07-13", refund: "2026-07-14", demat: "2026-07-14",
     priceMin: 398, priceMax: 419, faceValue: 10, lot: 35, issueSize: 650, freshIssue: 0, ofs: 650,
-    gmp: 155, trend: "up", estListing: 574, gmpHistory: [{ d: "Jun28", v: 100 }, { d: "Jul1", v: 110 }, { d: "Jul2", v: 92 }, { d: "Jul7", v: 171 }, { d: "Jul9", v: 160 }, { d: "Jul10", v: 155 }],
+    gmp: 155, trend: "up", estListing: 574, listedAt: 574, currentPrice: 574, gmpHistory: [{ d: "Jun28", v: 100 }, { d: "Jul1", v: 110 }, { d: "Jul2", v: 92 }, { d: "Jul7", v: 171 }, { d: "Jul9", v: 160 }, { d: "Jul10", v: 155 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/oct-2025/kusumgar-limited_97201.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/kusumgar-limited-rhp_102510.html",
     leadManager: "Axis Capital, ICICI Securities", exchange: "BSE, NSE",
     sub: { overall: 135.80, qib: 299.51, hni: 174.28, retail: 27.97, employee: null, shareholder: null }, fin: { revenue: 711.78, pat: 98.20, ebitda: null, eps: 22.3, pe: 18.8, roe: 21.6, netWorth: 420.5, debt: 95.3 },
@@ -269,6 +269,167 @@ function getLiveIPOS() {
     const merged = patch ? { ...ipo, ...patch } : ipo;
     return { ...merged, status: liveStatus(merged, today) };
   });
+}
+
+/* =====================================================================
+   NOTIFICATIONS — auto-generated from live IPO data (dates + doc links),
+   persisted in localStorage, refreshed every time `tick` changes (i.e.
+   every hourly sync and manual refresh).
+===================================================================== */
+function ymd(d) { return d.toISOString().slice(0, 10); }
+
+function computeDateNotifications(ipos, today) {
+  const todayStr = ymd(today);
+  const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr = ymd(tomorrow);
+  const notifs = [];
+  for (const ipo of ipos) {
+    if (ipo.open === todayStr) notifs.push({ id: `${ipo.id}-open-${todayStr}`, type: "open", ipoId: ipo.id, title: `${ipo.company} opens today`, message: ipo.priceMin ? `Price band ₹${ipo.priceMin}–₹${ipo.priceMax}` : "Bidding starts today", date: todayStr });
+    if (ipo.close === todayStr) notifs.push({ id: `${ipo.id}-close-${todayStr}`, type: "close", ipoId: ipo.id, title: `${ipo.company} closes today`, message: "Last day to apply", date: todayStr });
+    if (ipo.listing === todayStr) notifs.push({ id: `${ipo.id}-listing-${todayStr}`, type: "listing", ipoId: ipo.id, title: `${ipo.company} lists today`, message: ipo.listedAt ? `Listed at ${rupee(ipo.listedAt)}` : "Listing today", date: todayStr });
+    if (ipo.listing === tomorrowStr) notifs.push({ id: `${ipo.id}-listing-tmrw-${tomorrowStr}`, type: "listing-tomorrow", ipoId: ipo.id, title: `${ipo.company} lists tomorrow`, message: `Listing on ${ipo.listing}`, date: todayStr });
+  }
+  return notifs;
+}
+
+// Compares each sync's DRHP/RHP availability against what was last seen
+// (in localStorage) to detect newly-filed documents. On the very first
+// run ever (nothing seen yet), it silently bootstraps the snapshot instead
+// of firing a notification for every existing document at once.
+function computeDocNotifications(ipos) {
+  let seen = {};
+  try { seen = JSON.parse(localStorage.getItem("calmcapital-doc-seen") || "{}"); } catch { /* first run */ }
+  const isFirstRun = Object.keys(seen).length === 0;
+  const nextSeen = { ...seen };
+  const notifs = [];
+  const todayStr = ymd(new Date());
+
+  for (const ipo of ipos) {
+    const hasDrhp = !!ipo.drhp, hasRhp = !!ipo.rhp;
+    const prev = seen[ipo.id] || {};
+    if (!isFirstRun) {
+      if (hasDrhp && !prev.drhp) notifs.push({ id: `${ipo.id}-drhp-${Date.now()}`, type: "doc", ipoId: ipo.id, title: `${ipo.company}: DRHP filed`, message: "New draft prospectus available", date: todayStr });
+      if (hasRhp && !prev.rhp) notifs.push({ id: `${ipo.id}-rhp-${Date.now()}`, type: "doc", ipoId: ipo.id, title: `${ipo.company}: RHP filed`, message: "New red herring prospectus available", date: todayStr });
+    }
+    nextSeen[ipo.id] = { drhp: hasDrhp, rhp: hasRhp };
+  }
+  try { localStorage.setItem("calmcapital-doc-seen", JSON.stringify(nextSeen)); } catch { /* storage unavailable */ }
+  return notifs;
+}
+
+function useNotifications(tick) {
+  const [notifications, setNotifications] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("calmcapital-notifications");
+      if (raw) setNotifications(JSON.parse(raw));
+    } catch { /* none saved yet */ }
+  }, []);
+
+  useEffect(() => {
+    const ipos = getLiveIPOS();
+    const today = new Date();
+    const fresh = [...computeDateNotifications(ipos, today), ...computeDocNotifications(ipos)];
+    if (fresh.length === 0) return;
+    setNotifications((prev) => {
+      const existingIds = new Set(prev.map((n) => n.id));
+      const toAdd = fresh.filter((n) => !existingIds.has(n.id)).map((n) => ({ ...n, read: false, createdAt: Date.now() }));
+      if (toAdd.length === 0) return prev;
+      const merged = [...toAdd, ...prev].slice(0, 50); // cap history length
+      try { localStorage.setItem("calmcapital-notifications", JSON.stringify(merged)); } catch { /* storage unavailable */ }
+      return merged;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tick]);
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
+
+  const markAllRead = useCallback(() => {
+    setNotifications((prev) => {
+      if (prev.every((n) => n.read)) return prev;
+      const updated = prev.map((n) => ({ ...n, read: true }));
+      try { localStorage.setItem("calmcapital-notifications", JSON.stringify(updated)); } catch { /* storage unavailable */ }
+      return updated;
+    });
+  }, []);
+
+  const toggleOpen = useCallback(() => {
+    setOpen((o) => {
+      const next = !o;
+      if (next) markAllRead(); // mark as read when the panel is opened
+      return next;
+    });
+  }, [markAllRead]);
+
+  return { notifications, unreadCount, open, setOpen, toggleOpen };
+}
+
+const NOTIF_ICON = { open: TrendingUp, close: Clock, listing: Activity, "listing-tomorrow": Calendar, doc: FileText };
+const NOTIF_COLOR = { open: BRAND.green, close: "#F0A202", listing: BRAND.blue, "listing-tomorrow": "#8b5cf6", doc: "#64748b" };
+
+function NotificationBell({ hook, onOpenIpo }) {
+  const { notifications, unreadCount, open, toggleOpen, setOpen } = hook;
+  const panelRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClickOutside = (e) => { if (panelRef.current && !panelRef.current.contains(e.target)) setOpen(false); };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, [open, setOpen]);
+
+  return (
+    <div className="relative" ref={panelRef}>
+      <button onClick={toggleOpen} className="w-9 h-9 rounded-xl glass-inset hover:border-black/10 flex items-center justify-center text-slate-500 hover:text-slate-700 relative">
+        <Bell size={15} />
+        {unreadCount > 0 && (
+          <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center shadow-[0_0_0_2px_var(--bell-ring,white)]">
+            {unreadCount > 9 ? "9+" : unreadCount}
+          </span>
+        )}
+      </button>
+
+      {open && (
+        <div className="absolute top-11 right-0 w-80 glass rounded-2xl overflow-hidden z-30 shadow-xl">
+          <div className="px-4 py-3 border-b border-black/5 flex items-center justify-between">
+            <p className="text-sm font-semibold text-slate-800">Notifications</p>
+            {notifications.length > 0 && <span className="text-[10px] text-slate-400">{notifications.length} total</span>}
+          </div>
+          <div className="max-h-80 overflow-y-auto">
+            {notifications.length === 0 ? (
+              <div className="px-4 py-8 text-center text-xs text-slate-400">
+                <Bell size={20} className="mx-auto mb-2 text-slate-300" />
+                No notifications yet — you'll see IPO opens, closes, listings, and new filings here.
+              </div>
+            ) : (
+              notifications.map((n) => {
+                const Icon = NOTIF_ICON[n.type] || Bell;
+                const tint = NOTIF_COLOR[n.type] || BRAND.blue;
+                return (
+                  <button
+                    key={n.id}
+                    onClick={() => onOpenIpo?.(n.ipoId)}
+                    className="w-full flex items-start gap-2.5 px-4 py-3 text-left border-b border-black/5 last:border-b-0 hover:bg-black/[0.02] relative"
+                  >
+                    {!n.read && <span className="absolute left-1.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full" style={{ background: BRAND.blue }} />}
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style={{ background: `${tint}1a` }}>
+                      <Icon size={13} style={{ color: tint }} />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-medium text-slate-700 truncate">{n.title}</p>
+                      <p className="text-[11px] text-slate-400 truncate">{n.message}</p>
+                    </div>
+                  </button>
+                );
+              })
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 // Pulls the investorgain.com scrape result your GitHub Action publishes
@@ -614,15 +775,15 @@ function IPOCard({ ipo, onOpen, watchlist }) {
           ipo.listedAt ? (
             <div className="mt-3 space-y-1.5">
               <div className="flex items-center justify-between rounded-xl px-3 py-2" style={{ background: listingGainPct(ipo) >= 0 ? `${BRAND.green}22` : "rgba(225,29,72,0.10)" }}>
-                <span className="text-[11px]" style={{ color: listingGainPct(ipo) >= 0 ? "#3f6212" : "#be123c" }}>Listing gain</span>
-                <span className="font-mono font-medium flex items-center gap-1" style={{ color: listingGainPct(ipo) >= 0 ? "#3f6212" : "#be123c" }}>
+                <span className={`text-[11px] ${listingGainPct(ipo) >= 0 ? "text-profit" : "text-loss"}`}>Listing gain</span>
+                <span className={`font-mono font-medium flex items-center gap-1 ${listingGainPct(ipo) >= 0 ? "text-profit" : "text-loss"}`}>
                   {listingGainPct(ipo) >= 0 ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
                   {listingGainPct(ipo)?.toFixed(1)}% · {rupee(ipo.listedAt)}
                 </span>
               </div>
               <div className="flex items-center justify-between text-[11px] px-1">
                 <span className="text-slate-400">P&L / lot at listing</span>
-                <span className="font-mono font-medium" style={{ color: listingProfitLossPerLot(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>
+                <span className={`font-mono font-medium ${listingProfitLossPerLot(ipo) >= 0 ? "text-profit" : "text-loss"}`}>
                   {listingProfitLossPerLot(ipo) >= 0 ? "+" : ""}{rupee(listingProfitLossPerLot(ipo))}
                 </span>
               </div>
@@ -635,8 +796,8 @@ function IPOCard({ ipo, onOpen, watchlist }) {
         ) : (
           ipo.lot > 0 && ipo.gmp > 0 && (
             <div className="mt-3 flex items-center justify-between rounded-xl px-3 py-2" style={{ background: `${BRAND.green}22` }}>
-              <span className="text-[11px]" style={{ color: "#3f6212" }}>Est. profit / lot</span>
-              <span className="font-mono font-medium" style={{ color: "#3f6212" }}>+{rupee(profitPerLot(ipo))}</span>
+              <span className="text-[11px] text-profit">Est. profit / lot</span>
+              <span className="font-mono font-medium text-profit">+{rupee(profitPerLot(ipo))}</span>
             </div>
           )
         )}
@@ -721,7 +882,7 @@ function IPODetail({ ipo, onClose, watchlist }) {
           {/* Estimated profit — pre-listing only */}
           {ipo.status !== "Listed" && ipo.lot > 0 && ipo.gmp > 0 && (
             <div className="rounded-2xl p-4" style={{ background: `${BRAND.green}1c`, border: `1px solid ${BRAND.green}55` }}>
-              <p className="text-xs mb-2 font-medium" style={{ color: "#3f6212" }}>Estimated listing profit (1 lot)</p>
+              <p className="text-xs mb-2 font-medium text-profit">Estimated listing profit (1 lot)</p>
               <div className="grid grid-cols-3 gap-3 text-sm font-mono">
                 <div><p className="text-[11px] text-slate-500">Investment</p><p className="text-slate-800">{rupee(investment(ipo))}</p></div>
                 <div><p className="text-[11px] text-slate-500">GMP × lot</p><p style={{ color: "#0f9d68" }}>+{rupee(profitPerLot(ipo))}</p></div>
@@ -1035,6 +1196,7 @@ export default function App() {
   const [lastSync, setLastSync] = useState(null);
   const [syncOk, setSyncOk] = useState(null);
   const watchlist = useWatchlist();
+  const notifHook = useNotifications(tick);
 
   // Load a previously-saved investorgain live-data source URL (see LIVE_DATA_SETUP.md
   // from the automation repo — this points at your GitHub Action's public/live-data.json).
@@ -1139,6 +1301,10 @@ export default function App() {
           .dark .text-slate-500 { color: #94a3b8; }
           .dark .text-slate-400 { color: #7c8ba1; }
           .dark .text-slate-300 { color: #64748b; }
+          .text-profit { color: #3f6212; }
+          .dark .text-profit { color: #6ee7a0; font-weight: 600; }
+          .text-loss { color: #be123c; }
+          .dark .text-loss { color: #fb7185; font-weight: 600; }
           .dark .border-black\\/5 { border-color: rgba(255,255,255,0.08); }
           .dark .border-black\\/10 { border-color: rgba(255,255,255,0.12); }
           .dark .bg-white\\/70, .dark .bg-white\\/80, .dark .bg-white\\/5, .dark .bg-white\\/10 { background: rgba(255,255,255,0.06); }
@@ -1199,8 +1365,8 @@ export default function App() {
             <div className="ml-auto flex items-center gap-2 relative">
               <button
                 onClick={() => setShowSourceInput((s) => !s)}
-                className="hidden sm:flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full"
-                style={{ background: syncOk === true ? `${BRAND.green}22` : "rgba(148,163,184,0.18)", color: syncOk === true ? "#3f6212" : "#64748b" }}
+                className={`hidden sm:flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full ${syncOk === true ? "text-profit" : ""}`}
+                style={{ background: syncOk === true ? `${BRAND.green}22` : "rgba(148,163,184,0.18)", color: syncOk === true ? undefined : "#64748b" }}
                 title={lastSync ? `Last synced ${new Date(lastSync).toLocaleString("en-IN")}` : "Auto-syncing from this repo's GitHub Action every hour — waiting for its first successful run"}
               >
                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: syncOk === true ? BRAND.green : "#94a3b8" }} />
@@ -1229,10 +1395,7 @@ export default function App() {
               <button onClick={refresh} className="w-9 h-9 rounded-xl glass-inset hover:border-black/10 flex items-center justify-center text-slate-500 hover:text-slate-700">
                 <RefreshCw size={15} className={refreshing ? "animate-spin" : ""} />
               </button>
-              <button className="w-9 h-9 rounded-xl glass-inset hover:border-black/10 flex items-center justify-center text-slate-500 hover:text-slate-700 relative">
-                <Bell size={15} />
-                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-rose-500 shadow-[0_0_0_2px_rgba(255,255,255,0.8)]" />
-              </button>
+              <NotificationBell hook={notifHook} onOpenIpo={(ipoId) => { const found = getLiveIPOS().find((i) => i.id === ipoId); if (found) setSelected(found); }} />
               <button onClick={() => setDark((d) => !d)} className="w-9 h-9 rounded-xl glass-inset hover:border-black/10 flex items-center justify-center text-slate-500 hover:text-slate-700">
                 {dark ? <Sun size={15} /> : <Moon size={15} />}
               </button>
