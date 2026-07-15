@@ -117,6 +117,28 @@ async function extractTable(page, label) {
   return [];
 }
 
+// investorgain's GMP cell isn't a plain number — it's a combined string like
+// "₹17 (9.09%)\n17 ↓ / 17 ↑" or "₹-- (0.00%)\n0 ↓ / 0 ↑" when GMP isn't
+// trading yet. Extract the rupee amount (undefined if "--").
+function parseGmpCell(text) {
+  if (!text) return undefined;
+  const m = text.match(/₹\s*(--|-?[\d,]+)/);
+  if (!m || m[1] === "--") return undefined;
+  const n = parseFloat(m[1].replace(/,/g, ""));
+  return Number.isFinite(n) ? n : undefined;
+}
+
+// Strips the trailing status-code letter (U/O/C/L) and "IPO"/"BSE SME"/
+// "NSE SME" suffix investorgain appends directly onto the name, e.g.
+// "Caliber Mining IPOU" -> "Caliber Mining", "Sotefin Bharat BSE SMEU" -> "Sotefin Bharat".
+function cleanScrapedName(raw) {
+  return raw
+    .split("\n")[0]
+    .replace(/[UOCL]$/, "")
+    .replace(/\s*(BSE SME|NSE SME|IPO)\s*$/i, "")
+    .trim();
+}
+
 async function scrapeGmp(page) {
   await page.goto(GMP_URL, { waitUntil: "networkidle", timeout: 45000 });
   await page.waitForTimeout(2000);
@@ -127,27 +149,25 @@ async function scrapeGmp(page) {
     console.log(JSON.stringify(rows.slice(0, 2), null, 2));
   }
 
-  // Expected columns (verify against the sample rows logged above if this drifts):
-  // [0] IPO Name  [1] Price  [2] GMP  [3] Est Listing  [4] Est Gain % ...
-  // NOTE: we intentionally do NOT patch price/priceMax from this table —
-  // investorgain's column layout isn't consistent across all IPO rows
-  // (mainboard vs SME, pre- vs post-price-band-announcement), and guessing
-  // wrong here previously corrupted price bands (e.g. showed "398-153").
-  // Price band changes are applied manually to the baseline in src/App.jsx
-  // instead, which is safer than an unverified column index.
+  // Verified against real captured samples (see chat/commit history):
+  // [0] Name+status  [1] "₹GMP (Gain%)\nKostak"  [2] interest emoji
+  // [3] Kostak price  [4] Price  [5] Issue size  [6] Lot size
+  // [7] Open  [8] Close  [9] Allotment  [10] Listing  [11] Updated  [12] status icon
   const result = {};
   for (const cells of rows) {
-    const rawName = cells[0]?.replace(/\s*IPO\s*$/i, "").trim();
-    const id = resolveId(rawName || "");
+    const rawName = cells[0];
+    const id = resolveId(cleanScrapedName(rawName || ""));
     if (!id) continue;
 
-    const gmp = toNumber(cells[2]);
-    const estListing = toNumber(cells[3]);
-    if (gmp === undefined && estListing === undefined) continue;
+    const gmp = parseGmpCell(cells[1]);
+    const price = toNumber(cells[4]);
+    if (gmp === undefined && price === undefined) continue;
 
     result[id] = {
       ...(gmp !== undefined ? { gmp } : {}),
-      ...(estListing !== undefined ? { estListing } : {}),
+      ...(price !== undefined ? { priceMax: price } : {}),
+      // Standard formula investorgain itself uses: Est. Listing = Issue Price + GMP.
+      ...(gmp !== undefined && price !== undefined ? { estListing: price + gmp } : {}),
     };
   }
   return result;
@@ -163,17 +183,22 @@ async function scrapeSubscription(page) {
     console.log(JSON.stringify(rows.slice(0, 2), null, 2));
   }
 
-  // Expected columns: [0] IPO Name [1] QIB [2] NII/HNI [3] Retail [4] Total ...
+  // Verified against real captured samples: [0] "Name\nIPOGMP:...{status}"
+  // [1] "{overall}\n{timestamp}"  [2] QIB  [3..6] NII/retail breakdown
+  // (exact sub-category split beyond QIB is not fully certain from sample
+  // data alone — [6] is treated as retail, the last numeric column before
+  // the status icon, which matches typical investorgain layout ordering)
+  // [7] icon  [8] issue size  [9] price  [10] ratio  [11] close date
   const result = {};
   for (const cells of rows) {
-    const rawName = cells[0]?.replace(/\s*IPO\s*$/i, "").trim();
-    const id = resolveId(rawName || "");
+    const rawName = cleanScrapedName(cells[0] || "");
+    const id = resolveId(rawName);
     if (!id) continue;
 
-    const qib = toNumber(cells[1]);
-    const hni = toNumber(cells[2]);
-    const retail = toNumber(cells[3]);
-    const overall = toNumber(cells[4]);
+    const overall = toNumber(cells[1]);
+    const qib = toNumber(cells[2]);
+    const hni = toNumber(cells[3]);
+    const retail = toNumber(cells[6]);
     if ([qib, hni, retail, overall].every((v) => v === undefined)) continue;
 
     result[id] = { overall: overall ?? 0, qib: qib ?? 0, hni: hni ?? 0, retail: retail ?? 0 };

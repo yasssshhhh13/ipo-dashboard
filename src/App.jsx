@@ -285,6 +285,13 @@ async function fetchLiveData(rawUrl) {
     // GitHub Action hasn't completed a real scrape yet — treat that as "not
     // synced" rather than fabricating a fresh timestamp.
     if (!json.updatedAt || Object.keys(json.ipos).length === 0) return false;
+    // Extra sanity check: a scrape can "succeed" (valid JSON, real
+    // timestamp, non-empty ipos object) while every entry is still missing
+    // actual GMP data — e.g. a column-mapping bug in the scraper. That's
+    // not a real sync even though nothing technically errored, so don't
+    // report it as one.
+    const hasRealData = Object.values(json.ipos).some((patch) => patch && typeof patch.gmp === "number");
+    if (!hasRealData) return false;
     _liveOverlay = { updatedAt: json.updatedAt, byId: json.ipos };
     return true;
   } catch {
@@ -558,7 +565,7 @@ function CalculatorTab() {
 function IPOCard({ ipo, onOpen, watchlist }) {
   const watched = watchlist.ids.includes(ipo.id);
   return (
-    <div className="glass rounded-2xl p-4 hover:shadow-lg transition-shadow relative group">
+    <div className="glass glass-hover rounded-2xl p-4 relative group">
       <button
         onClick={(e) => { e.stopPropagation(); watchlist.toggle(ipo.id); }}
         className="absolute top-4 right-4 text-slate-400 hover:text-amber-500 z-10"
@@ -808,18 +815,18 @@ function SectionLabel({ icon: Icon, children }) {
 /* =====================================================================
    GMP TRENDS TAB
 ===================================================================== */
-function GMPTab() {
-  const data = useMemo(() => [...getLiveIPOS()].sort((a, b) => gainPct(b) - gainPct(a)).map((i) => ({ name: i.name, pct: Number(gainPct(i).toFixed(1)) })), []);
+function GMPTab({ tick }) {
+  const data = useMemo(() => [...getLiveIPOS()].sort((a, b) => gainPct(b) - gainPct(a)).map((i) => ({ name: i.name, pct: Number(gainPct(i).toFixed(1)) })), [tick]);
   return (
-    <div className="glass rounded-2xl p-4">
+    <div className="glass rounded-2xl p-5">
       <SectionLabel icon={BarChart3}>GMP % gain — all IPOs</SectionLabel>
       <ResponsiveContainer width="100%" height={Math.max(340, data.length * 32)}>
         <BarChart data={data} layout="vertical" margin={{ left: 8, right: 28, top: 4, bottom: 4 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" horizontal={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(28,155,218,0.08)" horizontal={false} />
           <XAxis type="number" stroke="#94a3b8" fontSize={11} tickFormatter={(v) => `${v}%`} />
-          <YAxis type="category" dataKey="name" stroke="#64748b" fontSize={11} width={150} interval={0} />
-          <Tooltip contentStyle={{ borderRadius: 12, fontSize: 12, border: "1px solid rgba(0,0,0,0.06)" }} formatter={(v) => [`${v}%`, "Est. gain"]} />
-          <Bar dataKey="pct" radius={[0, 6, 6, 0]}>
+          <YAxis type="category" dataKey="name" stroke="#64748b" fontSize={11} fontWeight={500} width={150} interval={0} />
+          <Tooltip contentStyle={{ borderRadius: 14, fontSize: 12, border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 8px 24px -8px rgba(28,155,218,0.25)" }} formatter={(v) => [`${v}%`, "Est. gain"]} cursor={{ fill: "rgba(28,155,218,0.05)" }} />
+          <Bar dataKey="pct" radius={[0, 8, 8, 0]}>
             {data.map((d, idx) => <Cell key={idx} fill={d.pct > 15 ? BRAND.green : d.pct > 0 ? "#c8e6a0" : "#cbd5e1"} />)}
           </Bar>
         </BarChart>
@@ -836,7 +843,7 @@ function SubscriptionsTab() {
   return (
     <div className="space-y-3">
       {withSub.map((ipo) => (
-        <div key={ipo.id} className="glass rounded-2xl p-4">
+        <div key={ipo.id} className="glass glass-hover rounded-2xl p-4">
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-medium text-slate-800">{ipo.company}</span>
             <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: `${STATUS_COLOR[ipo.status]}22`, color: STATUS_COLOR[ipo.status] }}>{ipo.status}</span>
@@ -863,8 +870,8 @@ function FinancialsTab() {
   return (
     <div className="grid sm:grid-cols-2 gap-3">
       {withFin.map((ipo) => (
-        <div key={ipo.id} className="glass rounded-2xl p-4">
-          <p className="text-sm font-medium text-slate-800 mb-2">{ipo.company}</p>
+        <div key={ipo.id} className="glass glass-hover rounded-2xl p-4">
+          <p className="text-sm font-semibold text-slate-800 mb-3">{ipo.company}</p>
           <div className="grid grid-cols-3 gap-2 text-xs">
             <div><p className="text-slate-400">Revenue</p><p className="font-mono text-slate-700">{cr(ipo.fin.revenue)}</p></div>
             <div><p className="text-slate-400">PAT</p><p className="font-mono text-slate-700">{cr(ipo.fin.pat)}</p></div>
@@ -887,14 +894,16 @@ function DocumentsTab() {
     <div className="space-y-2">
       <p className="text-xs text-slate-400 mb-1">Mainboard IPOs link to official SEBI filings. SME IPOs (NSE Emerge / BSE SME) aren't filed with SEBI by regulation — those link to the exchange-hosted offer document instead.</p>
       {getLiveIPOS().map((ipo) => (
-        <div key={ipo.id} className="flex items-center justify-between glass rounded-xl px-4 py-3">
-          <div className="flex items-center gap-2">
-            <Building2 size={14} className="text-slate-400" />
-            <span className="text-sm text-slate-700">{ipo.company}</span>
+        <div key={ipo.id} className="flex items-center justify-between glass glass-hover rounded-xl px-4 py-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${BRAND.blue}14` }}>
+              <Building2 size={13} style={{ color: BRAND.blue }} />
+            </div>
+            <span className="text-sm text-slate-700 font-medium">{ipo.company}</span>
           </div>
           <div className="flex gap-2">
-            {ipo.drhp && <a href={ipo.drhp} target="_blank" rel="noreferrer" title={isPortalLink(ipo.drhp) ? "Opens exchange portal to search" : "Official DRHP"} className="text-xs glass-inset hover:bg-white rounded-lg px-2.5 py-1 text-slate-600">{isPortalLink(ipo.drhp) ? "Find DRHP ↗" : "DRHP"}</a>}
-            {ipo.rhp && <a href={ipo.rhp} target="_blank" rel="noreferrer" title={isPortalLink(ipo.rhp) ? "Opens exchange portal to search" : "Official RHP"} className="text-xs glass-inset hover:bg-white rounded-lg px-2.5 py-1 text-slate-600">{isPortalLink(ipo.rhp) ? "Find RHP ↗" : "RHP"}</a>}
+            {ipo.drhp && <a href={ipo.drhp} target="_blank" rel="noreferrer" title={isPortalLink(ipo.drhp) ? "Opens exchange portal to search" : "Official DRHP"} className="text-xs glass-inset hover:bg-white hover:shadow-sm rounded-lg px-2.5 py-1.5 text-slate-600 font-medium">{isPortalLink(ipo.drhp) ? "Find DRHP ↗" : "DRHP"}</a>}
+            {ipo.rhp && <a href={ipo.rhp} target="_blank" rel="noreferrer" title={isPortalLink(ipo.rhp) ? "Opens exchange portal to search" : "Official RHP"} className="text-xs glass-inset hover:bg-white hover:shadow-sm rounded-lg px-2.5 py-1.5 text-slate-600 font-medium">{isPortalLink(ipo.rhp) ? "Find RHP ↗" : "RHP"}</a>}
             {!ipo.drhp && !ipo.rhp && <span className="text-xs text-slate-400">Not available</span>}
           </div>
         </div>
@@ -929,14 +938,14 @@ function WatchlistTab({ watchlist, onOpen }) {
 ===================================================================== */
 function StatCard({ icon: Icon, label, value, tint }) {
   return (
-    <div className="glass rounded-2xl p-4 hover:shadow-md transition-shadow">
-      <div className="flex items-center justify-between mb-2">
-        <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: `${tint}22` }}>
-          <Icon size={16} style={{ color: tint }} />
+    <div className="glass glass-hover rounded-2xl p-4">
+      <div className="flex items-center justify-between mb-3">
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${tint}1a`, boxShadow: `inset 0 0 0 1px ${tint}30` }}>
+          <Icon size={17} style={{ color: tint }} />
         </div>
       </div>
-      <p className="text-2xl font-semibold text-slate-800 font-mono">{value}</p>
-      <p className="text-xs text-slate-400 mt-0.5">{label}</p>
+      <p className="text-2xl font-bold text-slate-800 font-mono tracking-tight">{value}</p>
+      <p className="text-xs text-slate-400 mt-1 font-medium tracking-wide">{label}</p>
     </div>
   );
 }
@@ -1035,21 +1044,48 @@ export default function App() {
   return (
     <div className={dark ? "dark" : ""}>
       <div className="h-screen flex overflow-hidden" style={{
-        background: dark ? "#0b1220" : "linear-gradient(160deg, #eef7fc 0%, #f4faee 45%, #ffffff 100%)",
+        background: dark
+          ? "radial-gradient(1200px 800px at 15% -10%, rgba(28,155,218,0.10), transparent), radial-gradient(1000px 700px at 100% 0%, rgba(174,215,104,0.06), transparent), #090f1c"
+          : "radial-gradient(1200px 800px at 15% -10%, rgba(28,155,218,0.08), transparent), radial-gradient(1000px 700px at 100% 0%, rgba(174,215,104,0.10), transparent), linear-gradient(160deg, #eef7fc 0%, #f4faee 45%, #ffffff 100%)",
         color: dark ? "#e2e8f0" : "#1e293b",
       }}>
         <style>{`
-          .glass { background: ${dark ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.55)"}; backdrop-filter: blur(14px); border: 1px solid ${dark ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.6)"}; box-shadow: 0 4px 24px rgba(28,155,218,0.06); }
-          .glass-inset { background: ${dark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.6)"}; border: 1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"}; }
+          .glass {
+            background: ${dark ? "rgba(255,255,255,0.045)" : "rgba(255,255,255,0.62)"};
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            border: 1px solid ${dark ? "rgba(255,255,255,0.09)" : "rgba(255,255,255,0.75)"};
+            box-shadow: 0 1px 1px rgba(28,155,218,0.04), 0 8px 24px -8px ${dark ? "rgba(0,0,0,0.45)" : "rgba(28,155,218,0.14)"}, inset 0 1px 0 ${dark ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.9)"};
+            transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+          }
+          .glass-inset {
+            background: ${dark ? "rgba(255,255,255,0.035)" : "rgba(255,255,255,0.65)"};
+            border: 1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.045)"};
+            transition: background 0.2s ease, border-color 0.2s ease;
+          }
+          .glass-hover:hover {
+            box-shadow: 0 1px 1px rgba(28,155,218,0.05), 0 16px 36px -12px ${dark ? "rgba(0,0,0,0.55)" : "rgba(28,155,218,0.22)"}, inset 0 1px 0 ${dark ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.95)"};
+            border-color: ${dark ? "rgba(28,155,218,0.35)" : "rgba(28,155,218,0.28)"};
+            transform: translateY(-2px);
+          }
           select { appearance: none; }
+          * { scrollbar-width: thin; scrollbar-color: ${dark ? "rgba(255,255,255,0.15)" : "rgba(28,155,218,0.25)"} transparent; }
+          *::-webkit-scrollbar { width: 8px; height: 8px; }
+          *::-webkit-scrollbar-thumb { background: ${dark ? "rgba(255,255,255,0.15)" : "rgba(28,155,218,0.25)"}; border-radius: 999px; }
+          *::-webkit-scrollbar-thumb:hover { background: ${dark ? "rgba(255,255,255,0.25)" : "rgba(28,155,218,0.4)"}; }
+          @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+          .tab-enter { animation: fadeSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+          button, a { transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+          button:active { transform: scale(0.97); }
+          input:focus, select:focus, textarea:focus { outline: none; box-shadow: 0 0 0 3px ${dark ? "rgba(28,155,218,0.28)" : "rgba(28,155,218,0.18)"}; border-color: ${BRAND.blue} !important; }
         `}</style>
 
         {/* SIDEBAR */}
-        <aside className={`${sidebarOpen ? "w-64" : "w-0"} transition-all overflow-hidden shrink-0 border-r`}
+        <aside className={`${sidebarOpen ? "w-64" : "w-0"} transition-all duration-300 overflow-hidden shrink-0 border-r`}
           style={{ borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)" }}>
           <div className="w-64 p-5 flex flex-col h-full">
             <div className="flex items-center gap-2.5 mb-1">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold" style={{ background: `linear-gradient(135deg, ${BRAND.blue}, ${BRAND.green})` }}>IQ</div>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm tracking-tight" style={{ background: `linear-gradient(135deg, ${BRAND.blue}, ${BRAND.green})`, boxShadow: `0 4px 14px -2px ${BRAND.blue}55` }}>IQ</div>
               <div>
                 <p className="text-sm font-semibold" style={{ color: dark ? "#fff" : "#1e293b" }}>IPO Intelligence</p>
                 <p className="text-[10px] text-slate-400">AI-powered IPO analysis</p>
@@ -1059,11 +1095,15 @@ export default function App() {
             <nav className="mt-6 space-y-1 flex-1 overflow-y-auto">
               {NAV.map((n) => (
                 <button key={n.id} onClick={() => setTab(n.id)}
-                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm transition-colors"
+                  className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm relative"
                   style={tab === n.id
-                    ? { background: `${BRAND.blue}18`, color: BRAND.blue, fontWeight: 600 }
-                    : { color: dark ? "#94a3b8" : "#64748b" }}>
-                  <n.icon size={16} /> {n.label}
+                    ? { background: `linear-gradient(90deg, ${BRAND.blue}1f, ${BRAND.blue}0a)`, color: BRAND.blue, fontWeight: 600, boxShadow: `inset 0 0 0 1px ${BRAND.blue}25` }
+                    : { color: dark ? "#94a3b8" : "#64748b" }}
+                  onMouseEnter={(e) => { if (tab !== n.id) e.currentTarget.style.background = dark ? "rgba(255,255,255,0.05)" : "rgba(28,155,218,0.06)"; }}
+                  onMouseLeave={(e) => { if (tab !== n.id) e.currentTarget.style.background = "transparent"; }}
+                >
+                  {tab === n.id && <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-full" style={{ background: BRAND.blue }} />}
+                  <n.icon size={16} strokeWidth={tab === n.id ? 2.4 : 2} /> {n.label}
                 </button>
               ))}
             </nav>
@@ -1121,18 +1161,18 @@ export default function App() {
                 </div>
               )}
 
-              <button onClick={refresh} className="w-9 h-9 rounded-xl glass-inset flex items-center justify-center text-slate-500">
+              <button onClick={refresh} className="w-9 h-9 rounded-xl glass-inset hover:border-black/10 flex items-center justify-center text-slate-500 hover:text-slate-700">
                 <RefreshCw size={15} className={refreshing ? "animate-spin" : ""} />
               </button>
-              <button className="w-9 h-9 rounded-xl glass-inset flex items-center justify-center text-slate-500 relative">
+              <button className="w-9 h-9 rounded-xl glass-inset hover:border-black/10 flex items-center justify-center text-slate-500 hover:text-slate-700 relative">
                 <Bell size={15} />
-                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-rose-500" />
+                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-rose-500 shadow-[0_0_0_2px_rgba(255,255,255,0.8)]" />
               </button>
-              <button onClick={() => setDark((d) => !d)} className="w-9 h-9 rounded-xl glass-inset flex items-center justify-center text-slate-500">
+              <button onClick={() => setDark((d) => !d)} className="w-9 h-9 rounded-xl glass-inset hover:border-black/10 flex items-center justify-center text-slate-500 hover:text-slate-700">
                 {dark ? <Sun size={15} /> : <Moon size={15} />}
               </button>
               {AI_ASSISTANT_ENABLED && (
-                <button onClick={() => setTab("ai")} className="hidden sm:flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm text-white" style={{ background: BRAND.blue }}>
+                <button onClick={() => setTab("ai")} className="hidden sm:flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium text-white" style={{ background: `linear-gradient(135deg, ${BRAND.blue}, #1584bd)`, boxShadow: `0 4px 14px -3px ${BRAND.blue}66` }}>
                   <MessageCircle size={14} /> Ask AI
                 </button>
               )}
@@ -1140,6 +1180,7 @@ export default function App() {
           </header>
 
           <main className="flex-1 overflow-y-auto px-5 py-5 max-w-5xl w-full mx-auto">
+            <div key={tab} className="tab-enter">
             {tab === "overview" && (
               <div className="space-y-6">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -1170,13 +1211,14 @@ export default function App() {
               </div>
             )}
 
-            {tab === "gmp" && <GMPTab />}
+            {tab === "gmp" && <GMPTab tick={tick} />}
             {tab === "subscriptions" && <SubscriptionsTab />}
             {tab === "financials" && <FinancialsTab />}
             {tab === "docs" && <DocumentsTab />}
             {tab === "calculator" && <CalculatorTab />}
             {tab === "watchlist" && <WatchlistTab watchlist={watchlist} onOpen={setSelected} />}
             {AI_ASSISTANT_ENABLED && tab === "ai" && <div className="glass rounded-2xl p-5"><AssistantPane embedded tick={tick} /></div>}
+            </div>
           </main>
         </div>
       </div>
