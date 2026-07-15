@@ -1,22 +1,22 @@
 {
-  "updatedAt": "2026-07-15T08:03:32.659Z",
+  "updatedAt": "2026-07-15T10:46:53.484Z",
   "errors": [],
   "ipos": {
     "sbi-funds": {
-      "gmp": 90,
+      "gmp": 93,
       "priceMax": 574,
-      "estListing": 664,
+      "estListing": 667,
       "sub": {
-        "overall": 1.6,
-        "qib": 0.15,
-        "hni": 3.48,
-        "retail": 1.28
+        "overall": 2.54,
+        "qib": 1.42,
+        "hni": 4.91,
+        "retail": 1.58
       }
     },
     "devson-catalyst": {
-      "gmp": 51,
+      "gmp": 49,
       "priceMax": 118,
-      "estListing": 169,
+      "estListing": 167,
       "sub": {
         "overall": 220.35,
         "qib": 168.56,
@@ -25,9 +25,9 @@
       }
     },
     "happy-steels": {
-      "gmp": 12,
+      "gmp": 10,
       "priceMax": 66,
-      "estListing": 78,
+      "estListing": 76,
       "sub": {
         "overall": 77.81,
         "qib": 59.01,
