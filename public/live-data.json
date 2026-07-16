@@ -1,7 +1,26 @@
 {
-  "updatedAt": "2026-07-16T19:05:29.526Z",
+  "updatedAt": "2026-07-16T20:54:59.585Z",
   "errors": [],
   "ipos": {
+    "cube-highways": {
+      "priceMax": 152
+    },
+    "caliber-mining": {
+      "gmp": 105,
+      "priceMax": 424,
+      "estListing": 529
+    },
+    "sotefin-bharat": {
+      "gmp": 18,
+      "priceMax": 187,
+      "estListing": 205,
+      "sub": {
+        "overall": 0.24,
+        "qib": 0,
+        "hni": 0.28,
+        "retail": 0.37
+      }
+    },
     "sbi-funds": {
       "gmp": 97,
       "priceMax": 574,
