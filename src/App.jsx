@@ -250,9 +250,12 @@ const isPortalLink = (url) => PORTAL_URLS.has(url);
 // the dashboard is opened on — not just the day the data was last refreshed.
 function liveStatus(ipo, today) {
   const d = (s) => new Date(s + "T00:00:00+05:30"); // dates are IST
-  const open = d(ipo.open), close = d(ipo.close), listing = d(ipo.listing);
+  const open = d(ipo.open), listing = d(ipo.listing);
+  // End of the closing day (23:59:59.999 IST) — an IPO stays "Open" for its
+  // entire closing day, not just until midnight when that date begins.
+  const closeEnd = new Date(d(ipo.close).getTime() + 24 * 60 * 60 * 1000 - 1);
   if (today < open) return "Upcoming";
-  if (today <= close) return "Open";
+  if (today <= closeEnd) return "Open";
   if (today < listing) return "Closed";
   return "Listed";
 }
@@ -569,7 +572,7 @@ const DEFAULT_SUGGESTED_Q = [
 
 function AssistantPane({ embedded, tick }) {
   const [messages, setMessages] = useState([
-    { role: "assistant", content: `Hi! Ask me about any IPO — GMP, subscription, financials, or estimated listing profit. Data as of ${formatDataAsOf()}.` },
+    { role: "assistant", content: `Hi! Ask me about any IPO — GMP, subscription, financials, or estimated listing profit.` },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -577,10 +580,6 @@ function AssistantPane({ embedded, tick }) {
   const [suggestLoading, setSuggestLoading] = useState(false);
   const endRef = useRef(null);
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, loading]);
-  // `tick` is bumped hourly (and on manual refresh) by the parent App, so this
-  // label re-renders with the latest investorgain sync time automatically —
-  // it is never a fixed/hardcoded string.
-  const freshnessLabel = useMemo(() => formatDataAsOf(), [tick]);
 
   const send = async (overrideText) => {
     const text = (overrideText ?? input).trim();
@@ -610,10 +609,6 @@ function AssistantPane({ embedded, tick }) {
 
   return (
     <div className={`flex flex-col ${embedded ? "h-[70vh]" : "h-full"}`}>
-      <div className="flex items-center gap-1.5 text-[11px] text-slate-400 pb-2">
-        <Sparkles size={11} />
-        <span>Data as of {freshnessLabel}</span>
-      </div>
       <div className="flex-1 overflow-y-auto px-1 py-2 space-y-3">
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -1308,6 +1303,9 @@ export default function App() {
           .dark .border-black\\/5 { border-color: rgba(255,255,255,0.08); }
           .dark .border-black\\/10 { border-color: rgba(255,255,255,0.12); }
           .dark .bg-white\\/70, .dark .bg-white\\/80, .dark .bg-white\\/5, .dark .bg-white\\/10 { background: rgba(255,255,255,0.06); }
+          .dark .bg-white\\/95 { background: rgba(13,20,36,0.97); }
+          .dark .border-white { border-color: rgba(255,255,255,0.1); }
+          .dark .shadow-2xl { box-shadow: 0 25px 60px -15px rgba(0,0,0,0.7); }
           .dark .hover\\:bg-white:hover { background: rgba(255,255,255,0.08) !important; }
         `}</style>
 
@@ -1339,13 +1337,6 @@ export default function App() {
               ))}
             </nav>
 
-            <div className="mt-4 pt-4 border-t" style={{ borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)" }}>
-              <p className="text-[10px] text-slate-400">
-                {lastSync
-                  ? `Data as of ${new Date(lastSync).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}`
-                  : `Baseline data (${DATA_AS_OF}) — live sync pending first Action run`}
-              </p>
-            </div>
           </div>
         </aside>
 
@@ -1367,7 +1358,7 @@ export default function App() {
                 onClick={() => setShowSourceInput((s) => !s)}
                 className={`hidden sm:flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full ${syncOk === true ? "text-profit" : ""}`}
                 style={{ background: syncOk === true ? `${BRAND.green}22` : "rgba(148,163,184,0.18)", color: syncOk === true ? undefined : "#64748b" }}
-                title={lastSync ? `Last synced ${new Date(lastSync).toLocaleString("en-IN")}` : "Auto-syncing from this repo's GitHub Action every hour — waiting for its first successful run"}
+                title={syncOk === true ? "Live data connected" : "Auto-syncing from this repo's GitHub Action every hour — waiting for its first successful run"}
               >
                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: syncOk === true ? BRAND.green : "#94a3b8" }} />
                 {syncOk === true ? "Live Data" : "Awaiting first sync"}
@@ -1385,8 +1376,7 @@ export default function App() {
                     placeholder="/live-data.json"
                     className="w-full glass-inset rounded-xl px-3 py-2 text-xs outline-none mb-2"
                   />
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] text-slate-400">{lastSync ? `Synced ${new Date(lastSync).toLocaleTimeString("en-IN")}` : "No successful sync yet"}</span>
+                  <div className="flex items-center justify-end">
                     <button onClick={() => setShowSourceInput(false)} className="text-xs px-2.5 py-1 rounded-lg text-white" style={{ background: BRAND.blue }}>Done</button>
                   </div>
                 </div>
