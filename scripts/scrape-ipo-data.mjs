@@ -77,6 +77,12 @@ const NAME_TO_ID = {
   "adon agro": "adon-agro",
   "adon agro commodities": "adon-agro",
   "csm technologies": "csm-technologies",
+  "caliber mining": "caliber-mining",
+  "caliber mining logistics": "caliber-mining",
+  "cube highways": "cube-highways",
+  "cube highways trust": "cube-highways",
+  "cube highways trust invit": "cube-highways",
+  "sotefin bharat": "sotefin-bharat",
 };
 
 function normalizeName(raw) {

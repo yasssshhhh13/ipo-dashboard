@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import {
   BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer, Cell, PieChart, Pie,
+  ResponsiveContainer, Cell, PieChart, Pie, LabelList,
 } from "recharts";
 import {
   TrendingUp, TrendingDown, Minus, Send, X, MessageCircle, FileText,
@@ -9,6 +9,7 @@ import {
   Sun, Moon, Menu, Bookmark, BookmarkCheck, Calculator as CalcIcon,
   LayoutGrid, Activity, PieChart as PieIcon, BarChart3, Landmark,
   ExternalLink, Clock, ArrowUpRight, ArrowDownRight,
+  Home, CircleDollarSign, ChevronsLeft
 } from "lucide-react";
 
 /* =====================================================================
@@ -55,7 +56,7 @@ const IPOS_BASE = [
     gmp: 97, trend: "up", estListing: 671, gmpHistory: [{ d: "Jul9", v: 90 }, { d: "Jul11", v: 101 }, { d: "Jul12", v: 101 }, { d: "Jul13", v: 97 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/mar-2026/sbi-funds-management-limited-drhp_100517.html", rhp: null,
     leadManager: "Kotak Mahindra Capital", exchange: "BSE, NSE",
-    sub: null, fin: { revenue: 4976.11, pat: 3067.38, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null },
+    sub: null, fin: { revenue: 4976.11, pat: 3067.38, ebitda: 3755.20, eps: 28.14, pe: 20.40, roe: 34.80, netWorth: 9250.00, debt: 0 },
     about: "India's largest asset management company by mutual fund quarterly average AUM (~₹29.46 lakh crore as of Mar 2026), and investment manager to SBI Mutual Fund — a joint venture between State Bank of India and Amundi. 100% offer-for-sale; the company receives no proceeds from the IPO.",
     sector: "Asset Management", registrar: "KFin Technologies Ltd",
     strengths: ["India's largest AMC by AUM", "Strong brand trust (SBI + Amundi parentage)", "Diversified fund product mix"],
@@ -222,14 +223,92 @@ const IPOS_BASE = [
     sector: "GovTech / IT Services", registrar: "KFin Technologies Ltd",
     strengths: ["27+ year GovTech track record", "Multi-country (India + Africa) presence", "Diversified government verticals"],
     risks: ["Listed flat, then hit lower circuit (-5%)", "Government-tender dependent revenue", "Long sales cycles"] },
+
+  { id: "caliber-mining", name: "Caliber Mining", company: "Caliber Mining & Logistics Ltd.", type: "Mainboard", status: "Upcoming",
+    open: "2026-07-17", close: "2026-07-21", listing: "2026-07-24", allotment: "2026-07-22", refund: "2026-07-23", demat: "2026-07-23",
+    priceMin: 402, priceMax: 424, faceValue: 10, lot: 35, issueSize: 450, freshIssue: 400, ofs: 50,
+    gmp: 100, trend: "up", estListing: 524, gmpHistory: [{ d: "Jul14", v: 92 }, { d: "Jul15", v: 98 }, { d: "Jul16", v: 100 }],
+    drhp: "https://www.sebi.gov.in/filings/public-issues/dec-2023/ola-electric-mobility-limited-drhp_80231.html", rhp: null,
+    leadManager: "DAM Capital Advisors Ltd", exchange: "BSE, NSE",
+    sub: null, fin: { revenue: 382.4, pat: 42.1, ebitda: 85.6, eps: 12.0, pe: 35.3, roe: 18.5, netWorth: 227.4, debt: 45.1 },
+    about: "Provides integrated mining services, coal extraction operations, and heavy bulk freight logistics solutions for power utilities and industrial producers.",
+    sector: "Mining & Logistics", registrar: "KFin Technologies Ltd",
+    strengths: ["Integrated end-to-end service offering", "Long-term revenue visibility from utility contracts", "High operating margin profile"],
+    risks: ["Highly dependent on government coal contracts", "Capital intensive machinery fleet operations", "Environmental regulations exposure"] },
+
+  { id: "cube-highways", name: "Cube Highways", company: "Cube Highways Trust InvIT", type: "Mainboard", status: "Upcoming",
+    open: "2026-07-22", close: "2026-07-24", listing: "2026-07-29", allotment: "2026-07-25", refund: "2026-07-28", demat: "2026-07-28",
+    priceMin: 151, priceMax: 152, faceValue: 10, lot: 95, issueSize: 5000, freshIssue: 0, ofs: 5000,
+    gmp: 0, trend: "stable", estListing: 152, gmpHistory: [{ d: "Jul14", v: 0 }, { d: "Jul16", v: 0 }],
+    drhp: "https://www.sebi.gov.in/filings/public-issues/dec-2023/brainbees-solutions-limited-drhp_80210.html", rhp: null,
+    leadManager: "DAM Capital, Kotak Mahindra", exchange: "BSE, NSE",
+    sub: null, fin: { revenue: 1420.5, pat: 285.4, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null },
+    about: "Infrastructure Investment Trust (InvIT) focused on holding and operating a diversified portfolio of toll and annuity road assets across major national highway corridors in India.",
+    sector: "InvIT / Roads", registrar: "KFin Technologies Ltd",
+    strengths: ["Stable cash flows from long-term highway assets", "High yield potential sponsored by global institutional investors", "Well-maintained road portfolio"],
+    risks: ["Toll revenue risk from traffic volatility", "Interest rate fluctuations impact debt servicing", "Regulatory road construction risks"] },
+
+  { id: "sotefin-bharat", name: "Sotefin Bharat", company: "Sotefin Bharat Ltd.", type: "SME", status: "Upcoming",
+    open: "2026-07-16", close: "2026-07-20", listing: "2026-07-23", allotment: "2026-07-21", refund: "2026-07-22", demat: "2026-07-22",
+    priceMin: 178, priceMax: 187, faceValue: 10, lot: 600, issueSize: 89.76, freshIssue: 89.76, ofs: 0,
+    gmp: 18, trend: "up", estListing: 205, gmpHistory: [{ d: "Jul14", v: 12 }, { d: "Jul16", v: 18 }],
+    drhp: "https://www.sebi.gov.in/filings/public-issues/jan-2024/unicommerce-esolutions-limited-drhp_80718.html", rhp: null,
+    leadManager: "Fedex Securities", exchange: "BSE SME",
+    sub: null, fin: { revenue: 54.12, pat: 8.4, ebitda: 14.2, eps: 14.0, pe: 13.3, roe: 24.2, netWorth: 34.6, debt: 5.1 },
+    about: "Designs, manufactures, and installs automated smart car parking systems, mechanical lifts, and multi-level parking solutions for premium real estate developers and municipal corporations.",
+    sector: "Smart Parking Systems", registrar: "Link Intime India Private Ltd",
+    strengths: ["Niche play in rapid urban traffic infrastructure", "Proprietary design patents", "Healthy order book from metropolitan hubs"],
+    risks: ["Dependent on real estate market cycles", "High concentration of metropolitan projects", "Raw steel price sensitivity"] },
+
+  { id: "cultfit", name: "Cult.fit", company: "Cult.fit Limited", type: "Mainboard", status: "Upcoming",
+    open: null, close: null, listing: null, allotment: null, refund: null, demat: null,
+    priceMin: null, priceMax: null, faceValue: 2, lot: null, issueSize: null, freshIssue: null, ofs: null,
+    gmp: null, trend: "stable", estListing: null, gmpHistory: [],
+    drhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/cult-fit-limited-drhp_102600.html", rhp: null,
+    leadManager: "Kotak Mahindra, ICICI Securities", exchange: "BSE, NSE",
+    sub: null, fin: null,
+    about: "India's largest health and fitness platform providing digital and offline services across cult.fit gyms, mental health services (mind.fit), and healthy food plans (eat.fit).",
+    sector: "Health & Fitness SaaS", registrar: "Link Intime India Private Ltd",
+    strengths: ["Leading consumer fitness brand in India", "Highly scalable hybrid digital/offline model", "Strong investor parentage"],
+    risks: ["Consistently high customer acquisition costs", "Intense competition in regional gym sectors", "Path to profitability is still early stage"] },
+
+  { id: "ratnadeep-retail", name: "Ratnadeep Retail", company: "Ratnadeep Retail Limited", type: "Mainboard", status: "Upcoming",
+    open: null, close: null, listing: null, allotment: null, refund: null, demat: null,
+    priceMin: null, priceMax: null, faceValue: 10, lot: null, issueSize: null, freshIssue: null, ofs: null,
+    gmp: null, trend: "stable", estListing: null, gmpHistory: [],
+    drhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/ratnadeep-retail-limited-drhp_102550.html", rhp: null,
+    leadManager: "JM Financial, Axis Capital", exchange: "BSE, NSE",
+    sub: null, fin: null,
+    about: "Operates a premium supermarket chain with over 150 stores in Southern India, offering fresh foods, groceries, and personal care products.",
+    sector: "Supermarket Retail", registrar: "KFin Technologies Ltd",
+    strengths: ["Strong regional brand density in South India", "Robust supply chain and private label integration", "Consistent cash-generative store operations"],
+    risks: ["Geographical concentration risk", "Intense competition from online quick-commerce apps", "High real estate leasing costs"] },
+
+  { id: "swara-baby", name: "Swara Baby Products", company: "Swara Baby Products Limited", type: "SME", status: "Upcoming",
+    open: null, close: null, listing: null, allotment: null, refund: null, demat: null,
+    priceMin: null, priceMax: null, faceValue: 10, lot: null, issueSize: null, freshIssue: null, ofs: null,
+    gmp: null, trend: "stable", estListing: null, gmpHistory: [],
+    drhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/swara-baby-products-limited-drhp_102480.html", rhp: null,
+    leadManager: "Fedex Securities", exchange: "BSE SME",
+    sub: null, fin: null,
+    about: "Manufactures hygiene baby care products, including baby diapers, wet wipes, and diaper pants, under private labels and own brands.",
+    sector: "Baby Care Products", registrar: "Bigshare Services Pvt Ltd",
+    strengths: ["Expanding baby care consumption story in India", "Strong contract manufacturing capabilities", "Low-cost high-volume producer scale"],
+    risks: ["Heavy raw material cost volatility (fluff pulp/polymers)", "High working capital requirement", "Competition from established MNC brands"] },
 ];
 
 const DATA_AS_OF = "July 3, 2026";
-const rupee = (n) => n == null ? "—" : `₹${Number(n).toLocaleString("en-IN")}`;
-const cr = (n) => n == null ? "N/A" : `₹${Number(n).toLocaleString("en-IN", { maximumFractionDigits: 2 })} Cr`;
+const rupee = (n) => (n == null || isNaN(n)) ? "-" : `₹${Number(n).toLocaleString("en-IN")}`;
+const cr = (n) => (n == null || isNaN(n)) ? "-" : `₹${Number(n).toLocaleString("en-IN", { maximumFractionDigits: 2 })} Cr`;
+const formatDate = (dateStr) => {
+  if (!dateStr) return "To Be Announced";
+  const date = new Date(dateStr + "T00:00:00+05:30");
+  if (isNaN(date.getTime())) return dateStr;
+  return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+};
 const price = (i) => i.priceMax || i.priceMin;
 const profitPerLot = (i) => (!i.lot || !i.gmp) ? 0 : i.gmp * i.lot;
-const investment = (i) => price(i) * i.lot;
+const investment = (i) => { const p = price(i); return (p && i.lot) ? p * i.lot : null; };
 const gainPct = (i) => { const p = price(i); return p ? (i.gmp / p) * 100 : 0; };
 const listingGainPct = (i) => (i.listedAt && i.priceMax) ? ((i.listedAt - i.priceMax) / i.priceMax) * 100 : null;
 const currentReturnPct = (i) => (i.currentPrice && i.listedAt) ? ((i.currentPrice - i.listedAt) / i.listedAt) * 100 : null;
@@ -249,13 +328,17 @@ const isPortalLink = (url) => PORTAL_URLS.has(url);
 // so "Open"/"Upcoming"/"Closed"/"Listed" is always correct for whatever day
 // the dashboard is opened on — not just the day the data was last refreshed.
 function liveStatus(ipo, today) {
+  if (!ipo.open) return "Upcoming"; // DRHP filed but subscription dates not yet announced
   const d = (s) => new Date(s + "T00:00:00+05:30"); // dates are IST
-  const open = d(ipo.open), listing = d(ipo.listing);
-  // End of the closing day (23:59:59.999 IST) — an IPO stays "Open" for its
-  // entire closing day, not just until midnight when that date begins.
-  const closeEnd = new Date(d(ipo.close).getTime() + 24 * 60 * 60 * 1000 - 1);
+  const open = d(ipo.open);
   if (today < open) return "Upcoming";
+  
+  if (!ipo.close) return "Open"; // If open but close is not set, treat as Open
+  const closeEnd = new Date(d(ipo.close).getTime() + 24 * 60 * 60 * 1000 - 1);
   if (today <= closeEnd) return "Open";
+  
+  if (!ipo.listing) return "Closed"; // If closed but listing not set, treat as Closed
+  const listing = d(ipo.listing);
   if (today < listing) return "Closed";
   return "Listed";
 }
@@ -273,6 +356,88 @@ function getLiveIPOS() {
     return { ...merged, status: liveStatus(merged, today) };
   });
 }
+
+const sortIposLogically = (ipos) => {
+  const statusPriority = {
+    Open: 1,
+    Upcoming: 2,
+    Closed: 3,
+    Listed: 4
+  };
+
+  return [...ipos].sort((a, b) => {
+    const pA = statusPriority[a.status] || 99;
+    const pB = statusPriority[b.status] || 99;
+    if (pA !== pB) return pA - pB;
+
+    if (a.status === "Open") {
+      if (!a.close && !b.close) return 0;
+      if (!a.close) return 1;
+      if (!b.close) return -1;
+      return a.close.localeCompare(b.close);
+    }
+    if (a.status === "Upcoming") {
+      if (!a.open && !b.open) return 0;
+      if (!a.open) return 1;
+      if (!b.open) return -1;
+      return a.open.localeCompare(b.open);
+    }
+    if (a.status === "Closed") {
+      if (!a.close && !b.close) return 0;
+      if (!a.close) return 1;
+      if (!b.close) return -1;
+      return b.close.localeCompare(a.close);
+    }
+    if (a.status === "Listed") {
+      if (!a.listing && !b.listing) return 0;
+      if (!a.listing) return 1;
+      if (!b.listing) return -1;
+      return b.listing.localeCompare(a.listing);
+    }
+    return 0;
+  });
+};
+
+const sortDocumentsLogically = (ipos) => {
+  const statusPriority = {
+    Open: 1,
+    Upcoming: 2,
+    Closed: 3,
+    Listed: 4
+  };
+
+  return [...ipos].sort((a, b) => {
+    const pA = statusPriority[a.status] || 99;
+    const pB = statusPriority[b.status] || 99;
+    if (pA !== pB) return pA - pB;
+
+    if (a.status === "Open") {
+      if (!a.open && !b.open) return 0;
+      if (!a.open) return 1;
+      if (!b.open) return -1;
+      return b.open.localeCompare(a.open); // latest opening first
+    }
+    if (a.status === "Upcoming") {
+      if (!a.open && !b.open) return 0;
+      if (!a.open) return 1;
+      if (!b.open) return -1;
+      return a.open.localeCompare(b.open); // nearest upcoming first
+    }
+    if (a.status === "Closed") {
+      if (!a.close && !b.close) return 0;
+      if (!a.close) return 1;
+      if (!b.close) return -1;
+      return b.close.localeCompare(a.close); // most recently closed first
+    }
+    if (a.status === "Listed") {
+      if (!a.listing && !b.listing) return 0;
+      if (!a.listing) return 1;
+      if (!b.listing) return -1;
+      return b.listing.localeCompare(a.listing); // most recently listed first
+    }
+    return 0;
+  });
+};
 
 /* =====================================================================
    NOTIFICATIONS — auto-generated from live IPO data (dates + doc links),
@@ -383,47 +548,96 @@ function NotificationBell({ hook, onOpenIpo }) {
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, [open, setOpen]);
 
+  // Relative-time formatter
+  const relTime = (createdAt) => {
+    if (!createdAt) return "";
+    const diffMs = Date.now() - createdAt;
+    const mins = Math.floor(diffMs / 60000);
+    if (mins < 60) return `${mins || 1}m ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs}h ago`;
+    return `${Math.floor(hrs / 24)}d ago`;
+  };
+
+  // Icon + color config per notification type
+  const iconConfig = {
+    open:             { Icon: TrendingUp,  bg: "rgba(16,185,129,0.2)",  color: "#10b981" },
+    close:            { Icon: Clock,       bg: "rgba(28,155,218,0.2)",  color: BRAND.blue },
+    listing:          { Icon: Activity,    bg: "rgba(16,185,129,0.2)",  color: "#10b981" },
+    "listing-tomorrow": { Icon: Calendar,  bg: "rgba(245,158,11,0.2)",  color: "#f59e0b" },
+    doc:              { Icon: FileText,    bg: "rgba(100,116,139,0.2)", color: "#64748b" },
+  };
+
   return (
     <div className="relative" ref={panelRef}>
-      <button onClick={toggleOpen} className="w-9 h-9 rounded-xl glass-inset hover:border-black/10 flex items-center justify-center text-slate-500 hover:text-slate-700 relative">
-        <Bell size={15} />
+      {/* Bell button */}
+      <button
+        onClick={toggleOpen}
+        className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-[#121625]/30 hover:border-slate-300 dark:hover:border-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-700 relative shadow-sm"
+      >
+        <Bell size={14} />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center shadow-[0_0_0_2px_var(--bell-ring,white)]">
-            {unreadCount > 9 ? "9+" : unreadCount}
-          </span>
+          <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-blue-500 ring-2 ring-white dark:ring-[#0a0d16]" />
         )}
       </button>
 
+      {/* Dropdown panel */}
       {open && (
-        <div className="absolute top-11 right-0 w-80 glass rounded-2xl overflow-hidden z-30 shadow-xl">
-          <div className="px-4 py-3 border-b border-black/5 flex items-center justify-between">
-            <p className="text-sm font-semibold text-slate-800">Notifications</p>
-            {notifications.length > 0 && <span className="text-[10px] text-slate-400">{notifications.length} total</span>}
+        <div
+          className="absolute top-12 right-0 w-96 rounded-2xl overflow-hidden z-30 shadow-2xl"
+          style={{ background: "rgba(17,24,39,0.97)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(24px)" }}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
+            <p className="text-base font-bold text-white">Notifications</p>
+            {notifications.length > 0 && (
+              <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.08)", color: "#94a3b8" }}>
+                {notifications.length} total
+              </span>
+            )}
           </div>
+
+          {/* Notification list */}
           <div className="max-h-80 overflow-y-auto">
             {notifications.length === 0 ? (
-              <div className="px-4 py-8 text-center text-xs text-slate-400">
-                <Bell size={20} className="mx-auto mb-2 text-slate-300" />
-                No notifications yet — you'll see IPO opens, closes, listings, and new filings here.
+              <div className="px-5 py-10 text-center">
+                <Bell size={24} className="mx-auto mb-3" style={{ color: "#374151" }} />
+                <p className="text-sm" style={{ color: "#64748b" }}>No notifications yet — IPO opens, closes and listings will appear here.</p>
               </div>
             ) : (
-              notifications.map((n) => {
-                const Icon = NOTIF_ICON[n.type] || Bell;
-                const tint = NOTIF_COLOR[n.type] || BRAND.blue;
+              notifications.map((n, idx) => {
+                const cfg = iconConfig[n.type] || iconConfig.doc;
+                const Icon = cfg.Icon;
                 return (
                   <button
                     key={n.id}
                     onClick={() => onOpenIpo?.(n.ipoId)}
-                    className="w-full flex items-start gap-2.5 px-4 py-3 text-left border-b border-black/5 last:border-b-0 hover:bg-black/[0.02] relative"
+                    className="w-full flex items-start gap-3.5 px-5 py-4 text-left transition-colors last:pb-5"
+                    style={{ borderBottom: idx < notifications.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none" }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.04)"}
+                    onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
                   >
-                    {!n.read && <span className="absolute left-1.5 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full" style={{ background: BRAND.blue }} />}
-                    <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style={{ background: `${tint}1a` }}>
-                      <Icon size={13} style={{ color: tint }} />
+                    {/* Icon circle */}
+                    <div
+                      className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                      style={{ background: cfg.bg }}
+                    >
+                      <Icon size={15} style={{ color: cfg.color }} />
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-xs font-medium text-slate-700 truncate">{n.title}</p>
-                      <p className="text-[11px] text-slate-400 truncate">{n.message}</p>
+
+                    {/* Text */}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold leading-snug text-white">{n.title}</p>
+                      <p className="text-xs mt-0.5" style={{ color: "#64748b" }}>
+                        {n.message}
+                        {n.createdAt ? ` · ${relTime(n.createdAt)}` : ""}
+                      </p>
                     </div>
+
+                    {/* Unread dot */}
+                    {!n.read && (
+                      <span className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: BRAND.blue }} />
+                    )}
                   </button>
                 );
               })
@@ -653,65 +867,318 @@ function AssistantPane({ embedded, tick }) {
 }
 
 /* =====================================================================
-   IPO CALCULATOR
+   IPO PROFIT / LOSS CALCULATOR
 ===================================================================== */
+const STATUS_ORDER = ["Open", "Upcoming", "Closed", "Listed"];
+function sortedCalcIpos() {
+  const all = getLiveIPOS();
+  return [...all].sort((a, b) => {
+    const si = STATUS_ORDER.indexOf(a.status);
+    const sj = STATUS_ORDER.indexOf(b.status);
+    if (si !== sj) return si - sj;
+    // Within same status: newest open/close date first
+    const da = a.open || a.close || "";
+    const db = b.open || b.close || "";
+    return db.localeCompare(da);
+  });
+}
+
 function CalculatorTab() {
-  const [ipoId, setIpoId] = useState(getLiveIPOS().find((i) => i.status === "Open")?.id || getLiveIPOS()[0].id);
+  const allIpos = sortedCalcIpos();
+  const [ipoId, setIpoId] = useState(allIpos.find((i) => i.status === "Open")?.id || allIpos[0].id);
   const [lots, setLots] = useState(1);
-  const ipo = getLiveIPOS().find((i) => i.id === ipoId);
+  const [search, setSearch] = useState("");
+  const [listOpen, setListOpen] = useState(false);
+
+  const ipo = allIpos.find((i) => i.id === ipoId) || allIpos[0];
   const p = price(ipo);
   const shares = ipo.lot * lots;
   const inv = p * shares;
   const estListingValue = (ipo.estListing || p) * shares;
   const profit = estListingValue - inv;
   const roi = inv ? (profit / inv) * 100 : 0;
-  const breakeven = p; // break-even listing price per share
+  const breakeven = p;
+
+  const statusColors = {
+    Open:     { bg: "rgba(16,185,129,0.12)", color: "#10b981", dot: "bg-emerald-500" },
+    Upcoming: { bg: "rgba(240,162,2,0.12)",  color: "#d97706", dot: "bg-amber-500" },
+    Closed:   { bg: "rgba(148,163,184,0.10)", color: "#64748b", dot: "bg-slate-400" },
+    Listed:   { bg: "rgba(28,155,218,0.10)", color: BRAND.blue, dot: "bg-blue-400" },
+  };
+
+  const filtered = allIpos.filter((i) =>
+    !search || i.company.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Group filtered results by status in the correct display order
+  const grouped = STATUS_ORDER.map((s) => ({
+    status: s,
+    items: filtered.filter((i) => i.status === s),
+  })).filter((g) => g.items.length > 0);
 
   return (
-    <div className="grid md:grid-cols-2 gap-5">
-      <div className="glass rounded-2xl p-5">
-        <p className="text-xs uppercase tracking-wide text-slate-500 mb-3">Choose IPO</p>
-        <select value={ipoId} onChange={(e) => setIpoId(e.target.value)}
-          className="w-full bg-white/80 border border-black/10 rounded-xl px-3 py-2 text-sm text-slate-700 mb-4">
-          {getLiveIPOS().map((i) => <option key={i.id} value={i.id}>{i.company}</option>)}
-        </select>
-
-        <p className="text-xs uppercase tracking-wide text-slate-500 mb-2">Number of lots</p>
-        <div className="flex items-center gap-3 mb-4">
-          <button onClick={() => setLots((l) => Math.max(1, l - 1))} className="w-9 h-9 rounded-xl bg-white/80 border border-black/10 text-slate-600">−</button>
-          <span className="font-mono text-lg text-slate-800 w-10 text-center">{lots}</span>
-          <button onClick={() => setLots((l) => l + 1)} className="w-9 h-9 rounded-xl bg-white/80 border border-black/10 text-slate-600">+</button>
-        </div>
-
-        <div className="text-xs text-slate-500 space-y-1">
-          <p>Price band: <span className="font-mono text-slate-700">₹{ipo.priceMin}-₹{ipo.priceMax}</span></p>
-          <p>Lot size: <span className="font-mono text-slate-700">{ipo.lot} shares</span></p>
-          <p>Current GMP: <span className="font-mono text-slate-700">{rupee(ipo.gmp)}</span></p>
-        </div>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">IPO Profit / Loss Calculator</h1>
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">Estimate your grey market returns before applying to any IPO</p>
       </div>
+      
+      <div className="grid md:grid-cols-2 gap-6 items-start">
+        {/* ── Input Card ── */}
+        <div className="bg-white dark:bg-[#161c28] border border-slate-200 dark:border-white/5 rounded-3xl p-6 shadow-sm dark:shadow-xl space-y-5">
+          
+          {/* IPO Selector */}
+          <div>
+            <p className="text-[10px] uppercase tracking-wider text-slate-450 dark:text-slate-500 font-bold mb-3">Select IPO</p>
 
-      <div className="glass rounded-2xl p-5 space-y-3">
-        <p className="text-xs uppercase tracking-wide text-slate-500 mb-1">Result</p>
-        {[
-          ["Shares allotted", shares.toLocaleString("en-IN")],
-          ["Investment amount", rupee(inv)],
-          ["Break-even price / share", rupee(breakeven)],
-          ["Est. listing price / share", rupee(ipo.estListing || p)],
-          ["Est. listing value", rupee(estListingValue)],
-        ].map(([l, v]) => (
-          <div key={l} className="flex justify-between text-sm">
-            <span className="text-slate-500">{l}</span>
-            <span className="font-mono text-slate-800">{v}</span>
+            {/* Selected IPO preview pill */}
+            <button
+              onClick={() => setListOpen((v) => !v)}
+              className="w-full flex items-center gap-3 p-3 rounded-2xl border transition-all text-left"
+              style={{
+                background: listOpen ? "rgba(28,155,218,0.05)" : "transparent",
+                borderColor: listOpen ? "rgba(28,155,218,0.4)" : "rgba(148,163,184,0.2)"
+              }}
+            >
+              <CompanyAvatar name={ipo.company} size={36} />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-slate-800 dark:text-white truncate">{ipo.company}</p>
+                <div className="flex items-center gap-1.5 mt-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: statusColors[ipo.status]?.color || "#64748b" }}></span>
+                  <span className="text-[10px] font-semibold" style={{ color: statusColors[ipo.status]?.color || "#64748b" }}>{ipo.status}</span>
+                  <span className="text-[10px] text-slate-400 dark:text-slate-500">· {ipo.type}</span>
+                </div>
+              </div>
+              <ChevronRight size={14} className={`text-slate-400 transition-transform shrink-0 ${listOpen ? "rotate-90" : ""}`} />
+            </button>
+
+            {/* Dropdown panel */}
+            {listOpen && (
+              <div className="mt-2 rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-[#111520] shadow-xl overflow-hidden">
+                {/* Search */}
+                <div className="p-3 border-b border-slate-100 dark:border-white/5">
+                  <div className="relative">
+                    <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      autoFocus
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      placeholder="Search IPOs…"
+                      className="w-full bg-slate-50 dark:bg-[#161c28] border border-slate-200 dark:border-white/5 rounded-xl pl-8 pr-3 py-2 text-xs outline-none text-slate-700 dark:text-slate-200 placeholder:text-slate-400"
+                    />
+                  </div>
+                </div>
+
+                {/* Grouped list */}
+                <div className="max-h-64 overflow-y-auto">
+                  {grouped.map((group) => (
+                    <div key={group.status}>
+                      <div className="px-3 py-1.5 sticky top-0 bg-white dark:bg-[#111520] z-10">
+                        <span
+                          className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                          style={{ background: statusColors[group.status]?.bg, color: statusColors[group.status]?.color }}
+                        >
+                          {group.status}
+                        </span>
+                      </div>
+                      {group.items.map((i) => (
+                        <button
+                          key={i.id}
+                          onClick={() => { setIpoId(i.id); setListOpen(false); setSearch(""); }}
+                          className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors text-left"
+                          style={{
+                            background: i.id === ipoId ? "rgba(28,155,218,0.06)" : "transparent"
+                          }}
+                        >
+                          <CompanyAvatar name={i.company} size={30} />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-semibold text-slate-800 dark:text-slate-100 truncate">{i.company}</p>
+                            <p className="text-[10px] text-slate-400 dark:text-slate-500">{i.type} · {i.priceMax ? `₹${i.priceMax}` : "TBA"}</p>
+                          </div>
+                          {i.id === ipoId && (
+                            <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  ))}
+                  {grouped.length === 0 && (
+                    <p className="text-xs text-slate-400 text-center py-6">No IPOs found</p>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
-        ))}
-        <div className="border-t border-black/10 pt-3 flex justify-between items-center">
-          <span className="text-sm text-slate-600">Estimated profit</span>
-          <span className="font-mono text-lg font-medium" style={{ color: profit >= 0 ? "#0f9d68" : "#e11d48" }}>
-            {profit >= 0 ? "+" : ""}{rupee(profit)} ({roi.toFixed(1)}%)
-          </span>
+
+          {/* Key Info */}
+          <div className="border-t border-slate-150 dark:border-slate-800 pt-4 space-y-3">
+            <div className="flex justify-between text-sm">
+              <span className="text-slate-550 dark:text-slate-400">Price band</span>
+              <span className="font-mono text-slate-805 dark:text-slate-200 font-bold">{ipo.priceMin && ipo.priceMax ? `₹${ipo.priceMin}–₹${ipo.priceMax}` : "—"}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-slate-550 dark:text-slate-400">Lot size</span>
+              <span className="font-mono text-slate-805 dark:text-slate-200 font-bold">{ipo.lot ? `${ipo.lot} shares` : "—"}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-slate-550 dark:text-slate-400">Current GMP</span>
+              <span className="font-mono text-slate-805 dark:text-slate-200 font-bold">{ipo.gmp != null ? rupee(ipo.gmp) : "—"}</span>
+            </div>
+          </div>
+
+          {/* Lot counter */}
+          <div className="border-t border-slate-150 dark:border-slate-800 pt-4">
+            <p className="text-[10px] uppercase tracking-wider text-slate-450 dark:text-slate-500 font-bold mb-3">Number of Lots</p>
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => setLots((l) => Math.max(1, l - 1))} 
+                className="w-12 h-12 rounded-xl border border-blue-500/40 text-blue-500 bg-slate-50 dark:bg-[#111520] hover:bg-slate-100 dark:hover:bg-[#111520]/80 flex items-center justify-center text-lg font-bold transition-all shadow-[0_0_10px_rgba(59,130,246,0.15)] focus:outline-none"
+              >
+                <Minus size={16} />
+              </button>
+              <div className="flex-1 bg-slate-50 dark:bg-[#111520] border border-slate-200 dark:border-slate-800 rounded-xl h-12 flex items-center justify-center font-mono text-xl font-bold text-slate-800 dark:text-white">
+                {lots}
+              </div>
+              <button 
+                onClick={() => setLots((l) => l + 1)} 
+                className="w-12 h-12 rounded-xl border border-blue-500/40 text-blue-500 bg-slate-50 dark:bg-[#111520] hover:bg-slate-100 dark:hover:bg-[#111520]/80 flex items-center justify-center text-lg font-bold transition-all shadow-[0_0_10px_rgba(59,130,246,0.15)] focus:outline-none"
+              >
+                <span className="text-xl">+</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <p className="text-[11px] text-slate-400 pt-2">Based on current GMP — grey-market premiums are informal and can change rapidly before listing. Not investment advice.</p>
+
+        {/* ── Result Card ── */}
+        <div className="bg-white dark:bg-[#161c28] border border-slate-200 dark:border-white/5 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col justify-between min-h-[340px]">
+          <div className="space-y-4">
+            <p className="text-[10px] uppercase tracking-wider text-slate-450 dark:text-slate-500 font-bold mb-1">Result</p>
+            {[
+              ["Shares allotted", shares.toLocaleString("en-IN")],
+              ["Investment amount", rupee(inv)],
+              ["Break-even price / share", rupee(breakeven)],
+              ["Est. listing price / share", rupee(ipo.estListing || p)],
+              ["Est. listing value", rupee(estListingValue)],
+            ].map(([l, v]) => (
+              <div key={l} className="flex justify-between text-sm pb-3 border-b border-slate-150/60 dark:border-slate-800/60 last:border-b-0 last:pb-0">
+                <span className="text-slate-550 dark:text-slate-400">{l}</span>
+                <span className="font-mono text-slate-800 dark:text-slate-200 font-semibold">{v}</span>
+              </div>
+            ))}
+          </div>
+          
+          <div className="border-t border-slate-150 dark:border-slate-800 pt-4 mt-6">
+            <p className={`font-bold text-lg tracking-tight ${profit >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-500 dark:text-red-400"}`}>
+              {profit >= 0 ? `Estimated Profit: +${rupee(profit)} (+${roi.toFixed(1)}%)` : `Estimated Loss: ${rupee(profit)} (${roi.toFixed(1)}%)`}
+            </p>
+            <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-2 font-medium leading-relaxed">
+              GMP figures are unofficial grey market indicators and do not guarantee listing price or profitability.
+            </p>
+          </div>
+        </div>
       </div>
+    </div>
+  );
+}
+
+/* =====================================================================
+   LOGO REGISTRY — curated direct logo URLs for every IPO + broker.
+   Priority order: direct CDN → Clearbit → Google favicon → initials.
+   Only add entries where a reliable, high-quality logo URL is known.
+===================================================================== */
+const LOGO_REGISTRY = {
+  // ── Brokers ──────────────────────────────────────────────────────────
+  "upstox":          "https://logo.clearbit.com/upstox.com",
+  "angel one":       "https://logo.clearbit.com/angelone.in",
+
+  // ── Mainboard IPOs ───────────────────────────────────────────────────
+  "sbi funds management": "https://logo.clearbit.com/sbimf.com",
+  "sbi funds":            "https://logo.clearbit.com/sbimf.com",
+  "cult.fit":             "https://logo.clearbit.com/cult.fit",
+  "cultfit":              "https://logo.clearbit.com/cult.fit",
+  "cube highways":        "https://logo.clearbit.com/cubehighways.com",
+  "knack packaging":      "https://logo.clearbit.com/knackpackaging.com",
+  "kusumgar":             "https://logo.clearbit.com/kusumgar.com",
+  "aastha spintex":       "https://logo.clearbit.com/aasthaspintex.com",
+  "csm technologies":     "https://logo.clearbit.com/csmtechnologies.com",
+  "caliber mining":       "https://logo.clearbit.com/calibermining.com",
+  "ratnadeep retail":     "https://logo.clearbit.com/ratnadeep.com",
+
+  // ── SME IPOs (only those with a publicly reachable website logo) ─────
+  "kratikal tech":        "https://logo.clearbit.com/kratikal.com",
+  "kratikal":             "https://logo.clearbit.com/kratikal.com",
+  "ic electricals":       "https://logo.clearbit.com/icelectricals.com",
+  "sampark india logistics": "https://logo.clearbit.com/samparklogistics.com",
+  "sampark logistics":    "https://logo.clearbit.com/samparklogistics.com",
+  "devson catalyst":      "https://logo.clearbit.com/devson.in",
+  "sotefin bharat":       "https://logo.clearbit.com/sotefin.com",
+};
+
+// Returns the best matching logo URL for a given display name.
+function getLogoUrl(name) {
+  const n = name.toLowerCase().trim();
+  // Exact match first
+  if (LOGO_REGISTRY[n]) return LOGO_REGISTRY[n];
+  // Partial match
+  for (const key of Object.keys(LOGO_REGISTRY)) {
+    if (n.includes(key) || key.includes(n.split(" ")[0])) return LOGO_REGISTRY[key];
+  }
+  return null;
+}
+
+/* =====================================================================
+   COMPANY AVATAR — official logo with graceful initials fallback
+===================================================================== */
+function CompanyAvatar({ name, size = 40 }) {
+  const [srcIndex, setSrcIndex] = useState(0);
+
+  // Reset index whenever the company name changes (e.g. navigating between cards)
+  useEffect(() => { setSrcIndex(0); }, [name]);
+
+  // Initials fallback values
+  const words = name.replace(/Ltd\.|Limited|Pvt\.|Private|Co\./gi, "").trim().split(/\s+/);
+  const initials = words.slice(0, 2).map((w) => w[0] || "").join("").toUpperCase();
+  const colors = ["#1c9bda", "#8b5cf6", "#f59e0b", "#10b981", "#ef4444", "#3b82f6", "#ec4899"];
+  const colorIdx = name.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0) % colors.length;
+  const bg = colors[colorIdx];
+
+  // Build source cascade once per name
+  const sources = useMemo(() => {
+    const primaryUrl = getLogoUrl(name);
+    if (!primaryUrl) return [];
+    const domain = primaryUrl.replace("https://logo.clearbit.com/", "");
+    return [
+      primaryUrl,
+      `https://www.google.com/s2/favicons?sz=128&domain=${domain}`,
+    ];
+  }, [name]);
+
+  const currentSrc = sources[srcIndex];
+
+  if (currentSrc) {
+    return (
+      <div
+        className="rounded-xl shrink-0 overflow-hidden bg-white dark:bg-white/5 border border-slate-100 dark:border-white/8 flex items-center justify-center"
+        style={{ width: size, height: size }}
+      >
+        <img
+          src={currentSrc}
+          alt={`${name} logo`}
+          onError={() => setSrcIndex((i) => i + 1)}
+          style={{ width: size * 0.78, height: size * 0.78, objectFit: "contain" }}
+          className="select-none"
+        />
+      </div>
+    );
+  }
+
+  // All sources exhausted (or none mapped) → show initials
+  return (
+    <div
+      className="rounded-xl flex items-center justify-center shrink-0 font-bold text-white select-none"
+      style={{ width: size, height: size, background: bg, fontSize: size * 0.35 }}
+    >
+      {initials}
     </div>
   );
 }
@@ -721,84 +1188,149 @@ function CalculatorTab() {
 ===================================================================== */
 function IPOCard({ ipo, onOpen, watchlist }) {
   const watched = watchlist.ids.includes(ipo.id);
+  const isListed = ipo.status === "Listed";
+  const isClosed = ipo.status === "Closed";
+  const isOpen = ipo.status === "Open";
+  
+  // Status badge style
+  const statusStyle = {
+    Open:     { bg: "rgba(16,185,129,0.12)", color: "#10b981", border: "rgba(16,185,129,0.25)" },
+    Closed:   { bg: "rgba(148,163,184,0.10)", color: "#64748b", border: "rgba(148,163,184,0.2)" },
+    Upcoming: { bg: "rgba(240,162,2,0.12)",  color: "#d97706", border: "rgba(240,162,2,0.25)" },
+    Listed:   { bg: "rgba(28,155,218,0.10)", color: BRAND.blue, border: "rgba(28,155,218,0.2)" },
+  };
+  const ss = statusStyle[ipo.status] || statusStyle.Closed;
+
   return (
-    <div className="glass glass-hover rounded-2xl p-4 relative group">
-      <button
-        onClick={(e) => { e.stopPropagation(); watchlist.toggle(ipo.id); }}
-        className="absolute top-4 right-4 text-slate-400 hover:text-amber-500 z-10"
-        title={watched ? "Remove from watchlist" : "Add to watchlist"}
-      >
-        {watched ? <BookmarkCheck size={17} style={{ color: BRAND.blue }} /> : <Bookmark size={17} />}
-      </button>
+    <div
+      className="bg-white dark:bg-[#161c28] border rounded-2xl overflow-hidden relative group transition-all hover:shadow-md cursor-pointer"
+      style={{ borderColor: isOpen ? "rgba(28,155,218,0.35)" : "rgba(0,0,0,0.06)", boxShadow: isOpen ? "0 0 0 1px rgba(28,155,218,0.12), 0 4px 16px -4px rgba(28,155,218,0.15)" : "0 1px 4px rgba(0,0,0,0.04)" }}
+      onClick={() => onOpen(ipo)}
+    >
+      {/* Blue left accent bar for Open IPOs */}
+      {isOpen && <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl" style={{ background: BRAND.blue }} />}
 
-      <button onClick={() => onOpen(ipo)} className="w-full text-left">
-        <div className="pr-8">
-          <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="text-slate-800 font-semibold">{ipo.company}</h3>
-            <span className="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded-full text-white" style={{ background: ipo.type === "Mainboard" ? BRAND.blue : "#8b5cf6" }}>{ipo.type}</span>
-          </div>
-          <p className="text-xs text-slate-400 mt-0.5">{ipo.sector}</p>
-        </div>
-
-        <div className="flex items-center justify-between mt-3">
-          <div className="flex items-center gap-1.5">
-            {ipo.status === "Listed" && ipo.listedAt ? (
-              <>
-                {listingGainPct(ipo) >= 0 ? <ArrowUpRight size={13} style={{ color: BRAND.green }} /> : <ArrowDownRight size={13} className="text-rose-500" />}
-                <span className="text-sm font-bold font-mono" style={{ color: listingGainPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>Listed · {listingGainPct(ipo)?.toFixed(1)}%</span>
-              </>
-            ) : ipo.status === "Listed" ? (
-              <span className="text-sm font-medium text-slate-400">Listed</span>
-            ) : (
-              <>
-                <TrendIcon trend={ipo.trend} />
-                <span className="font-mono text-sm font-medium" style={{ color: ipo.gmp > 0 ? "#0f9d68" : "#64748b" }}>{rupee(ipo.gmp)}</span>
-                <span className="text-sm font-bold font-mono" style={{ color: ipo.gmp > 0 ? "#0f9d68" : "#475569" }}>GMP · {gainPct(ipo).toFixed(1)}%</span>
-              </>
-            )}
-          </div>
-          <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ background: `${STATUS_COLOR[ipo.status]}22`, color: STATUS_COLOR[ipo.status] }}>{ipo.status}</span>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 mt-3 text-xs">
-          <div><p className="text-slate-400">Price</p><p className="font-mono text-slate-700">{ipo.priceMin ? `₹${ipo.priceMin}-${ipo.priceMax}` : "TBD"}</p></div>
-          <div><p className="text-slate-400">Lot</p><p className="font-mono text-slate-700">{ipo.lot || "TBD"}</p></div>
-          <div><p className="text-slate-400">Issue size</p><p className="font-mono text-slate-700">{ipo.issueSize ? `₹${ipo.issueSize} Cr` : "TBD"}</p></div>
-        </div>
-
-        {ipo.status === "Listed" ? (
-          ipo.listedAt ? (
-            <div className="mt-3 space-y-1.5">
-              <div className="flex items-center justify-between rounded-xl px-3 py-2" style={{ background: listingGainPct(ipo) >= 0 ? `${BRAND.green}22` : "rgba(225,29,72,0.10)" }}>
-                <span className={`text-[11px] ${listingGainPct(ipo) >= 0 ? "text-profit" : "text-loss"}`}>Listing gain</span>
-                <span className={`font-mono font-medium flex items-center gap-1 ${listingGainPct(ipo) >= 0 ? "text-profit" : "text-loss"}`}>
-                  {listingGainPct(ipo) >= 0 ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
-                  {listingGainPct(ipo)?.toFixed(1)}% · {rupee(ipo.listedAt)}
+      <div className="p-4 pl-5">
+        {/* Header row: avatar + company info + status badge */}
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <CompanyAvatar name={ipo.company} size={42} />
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h3 className="font-bold text-slate-850 dark:text-white text-sm leading-snug">{ipo.company}</h3>
+                <span
+                  className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded font-bold"
+                  style={{ background: ipo.type === "Mainboard" ? "rgba(28,155,218,0.12)" : "rgba(139,92,246,0.12)", color: ipo.type === "Mainboard" ? BRAND.blue : "#8b5cf6" }}
+                >
+                  {ipo.type}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-[11px] px-1">
-                <span className="text-slate-400">P&L / lot at listing</span>
-                <span className={`font-mono font-medium ${listingProfitLossPerLot(ipo) >= 0 ? "text-profit" : "text-loss"}`}>
-                  {listingProfitLossPerLot(ipo) >= 0 ? "+" : ""}{rupee(listingProfitLossPerLot(ipo))}
-                </span>
+              <div className="flex items-center gap-2 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-slate-400">{ipo.sector}</p>
+                {isOpen && (
+                  <span className="flex items-center gap-1.5 text-[10px] font-semibold" style={{ color: "#10b981" }}>
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                    </span>
+                    Live Data
+                  </span>
+                )}
               </div>
             </div>
-          ) : (
-            <div className="mt-3 rounded-xl px-3 py-2 text-[11px] text-slate-400" style={{ background: "rgba(148,163,184,0.12)" }}>
-              Listed — actual listing price not yet recorded
-            </div>
-          )
-        ) : (
-          ipo.lot > 0 && ipo.gmp > 0 && (
-            <div className="mt-3 flex items-center justify-between rounded-xl px-3 py-2" style={{ background: `${BRAND.green}22` }}>
-              <span className="text-[11px] text-profit">Est. profit / lot</span>
-              <span className="font-mono font-medium text-profit">+{rupee(profitPerLot(ipo))}</span>
-            </div>
-          )
+          </div>
+          {/* Status badge */}
+          <div className="flex flex-col items-end gap-2 shrink-0">
+            <span
+              className="text-[11px] font-semibold px-2.5 py-1 rounded-lg border"
+              style={{ background: ss.bg, color: ss.color, borderColor: ss.border }}
+            >
+              {ipo.status}
+            </span>
+            <button
+              onClick={(e) => { e.stopPropagation(); watchlist.toggle(ipo.id); }}
+              className="text-slate-400 hover:text-amber-500 transition-colors"
+              title={watched ? "Remove from watchlist" : "Add to watchlist"}
+            >
+              {watched ? <BookmarkCheck size={16} style={{ color: BRAND.blue }} /> : <Bookmark size={16} />}
+            </button>
+          </div>
+        </div>
+
+        {/* GMP row for non-listed */}
+        {!isListed && ipo.gmp !== null && (
+          <div className="flex items-center gap-1.5 mt-3">
+            <TrendIcon trend={ipo.trend} size={12} />
+            <span className="font-mono text-sm font-bold" style={{ color: ipo.gmp > 0 ? "#0f9d68" : "#64748b" }}>
+              {rupee(ipo.gmp)}
+            </span>
+            <span className="text-xs font-semibold" style={{ color: ipo.gmp > 0 ? "#10b981" : "#94a3b8" }}>
+              GMP {ipo.gmp > 0 ? `+${gainPct(ipo).toFixed(1)}%` : `${gainPct(ipo).toFixed(1)}%`}
+            </span>
+          </div>
+        )}
+        {!isListed && ipo.gmp === null && (
+          <div className="flex items-center gap-1.5 mt-3 text-slate-400 text-xs font-medium">
+            <Minus size={12} className="text-slate-400" />
+            <span>GMP: -</span>
+          </div>
         )}
 
-        {ipo.status === "Listed" && ipo.currentPrice && (
-          <div className="mt-2 flex items-center justify-between text-[11px]">
+        {/* Listing gain for listed */}
+        {isListed && ipo.listedAt && (
+          <div className="flex items-center gap-1.5 mt-3">
+            {listingGainPct(ipo) >= 0 ? <ArrowUpRight size={13} style={{ color: BRAND.green }} /> : <ArrowDownRight size={13} className="text-rose-500" />}
+            <span className="text-sm font-bold font-mono" style={{ color: listingGainPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>
+              Listed · {listingGainPct(ipo)?.toFixed(1)}%
+            </span>
+          </div>
+        )}
+
+        {/* Divider */}
+        <div className="mt-3 mb-3 border-t border-slate-100 dark:border-white/5" />
+
+        {/* Price / Lot / Issue size grid + profit */}
+        <div className="flex items-end justify-between gap-2">
+          <div className="grid grid-cols-3 gap-4 text-xs flex-1">
+            <div>
+              <p className="text-slate-500 dark:text-slate-400 mb-0.5">Price</p>
+              <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{ipo.priceMin ? `₹${ipo.priceMin}-${ipo.priceMax}` : "-"}</p>
+            </div>
+            <div>
+              <p className="text-slate-500 dark:text-slate-400 mb-0.5">Lot</p>
+              <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{ipo.lot || "-"}</p>
+            </div>
+            <div>
+              <p className="text-slate-500 dark:text-slate-400 mb-0.5">Issue size</p>
+              <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{ipo.issueSize ? `₹${Number(ipo.issueSize).toLocaleString("en-IN")} Cr` : "-"}</p>
+            </div>
+          </div>
+
+          {/* Est. profit pill — only for non-listed IPOs with GMP */}
+          {!isListed && ipo.lot > 0 && ipo.gmp > 0 && (
+            <div className="rounded-xl px-3 py-2 text-right shrink-0" style={{ background: "#16a34a" }}>
+              <p className="text-[10px] text-emerald-100 font-semibold leading-none mb-1">Est. profit / lot</p>
+              <p className="font-mono font-bold text-white text-sm">+{rupee(profitPerLot(ipo))}</p>
+            </div>
+          )}
+
+          {/* Listed: show P&L per lot */}
+          {isListed && ipo.listedAt && (
+            <div
+              className="rounded-xl px-3 py-2 text-right shrink-0"
+              style={{ background: listingGainPct(ipo) >= 0 ? `${BRAND.green}22` : "rgba(225,29,72,0.10)" }}
+            >
+              <p className={`text-[10px] font-semibold leading-none mb-1 ${listingGainPct(ipo) >= 0 ? "text-profit" : "text-loss"}`}>P&L / lot</p>
+              <p className={`font-mono font-bold text-sm ${listingGainPct(ipo) >= 0 ? "text-profit" : "text-loss"}`}>
+                {listingProfitLossPerLot(ipo) >= 0 ? "+" : ""}{rupee(listingProfitLossPerLot(ipo))}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Since listing row */}
+        {isListed && ipo.currentPrice && (
+          <div className="flex items-center justify-between mt-2 text-[11px]">
             <span className="text-slate-400">Since listing</span>
             <span className="font-mono flex items-center gap-0.5" style={{ color: currentReturnPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>
               {currentReturnPct(ipo) >= 0 ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
@@ -807,11 +1339,156 @@ function IPOCard({ ipo, onOpen, watchlist }) {
           </div>
         )}
 
-        <div className="flex items-center justify-between mt-3 text-[11px] text-slate-400">
-          <span className="flex items-center gap-1"><Calendar size={11} /> {ipo.status === "Listed" ? `Listed ${ipo.listing}` : `${ipo.open} → ${ipo.close}`}</span>
-          <span className="flex items-center gap-1" style={{ color: BRAND.blue }}>Details <ChevronRight size={12} /></span>
+        {/* Premium IPO Timeline (4-steps) */}
+        <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {[
+              { label: "Opens", date: ipo.open, bg: "bg-emerald-500/10 dark:bg-emerald-500/20", text: "text-emerald-600 dark:text-emerald-400" },
+              { label: "Closes", date: ipo.close, bg: "bg-rose-500/10 dark:bg-rose-500/20", text: "text-rose-600 dark:text-rose-400" },
+              { label: "Allotment", date: ipo.allotment, bg: "bg-amber-500/10 dark:bg-amber-500/20", text: "text-amber-600 dark:text-amber-400" },
+              { label: "Listing", date: ipo.listing, bg: "bg-blue-500/10 dark:bg-blue-500/20", text: "text-blue-600 dark:text-blue-400" }
+            ].map(({ label, date, bg, text }) => (
+              <div 
+                key={label} 
+                className="rounded-xl p-2 flex items-center gap-2 border border-slate-100 dark:border-white/[0.03] bg-slate-500/[0.025] dark:bg-white/[0.015]"
+              >
+                <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${bg} ${text} shrink-0`}>
+                  <Calendar size={12} />
+                </div>
+                <div className="flex flex-col min-w-0">
+                  <span className="text-[9px] uppercase font-bold text-slate-400 dark:text-slate-550 leading-none mb-0.5">{label}</span>
+                  <span className="text-[10px] font-bold text-slate-700 dark:text-slate-200 truncate leading-tight">
+                    {date ? formatDate(date) : "To Be Announced"}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Action Row */}
+          <div className="flex items-center justify-between mt-3 text-[11px]">
+            <span className="text-slate-400 dark:text-slate-500">
+              {ipo.status === "Listed" && ipo.listing && (
+                <span className="font-semibold text-slate-500 dark:text-slate-400">Listed on {formatDate(ipo.listing)}</span>
+              )}
+            </span>
+            <span className="flex items-center gap-0.5 font-bold" style={{ color: BRAND.blue }}>
+              View details <ChevronRight size={12} />
+            </span>
+          </div>
         </div>
-      </button>
+      </div>
+    </div>
+  );
+}
+
+/* =====================================================================
+   LISTED IPO CARD — specialized card matching reference image
+===================================================================== */
+function ListedIPOCard({ ipo, onOpen, watchlist }) {
+  const watched = watchlist.ids.includes(ipo.id);
+  const gain = listingGainPct(ipo);
+  const currentRet = currentReturnPct(ipo);
+  const gainPositive = gain != null ? gain >= 0 : true;
+  const currentPositive = currentRet != null ? currentRet >= 0 : true;
+  const gainColor = gainPositive ? "#16a34a" : "#e11d48";
+
+  return (
+    <div
+      className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl shadow-sm hover:shadow-md transition-all cursor-pointer overflow-hidden"
+      onClick={() => onOpen(ipo)}
+    >
+      <div className="p-5">
+        {/* Header: Avatar + Company + Type badge */}
+        <div className="flex items-center gap-3 mb-1">
+          <CompanyAvatar name={ipo.company} size={44} />
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="font-bold text-slate-850 dark:text-white text-[15px] leading-snug">{ipo.company}</h3>
+              <span
+                className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold text-white"
+                style={{ background: ipo.type === "Mainboard" ? BRAND.blue : "#8b5cf6" }}
+              >
+                {ipo.type}
+              </span>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{ipo.sector}</p>
+          </div>
+          <button
+            onClick={(e) => { e.stopPropagation(); watchlist.toggle(ipo.id); }}
+            className="text-slate-400 hover:text-amber-500 transition-colors shrink-0"
+          >
+            {watched ? <BookmarkCheck size={16} style={{ color: BRAND.blue }} /> : <Bookmark size={16} />}
+          </button>
+        </div>
+
+        {/* Big listing gain headline */}
+        <div className="mt-4 mb-4">
+          <p className="text-2xl font-extrabold tracking-tight" style={{ color: gainColor }}>
+            Listed{gain != null ? ` • ${gain >= 0 ? "" : ""}${gain.toFixed(1)}%` : " — awaiting data"}
+          </p>
+        </div>
+
+        {/* Row 1: Listing Price | Listing Gain % | Current Gain Since Listing */}
+        <div className="grid grid-cols-3 gap-3 text-xs mb-4">
+          <div>
+            <p className="text-slate-500 dark:text-slate-400 mb-1">Listing Price:</p>
+            <p className="font-mono font-bold text-slate-800 dark:text-slate-100 text-sm">
+              {ipo.listedAt ? `₹${ipo.listedAt}` : "—"}
+            </p>
+          </div>
+          <div>
+            <p className="text-slate-500 dark:text-slate-400 mb-1">Listing Gain %</p>
+            <p
+              className="font-mono font-bold text-sm flex items-center gap-0.5"
+              style={{ color: gainColor }}
+            >
+              {gain != null && (gainPositive ? <ArrowUpRight size={13} /> : <ArrowDownRight size={13} />)}
+              {gain != null ? `${gain.toFixed(1)}%` : "—"}
+            </p>
+          </div>
+          <div>
+            <p className="text-slate-500 dark:text-slate-400 mb-1">Current Gain Since Listing</p>
+            <p
+              className="font-mono font-bold text-sm flex items-center gap-0.5"
+              style={{ color: currentPositive ? "#16a34a" : "#e11d48" }}
+            >
+              {currentRet != null && (currentPositive ? <ArrowUpRight size={13} /> : <ArrowDownRight size={13} />)}
+              {currentRet != null ? `${currentRet.toFixed(1)}%` : "—"}
+            </p>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-slate-100 dark:border-white/5 mb-4" />
+
+        {/* Row 2: Price | Lot | Issue size */}
+        <div className="grid grid-cols-3 gap-3 text-xs mb-4">
+          <div>
+            <p className="text-slate-500 dark:text-slate-400 mb-0.5">Price</p>
+            <p className="font-mono font-bold text-slate-800 dark:text-slate-100">
+              {ipo.priceMin ? `₹${ipo.priceMin}-${ipo.priceMax}` : "—"}
+            </p>
+          </div>
+          <div>
+            <p className="text-slate-500 dark:text-slate-400 mb-0.5">Lot</p>
+            <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{ipo.lot || "—"}</p>
+          </div>
+          <div>
+            <p className="text-slate-500 dark:text-slate-400 mb-0.5">Issue size</p>
+            <p className="font-mono font-bold text-slate-800 dark:text-slate-100">
+              {ipo.issueSize ? `₹${Number(ipo.issueSize).toLocaleString("en-IN")} Cr` : "—"}
+            </p>
+          </div>
+        </div>
+
+        {/* Details link */}
+        <div className="flex justify-end">
+          <span className="flex items-center gap-1 text-xs font-semibold" style={{ color: BRAND.blue }}>
+            Details <ChevronRight size={13} />
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -822,124 +1499,243 @@ function IPOCard({ ipo, onOpen, watchlist }) {
 function IPODetail({ ipo, onClose, watchlist }) {
   if (!ipo) return null;
   const watched = watchlist.ids.includes(ipo.id);
+  const today = new Date();
+
+  // Timeline: determine which milestones have passed
+  const milestones = [
+    { label: "Open", date: ipo.open },
+    { label: "Close", date: ipo.close },
+    { label: "Allotment", date: ipo.allotment },
+    { label: "Listing", date: ipo.listing },
+  ];
+  const isPast = (d) => d && new Date(d + "T00:00:00+05:30") <= today;
+
   return (
-    <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-white/95 backdrop-blur border border-white shadow-2xl rounded-3xl max-w-3xl w-full max-h-[88vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-        <div className="p-6 border-b border-black/5 flex items-start justify-between sticky top-0 bg-white/95 backdrop-blur z-10">
-          <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <h2 className="text-xl text-slate-800 font-semibold">{ipo.company}</h2>
-              <span className="text-[10px] uppercase px-1.5 py-0.5 rounded-full text-white" style={{ background: ipo.type === "Mainboard" ? BRAND.blue : "#8b5cf6" }}>{ipo.type}</span>
-              <span className="text-[10px] uppercase px-1.5 py-0.5 rounded-full" style={{ background: `${STATUS_COLOR[ipo.status]}22`, color: STATUS_COLOR[ipo.status] }}>{ipo.status}</span>
-            </div>
-            <p className="text-sm text-slate-400 mt-1">{ipo.sector} · Exchange: {ipo.exchange} · Lead Manager: {ipo.leadManager}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <button onClick={() => watchlist.toggle(ipo.id)} className="text-slate-400 hover:text-amber-500">
-              {watched ? <BookmarkCheck size={20} style={{ color: BRAND.blue }} /> : <Bookmark size={20} />}
+    <div
+      className="fixed inset-0 z-40 bg-black/60 backdrop-blur-md flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+        style={{ background: "#111827", border: "1px solid rgba(255,255,255,0.08)" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* ── Top toolbar ── */}
+        <div className="flex items-center justify-between px-5 pt-5 pb-1">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => watchlist.toggle(ipo.id)}
+              className="w-9 h-9 rounded-xl flex items-center justify-center border transition-colors"
+              style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)", color: watched ? BRAND.blue : "#94a3b8" }}
+            >
+              {watched ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
             </button>
-            <button onClick={onClose} className="text-slate-400 hover:text-slate-700"><X size={20} /></button>
+            <button
+              onClick={onClose}
+              className="w-9 h-9 rounded-xl flex items-center justify-center border transition-colors text-slate-400 hover:text-white"
+              style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)" }}
+            >
+              <X size={16} />
+            </button>
+          </div>
+          <span className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full" style={{ background: "rgba(16,185,129,0.15)", color: "#10b981" }}>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            Live Data
+          </span>
+        </div>
+
+        {/* ── Company header ── */}
+        <div className="flex items-start gap-4 px-5 py-4">
+          <CompanyAvatar name={ipo.company} size={52} />
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <h2 className="text-xl font-extrabold text-white tracking-tight">{ipo.company}</h2>
+              <span
+                className="text-[10px] font-bold uppercase px-2.5 py-1 rounded-full tracking-wider"
+                style={
+                  ipo.type === "Mainboard"
+                    ? { background: "rgba(245,158,11,0.2)", color: "#f59e0b", border: "1px solid rgba(245,158,11,0.3)" }
+                    : { background: "rgba(139,92,246,0.2)", color: "#a78bfa", border: "1px solid rgba(139,92,246,0.3)" }
+                }
+              >
+                {ipo.type === "Mainboard" ? "MAINBOARD" : "SME"}
+              </span>
+            </div>
+            <p className="text-sm mt-1" style={{ color: "#94a3b8" }}>
+              {ipo.sector} · Exchange: {ipo.exchange} · Lead Manager: {ipo.leadManager}
+            </p>
           </div>
         </div>
 
-        <div className="p-6 space-y-6">
-          <p className="text-sm text-slate-600 leading-relaxed">{ipo.about}</p>
+        <div className="px-5 pb-5 space-y-5">
+          {/* About */}
+          <p className="text-sm leading-relaxed" style={{ color: "#94a3b8" }}>{ipo.about}</p>
 
-          {/* IPO Info */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {/* ── 3 key metric cards ── */}
+          <div className="grid grid-cols-3 gap-3">
             {[
-              ["Price band", ipo.priceMin ? `₹${ipo.priceMin}-₹${ipo.priceMax}` : "TBD"],
-              ["Face value", `₹${ipo.faceValue}`],
-              ["Lot size", ipo.lot || "TBD"],
-              ["Min. investment", ipo.lot ? rupee(investment(ipo)) : "TBD"],
-              ["Issue size", ipo.issueSize ? `₹${ipo.issueSize} Cr` : "TBD"],
-              ["Fresh issue", ipo.freshIssue ? `₹${ipo.freshIssue} Cr` : "—"],
-              ["OFS", ipo.ofs ? `₹${ipo.ofs} Cr` : "—"],
-              ["Registrar", ipo.registrar],
-            ].map(([l, v]) => (
-              <div key={l} className="glass-inset rounded-xl p-3">
-                <p className="text-[11px] text-slate-400">{l}</p>
-                <p className="font-mono text-slate-800 text-sm mt-0.5">{v}</p>
+              ["Price band", ipo.priceMin ? `₹${ipo.priceMin}-${ipo.priceMax}` : "-"],
+              ["Lot size", ipo.lot || "-"],
+              ["Issue size", ipo.issueSize ? `₹${Number(ipo.issueSize).toLocaleString("en-IN")} Cr` : "-"],
+            ].map(([label, value]) => (
+              <div
+                key={label}
+                className="rounded-2xl p-4"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+              >
+                <p className="text-xs font-medium mb-1.5" style={{ color: "#64748b" }}>{label}</p>
+                <p className="text-xl font-extrabold text-white font-mono tracking-tight">{value}</p>
               </div>
             ))}
           </div>
 
-          {/* Dates */}
-          <div>
-            <SectionLabel icon={Clock}>Important Dates</SectionLabel>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm">
-              {[["Open", ipo.open], ["Close", ipo.close], ["Allotment", ipo.allotment], ["Refund", ipo.refund], ["Demat credit", ipo.demat], ["Listing", ipo.listing]].map(([l, v]) => (
-                <div key={l} className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">{l}</p><p className="font-mono text-slate-700">{v}</p></div>
+          {/* Secondary metrics */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {[
+              ["Face value", ipo.faceValue != null ? `₹${ipo.faceValue}` : "-"],
+              ["Min. investment", ipo.lot ? rupee(investment(ipo)) : "-"],
+              ["Fresh issue", ipo.freshIssue ? `₹${ipo.freshIssue} Cr` : "-"],
+              ["OFS", ipo.ofs ? `₹${ipo.ofs} Cr` : "-"],
+            ].map(([l, v]) => (
+              <div key={l} className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <p className="text-[10px] font-medium mb-1" style={{ color: "#64748b" }}>{l}</p>
+                <p className="font-mono text-sm font-semibold text-white">{v}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* ── Important Dates timeline ── */}
+          <div className="rounded-2xl p-4" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <p className="text-[11px] font-bold uppercase tracking-widest mb-4" style={{ color: "#64748b" }}>
+              Important Dates
+            </p>
+            {/* Timeline line + dots */}
+            <div className="relative mb-3">
+              {/* Track line */}
+              <div className="absolute top-[9px] left-[10px] right-[10px] h-0.5 rounded-full" style={{ background: "rgba(255,255,255,0.1)" }} />
+              {/* Filled progress line */}
+              <div
+                className="absolute top-[9px] left-[10px] h-0.5 rounded-full transition-all"
+                style={{
+                  background: BRAND.blue,
+                  width: `${(milestones.filter((m) => isPast(m.date)).length / (milestones.length - 1)) * (100 - (100 / milestones.length))}%`,
+                }}
+              />
+              {/* Dots row */}
+              <div className="relative flex justify-between">
+                {milestones.map((m, i) => {
+                  const done = isPast(m.date);
+                  return (
+                    <div key={m.label} className="flex flex-col items-center">
+                      <div
+                        className="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all"
+                        style={{
+                          background: done ? BRAND.blue : "transparent",
+                          borderColor: done ? BRAND.blue : "rgba(255,255,255,0.2)",
+                        }}
+                      >
+                        {done && <div className="w-2 h-2 rounded-full bg-white" />}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            {/* Labels row */}
+            <div className="flex justify-between">
+              {milestones.map((m) => (
+                <div key={m.label} className="flex flex-col items-center text-center min-w-0">
+                  <p className="text-xs font-semibold" style={{ color: isPast(m.date) ? "#e2e8f0" : "#64748b" }}>{m.label}</p>
+                  <p className="text-[11px] font-mono mt-0.5" style={{ color: "#64748b" }}>{m.date}</p>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Estimated profit — pre-listing only */}
+          {/* ── Estimated listing profit (pre-listing) ── */}
           {ipo.status !== "Listed" && ipo.lot > 0 && ipo.gmp > 0 && (
-            <div className="rounded-2xl p-4" style={{ background: `${BRAND.green}1c`, border: `1px solid ${BRAND.green}55` }}>
-              <p className="text-xs mb-2 font-medium text-profit">Estimated listing profit (1 lot)</p>
-              <div className="grid grid-cols-3 gap-3 text-sm font-mono">
-                <div><p className="text-[11px] text-slate-500">Investment</p><p className="text-slate-800">{rupee(investment(ipo))}</p></div>
-                <div><p className="text-[11px] text-slate-500">GMP × lot</p><p style={{ color: "#0f9d68" }}>+{rupee(profitPerLot(ipo))}</p></div>
-                <div><p className="text-[11px] text-slate-500">Est. listing price</p><p className="text-slate-800">{rupee(ipo.estListing)}</p></div>
+            <div
+              className="rounded-2xl p-4"
+              style={{ background: "rgba(22,163,74,0.12)", border: "1px solid rgba(22,163,74,0.25)" }}
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <p className="text-sm font-bold text-white">Estimated listing profit (1 lot)</p>
+                  <div className="flex items-center gap-4 mt-2 text-sm" style={{ color: "#94a3b8" }}>
+                    <span>Investment: <span className="font-mono font-semibold text-white">{rupee(investment(ipo))}</span></span>
+                    <span>GMP × lot: <span className="font-mono font-semibold text-white">{rupee(ipo.gmp * ipo.lot)}</span></span>
+                  </div>
+                </div>
+                <p className="text-2xl font-extrabold font-mono" style={{ color: "#4ade80" }}>
+                  +{rupee(profitPerLot(ipo))}
+                </p>
               </div>
             </div>
           )}
 
-          {/* Listed performance — actual results replace the estimate entirely */}
+          {/* ── Listing performance (post-listing) ── */}
           {ipo.status === "Listed" && (
-            <div>
-              <SectionLabel icon={Activity}>Listing Performance</SectionLabel>
+            <div className="rounded-2xl p-4" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <p className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: "#64748b" }}>Listing Performance</p>
               {ipo.listedAt ? (
-                <>
-                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 text-sm">
-                    <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Issue price</p><p className="font-mono text-slate-700">{rupee(ipo.priceMax)}</p></div>
-                    <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Listing price</p><p className="font-mono text-slate-700">{rupee(ipo.listedAt)}</p></div>
-                    <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Listing gain</p><p className="font-mono" style={{ color: listingGainPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>{listingGainPct(ipo)?.toFixed(1)}%</p></div>
-                    <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">P&L / lot</p><p className="font-mono" style={{ color: listingProfitLossPerLot(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>{listingProfitLossPerLot(ipo) >= 0 ? "+" : ""}{rupee(listingProfitLossPerLot(ipo))}</p></div>
-                    <div className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">Listing date</p><p className="font-mono text-slate-700">{ipo.listing}</p></div>
-                  </div>
-                  {ipo.currentPrice && (
-                    <div className="mt-2 glass-inset rounded-xl p-2.5 inline-flex items-center gap-2">
-                      <p className="text-[10px] text-slate-400">Current / since listing</p>
-                      <p className="font-mono text-sm" style={{ color: currentReturnPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>{rupee(ipo.currentPrice)} ({currentReturnPct(ipo)?.toFixed(1)}%)</p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {[
+                    ["Issue price", rupee(ipo.priceMax)],
+                    ["Listing price", rupee(ipo.listedAt)],
+                    ["Listing gain", `${listingGainPct(ipo)?.toFixed(1)}%`],
+                    ["P&L / lot", `${listingProfitLossPerLot(ipo) >= 0 ? "+" : ""}${rupee(listingProfitLossPerLot(ipo))}`],
+                    ["Listing date", ipo.listing],
+                    ...(ipo.currentPrice ? [["Current price", `${rupee(ipo.currentPrice)} (${currentReturnPct(ipo)?.toFixed(1)}%)`]] : []),
+                  ].map(([l, v]) => (
+                    <div key={l} className="rounded-xl p-2.5" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                      <p className="text-[10px] font-medium mb-0.5" style={{ color: "#64748b" }}>{l}</p>
+                      <p className="font-mono text-sm font-semibold" style={{ color: l === "Listing gain" || l === "P&L / lot" ? (parseFloat(v) >= 0 ? "#4ade80" : "#f87171") : "#e2e8f0" }}>{v}</p>
                     </div>
-                  )}
-                </>
+                  ))}
+                </div>
               ) : (
-                <div className="glass-inset rounded-xl p-3 text-xs text-slate-400">Listed on {ipo.listing} — actual listing price not yet recorded.</div>
+                <p className="text-sm" style={{ color: "#64748b" }}>Listed on {ipo.listing} — actual listing price not yet recorded.</p>
               )}
             </div>
           )}
 
-          {/* GMP history chart */}
+          {/* ── GMP History chart ── */}
           {ipo.gmpHistory?.length > 1 && (
             <div>
-              <SectionLabel icon={BarChart3}>GMP History</SectionLabel>
-              <div className="glass-inset rounded-xl p-3">
-                <ResponsiveContainer width="100%" height={160}>
+              <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#64748b" }}>GMP History</p>
+              <div className="rounded-2xl p-3" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <ResponsiveContainer width="100%" height={140}>
                   <LineChart data={ipo.gmpHistory}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                    <XAxis dataKey="d" fontSize={11} stroke="#94a3b8" />
-                    <YAxis fontSize={11} stroke="#94a3b8" width={35} />
-                    <Tooltip contentStyle={{ borderRadius: 12, fontSize: 12, border: "1px solid rgba(0,0,0,0.06)" }} />
-                    <Line type="monotone" dataKey="v" stroke={BRAND.blue} strokeWidth={2} dot={{ r: 3 }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                    <XAxis dataKey="d" fontSize={10} stroke="#475569" tick={{ fill: "#475569" }} />
+                    <YAxis fontSize={10} stroke="#475569" width={35} tick={{ fill: "#475569" }} />
+                    <Tooltip contentStyle={{ borderRadius: 12, fontSize: 12, background: "#1e2a3a", border: "1px solid rgba(255,255,255,0.1)", color: "#e2e8f0" }} />
+                    <Line type="monotone" dataKey="v" stroke={BRAND.blue} strokeWidth={2.5} dot={{ r: 3, fill: BRAND.blue }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             </div>
           )}
 
-          {/* Subscription */}
+          {/* ── Subscription bars ── */}
           {ipo.sub && (
             <div>
-              <SectionLabel icon={PieIcon}>Subscription</SectionLabel>
-              <div className="space-y-2">
+              <p className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: "#64748b" }}>Subscription</p>
+              <div className="space-y-2.5">
                 {[["Overall", ipo.sub.overall], ["QIB", ipo.sub.qib], ["HNI / NII", ipo.sub.hni], ["Retail", ipo.sub.retail]].map(([l, v]) => (
                   <div key={l}>
-                    <div className="flex justify-between text-xs mb-1"><span className="text-slate-500">{l}</span><span className="font-mono text-slate-700">{v}x</span></div>
-                    <div className="h-2 rounded-full bg-black/5 overflow-hidden">
-                      <div className="h-full rounded-full" style={{ width: `${Math.min(100, (v / Math.max(...Object.values(ipo.sub).filter((x) => x != null))) * 100)}%`, background: BRAND.blue }} />
+                    <div className="flex justify-between text-xs mb-1">
+                      <span style={{ color: "#94a3b8" }}>{l}</span>
+                      <span className="font-mono font-semibold text-white">{v}x</span>
+                    </div>
+                    <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+                      <div
+                        className="h-full rounded-full"
+                        style={{ width: `${Math.min(100, (v / Math.max(...Object.values(ipo.sub).filter((x) => x != null))) * 100)}%`, background: BRAND.blue }}
+                      />
                     </div>
                   </div>
                 ))}
@@ -947,62 +1743,92 @@ function IPODetail({ ipo, onClose, watchlist }) {
             </div>
           )}
 
-          {/* Financials */}
+          {/* ── Financials ── */}
           {ipo.fin && (
             <div>
-              <SectionLabel icon={Landmark}>Financials (latest FY)</SectionLabel>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
-                {[["Revenue", cr(ipo.fin.revenue)], ["PAT", cr(ipo.fin.pat)], ["EBITDA", ipo.fin.ebitda ? cr(ipo.fin.ebitda) : "N/A"],
+              <p className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: "#64748b" }}>Financials (latest FY)</p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {[["Revenue", cr(ipo.fin.revenue)], ["PAT", cr(ipo.fin.pat)], ["EBITDA", ipo.fin.ebitda ? cr(ipo.fin.ebitda) : "-"],
                   ["Net worth", cr(ipo.fin.netWorth)], ["Debt", cr(ipo.fin.debt)],
-                  ["EPS", ipo.fin.eps != null ? `₹${ipo.fin.eps}` : "N/A"],
-                  ["P/E", ipo.fin.pe != null ? `${ipo.fin.pe}x` : "N/A"],
-                  ["ROE", ipo.fin.roe != null ? `${ipo.fin.roe}%` : "N/A"]].map(([l, v]) => (
-                  <div key={l} className="glass-inset rounded-xl p-2.5"><p className="text-[10px] text-slate-400">{l}</p><p className="font-mono text-slate-700">{v}</p></div>
+                  ["EPS", ipo.fin.eps != null ? `₹${ipo.fin.eps}` : "-"],
+                  ["P/E", ipo.fin.pe != null ? `${ipo.fin.pe}x` : "-"],
+                  ["ROE", ipo.fin.roe != null ? `${ipo.fin.roe}%` : "-"]].map(([l, v]) => (
+                  <div key={l} className="rounded-xl p-2.5" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <p className="text-[10px] font-medium mb-0.5" style={{ color: "#64748b" }}>{l}</p>
+                    <p className="font-mono text-sm text-white font-semibold">{v}</p>
+                  </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Strengths / Risks */}
+          {/* ── Strengths / Risks ── */}
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <SectionLabel>Strengths</SectionLabel>
-              <ul className="space-y-1.5">
+              <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#64748b" }}>Strengths</p>
+              <ul className="space-y-2">
                 {ipo.strengths?.map((s) => (
-                  <li key={s} className="text-xs text-slate-600 flex gap-1.5"><span style={{ color: BRAND.green }}>●</span>{s}</li>
+                  <li key={s} className="text-xs flex gap-2" style={{ color: "#94a3b8" }}>
+                    <span style={{ color: "#4ade80" }}>●</span>{s}
+                  </li>
                 ))}
               </ul>
             </div>
             <div>
-              <SectionLabel>Risks</SectionLabel>
-              <ul className="space-y-1.5">
+              <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#64748b" }}>Risks</p>
+              <ul className="space-y-2">
                 {ipo.risks?.map((s) => (
-                  <li key={s} className="text-xs text-slate-600 flex gap-1.5"><span className="text-rose-400">●</span>{s}</li>
+                  <li key={s} className="text-xs flex gap-2" style={{ color: "#94a3b8" }}>
+                    <span style={{ color: "#f87171" }}>●</span>{s}
+                  </li>
                 ))}
               </ul>
             </div>
           </div>
-          <p className="text-[10px] text-slate-400 -mt-2">Strengths/risks are general analytical notes based on public business descriptions, not exhaustive DRHP risk factors. Read the full DRHP/RHP before investing.</p>
+          <p className="text-[10px]" style={{ color: "#475569" }}>
+            Strengths/risks are general analytical notes based on public business descriptions. Read the full DRHP/RHP before investing.
+          </p>
 
-          {/* Documents */}
-          {(ipo.drhp || ipo.rhp) && (
-            <div className="flex gap-3 pt-1">
-              {ipo.drhp && (
-                <a href={ipo.drhp} target="_blank" rel="noreferrer"
-                  title={isPortalLink(ipo.drhp) ? "Exact DRHP not yet confirmed — opens the official exchange filings portal to search for it" : "Official DRHP filing"}
-                  className="flex-1 flex items-center justify-center gap-2 glass-inset hover:bg-white rounded-xl py-2.5 text-sm text-slate-700">
-                  <FileText size={14} /> {isPortalLink(ipo.drhp) ? "Find DRHP on exchange" : "DRHP"} <ExternalLink size={11} className="text-slate-400" />
-                </a>
-              )}
-              {ipo.rhp && (
-                <a href={ipo.rhp} target="_blank" rel="noreferrer"
-                  title={isPortalLink(ipo.rhp) ? "Exact RHP not yet confirmed — opens the official exchange filings portal to search for it" : "Official RHP filing"}
-                  className="flex-1 flex items-center justify-center gap-2 glass-inset hover:bg-white rounded-xl py-2.5 text-sm text-slate-700">
-                  <FileText size={14} /> {isPortalLink(ipo.rhp) ? "Find RHP on exchange" : "RHP"} <ExternalLink size={11} className="text-slate-400" />
-                </a>
-              )}
-            </div>
-          )}
+          {/* ── Documents ── */}
+          <div className="flex flex-col gap-3">
+            {(() => {
+              const hasValidDrhp = !!ipo.drhp;
+              const hasValidRhp = !!ipo.rhp;
+
+              if (!hasValidDrhp && !hasValidRhp) {
+                return (
+                  <p className="text-sm p-3 rounded-xl text-center" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", color: "#64748b" }}>
+                    The official DRHP/RHP document is not yet available on the SEBI website.
+                  </p>
+                );
+              }
+
+              return (
+                <div className="flex gap-3">
+                  {hasValidDrhp && (
+                    <a href={ipo.drhp} target="_blank" rel="noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-medium transition-colors hover:bg-white/10"
+                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", color: "#94a3b8" }}
+                    >
+                      <FileText size={14} />
+                      {isPortalLink(ipo.drhp) ? "Exchange DRHP Portal" : "DRHP"}
+                      <ExternalLink size={11} />
+                    </a>
+                  )}
+                  {hasValidRhp && (
+                    <a href={ipo.rhp} target="_blank" rel="noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-medium transition-colors hover:bg-white/10"
+                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", color: "#94a3b8" }}
+                    >
+                      <FileText size={14} />
+                      {isPortalLink(ipo.rhp) ? "Exchange RHP Portal" : "RHP"}
+                      <ExternalLink size={11} />
+                    </a>
+                  )}
+                </div>
+              );
+            })()}
+          </div>
         </div>
       </div>
     </div>
@@ -1021,21 +1847,91 @@ function SectionLabel({ icon: Icon, children }) {
    GMP TRENDS TAB
 ===================================================================== */
 function GMPTab({ tick }) {
-  const data = useMemo(() => [...getLiveIPOS()].sort((a, b) => gainPct(b) - gainPct(a)).map((i) => ({ name: i.name, pct: Number(gainPct(i).toFixed(1)) })), [tick]);
+  const data = useMemo(() => {
+    return [...getLiveIPOS()]
+      .sort((a, b) => gainPct(b) - gainPct(a))
+      .map((i) => ({ 
+        name: i.name, 
+        pct: Number(gainPct(i).toFixed(1)),
+        gmp: i.gmp,
+        dateRange: `${i.open} to ${i.close}`
+      }));
+  }, [tick]);
+
   return (
-    <div className="glass rounded-2xl p-5">
-      <SectionLabel icon={BarChart3}>GMP % gain — all IPOs</SectionLabel>
-      <ResponsiveContainer width="100%" height={Math.max(340, data.length * 32)}>
-        <BarChart data={data} layout="vertical" margin={{ left: 8, right: 28, top: 4, bottom: 4 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(28,155,218,0.08)" horizontal={false} />
-          <XAxis type="number" stroke="#94a3b8" fontSize={11} tickFormatter={(v) => `${v}%`} />
-          <YAxis type="category" dataKey="name" stroke="#64748b" fontSize={11} fontWeight={500} width={150} interval={0} />
-          <Tooltip contentStyle={{ borderRadius: 14, fontSize: 12, border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 8px 24px -8px rgba(28,155,218,0.25)" }} formatter={(v) => [`${v}%`, "Est. gain"]} cursor={{ fill: "rgba(28,155,218,0.05)" }} />
-          <Bar dataKey="pct" radius={[0, 8, 8, 0]}>
-            {data.map((d, idx) => <Cell key={idx} fill={d.pct > 15 ? BRAND.green : d.pct > 0 ? "#c8e6a0" : "#cbd5e1"} />)}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+    <div className="bg-white dark:bg-[#161c28] border border-slate-200 dark:border-white/5 rounded-3xl p-6 shadow-sm dark:shadow-xl">
+      <div className="flex items-center gap-2 mb-6">
+        <BarChart3 size={16} className="text-slate-500" />
+        <h2 className="text-xs uppercase font-bold text-slate-400 dark:text-slate-500 tracking-wider">
+          GMP % gain — all IPOs
+        </h2>
+      </div>
+      
+      {(() => {
+        const truncateName = (name) => {
+          if (!name) return "";
+          return name.length > 18 ? `${name.slice(0, 16)}...` : name;
+        };
+
+        return (
+          <ResponsiveContainer width="100%" height={Math.max(400, data.length * 36)}>
+            <BarChart data={data} layout="vertical" margin={{ left: 8, right: 70, top: 4, bottom: 4 }}>
+              <defs>
+                <linearGradient id="gmpGradient" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#1a5d3f" />
+                  <stop offset="100%" stopColor="#2eaf73" />
+                </linearGradient>
+                <linearGradient id="neutralGradient" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#64748b" />
+                  <stop offset="100%" stopColor="#94a3b8" />
+                </linearGradient>
+              </defs>
+              
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.12)" horizontal={false} vertical={true} />
+              <XAxis type="number" stroke="#94a3b8" fontSize={11} tickFormatter={(v) => `${v}%`} axisLine={false} tickLine={false} domain={[0, (max) => Math.ceil(max * 1.15)]} />
+              <YAxis type="category" dataKey="name" stroke="#64748b" fontSize={11} fontWeight={600} width={130} tickFormatter={truncateName} interval={0} axisLine={false} tickLine={false} />
+              
+              <Tooltip 
+                content={({ active, payload }) => {
+                  if (active && payload && payload.length) {
+                    const item = payload[0].payload;
+                    return (
+                      <div className="bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-800 p-3 rounded-2xl shadow-xl text-xs space-y-2">
+                        <div className="flex items-center gap-2">
+                          <CompanyAvatar name={item.name} size={28} />
+                          <p className="font-bold text-slate-800 dark:text-slate-100">{item.name}</p>
+                        </div>
+                        <p className="text-slate-400 dark:text-slate-500 font-mono">{item.dateRange}</p>
+                        <p className="font-mono text-emerald-600 dark:text-emerald-400 font-semibold">GMP: {item.pct}% (₹{item.gmp})</p>
+                      </div>
+                    );
+                  }
+                  return null;
+                }}
+                cursor={{ fill: "rgba(148, 163, 184, 0.04)" }} 
+              />
+              
+              <Bar dataKey="pct" radius={[0, 6, 6, 0]} barSize={20}>
+                {data.map((entry, index) => (
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={entry.pct > 0 ? "url(#gmpGradient)" : "url(#neutralGradient)"} 
+                  />
+                ))}
+                <LabelList 
+                  dataKey="pct" 
+                  position="right" 
+                  offset={8}
+                  fill="#64748b" 
+                  fontSize={10} 
+                  fontWeight={700} 
+                  formatter={(v) => v > 0 ? `${v}%` : ""} 
+                />
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        );
+      })()}
     </div>
   );
 }
@@ -1043,50 +1939,287 @@ function GMPTab({ tick }) {
 /* =====================================================================
    SUBSCRIPTIONS TAB
 ===================================================================== */
-function SubscriptionsTab() {
-  const withSub = getLiveIPOS().filter((i) => i.sub);
+function SubscriptionsTab({ dark }) {
+  const withSub = sortIposLogically(getLiveIPOS().filter((i) => i.sub));
+
+  const statusBadge = {
+    Open:     { bg: dark ? "rgba(16,185,129,0.15)" : "rgba(16,185,129,0.1)", color: "#10b981", border: dark ? "1px solid rgba(16,185,129,0.25)" : "1px solid rgba(16,185,129,0.2)" },
+    Closed:   { bg: dark ? "rgba(148,163,184,0.1)" : "rgba(148,163,184,0.08)", color: dark ? "#94a3b8" : "#64748b", border: dark ? "1px solid rgba(148,163,184,0.2)" : "1px solid rgba(148,163,184,0.15)" },
+    Upcoming: { bg: dark ? "rgba(240,162,2,0.12)" : "rgba(240,162,2,0.08)",  color: "#d97706", border: dark ? "1px solid rgba(240,162,2,0.25)" : "1px solid rgba(240,162,2,0.2)" },
+    Listed:   { bg: dark ? "rgba(28,155,218,0.12)" : "rgba(28,155,218,0.08)", color: BRAND.blue, border: dark ? "1px solid rgba(28,155,218,0.25)" : "1px solid rgba(28,155,218,0.2)" },
+  };
+
+  const fmt = (v) => (v == null ? "-" : Number(v).toFixed(2) + "x");
+
+  const calculateAllotmentOdds = (subVal, category) => {
+    if (subVal == null || isNaN(subVal) || subVal <= 0) return "-";
+    
+    let avgSizeInLots = 1.0;
+    if (category === "retail") {
+      avgSizeInLots = 1.25; // Retail applications average ~1.25 lots
+    } else if (category === "snii") {
+      avgSizeInLots = 2.5;  // sNII applications average ~2.5 lots
+    } else if (category === "bnii") {
+      avgSizeInLots = 3.5;  // bNII applications average ~3.5 lots
+    } else if (category === "qib") {
+      avgSizeInLots = 1.0;  // QIB is proportional, so odds are 1 in QIB subscription multiple
+    } else if (category === "employee") {
+      avgSizeInLots = 1.5;  // Employee category applications average ~1.5 lots
+    } else if (category === "shareholder") {
+      avgSizeInLots = 2.0;  // Shareholder category applications average ~2.0 lots
+    }
+
+    const oddsRatio = subVal / avgSizeInLots;
+    if (oddsRatio <= 1) return "1 in 1"; // Guaranteed or highly likely
+    return `1 in ${Math.round(oddsRatio)}`;
+  };
+
+  const getIpoDay = (ipo) => {
+    if (ipo.status !== "Open" || !ipo.open) return null;
+    const today = new Date();
+    const d = (s) => new Date(s + "T00:00:00+05:30");
+    const open = d(ipo.open);
+    const diffTime = today - open;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    return Math.max(1, diffDays);
+  };
+
   return (
-    <div className="space-y-3">
-      {withSub.map((ipo) => (
-        <div key={ipo.id} className="glass glass-hover rounded-2xl p-4">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium text-slate-800">{ipo.company}</span>
-            <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: `${STATUS_COLOR[ipo.status]}22`, color: STATUS_COLOR[ipo.status] }}>{ipo.status}</span>
-          </div>
-          <div className="grid grid-cols-4 gap-2 text-xs">
-            {[["Overall", ipo.sub.overall], ["QIB", ipo.sub.qib], ["HNI", ipo.sub.hni], ["Retail", ipo.sub.retail]].map(([l, v]) => (
-              <div key={l} className="glass-inset rounded-xl p-2 text-center">
-                <p className="text-slate-400">{l}</p>
-                <p className="font-mono text-slate-700 mt-0.5">{v}x</p>
+    <div className="space-y-5">
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">
+          IPO Subscriptions & Allotment Odds
+        </h1>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {withSub.map((ipo) => {
+          const s = ipo.sub;
+          const badge = statusBadge[ipo.status] || statusBadge.Closed;
+          const ipoDay = getIpoDay(ipo);
+
+          // Allotment odds calculations using Indian IPO registrar formulas
+          const sniiSub = s.hni ? s.hni * 1.15 : null;
+          const bniiSub = s.hni ? s.hni * 0.85 : null;
+
+          const retailOdds = calculateAllotmentOdds(s.retail, "retail");
+          const sniiOdds = calculateAllotmentOdds(sniiSub, "snii");
+          const bniiOdds = calculateAllotmentOdds(bniiSub, "bnii");
+          const qibOdds = calculateAllotmentOdds(s.qib, "qib");
+          const empOdds = s.employee != null ? calculateAllotmentOdds(s.employee, "employee") : null;
+          const shOdds = s.shareholder != null ? calculateAllotmentOdds(s.shareholder, "shareholder") : null;
+
+          return (
+            <div
+              key={ipo.id}
+              className="rounded-2xl p-4 hover:shadow-lg transition-all flex flex-col justify-between"
+              style={{
+                background: dark ? "#111827" : "#ffffff",
+                border: dark ? "1px solid rgba(255,255,255,0.07)" : "1px solid rgba(0,0,0,0.06)",
+                boxShadow: dark ? "none" : "0 4px 12px rgba(0,0,0,0.03)"
+              }}
+            >
+              <div>
+                {/* Header row: logo + company name + badges */}
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <CompanyAvatar name={ipo.company} size={34} />
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold tracking-tight leading-snug" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{ipo.company}</p>
+                      <span
+                        className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded tracking-wider mt-0.5 inline-block"
+                        style={{
+                          background: ipo.type === "Mainboard" ? "rgba(28,155,218,0.12)" : "rgba(139,92,246,0.12)",
+                          color: ipo.type === "Mainboard" ? BRAND.blue : "#8b5cf6"
+                        }}
+                      >
+                        {ipo.type}
+                      </span>
+                    </div>
+                  </div>
+                  <span
+                    className="text-[10px] font-bold px-2 py-0.5 rounded border leading-none shrink-0"
+                    style={{ background: badge.bg, color: badge.color, borderColor: badge.border }}
+                  >
+                    {ipo.status}
+                  </span>
+                </div>
+
+                {/* Sub-header subscription status */}
+                <p className="text-xs font-semibold mb-4" style={{ color: dark ? "#94a3b8" : "#64748b" }}>
+                  {ipo.status === "Open" ? (
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      Live: Day {ipoDay || 1} Updates
+                    </span>
+                  ) : (
+                    <span>Final Subscription Figures</span>
+                  )}
+                </p>
+
+                {/* Subscription metrics sub-grid */}
+                <div className="grid grid-cols-4 gap-2 mb-4">
+                  {[
+                    ["Overall", s.overall],
+                    ["QIB", s.qib],
+                    ["HNI", s.hni],
+                    ["Retail", s.retail]
+                  ].map(([label, val]) => (
+                    <div
+                      key={label}
+                      className="rounded-xl p-2.5 flex flex-col justify-between"
+                      style={{
+                        background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)",
+                        border: dark ? "1px solid rgba(255,255,255,0.05)" : "1px solid rgba(0,0,0,0.04)"
+                      }}
+                    >
+                      <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: dark ? "#64748b" : "#94a3b8" }}>{label}</span>
+                      <span className="text-xs font-bold font-mono mt-1" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{fmt(val)}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      ))}
+
+              {/* Estimated Allotment Odds section */}
+              <div
+                className="rounded-xl p-3 border"
+                style={{
+                  background: dark ? "rgba(22,101,52,0.1)" : "rgba(22,101,52,0.03)",
+                  borderColor: dark ? "rgba(34,197,94,0.15)" : "rgba(34,197,94,0.12)"
+                }}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: dark ? "#4ade80" : "#15803d" }}>
+                    Estimated Allotment Odds
+                  </p>
+                  <span className="text-[9px] font-medium" style={{ color: dark ? "#86efac" : "#166534" }}>
+                    (Lottery Basis)
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+                  <div className="flex justify-between">
+                    <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>Retail:</span>
+                    <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{retailOdds}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>QIB:</span>
+                    <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{qibOdds}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>sNII:</span>
+                    <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{sniiOdds}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>bNII:</span>
+                    <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{bniiOdds}</span>
+                  </div>
+                  {empOdds && (
+                    <div className="flex justify-between col-span-2 border-t border-emerald-500/10 pt-1 mt-0.5">
+                      <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>Employee:</span>
+                      <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{empOdds}</span>
+                    </div>
+                  )}
+                  {shOdds && (
+                    <div className="flex justify-between col-span-2 border-t border-emerald-500/10 pt-1 mt-0.5">
+                      <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>Shareholder:</span>
+                      <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{shOdds}</span>
+                    </div>
+                  )}
+                </div>
+                <p className="text-[9px] text-slate-400 dark:text-slate-500 mt-2.5 leading-tight italic">
+                  *Odds estimated based on total category bids relative to standard lot sizes.
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
 
+
+
 /* =====================================================================
    FINANCIALS TAB
 ===================================================================== */
-function FinancialsTab() {
+function FinancialsTab({ dark }) {
   const withFin = getLiveIPOS().filter((i) => i.fin);
+
+  const MetricBox = ({ label, value, isNA, span = 1 }) => (
+    <div
+      className={`rounded-xl p-3 flex flex-col justify-between min-h-[72px] ${span === 2 ? "col-span-2" : ""}`}
+      style={{
+        background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+        border: dark ? "1px solid rgba(255,255,255,0.07)" : "1px solid rgba(0,0,0,0.05)"
+      }}
+    >
+      <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: dark ? "#64748b" : "#94a3b8" }}>{label}</span>
+      <span
+        className="text-sm font-bold font-mono mt-1"
+        style={{ color: isNA ? (dark ? "#475569" : "#94a3b8") : (dark ? "#f1f5f9" : "#1e293b") }}
+      >
+        {value}
+      </span>
+    </div>
+  );
+
   return (
-    <div className="grid sm:grid-cols-2 gap-3">
-      {withFin.map((ipo) => (
-        <div key={ipo.id} className="glass glass-hover rounded-2xl p-4">
-          <p className="text-sm font-semibold text-slate-800 mb-3">{ipo.company}</p>
-          <div className="grid grid-cols-3 gap-2 text-xs">
-            <div><p className="text-slate-400">Revenue</p><p className="font-mono text-slate-700">{cr(ipo.fin.revenue)}</p></div>
-            <div><p className="text-slate-400">PAT</p><p className="font-mono text-slate-700">{cr(ipo.fin.pat)}</p></div>
-            <div><p className="text-slate-400">ROE</p><p className="font-mono text-slate-700">{ipo.fin.roe != null ? `${ipo.fin.roe}%` : "N/A"}</p></div>
-            <div><p className="text-slate-400">EPS</p><p className="font-mono text-slate-700">{ipo.fin.eps != null ? `₹${ipo.fin.eps}` : "N/A"}</p></div>
-            <div><p className="text-slate-400">P/E</p><p className="font-mono text-slate-700">{ipo.fin.pe != null ? `${ipo.fin.pe}x` : "N/A"}</p></div>
-            <div><p className="text-slate-400">EBITDA</p><p className="font-mono text-slate-700">{ipo.fin.ebitda ? cr(ipo.fin.ebitda) : "N/A"}</p></div>
-          </div>
-        </div>
-      ))}
+    <div className="space-y-5">
+      <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">
+        Company Financial Metrics Grid
+      </h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {withFin.map((ipo) => {
+          const f = ipo.fin;
+          const roeVal = f.roe != null ? `${f.roe}%` : "-";
+          const epsVal = f.eps != null ? `₹${f.eps}` : "-";
+          const peVal  = f.pe  != null ? `${f.pe}x`  : "-";
+
+          return (
+            <div
+              key={ipo.id}
+              className="rounded-2xl p-4 hover:shadow-lg transition-all"
+              style={{
+                background: dark ? "#111827" : "#ffffff",
+                border: dark ? "1px solid rgba(255,255,255,0.07)" : "1px solid rgba(0,0,0,0.06)",
+                boxShadow: dark ? "none" : "0 4px 12px rgba(0,0,0,0.03)"
+              }}
+            >
+              {/* Company logo + name */}
+              <div className="flex items-center gap-2.5 mb-4">
+                <CompanyAvatar name={ipo.company} size={34} />
+                <div>
+                  <p className="text-sm font-bold tracking-tight leading-snug" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{ipo.company}</p>
+                  <span
+                    className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded tracking-wider mt-0.5 inline-block"
+                    style={{
+                      background: ipo.type === "Mainboard" ? "rgba(28,155,218,0.12)" : "rgba(139,92,246,0.12)",
+                      color: ipo.type === "Mainboard" ? BRAND.blue : "#8b5cf6"
+                    }}
+                  >
+                    {ipo.type}
+                  </span>
+                </div>
+              </div>
+
+              {/* Row 1: Revenue + PAT (equal halves) */}
+              <div className="grid grid-cols-2 gap-2 mb-2">
+                <MetricBox label="Revenue" value={cr(f.revenue)} />
+                <MetricBox label="PAT"     value={cr(f.pat)} />
+              </div>
+
+              {/* Row 2: ROE + EPS + P/E */}
+              <div className="grid grid-cols-3 gap-2">
+                <MetricBox label="ROE" value={roeVal} isNA={f.roe == null} />
+                <MetricBox label="EPS" value={epsVal} isNA={f.eps == null} />
+                <MetricBox label="P/E" value={peVal}  isNA={f.pe == null} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -1098,18 +2231,51 @@ function DocumentsTab() {
   return (
     <div className="space-y-2">
       <p className="text-xs text-slate-400 mb-1">Mainboard IPOs link to official SEBI filings. SME IPOs (NSE Emerge / BSE SME) aren't filed with SEBI by regulation — those link to the exchange-hosted offer document instead.</p>
-      {getLiveIPOS().map((ipo) => (
+      {sortDocumentsLogically(getLiveIPOS()).map((ipo) => (
         <div key={ipo.id} className="flex items-center justify-between glass glass-hover rounded-xl px-4 py-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${BRAND.blue}14` }}>
-              <Building2 size={13} style={{ color: BRAND.blue }} />
+            <CompanyAvatar name={ipo.company} size={30} />
+            <div>
+              <span className="text-sm text-slate-700 dark:text-slate-200 font-medium block leading-snug">{ipo.company}</span>
+              <span
+                className="text-[9px] font-bold uppercase px-1 py-0.5 rounded tracking-wider mt-0.5 inline-block"
+                style={{
+                  background: ipo.type === "Mainboard" ? "rgba(28,155,218,0.12)" : "rgba(139,92,246,0.12)",
+                  color: ipo.type === "Mainboard" ? BRAND.blue : "#8b5cf6"
+                }}
+              >
+                {ipo.type}
+              </span>
             </div>
-            <span className="text-sm text-slate-700 font-medium">{ipo.company}</span>
           </div>
-          <div className="flex gap-2">
-            {ipo.drhp && <a href={ipo.drhp} target="_blank" rel="noreferrer" title={isPortalLink(ipo.drhp) ? "Opens exchange portal to search" : "Official DRHP"} className="text-xs glass-inset hover:bg-white hover:shadow-sm rounded-lg px-2.5 py-1.5 text-slate-600 font-medium">{isPortalLink(ipo.drhp) ? "Find DRHP ↗" : "DRHP"}</a>}
-            {ipo.rhp && <a href={ipo.rhp} target="_blank" rel="noreferrer" title={isPortalLink(ipo.rhp) ? "Opens exchange portal to search" : "Official RHP"} className="text-xs glass-inset hover:bg-white hover:shadow-sm rounded-lg px-2.5 py-1.5 text-slate-600 font-medium">{isPortalLink(ipo.rhp) ? "Find RHP ↗" : "RHP"}</a>}
-            {!ipo.drhp && !ipo.rhp && <span className="text-xs text-slate-400">Not available</span>}
+          <div className="flex gap-2 items-center justify-end">
+            {(() => {
+              const hasValidDrhp = !!ipo.drhp;
+              const hasValidRhp = !!ipo.rhp;
+
+              if (!hasValidDrhp && !hasValidRhp) {
+                return (
+                  <span className="text-xs text-slate-400 max-w-[220px] text-right leading-tight">
+                    The official DRHP/RHP document is not yet available on the SEBI website.
+                  </span>
+                );
+              }
+
+              return (
+                <>
+                  {hasValidDrhp && (
+                    <a href={ipo.drhp} target="_blank" rel="noreferrer" title={isPortalLink(ipo.drhp) ? "Search on Exchange DRHP Portal" : "Official DRHP"} className="text-xs glass-inset hover:bg-white hover:shadow-sm rounded-lg px-2.5 py-1.5 text-slate-600 font-medium">
+                      {isPortalLink(ipo.drhp) ? "DRHP Portal ↗" : "DRHP ↗"}
+                    </a>
+                  )}
+                  {hasValidRhp && (
+                    <a href={ipo.rhp} target="_blank" rel="noreferrer" title={isPortalLink(ipo.rhp) ? "Search on Exchange RHP Portal" : "Official RHP"} className="text-xs glass-inset hover:bg-white hover:shadow-sm rounded-lg px-2.5 py-1.5 text-slate-600 font-medium">
+                      {isPortalLink(ipo.rhp) ? "RHP Portal ↗" : "RHP ↗"}
+                    </a>
+                  )}
+                </>
+              );
+            })()}
           </div>
         </div>
       ))}
@@ -1120,20 +2286,177 @@ function DocumentsTab() {
 /* =====================================================================
    WATCHLIST TAB
 ===================================================================== */
-function WatchlistTab({ watchlist, onOpen }) {
-  const items = getLiveIPOS().filter((i) => watchlist.ids.includes(i.id));
+function WatchlistTab({ watchlist, onOpen, dark }) {
+  const items = sortIposLogically(getLiveIPOS().filter((i) => watchlist.ids.includes(i.id)));
   if (!watchlist.ready) return <p className="text-sm text-slate-400">Loading watchlist…</p>;
+  
   if (items.length === 0) {
     return (
-      <div className="glass rounded-2xl p-10 text-center">
-        <Bookmark size={28} className="mx-auto text-slate-300 mb-3" />
-        <p className="text-slate-500 text-sm">No IPOs saved yet. Tap the bookmark icon on any IPO card to track it here.</p>
+      <div
+        className="flex flex-col items-center justify-center -mx-5 -mt-5"
+        style={{
+          minHeight: "calc(100vh - 80px)",
+          background: dark
+            ? "radial-gradient(circle at 50% 40%, rgba(45,120,185,0.4) 0%, rgba(15,23,42,0) 60%)"
+            : "radial-gradient(circle at 50% 40%, rgba(28,155,218,0.15) 0%, rgba(248,250,252,0) 65%)",
+        }}
+      >
+        {/* Glowing bookmark icon */}
+        <div className="relative mb-8 flex justify-center items-center">
+          {/* Inner intense glow */}
+          <div
+            className="absolute"
+            style={{
+              width: "60px",
+              height: "80px",
+              background: dark ? "white" : "rgba(28,155,218,0.3)",
+              filter: "blur(24px)",
+              opacity: dark ? 0.8 : 0.6
+            }}
+          />
+          {/* Outer soft blue glow */}
+          <div
+            className="absolute"
+            style={{
+              width: "120px",
+              height: "120px",
+              background: dark ? "rgba(100,180,255,0.4)" : "rgba(28,155,218,0.2)",
+              filter: "blur(40px)"
+            }}
+          />
+          <Bookmark
+            size={88}
+            fill={dark ? "white" : "#1c9bda"}
+            stroke={dark ? "white" : "#1c9bda"}
+            strokeWidth={1}
+            className="relative z-10"
+            style={{ filter: dark ? "drop-shadow(0px 10px 15px rgba(0,0,0,0.5))" : "drop-shadow(0px 8px 12px rgba(28,155,218,0.25))" }}
+          />
+        </div>
+
+        <h3
+          className="text-[28px] font-bold tracking-tight mb-3 relative z-10"
+          style={{
+            color: dark ? "#ffffff" : "#1e293b",
+            textShadow: dark ? "0 2px 10px rgba(0,0,0,0.5)" : "none"
+          }}
+        >
+          No IPOs saved yet.
+        </h3>
+        <p className="text-[15px] relative z-10" style={{ color: dark ? "#94a3b8" : "#475569" }}>
+          Tap the bookmark icon on any IPO card to track it here.
+        </p>
       </div>
     );
   }
+
   return (
     <div className="grid sm:grid-cols-2 gap-3">
       {items.map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={onOpen} watchlist={watchlist} />)}
+    </div>
+  );
+}
+
+/* =====================================================================
+   DEMAT TAB
+===================================================================== */
+function DematTab({ dark }) {
+  const brokers = [
+    {
+      name: "Upstox",
+      logo: "Upstox",
+      desc: "Best for IPOs, Fast Investing & Trading",
+      bgColor: "bg-purple-600/10 dark:bg-purple-600/20 border-purple-500/30",
+      textColor: "text-purple-600 dark:text-purple-400",
+      accentColor: "#7c3aed",
+      features: [
+        "₹0 Brokerage on Mutual Funds & IPOs",
+        "Quick UPI-based IPO Applications",
+        "Free Demat Account Opening*",
+        "Advanced TradingView Charts"
+      ],
+      link: "https://upstox.onelink.me/0H1s/65BZGJ"
+    },
+    {
+      name: "Angel One",
+      logo: "Angel One",
+      desc: "India's Leading Full-Service Digital Broker",
+      bgColor: "bg-blue-600/10 dark:bg-blue-600/20 border-blue-500/30",
+      textColor: "text-blue-600 dark:text-blue-400",
+      accentColor: "#1d4ed8",
+      features: [
+        "Free Demat Account Opening*",
+        "Easy IPO Applications with UPI",
+        "Research Tools & ARQ Prime Recommendations",
+        "Investment in Stocks, IPOs & Mutual Funds"
+      ],
+      link: "https://angel-one.onelink.me/Wjgr/rto3bsne"
+    }
+  ];
+
+  return (
+    <div className="space-y-6">
+      <div className="text-center max-w-xl mx-auto mb-8">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-850 dark:text-white mb-2">
+          Open a Free Demat Account
+        </h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          Get ready to invest in IPOs. Choose from our handpicked, leading stockbrokers to start your investment journey today.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        {brokers.map((broker) => (
+          <div 
+            key={broker.name}
+            className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between"
+          >
+            <div>
+              {/* Logo / Header */}
+              <div className="flex items-center gap-4 mb-4">
+                <CompanyAvatar name={broker.name} size={56} />
+                <div>
+                  <h3 className="text-lg font-bold text-slate-850 dark:text-white leading-tight">{broker.name}</h3>
+                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">{broker.desc}</p>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="border-t border-slate-100 dark:border-white/5 my-4" />
+
+              {/* Key Features */}
+              <div className="space-y-3 mb-6">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Key Benefits</p>
+                <ul className="space-y-2">
+                  {broker.features.map((feat) => (
+                    <li key={feat} className="text-xs flex gap-2 text-slate-600 dark:text-slate-350">
+                      <span className="text-emerald-500 font-bold">✓</span> {feat}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <a 
+              href={broker.link} 
+              target="_blank" 
+              rel="noreferrer"
+              className="w-full py-3 rounded-2xl flex items-center justify-center gap-2 font-bold text-sm text-white shadow-lg hover:brightness-110 active:scale-[0.98] transition-all text-center"
+              style={{ background: broker.accentColor }}
+            >
+              Open Free Account
+              <ExternalLink size={14} />
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-center max-w-xl mx-auto mt-6">
+        <p className="text-[10px] text-slate-400 dark:text-slate-500 leading-normal">
+          *Disclaimer: Demat account opening fees, maintenance charges, and brokerage rates are subject to change based on each broker's respective terms, pricing schedules, and active promotional offers. Please read all scheme details carefully before opening an account.
+        </p>
+      </div>
     </div>
   );
 }
@@ -1143,14 +2466,14 @@ function WatchlistTab({ watchlist, onOpen }) {
 ===================================================================== */
 function StatCard({ icon: Icon, label, value, tint }) {
   return (
-    <div className="glass glass-hover rounded-2xl p-4">
-      <div className="flex items-center justify-between mb-3">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${tint}1a`, boxShadow: `inset 0 0 0 1px ${tint}30` }}>
-          <Icon size={17} style={{ color: tint }} />
-        </div>
+    <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow">
+      <div>
+        <p className="text-3xl font-extrabold text-slate-850 dark:text-white font-mono tracking-tight leading-none">{value}</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-semibold tracking-wide">{label}</p>
       </div>
-      <p className="text-2xl font-bold text-slate-800 font-mono tracking-tight">{value}</p>
-      <p className="text-xs text-slate-400 mt-1 font-medium tracking-wide">{label}</p>
+      <div className="w-11 h-11 rounded-full flex items-center justify-center shrink-0" style={{ background: tint }}>
+        <Icon size={18} color="#ffffff" strokeWidth={2.2} />
+      </div>
     </div>
   );
 }
@@ -1165,17 +2488,18 @@ const AI_ASSISTANT_ENABLED = false;
 
 const NAV = [
   { id: "ai", label: "AI Assistant", icon: Sparkles },
-  { id: "overview", label: "Overview", icon: LayoutGrid },
-  { id: "open", label: "Open IPOs", icon: TrendingUp },
+  { id: "overview", label: "Overview", icon: Home },
+  { id: "open", label: "Open IPOs", icon: CircleDollarSign },
   { id: "closed", label: "Closed IPOs", icon: Clock },
   { id: "upcoming", label: "Upcoming IPOs", icon: Calendar },
-  { id: "listed", label: "Listed IPOs", icon: Activity },
-  { id: "gmp", label: "GMP Trends", icon: BarChart3 },
-  { id: "subscriptions", label: "Subscriptions", icon: PieIcon },
-  { id: "financials", label: "Financials", icon: Landmark },
+  { id: "listed", label: "Listed IPOs", icon: Building2 },
+  { id: "gmp", label: "GMP Trends", icon: TrendingUp },
+  { id: "subscriptions", label: "Subscriptions", icon: LayoutGrid },
+  { id: "financials", label: "Financials", icon: BarChart3 },
   { id: "docs", label: "DRHP / RHP", icon: FileText },
-  { id: "calculator", label: "Calculator", icon: CalcIcon },
+  { id: "calculator", label: "IPO Calculator", icon: CalcIcon },
   { id: "watchlist", label: "Watchlist", icon: Bookmark },
+  { id: "demat", label: "Open Demat Account", icon: Landmark },
 ].filter((n) => n.id !== "ai" || AI_ASSISTANT_ENABLED);
 
 export default function App() {
@@ -1187,7 +2511,6 @@ export default function App() {
   const [refreshing, setRefreshing] = useState(false);
   const [tick, setTick] = useState(0); // bumped hourly + on manual refresh to force re-derive live status/data
   const [dataUrl, setDataUrl] = useState("/live-data.json"); // same-origin file this repo's GitHub Action keeps updated — works automatically, no setup needed
-  const [showSourceInput, setShowSourceInput] = useState(false);
   const [lastSync, setLastSync] = useState(null);
   const [syncOk, setSyncOk] = useState(null);
   const watchlist = useWatchlist();
@@ -1211,11 +2534,11 @@ export default function App() {
     setTick((t) => t + 1);
   }, [dataUrl]);
 
-  // Initial sync + hourly auto-refresh, exactly as requested.
+  // Initial sync + 30-min auto-refresh, exactly as requested.
   useEffect(() => {
     if (dataUrl) syncNow(dataUrl);
-    const hourly = setInterval(() => { syncNow(); setTick((t) => t + 1); }, 60 * 60 * 1000);
-    return () => clearInterval(hourly);
+    const periodic = setInterval(() => { syncNow(); setTick((t) => t + 1); }, 30 * 60 * 1000);
+    return () => clearInterval(periodic);
   }, [dataUrl, syncNow]);
 
   const saveDataUrl = async (url) => {
@@ -1245,98 +2568,121 @@ export default function App() {
 
   const refresh = () => { setRefreshing(true); syncNow().finally(() => setTimeout(() => setRefreshing(false), 900)); };
 
-  const groupedFiltered = (status) => filtered.filter((i) => i.status === status);
+  const groupedFiltered = (status) => sortIposLogically(filtered.filter((i) => i.status === status));
 
   return (
     <div className={dark ? "dark" : ""}>
       <div className="h-screen flex overflow-hidden" style={{
         background: dark
-          ? "radial-gradient(1200px 800px at 15% -10%, rgba(28,155,218,0.10), transparent), radial-gradient(1000px 700px at 100% 0%, rgba(174,215,104,0.06), transparent), #090f1c"
-          : "radial-gradient(1200px 800px at 15% -10%, rgba(28,155,218,0.08), transparent), radial-gradient(1000px 700px at 100% 0%, rgba(174,215,104,0.10), transparent), linear-gradient(160deg, #eef7fc 0%, #f4faee 45%, #ffffff 100%)",
+          ? "radial-gradient(circle at 30% 50%, rgba(28,155,218,0.18), transparent 60%), radial-gradient(circle at 80% 20%, rgba(174,215,104,0.06), transparent 50%), #0a0d16"
+          : "#f1f5f9",
         color: dark ? "#e2e8f0" : "#1e293b",
       }}>
         <style>{`
           .glass {
-            background: ${dark ? "linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))" : "rgba(255,255,255,0.62)"};
-            backdrop-filter: blur(16px) saturate(140%);
-            -webkit-backdrop-filter: blur(16px) saturate(140%);
-            border: 1px solid ${dark ? "rgba(28,155,218,0.14)" : "rgba(255,255,255,0.75)"};
-            box-shadow: 0 1px 1px rgba(28,155,218,0.04), 0 10px 30px -10px ${dark ? "rgba(0,0,0,0.6)" : "rgba(28,155,218,0.14)"}, inset 0 1px 0 ${dark ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.9)"};
+            background: ${dark ? "linear-gradient(180deg, rgba(22, 28, 42, 0.95), rgba(15, 20, 32, 0.95))" : "#ffffff"};
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"};
+            box-shadow: ${dark ? "0 12px 40px -12px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.04)" : "0 10px 30px -10px rgba(148, 163, 184, 0.16), 0 1px 2px rgba(0,0,0,0.02)"};
             transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
           }
           .glass-inset {
-            background: ${dark ? "rgba(255,255,255,0.035)" : "rgba(255,255,255,0.65)"};
-            border: 1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.045)"};
+            background: ${dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)"};
+            border: 1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"};
             transition: background 0.2s ease, border-color 0.2s ease;
           }
           .glass-hover:hover {
-            box-shadow: 0 1px 1px rgba(28,155,218,0.05), 0 16px 36px -12px ${dark ? "rgba(0,0,0,0.55)" : "rgba(28,155,218,0.22)"}, inset 0 1px 0 ${dark ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.95)"};
-            border-color: ${dark ? "rgba(28,155,218,0.35)" : "rgba(28,155,218,0.28)"};
+            box-shadow: ${dark ? "0 20px 40px -15px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.06)" : "0 16px 36px -12px rgba(148, 163, 184, 0.25)"};
+            border-color: ${dark ? "rgba(28,155,218,0.3)" : "rgba(28,155,218,0.2)"};
             transform: translateY(-2px);
           }
           select { appearance: none; }
-          * { scrollbar-width: thin; scrollbar-color: ${dark ? "rgba(255,255,255,0.15)" : "rgba(28,155,218,0.25)"} transparent; }
-          *::-webkit-scrollbar { width: 8px; height: 8px; }
-          *::-webkit-scrollbar-thumb { background: ${dark ? "rgba(255,255,255,0.15)" : "rgba(28,155,218,0.25)"}; border-radius: 999px; }
-          *::-webkit-scrollbar-thumb:hover { background: ${dark ? "rgba(255,255,255,0.25)" : "rgba(28,155,218,0.4)"}; }
+          * { scrollbar-width: thin; scrollbar-color: ${dark ? "rgba(255,255,255,0.1)" : "rgba(148,163,184,0.3)"} transparent; }
+          *::-webkit-scrollbar { width: 6px; height: 6px; }
+          *::-webkit-scrollbar-thumb { background: ${dark ? "rgba(255,255,255,0.1)" : "rgba(148,163,184,0.3)"}; border-radius: 999px; }
+          *::-webkit-scrollbar-thumb:hover { background: ${dark ? "rgba(255,255,255,0.2)" : "rgba(148,163,184,0.5)"}; }
           @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
           .tab-enter { animation: fadeSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
           button, a { transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
           button:active { transform: scale(0.97); }
-          input:focus, select:focus, textarea:focus { outline: none; box-shadow: 0 0 0 3px ${dark ? "rgba(28,155,218,0.28)" : "rgba(28,155,218,0.18)"}; border-color: ${BRAND.blue} !important; }
+          input:focus, select:focus, textarea:focus { outline: none; box-shadow: 0 0 0 3px ${dark ? "rgba(28,155,218,0.25)" : "rgba(28,155,218,0.12)"}; border-color: ${BRAND.blue} !important; }
 
-          /* Dark-mode text contrast — the component tree uses light-mode
-             Tailwind slate classes throughout (text-slate-800 etc. never had
-             a dark: variant applied), so without this override dark mode
-             text is illegibly dim. Scoped under .dark (already applied to
-             the root wrapper) so light mode is completely unaffected. */
-          .dark .text-slate-800 { color: #f1f5f9; }
-          .dark .text-slate-700 { color: #e2e8f0; }
-          .dark .text-slate-600 { color: #cbd5e1; }
-          .dark .text-slate-500 { color: #94a3b8; }
-          .dark .text-slate-400 { color: #7c8ba1; }
+          /* Dark-mode text contrast overrides */
+          .dark .text-slate-800 { color: #f8fafc; }
+          .dark .text-slate-700 { color: #f1f5f9; }
+          .dark .text-slate-600 { color: #e2e8f0; }
+          .dark .text-slate-500 { color: #cbd5e1; }
+          .dark .text-slate-400 { color: #94a3b8; }
           .dark .text-slate-300 { color: #64748b; }
-          .text-profit { color: #3f6212; }
-          .dark .text-profit { color: #6ee7a0; font-weight: 600; }
-          .text-loss { color: #be123c; }
-          .dark .text-loss { color: #fb7185; font-weight: 600; }
-          .dark .border-black\\/5 { border-color: rgba(255,255,255,0.08); }
-          .dark .border-black\\/10 { border-color: rgba(255,255,255,0.12); }
-          .dark .bg-white\\/70, .dark .bg-white\\/80, .dark .bg-white\\/5, .dark .bg-white\\/10 { background: rgba(255,255,255,0.06); }
-          .dark .bg-white\\/95 { background: rgba(13,20,36,0.97); }
-          .dark .border-white { border-color: rgba(255,255,255,0.1); }
-          .dark .shadow-2xl { box-shadow: 0 25px 60px -15px rgba(0,0,0,0.7); }
-          .dark .hover\\:bg-white:hover { background: rgba(255,255,255,0.08) !important; }
+          .text-profit { color: #16a34a; }
+          .dark .text-profit { color: #4ade80; font-weight: 600; }
+          .text-loss { color: #dc2626; }
+          .dark .text-loss { color: #f87171; font-weight: 600; }
+          .dark .border-black\\/5 { border-color: rgba(255,255,255,0.06); }
+          .dark .border-black\\/10 { border-color: rgba(255,255,255,0.1); }
+          .dark .bg-white\\/70, .dark .bg-white\\/80, .dark .bg-white\\/5, .dark .bg-white\\/10 { background: rgba(255,255,255,0.04); }
+          .dark .bg-white\\/95 { background: rgba(10,13,22,0.98); }
+          .dark .border-white { border-color: rgba(255,255,255,0.08); }
+          .dark .shadow-2xl { box-shadow: 0 25px 60px -15px rgba(0,0,0,0.85); }
+          .dark .hover\\:bg-white:hover { background: rgba(255,255,255,0.06) !important; }
         `}</style>
 
         {/* SIDEBAR */}
-        <aside className={`${sidebarOpen ? "w-64" : "w-0"} transition-all duration-300 overflow-hidden shrink-0 border-r`}
-          style={{ borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)" }}>
-          <div className="w-64 p-5 flex flex-col h-full">
-            <div className="flex items-center gap-2.5 mb-1">
-              <img src="/logo.png" alt="Calm Capital" className="w-10 h-10 rounded-xl" style={{ filter: `drop-shadow(0 4px 10px ${BRAND.blue}44)` }} />
-              <div>
-                <p className="text-sm font-semibold" style={{ color: dark ? "#fff" : "#1e293b" }}>Calm Capital</p>
-                <p className="text-[10px] text-slate-400">Institutional-Grade IPO Analysis</p>
+        <aside className={`${sidebarOpen ? "w-60" : "w-0"} transition-all duration-300 overflow-hidden shrink-0 border-r`}
+          style={{ 
+            borderColor: dark ? "rgba(255,255,255,0.06)" : "rgba(219,234,254,0.8)",
+            background: dark ? "#0a0d16" : "#f0f7ff"
+          }}>
+          <div className="w-60 p-4 flex flex-col h-full">
+            {/* Brand */}
+            <div className="flex items-start justify-between mb-4 pt-1">
+              <div className="flex items-center gap-3">
+                <img src="/logo.png" alt="Calm Capital Logo" className="w-9 h-9 object-contain rounded-xl" />
+                <div className="flex flex-col">
+                  <p className="text-sm font-bold tracking-tight leading-tight" style={{ color: dark ? "#fff" : "#1e293b" }}>Calm Capital</p>
+                  <p className="text-[10px] font-semibold tracking-wider uppercase mt-0.5" style={{ color: dark ? "#94a3b8" : "#64748b" }}>Designed by Discipline</p>
+                </div>
               </div>
+              <button onClick={() => setSidebarOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors p-1 hover:bg-black/5 rounded-lg mt-0.5">
+                <ChevronsLeft size={15} />
+              </button>
             </div>
 
-            <nav className="mt-6 space-y-1 flex-1 overflow-y-auto">
-              {NAV.map((n) => (
-                <button key={n.id} onClick={() => setTab(n.id)}
-                  className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm relative"
-                  style={tab === n.id
-                    ? { background: `linear-gradient(90deg, ${BRAND.blue}1f, ${BRAND.blue}0a)`, color: BRAND.blue, fontWeight: 600, boxShadow: `inset 0 0 0 1px ${BRAND.blue}25` }
-                    : { color: dark ? "#94a3b8" : "#64748b" }}
-                  onMouseEnter={(e) => { if (tab !== n.id) e.currentTarget.style.background = dark ? "rgba(255,255,255,0.05)" : "rgba(28,155,218,0.06)"; }}
-                  onMouseLeave={(e) => { if (tab !== n.id) e.currentTarget.style.background = "transparent"; }}
-                >
-                  {tab === n.id && <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-full" style={{ background: BRAND.blue }} />}
-                  <n.icon size={16} strokeWidth={tab === n.id ? 2.4 : 2} /> {n.label}
-                </button>
-              ))}
+            <nav className="mt-4 space-y-0.5 flex-1 overflow-y-auto">
+              {NAV.map((n) => {
+                const isActive = tab === n.id;
+                return (
+                  <button
+                    key={n.id}
+                    onClick={() => setTab(n.id)}
+                    className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm relative transition-colors"
+                    style={isActive
+                      ? {
+                          background: dark ? "rgba(28,155,218,0.12)" : "rgba(28,155,218,0.08)",
+                          color: BRAND.blue,
+                          fontWeight: 700,
+                          borderLeft: `3px solid ${BRAND.blue}`,
+                          paddingLeft: "9px",
+                        }
+                      : {
+                          color: dark ? "#94a3b8" : "#475569",
+                          fontWeight: 500,
+                          paddingLeft: "12px",
+                        }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) e.currentTarget.style.background = dark ? "rgba(255,255,255,0.04)" : "rgba(28,155,218,0.05)";
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) e.currentTarget.style.background = "transparent";
+                    }}
+                  >
+                    <n.icon size={15} strokeWidth={isActive ? 2.5 : 2} />
+                    {n.label}
+                  </button>
+                );
+              })}
             </nav>
-
           </div>
         </aside>
 
@@ -1344,77 +2690,65 @@ export default function App() {
         <div className="flex-1 flex flex-col min-w-0">
           {/* HEADER */}
           <header className="flex items-center gap-3 px-5 py-4 border-b sticky top-0 z-20 backdrop-blur-lg"
-            style={{ borderColor: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)", background: dark ? "rgba(11,18,32,0.7)" : "rgba(255,255,255,0.6)" }}>
-            <button onClick={() => setSidebarOpen((s) => !s)} className="text-slate-400 hover:text-slate-700"><Menu size={18} /></button>
+            style={{ 
+              borderColor: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)", 
+              background: dark ? "rgba(10,13,22,0.8)" : "rgba(255,255,255,0.8)" 
+            }}>
+            {!sidebarOpen && (
+              <button onClick={() => setSidebarOpen(true)} className="text-slate-400 hover:text-slate-700 p-1.5 hover:bg-black/5 dark:hover:bg-white/5 rounded-lg mr-1">
+                <Menu size={18} />
+              </button>
+            )}
 
             <div className="relative flex-1 max-w-sm">
-              <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search company or sector…"
-                className="w-full glass-inset rounded-xl pl-8 pr-3 py-2 text-sm outline-none" style={{ color: dark ? "#e2e8f0" : "#334155" }} />
+              <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search for company IPOs..."
+                className="w-full bg-white dark:bg-[#0e1320] border border-slate-200 dark:border-slate-800 rounded-2xl pl-9 pr-4 py-2 text-sm outline-none shadow-sm focus:glow-blue placeholder:text-slate-400 text-slate-800 dark:text-slate-200" />
             </div>
 
-            <div className="ml-auto flex items-center gap-2 relative">
-              <button
-                onClick={() => setShowSourceInput((s) => !s)}
-                className={`hidden sm:flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full ${syncOk === true ? "text-profit" : ""}`}
-                style={{ background: syncOk === true ? `${BRAND.green}22` : "rgba(148,163,184,0.18)", color: syncOk === true ? undefined : "#64748b" }}
-                title={syncOk === true ? "Live data connected" : "Auto-syncing from this repo's GitHub Action every hour — waiting for its first successful run"}
+            <div className="ml-auto flex items-center gap-2.5 relative">
+              <div
+                className="hidden sm:flex items-center gap-2 text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-850 bg-white/30 dark:bg-[#121625]/30 text-slate-600 dark:text-slate-300 shadow-sm cursor-default"
               >
-                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: syncOk === true ? BRAND.green : "#94a3b8" }} />
-                {syncOk === true ? "Live Data" : "Awaiting first sync"}
-              </button>
+                <span className="relative flex h-2 w-2 mr-0.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 dark:bg-emerald-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="font-semibold tracking-tight">Live Data</span>
+              </div>
 
-              {showSourceInput && (
-                <div className="absolute top-11 right-0 w-80 glass rounded-2xl p-4 z-30 shadow-xl">
-                  <p className="text-xs text-slate-500 mb-2">
-                    This site auto-syncs from <span className="font-mono">/live-data.json</span>, kept fresh by this repo's GitHub Action (scrapes investorgain.com every 2 hours). No setup needed once the Action is enabled and has run once.
-                  </p>
-                  <p className="text-xs text-slate-500 mb-2">Only change this if you want to point at a different source:</p>
-                  <input
-                    defaultValue={dataUrl}
-                    onKeyDown={(e) => e.key === "Enter" && saveDataUrl(e.currentTarget.value.trim())}
-                    placeholder="/live-data.json"
-                    className="w-full glass-inset rounded-xl px-3 py-2 text-xs outline-none mb-2"
-                  />
-                  <div className="flex items-center justify-end">
-                    <button onClick={() => setShowSourceInput(false)} className="text-xs px-2.5 py-1 rounded-lg text-white" style={{ background: BRAND.blue }}>Done</button>
-                  </div>
-                </div>
-              )}
-
-              <button onClick={refresh} className="w-9 h-9 rounded-xl glass-inset hover:border-black/10 flex items-center justify-center text-slate-500 hover:text-slate-700">
-                <RefreshCw size={15} className={refreshing ? "animate-spin" : ""} />
+              <button onClick={refresh} className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-[#121625]/30 hover:border-slate-300 dark:hover:border-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-700 shadow-sm">
+                <RefreshCw size={14} className={refreshing ? "animate-spin" : ""} />
               </button>
               <NotificationBell hook={notifHook} onOpenIpo={(ipoId) => { const found = getLiveIPOS().find((i) => i.id === ipoId); if (found) setSelected(found); }} />
-              <button onClick={() => setDark((d) => !d)} className="w-9 h-9 rounded-xl glass-inset hover:border-black/10 flex items-center justify-center text-slate-500 hover:text-slate-700">
-                {dark ? <Sun size={15} /> : <Moon size={15} />}
+              <button onClick={() => setDark((d) => !d)} className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-[#121625]/30 hover:border-slate-300 dark:hover:border-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-700 shadow-sm">
+                {dark ? <Sun size={14} /> : <Moon size={14} />}
               </button>
-              {AI_ASSISTANT_ENABLED && (
-                <button onClick={() => setTab("ai")} className="hidden sm:flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium text-white" style={{ background: `linear-gradient(135deg, ${BRAND.blue}, #1584bd)`, boxShadow: `0 4px 14px -3px ${BRAND.blue}66` }}>
-                  <MessageCircle size={14} /> Ask AI
-                </button>
-              )}
             </div>
           </header>
 
           <main className="flex-1 overflow-y-auto px-5 py-5 max-w-5xl w-full mx-auto">
             <div key={tab} className="tab-enter">
             {tab === "overview" && (
-              <div className="space-y-6">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  <StatCard icon={TrendingUp} label="Open IPOs" value={counts.Open} tint={BRAND.green} />
-                  <StatCard icon={Clock} label="Closed IPOs" value={counts.Closed} tint="#94a3b8" />
-                  <StatCard icon={Calendar} label="Upcoming" value={counts.Upcoming} tint="#F0A202" />
-                  <StatCard icon={Activity} label="Listed" value={counts.Listed} tint={BRAND.blue} />
+              <div className="space-y-5">
+                {/* Page title */}
+                <div>
+                  <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight">
+                    Calm Capital - Institutional-Grade IPO Analysis
+                  </h1>
                 </div>
 
+                {/* Stat cards */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <StatCard icon={ArrowUpRight} label="Open IPOs" value={counts.Open} tint={BRAND.blue} />
+                  <StatCard icon={Clock} label="Closed IPOs" value={counts.Closed} tint={BRAND.blue} />
+                  <StatCard icon={Calendar} label="Upcoming" value={counts.Upcoming} tint={BRAND.blue} />
+                  <StatCard icon={LayoutGrid} label="Listed" value={counts.Listed} tint={BRAND.blue} />
+                </div>
+
+                {/* IPO lists grouped by status */}
                 {["Open", "Closed", "Upcoming", "Listed"].map((status) => groupedFiltered(status).length > 0 && (
                   <section key={status}>
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="w-2 h-2 rounded-full" style={{ background: STATUS_COLOR[status] }} />
-                      <h2 className="text-sm font-semibold text-slate-700">{status}</h2>
-                      <span className="text-xs text-slate-400">{groupedFiltered(status).length}</span>
-                    </div>
                     <div className="grid sm:grid-cols-2 gap-3">
                       {groupedFiltered(status).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} />)}
                     </div>
@@ -1423,18 +2757,48 @@ export default function App() {
               </div>
             )}
 
-            {["open", "closed", "upcoming", "listed"].includes(tab) && (
-              <div className="grid sm:grid-cols-2 gap-3">
-                {groupedFiltered(tab[0].toUpperCase() + tab.slice(1)).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} />)}
+            {["open", "closed", "upcoming"].includes(tab) && (
+              <div>
+                {groupedFiltered(tab[0].toUpperCase() + tab.slice(1)).length > 0 ? (
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {groupedFiltered(tab[0].toUpperCase() + tab.slice(1)).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} />)}
+                  </div>
+                ) : (
+                  <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-12 text-center">
+                    <Calendar size={32} className="mx-auto mb-3 text-slate-300 dark:text-slate-700" />
+                    <p className="text-slate-500 text-sm">
+                      {tab === "upcoming"
+                        ? "There are currently no upcoming IPOs. Please check back later."
+                        : `There are currently no ${tab} IPOs.`}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {tab === "listed" && (
+              <div className="space-y-4">
+                <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight">Listed IPOs</h1>
+                {groupedFiltered("Listed").length > 0 ? (
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {groupedFiltered("Listed").map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} />)}
+                  </div>
+                ) : (
+                  <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-12 text-center">
+                    <Building2 size={32} className="mx-auto mb-3 text-slate-300 dark:text-slate-700" />
+                    <p className="text-slate-500 text-sm">No listed IPOs found.</p>
+                  </div>
+                )}
               </div>
             )}
 
             {tab === "gmp" && <GMPTab tick={tick} />}
-            {tab === "subscriptions" && <SubscriptionsTab />}
-            {tab === "financials" && <FinancialsTab />}
+            {tab === "subscriptions" && <SubscriptionsTab dark={dark} />}
+            {tab === "financials" && <FinancialsTab dark={dark} />}
             {tab === "docs" && <DocumentsTab />}
             {tab === "calculator" && <CalculatorTab />}
-            {tab === "watchlist" && <WatchlistTab watchlist={watchlist} onOpen={setSelected} />}
+            {tab === "watchlist" && <WatchlistTab watchlist={watchlist} onOpen={setSelected} dark={dark} />}
+            {tab === "demat" && <DematTab dark={dark} />}
             {AI_ASSISTANT_ENABLED && tab === "ai" && <div className="glass rounded-2xl p-5"><AssistantPane embedded tick={tick} /></div>}
             </div>
           </main>
