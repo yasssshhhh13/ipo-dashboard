@@ -1,11 +1,10 @@
 {
-  "updatedAt": "2026-07-16T13:43:49.303Z",
-  "errors": [],
+  "updatedAt": "2026-07-16T15:38:30.236Z",
+  "errors": [
+    "gmp: page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.investorgain.com/report/live-ipo-gmp/331/all/\", waiting until \"networkidle\"\n"
+  ],
   "ipos": {
     "sbi-funds": {
-      "gmp": 94,
-      "priceMax": 574,
-      "estListing": 668,
       "sub": {
         "overall": 41.73,
         "qib": 140.11,
@@ -14,9 +13,6 @@
       }
     },
     "happy-steels": {
-      "gmp": 10,
-      "priceMax": 66,
-      "estListing": 76,
       "sub": {
         "overall": 77.81,
         "qib": 59.01,
@@ -25,9 +21,6 @@
       }
     },
     "devson-catalyst": {
-      "gmp": 49,
-      "priceMax": 118,
-      "estListing": 167,
       "sub": {
         "overall": 220.35,
         "qib": 168.56,
@@ -36,9 +29,6 @@
       }
     },
     "kusumgar": {
-      "gmp": 161,
-      "priceMax": 419,
-      "estListing": 580,
       "sub": {
         "overall": 135.8,
         "qib": 299.51,
@@ -47,9 +37,6 @@
       }
     },
     "ic-electricals": {
-      "gmp": 47,
-      "priceMax": 99,
-      "estListing": 146,
       "sub": {
         "overall": 295.08,
         "qib": 241.75,
@@ -58,9 +45,6 @@
       }
     },
     "knack-packaging": {
-      "gmp": 13,
-      "priceMax": 170,
-      "estListing": 183,
       "sub": {
         "overall": 61.11,
         "qib": 160.03,
@@ -69,7 +53,6 @@
       }
     },
     "seemax-resources": {
-      "priceMax": 141,
       "sub": {
         "overall": 3.62,
         "qib": 17.19,
@@ -78,9 +61,6 @@
       }
     },
     "sampark-logistics": {
-      "gmp": 2,
-      "priceMax": 84,
-      "estListing": 86,
       "sub": {
         "overall": 3.47,
         "qib": 1.55,
@@ -89,9 +69,6 @@
       }
     },
     "kratikal-tech": {
-      "gmp": 78,
-      "priceMax": 135,
-      "estListing": 213,
       "sub": {
         "overall": 154.97,
         "qib": 145.82,
@@ -100,9 +77,6 @@
       }
     },
     "atharva-polyplast": {
-      "gmp": 10,
-      "priceMax": 60,
-      "estListing": 70,
       "sub": {
         "overall": 7.54,
         "qib": 3.58,
@@ -111,9 +85,6 @@
       }
     },
     "teja-engineering": {
-      "gmp": 36,
-      "priceMax": 220,
-      "estListing": 256,
       "sub": {
         "overall": 1.37,
         "qib": 0,
@@ -122,7 +93,6 @@
       }
     },
     "vinit-mobile": {
-      "priceMax": 158,
       "sub": {
         "overall": 1.62,
         "qib": 1,
@@ -131,7 +101,6 @@
       }
     },
     "adon-agro": {
-      "priceMax": 70,
       "sub": {
         "overall": 1.35,
         "qib": 22.47,
@@ -140,9 +109,6 @@
       }
     },
     "aastha-spintex": {
-      "gmp": 5,
-      "priceMax": 136,
-      "estListing": 141,
       "sub": {
         "overall": 5.05,
         "qib": 3.59,
@@ -151,7 +117,6 @@
       }
     },
     "csm-technologies": {
-      "priceMax": 113,
       "sub": {
         "overall": 1.18,
         "qib": 1.02,
