@@ -1,27 +1,16 @@
 {
-  "updatedAt": "2026-07-16T03:59:28.452Z",
+  "updatedAt": "2026-07-16T06:25:27.438Z",
   "errors": [],
   "ipos": {
     "sbi-funds": {
-      "gmp": 92,
+      "gmp": 97,
       "priceMax": 574,
-      "estListing": 666,
+      "estListing": 671,
       "sub": {
-        "overall": 2.82,
-        "qib": 1.5,
-        "hni": 5.53,
-        "retail": 1.71
-      }
-    },
-    "devson-catalyst": {
-      "gmp": 49,
-      "priceMax": 118,
-      "estListing": 167,
-      "sub": {
-        "overall": 220.35,
-        "qib": 168.56,
-        "hni": 211.19,
-        "retail": 244.08
+        "overall": 5.04,
+        "qib": 2.48,
+        "hni": 9.44,
+        "retail": 2.44
       }
     },
     "happy-steels": {
@@ -33,6 +22,17 @@
         "qib": 59.01,
         "hni": 83.26,
         "retail": 73.25
+      }
+    },
+    "devson-catalyst": {
+      "gmp": 49,
+      "priceMax": 118,
+      "estListing": 167,
+      "sub": {
+        "overall": 220.35,
+        "qib": 168.56,
+        "hni": 211.19,
+        "retail": 244.08
       }
     },
     "kusumgar": {
@@ -68,13 +68,24 @@
         "retail": 21.08
       }
     },
-    "vinit-mobile": {
-      "priceMax": 158,
+    "seemax-resources": {
+      "priceMax": 141,
       "sub": {
-        "overall": 1.62,
-        "qib": 1,
-        "hni": 0.63,
-        "retail": 2.18
+        "overall": 3.62,
+        "qib": 17.19,
+        "hni": 5.01,
+        "retail": 1.52
+      }
+    },
+    "sampark-logistics": {
+      "gmp": 2,
+      "priceMax": 84,
+      "estListing": 86,
+      "sub": {
+        "overall": 3.47,
+        "qib": 1.55,
+        "hni": 9.89,
+        "retail": 4.65
       }
     },
     "kratikal-tech": {
@@ -99,26 +110,6 @@
         "retail": 11.32
       }
     },
-    "sampark-logistics": {
-      "gmp": 2,
-      "priceMax": 84,
-      "estListing": 86,
-      "sub": {
-        "overall": 3.47,
-        "qib": 1.55,
-        "hni": 9.89,
-        "retail": 4.65
-      }
-    },
-    "seemax-resources": {
-      "priceMax": 141,
-      "sub": {
-        "overall": 3.62,
-        "qib": 17.19,
-        "hni": 5.01,
-        "retail": 1.52
-      }
-    },
     "teja-engineering": {
       "gmp": 36,
       "priceMax": 220,
@@ -128,6 +119,15 @@
         "qib": 0,
         "hni": 0,
         "retail": 0.32
+      }
+    },
+    "vinit-mobile": {
+      "priceMax": 158,
+      "sub": {
+        "overall": 1.62,
+        "qib": 1,
+        "hni": 0.63,
+        "retail": 2.18
       }
     },
     "adon-agro": {
