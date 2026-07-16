@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-07-16T11:37:53.420Z",
+  "updatedAt": "2026-07-16T13:43:49.303Z",
   "errors": [],
   "ipos": {
     "sbi-funds": {
-      "gmp": 96,
+      "gmp": 94,
       "priceMax": 574,
-      "estListing": 670,
+      "estListing": 668,
       "sub": {
-        "overall": 41.71,
+        "overall": 41.73,
         "qib": 140.11,
-        "hni": 15.49,
-        "retail": 3.72
+        "hni": 15.51,
+        "retail": 3.76
       }
     },
     "happy-steels": {
