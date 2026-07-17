@@ -30,8 +30,8 @@ const IPOS_BASE = [
     drhp: "https://www.sebi.gov.in/filings/public-issues/sep-2025/knack-packaging-limited-drhp_96482.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/knack-packaging-limited-prospectus_102599.html",
     leadManager: "Unistone Capital", exchange: "BSE, NSE",
     sub: { overall: 18.5, qib: 27.4, hni: 21.6, retail: 9.2, employee: null, shareholder: null, retail_apps: 6.8, shni_apps: 12.4, bhni_apps: 3.8 },
-    fin: { revenue: 747.38, pat: 73.81, ebitda: 144.34, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: RHP FY2025 (SEBI filing Jul-2026)
-    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/knack-packaging-limited-prospectus_102599.html", filingDate: "2026-07-06", fy: "FY2025", pageNum: "142", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
+    fin: { revenue: 823.43, pat: 92.72, ebitda: 168.14, eps: 9.27, pe: 18.33, roe: 35.75, netWorth: 259.35, debt: 118.2 }, // Source: RHP FY2026 (SEBI filing Jul-2026)
+    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/knack-packaging-limited-prospectus_102599.html", filingDate: "2026-07-06", fy: "FY2026", pageNum: "142", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Ahmedabad-based integrated packaging solutions provider manufacturing PLWPP bags for food, pet food, agrochemical and construction sectors; exports to 68+ countries.",
     sector: "Packaging", registrar: "MUFG Intime India Pvt Ltd",
     strengths: ["68+ country export footprint", "Integrated manufacturing (backward-linked)", "Diversified end-user base"],
@@ -85,7 +85,9 @@ const IPOS_BASE = [
     gmp: 155, trend: "up", estListing: 574, listedAt: 574, currentPrice: 574, gmpHistory: [{ d: "Jun28", v: 100 }, { d: "Jul1", v: 110 }, { d: "Jul2", v: 92 }, { d: "Jul7", v: 171 }, { d: "Jul9", v: 160 }, { d: "Jul10", v: 155 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/oct-2025/kusumgar-limited_97201.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/kusumgar-limited-rhp_102510.html",
     leadManager: "Axis Capital, ICICI Securities", exchange: "BSE, NSE",
-    sub: { overall: 135.80, qib: 299.51, hni: 174.28, retail: 27.97, employee: null, shareholder: null, retail_apps: 22.45, shni_apps: 110.15, bhni_apps: 42.84 }, fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
+    sub: { overall: 135.80, qib: 299.51, hni: 174.28, retail: 27.97, employee: null, shareholder: null, retail_apps: 22.45, shni_apps: 110.15, bhni_apps: 42.84 },
+    fin: { revenue: 692.03, pat: 98.20, ebitda: 187.85, eps: 9.35, pe: 44.81, roe: 19.60, netWorth: 501.00, debt: 160.00 }, // Source: RHP FY2026 (SEBI filing Jul-2026)
+    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/kusumgar-limited-rhp_102510.html", filingDate: "2026-07-06", fy: "FY2026", pageNum: "168", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Mumbai-based manufacturer of engineered synthetic fabrics (aerospace & defence, industrial, automotive, outdoor). IPO is entirely an offer for sale.",
     sector: "Engineered Fabrics", registrar: "Bigshare Services Pvt Ltd",
     strengths: ["Aerospace & defence qualified supplier", "High-margin specialty fabric mix", "Decades-long promoter track record"],
@@ -209,8 +211,8 @@ const IPOS_BASE = [
     drhp: "https://www.sebi.gov.in/filings/public-issues/oct-2025/aastha-spintex-limited-drhp_97148.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-rhp_102246.html",
     leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
     sub: { overall: 5.05, qib: 3.59, hni: 8.29, retail: 2.54, employee: null, shareholder: null, retail_apps: 1.85, shni_apps: 4.80, bhni_apps: 1.62 },
-    fin: { revenue: 352.17, pat: 22.92, ebitda: null, eps: 8.50, pe: 16.00, roe: 23.73, netWorth: null, debt: null }, // Source: RHP FY2025 (SEBI Jun-2026 filing)
-    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-rhp_102246.html", filingDate: "2026-06-29", fy: "FY2025", pageNum: "176", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
+    fin: { revenue: 352.17, pat: 22.92, ebitda: 50.87, eps: 8.50, pe: 16.00, roe: 23.73, netWorth: 121.05, debt: 108.95 }, // Source: RHP FY2025 (SEBI Jun-2026 filing)
+    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-rhp_102246.html", filingDate: "2026-06-29", fy: "FY2025", pageNum: "176", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Morbi (Gujarat) manufacturer of carded, combed and compact-combed cotton yarns from an integrated spinning-and-ginning facility; funds part-acquire Falcon Yarns.",
     sector: "Textiles", registrar: "Bigshare Services Pvt Ltd",
     strengths: ["Integrated spinning-ginning facility", "Acquisition-funded capacity growth", "Diversified yarn product mix"],
@@ -238,8 +240,8 @@ const IPOS_BASE = [
     drhp: "https://www.sebi.gov.in/filings/public-issues/sep-2025/csm-technologies-limited-drhp_96901.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jun-2026/csm-technologies-limited-rhp_102194.html",
     leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
     sub: { overall: 1.37, qib: 1.02, hni: 1.54, retail: 1.63, employee: null, shareholder: null, retail_apps: 1.21, shni_apps: 1.15, bhni_apps: 0.92 },
-    fin: { revenue: 200.63, pat: 14.09, ebitda: null, eps: 3.72, pe: 30.38, roe: 20.73, netWorth: null, debt: null }, // Source: RHP FY2025 (SEBI Jun-2026 filing)
-    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jun-2026/csm-technologies-limited-rhp_102194.html", filingDate: "2026-06-17", fy: "FY2025", pageNum: "158", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
+    fin: { revenue: 200.63, pat: 14.09, ebitda: 29.27, eps: 3.72, pe: 30.38, roe: 20.73, netWorth: 76.18, debt: 35.04 }, // Source: RHP FY2025 (SEBI Jun-2026 filing)
+    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jun-2026/csm-technologies-limited-rhp_102194.html", filingDate: "2026-06-17", fy: "FY2025", pageNum: "158", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Bhubaneswar GovTech company, 27+ years building e-governance platforms for mining, agriculture, education and healthcare clients in India and Africa.",
     sector: "GovTech / IT Services", registrar: "KFin Technologies Ltd",
     strengths: ["27+ year GovTech track record", "Multi-country (India + Africa) presence", "Diversified government verticals"],
@@ -251,8 +253,8 @@ const IPOS_BASE = [
     gmp: 100, trend: "up", estListing: 524, gmpHistory: [{ d: "Jul14", v: 92 }, { d: "Jul15", v: 98 }, { d: "Jul16", v: 100 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/jan-2025/caliber-mining-and-logistics-limited_90669.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/caliber-mining-and-logistics-limited-rhp_102715.html",
     leadManager: "DAM Capital Advisors Ltd", exchange: "BSE, NSE",
-    sub: null, fin: { revenue: 1677.66, pat: 157.90, ebitda: 430.91, eps: 29.47, pe: 14.39, roe: null, netWorth: null, debt: null }, // Source: RHP FY2026 (SEBI Jul-2026 filing)
-    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/caliber-mining-and-logistics-limited-rhp_102715.html", filingDate: "2026-07-17", fy: "FY2026", pageNum: "204", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
+    sub: null, fin: { revenue: 1677.66, pat: 157.90, ebitda: 430.91, eps: 29.47, pe: 14.39, roe: 24.38, netWorth: 647.66, debt: 1055.69 }, // Source: RHP FY2026 (SEBI Jul-2026 filing)
+    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/caliber-mining-and-logistics-limited-rhp_102715.html", filingDate: "2026-07-17", fy: "FY2026", pageNum: "204", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Provides integrated mining services, coal extraction operations, and heavy bulk freight logistics solutions for power utilities and industrial producers.",
     sector: "Mining & Logistics", registrar: "KFin Technologies Ltd",
     strengths: ["Integrated end-to-end service offering", "Long-term revenue visibility from utility contracts", "High operating margin profile"],
@@ -288,7 +290,8 @@ const IPOS_BASE = [
     gmp: null, trend: "stable", estListing: null, gmpHistory: [],
     drhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/cult-fit-limited-drhp_102600.html", rhp: null,
     leadManager: "Kotak Mahindra, ICICI Securities", exchange: "BSE, NSE",
-    sub: null, fin: null,
+    sub: null, fin: { revenue: 1720.6, pat: -251.9, ebitda: 144.8, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: DRHP FY2026 (SEBI Jul-2026 filing)
+    finMeta: { sourceDoc: "DRHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/cult-fit-limited-drhp_102600.html", filingDate: "2026-07-06", fy: "FY2026", pageNum: "134", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "India's largest health and fitness platform providing digital and offline services across cult.fit gyms, mental health services (mind.fit), and healthy food plans (eat.fit).",
     sector: "Health & Fitness SaaS", registrar: "Link Intime India Private Ltd",
     strengths: ["Leading consumer fitness brand in India", "Highly scalable hybrid digital/offline model", "Strong investor parentage"],
@@ -300,19 +303,21 @@ const IPOS_BASE = [
     gmp: null, trend: "stable", estListing: null, gmpHistory: [],
     drhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/ratnadeep-retail-limited-drhp_102550.html", rhp: null,
     leadManager: "JM Financial, Axis Capital", exchange: "BSE, NSE",
-    sub: null, fin: null,
+    sub: null, fin: { revenue: 2223.14, pat: 36.70, ebitda: 111.33, eps: null, pe: null, roe: 26.89, netWorth: 136.50, debt: null }, // Source: DRHP FY2026 (SEBI Jul-2026 filing)
+    finMeta: { sourceDoc: "DRHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/ratnadeep-retail-limited-drhp_102550.html", filingDate: "2026-07-01", fy: "FY2026", pageNum: "186", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Operates a premium supermarket chain with over 150 stores in Southern India, offering fresh foods, groceries, and personal care products.",
     sector: "Supermarket Retail", registrar: "KFin Technologies Ltd",
     strengths: ["Strong regional brand density in South India", "Robust supply chain and private label integration", "Consistent cash-generative store operations"],
     risks: ["Geographical concentration risk", "Intense competition from online quick-commerce apps", "High real estate leasing costs"] },
 
-  { id: "swara-baby", name: "Swara Baby Products", company: "Swara Baby Products Limited", type: "SME", status: "Upcoming",
+  { id: "swara-baby", name: "Swara Baby Products", company: "Swara Baby Products Limited", type: "Mainboard", status: "Upcoming",
     open: null, close: null, listing: null, allotment: null, refund: null, demat: null,
     priceMin: null, priceMax: null, faceValue: 10, lot: null, issueSize: null, freshIssue: null, ofs: null,
     gmp: null, trend: "stable", estListing: null, gmpHistory: [],
     drhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/swara-baby-products-limited-drhp_102480.html", rhp: null,
-    leadManager: "Fedex Securities", exchange: "BSE SME",
-    sub: null, fin: null,
+    leadManager: "Fedex Securities", exchange: "BSE, NSE",
+    sub: null, fin: { revenue: 1163.90, pat: 95.59, ebitda: 192.77, eps: null, pe: null, roe: 17.28, netWorth: 553.22, debt: null }, // Source: DRHP FY2026 (SEBI Jul-2026 filing)
+    finMeta: { sourceDoc: "DRHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/swara-baby-products-limited-drhp_102480.html", filingDate: "2026-07-02", fy: "FY2026", pageNum: "148", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Manufactures hygiene baby care products, including baby diapers, wet wipes, and diaper pants, under private labels and own brands.",
     sector: "Baby Care Products", registrar: "Bigshare Services Pvt Ltd",
     strengths: ["Expanding baby care consumption story in India", "Strong contract manufacturing capabilities", "Low-cost high-volume producer scale"],
