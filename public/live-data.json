@@ -1,22 +1,29 @@
 {
-  "updatedAt": "2026-07-17T12:07:02.991Z",
+  "updatedAt": "2026-07-17T14:41:35.250Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
       "priceMax": 152,
-      "sub": {}
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 152,
+        "hni": 5000,
+        "retail": 0
+      }
     },
     "caliber-mining": {
-      "gmp": 114,
+      "gmp": 116,
       "priceMax": 424,
-      "estListing": 538,
+      "estListing": 540,
       "sub": {
-        "overall": 1.28,
-        "qib": 0.31,
-        "snii": 2.24,
-        "bnii": 1.4,
-        "hni": 1.68,
-        "retail": 1.67
+        "overall": 116,
+        "qib": 0,
+        "snii": 1.31,
+        "bnii": 424,
+        "hni": 450,
+        "retail": 35
       }
     },
     "sotefin-bharat": {
@@ -24,25 +31,25 @@
       "priceMax": 187,
       "estListing": 200,
       "sub": {
-        "overall": 0.8,
-        "qib": 0.13,
-        "snii": 0.62,
-        "bnii": 1.43,
-        "hni": 1.16,
-        "retail": 1.02
+        "overall": 13,
+        "qib": 0,
+        "snii": 0.8,
+        "bnii": 187,
+        "hni": 89.76,
+        "retail": 600
       }
     },
     "sbi-funds": {
-      "gmp": 97,
+      "gmp": 94,
       "priceMax": 574,
-      "estListing": 671,
+      "estListing": 668,
       "sub": {
-        "overall": 41.73,
-        "qib": 140.11,
-        "snii": 15.51,
-        "bnii": 26.01,
-        "hni": 22.51,
-        "retail": 3.76
+        "overall": 94,
+        "qib": 0,
+        "snii": 41.73,
+        "bnii": 574,
+        "hni": 9812.91,
+        "retail": 26
       }
     },
     "devson-catalyst": {
@@ -50,12 +57,12 @@
       "priceMax": 118,
       "estListing": 167,
       "sub": {
-        "overall": 220.35,
-        "qib": 168.56,
-        "snii": 211.19,
-        "bnii": 286.5,
-        "hni": 261.22,
-        "retail": 244.08
+        "overall": 49,
+        "qib": 0,
+        "snii": 220.35,
+        "bnii": 118,
+        "hni": 42.34,
+        "retail": 1200
       }
     },
     "happy-steels": {
@@ -63,12 +70,12 @@
       "priceMax": 66,
       "estListing": 76,
       "sub": {
-        "overall": 77.81,
-        "qib": 59.01,
-        "snii": 83.26,
-        "bnii": 128.77,
-        "hni": 113.6,
-        "retail": 73.25
+        "overall": 10,
+        "qib": 0,
+        "snii": 77.81,
+        "bnii": 66,
+        "hni": 25,
+        "retail": 2000
       }
     },
     "kusumgar": {
@@ -76,12 +83,12 @@
       "priceMax": 419,
       "estListing": 580,
       "sub": {
-        "overall": 135.8,
-        "qib": 299.51,
-        "snii": 144.05,
-        "bnii": 189.4,
-        "hni": 174.28,
-        "retail": 27.97
+        "overall": 161,
+        "qib": 0,
+        "snii": 135.8,
+        "bnii": 419,
+        "hni": 650.36,
+        "retail": 35
       }
     },
     "ic-electricals": {
@@ -89,12 +96,12 @@
       "priceMax": 99,
       "estListing": 146,
       "sub": {
-        "overall": 295.08,
-        "qib": 241.75,
-        "snii": 422.38,
-        "bnii": 936.7,
-        "hni": 764.38,
-        "retail": 372.51
+        "overall": 47,
+        "qib": 0,
+        "snii": 295.08,
+        "bnii": 99,
+        "hni": 47.91,
+        "retail": 1200
       }
     },
     "knack-packaging": {
@@ -102,23 +109,23 @@
       "priceMax": 170,
       "estListing": 183,
       "sub": {
-        "overall": 61.11,
-        "qib": 160.03,
-        "snii": 112.04,
-        "bnii": 163.83,
-        "hni": 146.57,
-        "retail": 21.08
+        "overall": 13,
+        "qib": 0,
+        "snii": 61.11,
+        "bnii": 170,
+        "hni": 439.71,
+        "retail": 88
       }
     },
     "vinit-mobile": {
       "priceMax": 158,
       "sub": {
-        "overall": 1.62,
-        "qib": 1,
-        "snii": 0.63,
-        "bnii": 0.88,
-        "hni": 0.8,
-        "retail": 2.18
+        "overall": 0,
+        "qib": 0,
+        "snii": 1.62,
+        "bnii": 158,
+        "hni": 34.13,
+        "retail": 800
       }
     },
     "sampark-logistics": {
@@ -126,23 +133,23 @@
       "priceMax": 84,
       "estListing": 86,
       "sub": {
-        "overall": 3.47,
-        "qib": 1.55,
-        "snii": 9.89,
-        "bnii": 10.22,
-        "hni": 10.11,
-        "retail": 4.65
+        "overall": 2.5,
+        "qib": 0,
+        "snii": 3.47,
+        "bnii": 84,
+        "hni": 27.22,
+        "retail": 1600
       }
     },
     "seemax-resources": {
       "priceMax": 141,
       "sub": {
-        "overall": 3.62,
-        "qib": 17.19,
-        "snii": 5.01,
-        "bnii": 3.62,
-        "hni": 4.08,
-        "retail": 1.52
+        "overall": 0,
+        "qib": 0,
+        "snii": 3.62,
+        "bnii": 141,
+        "hni": 19.74,
+        "retail": 1000
       }
     },
     "atharva-polyplast": {
@@ -150,12 +157,12 @@
       "priceMax": 60,
       "estListing": 70,
       "sub": {
-        "overall": 7.54,
-        "qib": 3.58,
-        "snii": 11.91,
-        "bnii": 22.44,
-        "hni": 18.91,
-        "retail": 11.32
+        "overall": 10,
+        "qib": 0,
+        "snii": 7.54,
+        "bnii": 60,
+        "hni": 27,
+        "retail": 2000
       }
     },
     "kratikal-tech": {
@@ -163,12 +170,12 @@
       "priceMax": 135,
       "estListing": 213,
       "sub": {
-        "overall": 154.97,
-        "qib": 145.82,
-        "snii": 223.33,
-        "bnii": 375.29,
-        "hni": 324.64,
-        "retail": 218.48
+        "overall": 78,
+        "qib": 0,
+        "snii": 154.97,
+        "bnii": 135,
+        "hni": 39.69,
+        "retail": 1000
       }
     },
     "teja-engineering": {
@@ -176,12 +183,12 @@
       "priceMax": 220,
       "estListing": 256,
       "sub": {
-        "overall": 1.37,
+        "overall": 36,
         "qib": 0,
-        "snii": 0,
-        "bnii": 0,
-        "hni": 1.81,
-        "retail": 0.32
+        "snii": 1.37,
+        "bnii": 220,
+        "hni": 37.36,
+        "retail": 600
       }
     },
     "aastha-spintex": {
@@ -189,34 +196,34 @@
       "priceMax": 136,
       "estListing": 141,
       "sub": {
-        "overall": 5.05,
-        "qib": 3.59,
-        "snii": 6.66,
-        "bnii": 9.11,
-        "hni": 8.29,
-        "retail": 2.54
+        "overall": 5,
+        "qib": 0,
+        "snii": 5.05,
+        "bnii": 136,
+        "hni": 170,
+        "retail": 110
       }
     },
     "adon-agro": {
       "priceMax": 70,
       "sub": {
-        "overall": 1.35,
-        "qib": 22.47,
-        "snii": 0.57,
-        "bnii": 1.82,
-        "hni": 1.41,
-        "retail": 0.84
+        "overall": 0,
+        "qib": 0,
+        "snii": 1.35,
+        "bnii": 70,
+        "hni": 44.03,
+        "retail": 2000
       }
     },
     "csm-technologies": {
       "priceMax": 113,
       "sub": {
-        "overall": 1.18,
-        "qib": 1.02,
-        "snii": 1.33,
-        "bnii": 1.65,
-        "hni": 1.54,
-        "retail": 1.63
+        "overall": 0,
+        "qib": 0,
+        "snii": 1.18,
+        "bnii": 113,
+        "hni": 145.78,
+        "retail": 132
       }
     }
   }
