@@ -914,6 +914,7 @@ function CalculatorTab() {
   const [lots, setLots] = useState(1);
   const [search, setSearch] = useState("");
   const [listOpen, setListOpen] = useState(false);
+  const [calcFilter, setCalcFilter] = useState(null); // null = All
 
   const ipo = allIpos.find((i) => i.id === ipoId) || allIpos[0];
   const p = price(ipo);
@@ -931,9 +932,11 @@ function CalculatorTab() {
     Listed:   { bg: "rgba(28,155,218,0.10)", color: BRAND.blue, dot: "bg-blue-400" },
   };
 
-  const filtered = allIpos.filter((i) =>
-    !search || i.company.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = allIpos.filter((i) => {
+    const matchSearch = !search || i.company.toLowerCase().includes(search.toLowerCase());
+    const matchFilter = !calcFilter || i.status === calcFilter;
+    return matchSearch && matchFilter;
+  });
 
   // Group filtered results by status in the correct display order
   const grouped = STATUS_ORDER.map((s) => ({
@@ -979,41 +982,69 @@ function CalculatorTab() {
 
             {/* Dropdown panel */}
             {listOpen && (
-              <div className="mt-2 rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-[#111520] shadow-xl overflow-hidden">
-                {/* Search */}
-                <div className="p-3 border-b border-slate-100 dark:border-white/5">
-                  <div className="relative">
-                    <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input
-                      autoFocus
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      placeholder="Search IPOs…"
-                      className="w-full bg-slate-50 dark:bg-[#161c28] border border-slate-200 dark:border-white/5 rounded-xl pl-8 pr-3 py-2 text-xs outline-none text-slate-700 dark:text-slate-200 placeholder:text-slate-400"
-                    />
+              <div className="mt-2 rounded-2xl border border-slate-200 dark:border-white/5 bg-white dark:bg-[#111520] shadow-xl overflow-hidden flex flex-col" style={{ maxHeight: "340px" }}>
+
+                {/* ── Sticky header: filter tabs + search ── */}
+                <div className="sticky top-0 z-20 bg-white dark:bg-[#111520] border-b border-slate-100 dark:border-white/5">
+
+                  {/* Filter tabs */}
+                  <div className="flex gap-1 p-2.5 pb-2">
+                    {[null, "Open", "Upcoming", "Closed", "Listed"].map((f) => {
+                      const label = f ?? "All";
+                      const isActive = calcFilter === f;
+                      return (
+                        <button
+                          key={label}
+                          onClick={() => { setCalcFilter(f); setSearch(""); }}
+                          className="flex-1 text-[10px] font-bold rounded-lg py-1 transition-all"
+                          style={{
+                            background: isActive ? BRAND.blue : "transparent",
+                            color: isActive ? "#fff" : "#94a3b8",
+                            border: isActive ? `1px solid ${BRAND.blue}` : "1px solid transparent",
+                          }}
+                        >
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Search */}
+                  <div className="px-2.5 pb-2.5">
+                    <div className="relative">
+                      <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        autoFocus
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder={calcFilter ? `Search ${calcFilter} IPOs…` : "Search all IPOs…"}
+                        className="w-full bg-slate-50 dark:bg-[#161c28] border border-slate-200 dark:border-white/5 rounded-xl pl-8 pr-3 py-2 text-xs outline-none text-slate-700 dark:text-slate-200 placeholder:text-slate-400"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* Grouped list */}
-                <div className="max-h-64 overflow-y-auto">
+                {/* ── Scrollable IPO list ── */}
+                <div className="overflow-y-auto flex-1">
                   {grouped.map((group) => (
                     <div key={group.status}>
-                      <div className="px-3 py-1.5 sticky top-0 bg-white dark:bg-[#111520] z-10">
-                        <span
-                          className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
-                          style={{ background: statusColors[group.status]?.bg, color: statusColors[group.status]?.color }}
-                        >
-                          {group.status}
-                        </span>
-                      </div>
+                      {/* Only show group header when showing All */}
+                      {!calcFilter && (
+                        <div className="px-3 py-1.5">
+                          <span
+                            className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                            style={{ background: statusColors[group.status]?.bg, color: statusColors[group.status]?.color }}
+                          >
+                            {group.status}
+                          </span>
+                        </div>
+                      )}
                       {group.items.map((i) => (
                         <button
                           key={i.id}
                           onClick={() => { setIpoId(i.id); setListOpen(false); setSearch(""); }}
                           className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors text-left"
-                          style={{
-                            background: i.id === ipoId ? "rgba(28,155,218,0.06)" : "transparent"
-                          }}
+                          style={{ background: i.id === ipoId ? "rgba(28,155,218,0.06)" : "transparent" }}
                         >
                           <CompanyAvatar name={i.company} size={30} />
                           <div className="flex-1 min-w-0">
