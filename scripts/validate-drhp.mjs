@@ -90,6 +90,10 @@ async function findCorrectDrhpUrl(companyName) {
 }
 
 async function main() {
+  if (process.env.VERCEL || process.env.NOW_BUILDER) {
+    console.log("Vercel build environment detected. Skipping Playwright check to avoid missing browser errors.");
+    return;
+  }
   console.log("Reading ipos.json...");
   let fileContent = await readFile(IPOS_JSON_PATH, "utf-8");
   const ipos = JSON.parse(fileContent);
