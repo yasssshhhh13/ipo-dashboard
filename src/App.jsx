@@ -30,7 +30,7 @@ const IPOS_BASE = [
     drhp: "https://www.sebi.gov.in/filings/public-issues/sep-2025/knack-packaging-limited-drhp_96482.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/knack-packaging-limited-prospectus_102599.html",
     leadManager: "Unistone Capital", exchange: "BSE, NSE",
     sub: { overall: 18.5, qib: 27.4, hni: 21.6, retail: 9.2, employee: null, shareholder: null, retail_apps: 6.8, shni_apps: 12.4, bhni_apps: 3.8 },
-    fin: { revenue: 843.77, pat: 92.72, ebitda: 172.29, eps: 9.27, pe: 18.33, roe: 35.75, netWorth: 259.4, debt: 118.2 },
+    fin: { revenue: 747.38, pat: 73.81, ebitda: 144.34, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: RHP FY2025 (SEBI filing Jul-2026)
     about: "Ahmedabad-based integrated packaging solutions provider manufacturing PLWPP bags for food, pet food, agrochemical and construction sectors; exports to 68+ countries.",
     sector: "Packaging", registrar: "MUFG Intime India Pvt Ltd",
     strengths: ["68+ country export footprint", "Integrated manufacturing (backward-linked)", "Diversified end-user base"],
@@ -44,7 +44,7 @@ const IPOS_BASE = [
     drhp: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_30092025221533_DRHP_ICEL_30092025.pdf", rhp: null,
     leadManager: "Corpwis Advisors", exchange: "NSE Emerge",
     sub: { overall: 0.4, qib: 0, hni: 0.3, retail: 0.6, employee: null, shareholder: null },
-    fin: { revenue: 143.81, pat: 14.10, ebitda: 19.5, eps: 7.7, pe: 12.9, roe: 18.4, netWorth: 76.5, debt: 22.1 },
+    fin: { revenue: 143.81, pat: 14.10, ebitda: null, eps: 10.49, pe: 9.44, roe: null, netWorth: null, debt: null }, // Source: RHP FY2026 (NSE Emerge filing)
     about: "Manufactures electronic equipment for Indian Railways (ERRUs, vigilance control devices, passenger info systems) under a B2G model, plus railway electrification EPC work.",
     sector: "Railway Electricals", registrar: "Skyline Financial Services Pvt Ltd",
     strengths: ["B2G model with Indian Railways", "Growing electrification order book", "Niche technical certification moat"],
@@ -70,7 +70,7 @@ const IPOS_BASE = [
       bhni_apps: 4.99,
       employee_apps: 1.30,
       shareholder_apps: 1.38
-    }, fin: { revenue: 4976.11, pat: 3067.38, ebitda: 3755.20, eps: 28.14, pe: 20.40, roe: 34.80, netWorth: 9250.00, debt: 0 },
+    }, fin: { revenue: 4970, pat: 3067.38, ebitda: null, eps: 15.08, pe: 38.06, roe: 51.44, netWorth: 5963, debt: 0 }, // Source: DRHP FY2026 (SEBI Mar-2026); EBITDA not applicable for AMC
     about: "India's largest asset management company by mutual fund quarterly average AUM (~₹29.46 lakh crore as of Mar 2026), and investment manager to SBI Mutual Fund — a joint venture between State Bank of India and Amundi. 100% offer-for-sale; the company receives no proceeds from the IPO.",
     sector: "Asset Management", registrar: "KFin Technologies Ltd",
     strengths: ["India's largest AMC by AUM", "Strong brand trust (SBI + Amundi parentage)", "Diversified fund product mix"],
@@ -82,7 +82,7 @@ const IPOS_BASE = [
     gmp: 155, trend: "up", estListing: 574, listedAt: 574, currentPrice: 574, gmpHistory: [{ d: "Jun28", v: 100 }, { d: "Jul1", v: 110 }, { d: "Jul2", v: 92 }, { d: "Jul7", v: 171 }, { d: "Jul9", v: 160 }, { d: "Jul10", v: 155 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/oct-2025/kusumgar-limited_97201.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/kusumgar-limited-rhp_102510.html",
     leadManager: "Axis Capital, ICICI Securities", exchange: "BSE, NSE",
-    sub: { overall: 135.80, qib: 299.51, hni: 174.28, retail: 27.97, employee: null, shareholder: null, retail_apps: 22.45, shni_apps: 110.15, bhni_apps: 42.84 }, fin: { revenue: 711.78, pat: 98.20, ebitda: null, eps: 22.3, pe: 18.8, roe: 21.6, netWorth: 420.5, debt: 95.3 },
+    sub: { overall: 135.80, qib: 299.51, hni: 174.28, retail: 27.97, employee: null, shareholder: null, retail_apps: 22.45, shni_apps: 110.15, bhni_apps: 42.84 }, fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
     about: "Mumbai-based manufacturer of engineered synthetic fabrics (aerospace & defence, industrial, automotive, outdoor). IPO is entirely an offer for sale.",
     sector: "Engineered Fabrics", registrar: "Bigshare Services Pvt Ltd",
     strengths: ["Aerospace & defence qualified supplier", "High-margin specialty fabric mix", "Decades-long promoter track record"],
@@ -94,7 +94,7 @@ const IPOS_BASE = [
     gmp: 6, trend: "stable", estListing: 124, gmpHistory: [{ d: "Jul1", v: 0 }, { d: "Jul2", v: 6 }, { d: "Jul3", v: 6 }],
     drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
     leadManager: "Corpwis Advisors", exchange: "NSE Emerge",
-    sub: null, fin: { revenue: 322.58, pat: 28.13, ebitda: null, eps: 25.0, pe: 15.5, roe: 45.97, netWorth: 61.2, debt: 18.4 },
+    sub: null, fin: { revenue: 55.78, pat: 12.52, ebitda: null, eps: 1.22, pe: 96.72, roe: null, netWorth: null, debt: null }, // Source: BSE SME filing FY2026 (prior data was 5.8× overstated)
     about: "Gujarat-based manufacturer of catalysts, adsorbents and ceramic balls for refineries, petrochemical, steel and fertilizer producers; exports to 15+ countries.",
     sector: "Specialty Chemicals", registrar: "MUFG Intime India Pvt Ltd",
     strengths: ["High ROE (45.97%)", "Import-substitution positioning", "15+ country export base"],
@@ -120,7 +120,7 @@ const IPOS_BASE = [
     drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
     leadManager: "Fedex Securities", exchange: "NSE Emerge",
     sub: { overall: 45.2, qib: 38.6, hni: 72.4, retail: 28.1, employee: null, shareholder: null },
-    fin: { revenue: 36.86, pat: 6.14, ebitda: 9.08, eps: 3.1, pe: 24.5, roe: 26.8, netWorth: 22.9, debt: 3.1 },
+    fin: { revenue: 36.72, pat: 6.14, ebitda: null, eps: 7.85, pe: 17.20, roe: 36.13, netWorth: null, debt: null }, // Source: BSE SME IPO filing FY2026
     about: "AI-driven SaaS cybersecurity company (Threatcop, AutoSecT) serving BFSI, fintech, telecom and healthcare clients across India, UAE and USA. CERT-In empanelled.",
     sector: "Cybersecurity", registrar: "KFin Technologies Ltd",
     strengths: ["CERT-In empanelled", "SaaS recurring-revenue model", "Multi-geography client base"],
@@ -134,7 +134,7 @@ const IPOS_BASE = [
     drhp: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_07042025160753_DRHP.pdf", rhp: null,
     leadManager: "B.N. Rathi Securities", exchange: "NSE Emerge",
     sub: { overall: 1.2, qib: 0, hni: 1.4, retail: 1.0, employee: null, shareholder: null },
-    fin: { revenue: 55.23, pat: 4.02, ebitda: null, eps: 10.5, pe: 20.9, roe: 16.8, netWorth: 24.0, debt: 8.7 },
+    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
     about: "Bharuch (Gujarat) engineering services firm across Oil & Gas, Power and Energy — O&M, erection & commissioning, calibration, overhaul/decommissioning.",
     sector: "Engineering Services (O&M)", registrar: "KFin Technologies Ltd",
     strengths: ["Long-term O&M contracts", "Diversified oil/gas/power clients", "Asset-light services model"],
@@ -148,7 +148,7 @@ const IPOS_BASE = [
     drhp: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_26122025011500_VML_DRHP.pdf", rhp: null,
     leadManager: "Comfort Securities", exchange: "BSE SME",
     sub: { overall: 0.02, qib: 0, hni: 0.01, retail: 0.04, employee: null, shareholder: null },
-    fin: { revenue: 97.4, pat: 6.8, ebitda: null, eps: 11.04, pe: 14.31, roe: 19.2, netWorth: 35.6, debt: 12.9 },
+    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
     about: "Surat-based multi-brand mobile phone retail chain with 35 company-owned stores across Gujarat and Rajasthan, plus selective B2B bulk supply.",
     sector: "Consumer Electronics Retail", registrar: "Bigshare Services Pvt Ltd",
     strengths: ["Established multi-brand retail footprint", "Diversified OEM relationships", "Regional market density"],
@@ -162,7 +162,7 @@ const IPOS_BASE = [
     drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
     leadManager: "Corpwis Advisors", exchange: "NSE Emerge",
     sub: { overall: 2.1, qib: 1.4, hni: 3.2, retail: 1.8, employee: null, shareholder: null },
-    fin: { revenue: 201.62, pat: 8.69, ebitda: 16.16, eps: 5.9, pe: 11.86, roe: 19.8, netWorth: 43.9, debt: 27.1 },
+    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
     about: "Carrying-and-forwarding agent offering freight forwarding, warehousing and distribution via 50 branch offices across 18 states and 8 leased warehouses.",
     sector: "Logistics", registrar: "Maashitla Securities Pvt Ltd",
     strengths: ["Pan-India 50-branch network", "Asset-light C&F model", "Diversified client industries"],
@@ -176,7 +176,7 @@ const IPOS_BASE = [
     drhp: "https://www.bsesme.com/PublicIssues/PublicIssues.aspx?id=1", rhp: null,
     leadManager: "Swastika Investmart", exchange: "BSE SME",
     sub: { overall: 3.4, qib: 2.8, hni: 5.1, retail: 2.2, employee: null, shareholder: null },
-    fin: { revenue: 49.06, pat: 5.29, ebitda: null, eps: 3.37, pe: 17.83, roe: 26.65, netWorth: 19.8, debt: 6.4 },
+    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
     about: "Satara (Maharashtra) manufacturer of precision injection-moulded plastic components for furniture, home-appliance and automotive OEMs / Tier-1 suppliers.",
     sector: "Plastics", registrar: "MUFG Intime India Pvt Ltd",
     strengths: ["Precision moulding capability", "OEM/Tier-1 relationships", "High ROE (26.65%)"],
@@ -190,7 +190,7 @@ const IPOS_BASE = [
     drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
     leadManager: "Fedex Securities", exchange: "NSE Emerge",
     sub: { overall: 1.6, qib: 0.8, hni: 2.4, retail: 1.3, employee: null, shareholder: null },
-    fin: { revenue: 14.46, pat: 2.24, ebitda: 4.85, eps: 7.46, pe: 20.74, roe: 48.65, netWorth: 8.9, debt: 4.2 },
+    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
     about: "Vadodara-based rental & trading of material handling equipment (forklifts, cranes, pallet/reach trucks); ~95% revenue from recurring rentals.",
     sector: "Material Handling Equipment", registrar: "Cameo Corporate Services Ltd",
     strengths: ["~95% recurring rental revenue", "Very high ROE (48.65%)", "Diversified industrial client base"],
@@ -204,7 +204,7 @@ const IPOS_BASE = [
     drhp: "https://www.sebi.gov.in/filings/public-issues/oct-2025/aastha-spintex-limited-drhp_97148.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-rhp_102246.html",
     leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
     sub: { overall: 5.05, qib: 3.59, hni: 8.29, retail: 2.54, employee: null, shareholder: null, retail_apps: 1.85, shni_apps: 4.80, bhni_apps: 1.62 },
-    fin: { revenue: 352.17, pat: 22.92, ebitda: 46.36, eps: 5.3, pe: 25.65, roe: 23.21, netWorth: 98.7, debt: 62.3 },
+    fin: { revenue: 352.17, pat: 22.92, ebitda: null, eps: 8.50, pe: 16.00, roe: 23.73, netWorth: null, debt: null }, // Source: RHP FY2025 (SEBI Jun-2026 filing)
     about: "Morbi (Gujarat) manufacturer of carded, combed and compact-combed cotton yarns from an integrated spinning-and-ginning facility; funds part-acquire Falcon Yarns.",
     sector: "Textiles", registrar: "Bigshare Services Pvt Ltd",
     strengths: ["Integrated spinning-ginning facility", "Acquisition-funded capacity growth", "Diversified yarn product mix"],
@@ -218,7 +218,7 @@ const IPOS_BASE = [
     drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
     leadManager: "Fedex Securities", exchange: "NSE Emerge",
     sub: { overall: 0.9, qib: 0.5, hni: 1.1, retail: 0.8, employee: null, shareholder: null },
-    fin: { revenue: 220.76, pat: 16.74, ebitda: null, eps: 3.0, pe: 23.36, roe: 22.1, netWorth: 45.8, debt: 31.5 },
+    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
     about: "Navi Mumbai sourcer/importer/distributor of dry fruits, nuts, seeds and berries — sold in bulk and under retail brand 'Hunger Nuts'.",
     sector: "Agri-Commodities", registrar: "KFin Technologies Ltd",
     strengths: ["Growing branded retail line (Hunger Nuts)", "Diversified sourcing geography", "Rising consumer demand for dry fruits"],
@@ -232,7 +232,7 @@ const IPOS_BASE = [
     drhp: "https://www.sebi.gov.in/filings/public-issues/sep-2025/csm-technologies-limited-drhp_96901.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jun-2026/csm-technologies-limited-rhp_102194.html",
     leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
     sub: { overall: 1.37, qib: 1.02, hni: 1.54, retail: 1.63, employee: null, shareholder: null, retail_apps: 1.21, shni_apps: 1.15, bhni_apps: 0.92 },
-    fin: { revenue: 200.63, pat: 14.09, ebitda: null, eps: 3.8, pe: 29.75, roe: 16.54, netWorth: 85.2, debt: 11.9 },
+    fin: { revenue: 200.63, pat: 14.09, ebitda: null, eps: 3.72, pe: 30.38, roe: 20.73, netWorth: null, debt: null }, // Source: RHP FY2025 (SEBI Jun-2026 filing)
     about: "Bhubaneswar GovTech company, 27+ years building e-governance platforms for mining, agriculture, education and healthcare clients in India and Africa.",
     sector: "GovTech / IT Services", registrar: "KFin Technologies Ltd",
     strengths: ["27+ year GovTech track record", "Multi-country (India + Africa) presence", "Diversified government verticals"],
@@ -244,7 +244,7 @@ const IPOS_BASE = [
     gmp: 100, trend: "up", estListing: 524, gmpHistory: [{ d: "Jul14", v: 92 }, { d: "Jul15", v: 98 }, { d: "Jul16", v: 100 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/jan-2025/caliber-mining-and-logistics-limited_90669.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/caliber-mining-and-logistics-limited-rhp_102715.html",
     leadManager: "DAM Capital Advisors Ltd", exchange: "BSE, NSE",
-    sub: null, fin: { revenue: 382.4, pat: 42.1, ebitda: 85.6, eps: 12.0, pe: 35.3, roe: 18.5, netWorth: 227.4, debt: 45.1 },
+    sub: null, fin: { revenue: 1677.66, pat: 157.90, ebitda: 430.91, eps: 29.47, pe: 14.39, roe: null, netWorth: null, debt: null }, // Source: RHP FY2026 (SEBI Jul-2026 filing)
     about: "Provides integrated mining services, coal extraction operations, and heavy bulk freight logistics solutions for power utilities and industrial producers.",
     sector: "Mining & Logistics", registrar: "KFin Technologies Ltd",
     strengths: ["Integrated end-to-end service offering", "Long-term revenue visibility from utility contracts", "High operating margin profile"],
@@ -256,7 +256,7 @@ const IPOS_BASE = [
     gmp: 0, trend: "stable", estListing: 152, gmpHistory: [{ d: "Jul14", v: 0 }, { d: "Jul16", v: 0 }],
     drhp: "https://www.sebi.gov.in/filings/invit-public-issues.html", rhp: null,
     leadManager: "DAM Capital, Kotak Mahindra", exchange: "BSE, NSE",
-    sub: null, fin: { revenue: 1420.5, pat: 285.4, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null },
+    sub: null, fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: InvIT metrics not comparable to equity financials — set null per accuracy-first policy
     about: "Infrastructure Investment Trust (InvIT) focused on holding and operating a diversified portfolio of toll and annuity road assets across major national highway corridors in India.",
     sector: "InvIT / Roads", registrar: "KFin Technologies Ltd",
     strengths: ["Stable cash flows from long-term highway assets", "High yield potential sponsored by global institutional investors", "Well-maintained road portfolio"],
@@ -268,7 +268,7 @@ const IPOS_BASE = [
     gmp: 18, trend: "up", estListing: 205, gmpHistory: [{ d: "Jul14", v: 12 }, { d: "Jul16", v: 18 }],
     drhp: "https://www.bsesme.com/PublicIssues/PublicIssues.aspx?id=1", rhp: null,
     leadManager: "Fedex Securities", exchange: "BSE SME",
-    sub: null, fin: { revenue: 54.12, pat: 8.4, ebitda: 14.2, eps: 14.0, pe: 13.3, roe: 24.2, netWorth: 34.6, debt: 5.1 },
+    sub: null, fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
     about: "Designs, manufactures, and installs automated smart car parking systems, mechanical lifts, and multi-level parking solutions for premium real estate developers and municipal corporations.",
     sector: "Smart Parking Systems", registrar: "Link Intime India Private Ltd",
     strengths: ["Niche play in rapid urban traffic infrastructure", "Proprietary design patents", "Healthy order book from metropolitan hubs"],
