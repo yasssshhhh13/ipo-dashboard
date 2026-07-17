@@ -127,7 +127,9 @@ function cleanScrapedName(raw) {
 
 function parseInvestorGainDate(dateText) {
   if (!dateText || dateText === "-" || dateText.includes("--") || dateText.toLowerCase().includes("tbd") || dateText.toLowerCase().includes("tba")) return null;
-  const parts = dateText.split("-");
+  // Discard subsequent lines (e.g. \nGMP: -28) before splitting on '-'
+  const dateLine = dateText.split("\n")[0].trim();
+  const parts = dateLine.split("-");
   if (parts.length < 2) return null;
   const day = parseInt(parts[0], 10);
   const monthStr = parts[1].toLowerCase();
