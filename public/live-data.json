@@ -1,19 +1,22 @@
 {
-  "updatedAt": "2026-07-17T08:04:56.500Z",
+  "updatedAt": "2026-07-17T09:29:19.486Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
-      "priceMax": 152
+      "priceMax": 152,
+      "sub": {}
     },
     "caliber-mining": {
-      "gmp": 102,
+      "gmp": 118,
       "priceMax": 424,
-      "estListing": 526,
+      "estListing": 542,
       "sub": {
-        "overall": 0.78,
+        "overall": 0.97,
         "qib": 0.31,
-        "hni": 1.18,
-        "retail": 1
+        "snii": 1.6,
+        "bnii": 0.9,
+        "hni": 1.14,
+        "retail": 1.29
       }
     },
     "sotefin-bharat": {
@@ -21,10 +24,12 @@
       "priceMax": 187,
       "estListing": 205,
       "sub": {
-        "overall": 0.5,
+        "overall": 0.57,
         "qib": 0.13,
-        "hni": 0.51,
-        "retail": 0.72
+        "snii": 0.54,
+        "bnii": 0.47,
+        "hni": 0.5,
+        "retail": 0.84
       }
     },
     "sbi-funds": {
@@ -34,7 +39,9 @@
       "sub": {
         "overall": 41.73,
         "qib": 140.11,
-        "hni": 15.51,
+        "snii": 15.51,
+        "bnii": 26.01,
+        "hni": 22.51,
         "retail": 3.76
       }
     },
@@ -45,7 +52,9 @@
       "sub": {
         "overall": 220.35,
         "qib": 168.56,
-        "hni": 211.19,
+        "snii": 211.19,
+        "bnii": 286.5,
+        "hni": 261.22,
         "retail": 244.08
       }
     },
@@ -56,7 +65,9 @@
       "sub": {
         "overall": 77.81,
         "qib": 59.01,
-        "hni": 83.26,
+        "snii": 83.26,
+        "bnii": 128.77,
+        "hni": 113.6,
         "retail": 73.25
       }
     },
@@ -67,7 +78,9 @@
       "sub": {
         "overall": 135.8,
         "qib": 299.51,
-        "hni": 144.05,
+        "snii": 144.05,
+        "bnii": 189.4,
+        "hni": 174.28,
         "retail": 27.97
       }
     },
@@ -78,7 +91,9 @@
       "sub": {
         "overall": 295.08,
         "qib": 241.75,
-        "hni": 422.38,
+        "snii": 422.38,
+        "bnii": 936.7,
+        "hni": 764.38,
         "retail": 372.51
       }
     },
@@ -89,7 +104,9 @@
       "sub": {
         "overall": 61.11,
         "qib": 160.03,
-        "hni": 112.04,
+        "snii": 112.04,
+        "bnii": 163.83,
+        "hni": 146.57,
         "retail": 21.08
       }
     },
@@ -98,7 +115,9 @@
       "sub": {
         "overall": 1.62,
         "qib": 1,
-        "hni": 0.63,
+        "snii": 0.63,
+        "bnii": 0.88,
+        "hni": 0.8,
         "retail": 2.18
       }
     },
@@ -109,7 +128,9 @@
       "sub": {
         "overall": 3.47,
         "qib": 1.55,
-        "hni": 9.89,
+        "snii": 9.89,
+        "bnii": 10.22,
+        "hni": 10.11,
         "retail": 4.65
       }
     },
@@ -118,7 +139,9 @@
       "sub": {
         "overall": 3.62,
         "qib": 17.19,
-        "hni": 5.01,
+        "snii": 5.01,
+        "bnii": 3.62,
+        "hni": 4.08,
         "retail": 1.52
       }
     },
@@ -129,7 +152,9 @@
       "sub": {
         "overall": 7.54,
         "qib": 3.58,
-        "hni": 11.91,
+        "snii": 11.91,
+        "bnii": 22.44,
+        "hni": 18.91,
         "retail": 11.32
       }
     },
@@ -140,7 +165,9 @@
       "sub": {
         "overall": 154.97,
         "qib": 145.82,
-        "hni": 223.33,
+        "snii": 223.33,
+        "bnii": 375.29,
+        "hni": 324.64,
         "retail": 218.48
       }
     },
@@ -151,7 +178,9 @@
       "sub": {
         "overall": 1.37,
         "qib": 0,
-        "hni": 0,
+        "snii": 0,
+        "bnii": 0,
+        "hni": 1.81,
         "retail": 0.32
       }
     },
@@ -162,7 +191,9 @@
       "sub": {
         "overall": 5.05,
         "qib": 3.59,
-        "hni": 6.66,
+        "snii": 6.66,
+        "bnii": 9.11,
+        "hni": 8.29,
         "retail": 2.54
       }
     },
@@ -171,7 +202,9 @@
       "sub": {
         "overall": 1.35,
         "qib": 22.47,
-        "hni": 0.57,
+        "snii": 0.57,
+        "bnii": 1.82,
+        "hni": 1.41,
         "retail": 0.84
       }
     },
@@ -180,7 +213,9 @@
       "sub": {
         "overall": 1.18,
         "qib": 1.02,
-        "hni": 1.33,
+        "snii": 1.33,
+        "bnii": 1.65,
+        "hni": 1.54,
         "retail": 1.63
       }
     }

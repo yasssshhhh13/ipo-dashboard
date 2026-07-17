@@ -25,7 +25,7 @@
  */
 
 import { chromium } from "playwright";
-import { writeFile, mkdir } from "fs/promises";
+import { writeFile, mkdir, readFile } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -209,11 +209,20 @@ async function scrapeSubscription(page) {
 
     const overall = toNumber(cells[1]);
     const qib = toNumber(cells[2]);
-    const hni = toNumber(cells[3]);
+    const snii = toNumber(cells[3]);
+    const bnii = toNumber(cells[4]);
+    const hni = toNumber(cells[5]);
     const retail = toNumber(cells[6]);
-    if ([qib, hni, retail, overall].every((v) => v === undefined)) continue;
+    if ([qib, hni, retail, overall, snii, bnii].every((v) => v === undefined)) continue;
 
-    result[id] = { overall: overall ?? 0, qib: qib ?? 0, hni: hni ?? 0, retail: retail ?? 0 };
+    result[id] = {
+      overall: overall ?? 0,
+      qib: qib ?? 0,
+      snii: snii ?? 0,
+      bnii: bnii ?? 0,
+      hni: hni ?? 0,
+      retail: retail ?? 0
+    };
   }
   return result;
 }
@@ -244,13 +253,35 @@ async function main() {
 
   await browser.close();
 
-  const ids = new Set([...Object.keys(gmpPatches), ...Object.keys(subPatches)]);
+  let existingIpos = {};
+  try {
+    const existingContent = await readFile(OUTPUT_PATH, "utf-8");
+    const parsed = JSON.parse(existingContent);
+    if (parsed && parsed.ipos) {
+      existingIpos = parsed.ipos;
+    }
+  } catch (e) {
+    // File doesn't exist or is invalid, ignore
+  }
+
+  const ids = new Set([...Object.keys(existingIpos), ...Object.keys(gmpPatches), ...Object.keys(subPatches)]);
   const ipos = {};
   for (const id of ids) {
+    const existingIpo = existingIpos[id] || {};
+    const newGmp = gmpPatches[id] || {};
+    const newSub = subPatches[id] || {};
+
     ipos[id] = {
-      ...(gmpPatches[id] || {}),
-      ...(subPatches[id] ? { sub: subPatches[id] } : {}),
+      ...existingIpo,
+      ...newGmp,
     };
+
+    if (existingIpo.sub || newSub) {
+      ipos[id].sub = {
+        ...(existingIpo.sub || {}),
+        ...newSub,
+      };
+    }
   }
 
   const output = { updatedAt: new Date().toISOString(), errors, ipos };

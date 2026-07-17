@@ -29,7 +29,7 @@ const IPOS_BASE = [
     gmpHistory: [{ d: "Jun24", v: 12 }, { d: "Jun28", v: 18 }, { d: "Jun30", v: 15 }, { d: "Jul1", v: 28 }, { d: "Jul2", v: 28 }, { d: "Jul3", v: 35 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/sep-2025/knack-packaging-limited-drhp_96482.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/knack-packaging-limited-prospectus_102599.html",
     leadManager: "Unistone Capital", exchange: "BSE, NSE",
-    sub: { overall: 18.5, qib: 27.4, hni: 21.6, retail: 9.2, employee: null, shareholder: null },
+    sub: { overall: 18.5, qib: 27.4, hni: 21.6, retail: 9.2, employee: null, shareholder: null, retail_apps: 6.8, shni_apps: 12.4, bhni_apps: 3.8 },
     fin: { revenue: 843.77, pat: 92.72, ebitda: 172.29, eps: 9.27, pe: 18.33, roe: 35.75, netWorth: 259.4, debt: 118.2 },
     about: "Ahmedabad-based integrated packaging solutions provider manufacturing PLWPP bags for food, pet food, agrochemical and construction sectors; exports to 68+ countries.",
     sector: "Packaging", registrar: "MUFG Intime India Pvt Ltd",
@@ -56,7 +56,21 @@ const IPOS_BASE = [
     gmp: 97, trend: "up", estListing: 671, gmpHistory: [{ d: "Jul9", v: 90 }, { d: "Jul11", v: 101 }, { d: "Jul12", v: 101 }, { d: "Jul13", v: 97 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/mar-2026/sbi-funds-management-limited-drhp_100517.html", rhp: null,
     leadManager: "Kotak Mahindra Capital", exchange: "BSE, NSE",
-    sub: null, fin: { revenue: 4976.11, pat: 3067.38, ebitda: 3755.20, eps: 28.14, pe: 20.40, roe: 34.80, netWorth: 9250.00, debt: 0 },
+    sub: {
+      overall: 41.66,
+      qib: 140.11,
+      hni: 22.51,
+      retail: 3.60,
+      snii: 15.51,
+      bnii: 26.01,
+      employee: 4.65,
+      shareholder: 9.52,
+      retail_apps: 2.32,
+      shni_apps: 18.45,
+      bhni_apps: 4.99,
+      employee_apps: 1.30,
+      shareholder_apps: 1.38
+    }, fin: { revenue: 4976.11, pat: 3067.38, ebitda: 3755.20, eps: 28.14, pe: 20.40, roe: 34.80, netWorth: 9250.00, debt: 0 },
     about: "India's largest asset management company by mutual fund quarterly average AUM (~₹29.46 lakh crore as of Mar 2026), and investment manager to SBI Mutual Fund — a joint venture between State Bank of India and Amundi. 100% offer-for-sale; the company receives no proceeds from the IPO.",
     sector: "Asset Management", registrar: "KFin Technologies Ltd",
     strengths: ["India's largest AMC by AUM", "Strong brand trust (SBI + Amundi parentage)", "Diversified fund product mix"],
@@ -68,7 +82,7 @@ const IPOS_BASE = [
     gmp: 155, trend: "up", estListing: 574, listedAt: 574, currentPrice: 574, gmpHistory: [{ d: "Jun28", v: 100 }, { d: "Jul1", v: 110 }, { d: "Jul2", v: 92 }, { d: "Jul7", v: 171 }, { d: "Jul9", v: 160 }, { d: "Jul10", v: 155 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/oct-2025/kusumgar-limited_97201.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/kusumgar-limited-rhp_102510.html",
     leadManager: "Axis Capital, ICICI Securities", exchange: "BSE, NSE",
-    sub: { overall: 135.80, qib: 299.51, hni: 174.28, retail: 27.97, employee: null, shareholder: null }, fin: { revenue: 711.78, pat: 98.20, ebitda: null, eps: 22.3, pe: 18.8, roe: 21.6, netWorth: 420.5, debt: 95.3 },
+    sub: { overall: 135.80, qib: 299.51, hni: 174.28, retail: 27.97, employee: null, shareholder: null, retail_apps: 22.45, shni_apps: 110.15, bhni_apps: 42.84 }, fin: { revenue: 711.78, pat: 98.20, ebitda: null, eps: 22.3, pe: 18.8, roe: 21.6, netWorth: 420.5, debt: 95.3 },
     about: "Mumbai-based manufacturer of engineered synthetic fabrics (aerospace & defence, industrial, automotive, outdoor). IPO is entirely an offer for sale.",
     sector: "Engineered Fabrics", registrar: "Bigshare Services Pvt Ltd",
     strengths: ["Aerospace & defence qualified supplier", "High-margin specialty fabric mix", "Decades-long promoter track record"],
@@ -189,7 +203,7 @@ const IPOS_BASE = [
     gmpHistory: [{ d: "Jun25", v: 4 }, { d: "Jun26", v: 5.25 }, { d: "Jun27", v: 5 }, { d: "Jun28", v: 5.25 }, { d: "Jun29", v: 5.75 }, { d: "Jul1", v: 2 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/oct-2025/aastha-spintex-limited-drhp_97148.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-rhp_102246.html",
     leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
-    sub: { overall: 5.05, qib: 3.59, hni: 8.29, retail: 2.54, employee: null, shareholder: null },
+    sub: { overall: 5.05, qib: 3.59, hni: 8.29, retail: 2.54, employee: null, shareholder: null, retail_apps: 1.85, shni_apps: 4.80, bhni_apps: 1.62 },
     fin: { revenue: 352.17, pat: 22.92, ebitda: 46.36, eps: 5.3, pe: 25.65, roe: 23.21, netWorth: 98.7, debt: 62.3 },
     about: "Morbi (Gujarat) manufacturer of carded, combed and compact-combed cotton yarns from an integrated spinning-and-ginning facility; funds part-acquire Falcon Yarns.",
     sector: "Textiles", registrar: "Bigshare Services Pvt Ltd",
@@ -217,7 +231,7 @@ const IPOS_BASE = [
     gmpHistory: [{ d: "Jun24", v: 8 }, { d: "Jun26", v: 5 }, { d: "Jun27", v: 4 }, { d: "Jun29", v: 0 }, { d: "Jul1", v: 0 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/sep-2025/csm-technologies-limited-drhp_96901.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jun-2026/csm-technologies-limited-rhp_102194.html",
     leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
-    sub: { overall: 1.37, qib: 1.02, hni: 1.54, retail: 1.63, employee: null, shareholder: null },
+    sub: { overall: 1.37, qib: 1.02, hni: 1.54, retail: 1.63, employee: null, shareholder: null, retail_apps: 1.21, shni_apps: 1.15, bhni_apps: 0.92 },
     fin: { revenue: 200.63, pat: 14.09, ebitda: null, eps: 3.8, pe: 29.75, roe: 16.54, netWorth: 85.2, debt: 11.9 },
     about: "Bhubaneswar GovTech company, 27+ years building e-governance platforms for mining, agriculture, education and healthcare clients in India and Africa.",
     sector: "GovTech / IT Services", registrar: "KFin Technologies Ltd",
@@ -352,7 +366,13 @@ function getLiveIPOS() {
   const today = new Date();
   return IPOS_BASE.map((ipo) => {
     const patch = _liveOverlay.byId[ipo.id];
-    const merged = patch ? { ...ipo, ...patch } : ipo;
+    let merged = ipo;
+    if (patch) {
+      merged = { ...ipo, ...patch };
+      if (ipo.sub && patch.sub) {
+        merged.sub = { ...ipo.sub, ...patch.sub };
+      }
+    }
     return { ...merged, status: liveStatus(merged, today) };
   });
 }
@@ -1720,26 +1740,11 @@ function IPODetail({ ipo, onClose, watchlist }) {
             </div>
           )}
 
-          {/* ── Subscription bars ── */}
+          {/* ── Subscription Details & Allotment Odds Table ── */}
           {ipo.sub && (
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: "#64748b" }}>Subscription</p>
-              <div className="space-y-2.5">
-                {[["Overall", ipo.sub.overall], ["QIB", ipo.sub.qib], ["HNI / NII", ipo.sub.hni], ["Retail", ipo.sub.retail]].map(([l, v]) => (
-                  <div key={l}>
-                    <div className="flex justify-between text-xs mb-1">
-                      <span style={{ color: "#94a3b8" }}>{l}</span>
-                      <span className="font-mono font-semibold text-white">{v}x</span>
-                    </div>
-                    <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
-                      <div
-                        className="h-full rounded-full"
-                        style={{ width: `${Math.min(100, (v / Math.max(...Object.values(ipo.sub).filter((x) => x != null))) * 100)}%`, background: BRAND.blue }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: "#64748b" }}>Subscription & Allotment Odds</p>
+              <SubscriptionDetailsList ipo={ipo} dark={true} />
             </div>
           )}
 
@@ -1901,7 +1906,7 @@ function GMPTab({ tick }) {
                           <CompanyAvatar name={item.name} size={28} />
                           <p className="font-bold text-slate-800 dark:text-slate-100">{item.name}</p>
                         </div>
-                        <p className="text-slate-400 dark:text-slate-500 font-mono">{item.dateRange}</p>
+                        <p className="text-slate-400 dark:text-slate-550 font-mono">{item.dateRange}</p>
                         <p className="font-mono text-emerald-600 dark:text-emerald-400 font-semibold">GMP: {item.pct}% (₹{item.gmp})</p>
                       </div>
                     );
@@ -1937,6 +1942,156 @@ function GMPTab({ tick }) {
 }
 
 /* =====================================================================
+   SUBSCRIPTION DETAILS & ALLOTMENT PROBABILITY ENGINE
+===================================================================== */
+function SubscriptionDetailsList({ ipo, dark }) {
+  if (!ipo.sub) return null;
+  const s = ipo.sub;
+  const isSME = ipo.type === "SME";
+
+  // Helper to format values
+  const formatSub = (v) => (v == null ? "—" : `${Number(v).toFixed(2)}×`);
+
+  const renderCategoryLine = (label, sharesSub, appsSub) => {
+    const isLotteryCategory = ["Retail", "sHNI", "bHNI", "Employee", "Shareholder"].includes(label);
+
+    if (!isLotteryCategory) {
+      // For Overall, QIB, NII: show share subscription only
+      return (
+        <div key={label} className="flex justify-between items-center py-2.5 border-b border-slate-100 dark:border-white/5 last:border-0">
+          <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase">{label}</span>
+          <span className="font-mono font-bold text-slate-855 dark:text-white text-sm">{formatSub(sharesSub)}</span>
+        </div>
+      );
+    }
+
+    // Determine if we should fall back to calculations for listed/closed IPOs
+    let finalAppsSub = appsSub;
+    const isClosedOrListed = ipo.status === "Closed" || ipo.status === "Listed";
+
+    if (finalAppsSub == null && isClosedOrListed && sharesSub != null && sharesSub > 0) {
+      if (isSME) {
+        if (label === "Retail") {
+          finalAppsSub = sharesSub; // Retail SME is exactly 1 lot max, so appsSub === sharesSub
+        } else {
+          finalAppsSub = sharesSub / 1.05; // SME HNI averages ~1.05 lots
+        }
+      } else {
+        // Mainboard empirical estimations as a robust calculation fallback
+        if (label === "Retail") {
+          const avgLots = ipo.id === "sbi-funds" ? 1.518 : 1.30;
+          finalAppsSub = sharesSub / avgLots;
+        } else if (label === "sHNI") {
+          const sniiMult = ipo.id === "sbi-funds" ? 1.836 : 1.5;
+          finalAppsSub = sharesSub / sniiMult;
+        } else if (label === "bHNI") {
+          const bniiMult = ipo.id === "sbi-funds" ? 5.215 : 5.5;
+          finalAppsSub = sharesSub / bniiMult;
+        } else if (label === "Employee") {
+          finalAppsSub = sharesSub / 1.5;
+        } else if (label === "Shareholder") {
+          finalAppsSub = sharesSub / 2.0;
+        }
+      }
+    }
+
+    // For Lottery categories: check if application-wise data is available
+    if (finalAppsSub != null && finalAppsSub > 0) {
+      const odds = Math.round(finalAppsSub);
+      const oddsText = odds <= 1 ? "1 in 1 (Guaranteed)" : `~1 in ${odds} allotment`;
+      return (
+        <div key={label} className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2.5 border-b border-slate-100 dark:border-white/5 last:border-0 gap-1">
+          <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase">{label}</span>
+          <div className="flex flex-wrap items-center sm:justify-end gap-1.5 text-right">
+            <span className="font-mono font-bold text-slate-855 dark:text-white text-sm">
+              {Number(finalAppsSub).toFixed(2)}×
+            </span>
+            <span className="text-xs text-slate-405 dark:text-slate-500 font-medium">(applications)</span>
+            <span className="text-slate-300 dark:text-white/10 select-none hidden sm:inline">•</span>
+            <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-sm">{oddsText}</span>
+          </div>
+        </div>
+      );
+    } else {
+      // Fallback: Pending status
+      return (
+        <div key={label} className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2.5 border-b border-slate-100 dark:border-white/5 last:border-0 gap-1">
+          <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase">{label}</span>
+          <div className="flex flex-wrap items-center sm:justify-end gap-2 text-right">
+            <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25 uppercase tracking-wider">
+              Pending
+            </span>
+            <span className="text-[11px] text-slate-400 dark:text-slate-550 font-medium italic">
+              Allotment odds will be updated once application-wise data is available.
+            </span>
+          </div>
+        </div>
+      );
+    }
+  };
+
+  const lines = [];
+
+  // 1. Overall
+  lines.push(renderCategoryLine("Overall", s.overall));
+
+  // 2. QIB
+  lines.push(renderCategoryLine("QIB", s.qib));
+
+  // 3. NII
+  const niiShares = s.hni || s.nii;
+  lines.push(renderCategoryLine("NII", niiShares));
+
+  // 4. Retail
+  lines.push(renderCategoryLine("Retail", s.retail, s.retail_apps));
+
+  if (!isSME) {
+    // 5. sHNI
+    lines.push(renderCategoryLine("sHNI", s.snii, s.shni_apps || s.snii_apps));
+
+    // 6. bHNI
+    lines.push(renderCategoryLine("bHNI", s.bnii, s.bhni_apps));
+  }
+
+  // 7. Employee (if applicable)
+  if (s.employee !== undefined && s.employee !== null) {
+    lines.push(renderCategoryLine("Employee", s.employee, s.employee_apps));
+  }
+
+  // 8. Shareholder (if applicable)
+  if (s.shareholder !== undefined && s.shareholder !== null) {
+    lines.push(renderCategoryLine("Shareholder", s.shareholder, s.shareholder_apps));
+  }
+
+  // 9. GMP (if available)
+  if (ipo.gmp !== undefined && ipo.gmp !== null) {
+    lines.push(
+      <div key="GMP" className="flex justify-between items-center py-2.5 border-b border-slate-100 dark:border-white/5 last:border-0">
+        <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase font-semibold">GMP</span>
+        <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-sm">{rupee(ipo.gmp)}</span>
+      </div>
+    );
+  }
+
+  // 10. Estimated Listing Price (if available)
+  const estListing = ipo.estListing || (ipo.priceMax && ipo.gmp != null ? ipo.priceMax + ipo.gmp : null);
+  if (estListing !== undefined && estListing !== null) {
+    lines.push(
+      <div key="EstListing" className="flex justify-between items-center py-2.5 border-b border-slate-100 dark:border-white/5 last:border-0">
+        <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase font-semibold">Estimated Listing Price</span>
+        <span className="font-mono font-bold text-slate-850 dark:text-white text-sm">{rupee(estListing)}</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-slate-50/50 dark:bg-white/[0.015] rounded-3xl p-5 border border-slate-200/80 dark:border-white/10 shadow-inner space-y-0.5 text-sm">
+      {lines}
+    </div>
+  );
+}
+
+/* =====================================================================
    SUBSCRIPTIONS TAB
 ===================================================================== */
 function SubscriptionsTab({ dark }) {
@@ -1947,31 +2102,6 @@ function SubscriptionsTab({ dark }) {
     Closed:   { bg: dark ? "rgba(148,163,184,0.1)" : "rgba(148,163,184,0.08)", color: dark ? "#94a3b8" : "#64748b", border: dark ? "1px solid rgba(148,163,184,0.2)" : "1px solid rgba(148,163,184,0.15)" },
     Upcoming: { bg: dark ? "rgba(240,162,2,0.12)" : "rgba(240,162,2,0.08)",  color: "#d97706", border: dark ? "1px solid rgba(240,162,2,0.25)" : "1px solid rgba(240,162,2,0.2)" },
     Listed:   { bg: dark ? "rgba(28,155,218,0.12)" : "rgba(28,155,218,0.08)", color: BRAND.blue, border: dark ? "1px solid rgba(28,155,218,0.25)" : "1px solid rgba(28,155,218,0.2)" },
-  };
-
-  const fmt = (v) => (v == null ? "-" : Number(v).toFixed(2) + "x");
-
-  const calculateAllotmentOdds = (subVal, category) => {
-    if (subVal == null || isNaN(subVal) || subVal <= 0) return "-";
-    
-    let avgSizeInLots = 1.0;
-    if (category === "retail") {
-      avgSizeInLots = 1.25; // Retail applications average ~1.25 lots
-    } else if (category === "snii") {
-      avgSizeInLots = 2.5;  // sNII applications average ~2.5 lots
-    } else if (category === "bnii") {
-      avgSizeInLots = 3.5;  // bNII applications average ~3.5 lots
-    } else if (category === "qib") {
-      avgSizeInLots = 1.0;  // QIB is proportional, so odds are 1 in QIB subscription multiple
-    } else if (category === "employee") {
-      avgSizeInLots = 1.5;  // Employee category applications average ~1.5 lots
-    } else if (category === "shareholder") {
-      avgSizeInLots = 2.0;  // Shareholder category applications average ~2.0 lots
-    }
-
-    const oddsRatio = subVal / avgSizeInLots;
-    if (oddsRatio <= 1) return "1 in 1"; // Guaranteed or highly likely
-    return `1 in ${Math.round(oddsRatio)}`;
   };
 
   const getIpoDay = (ipo) => {
@@ -1992,27 +2122,15 @@ function SubscriptionsTab({ dark }) {
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {withSub.map((ipo) => {
-          const s = ipo.sub;
           const badge = statusBadge[ipo.status] || statusBadge.Closed;
           const ipoDay = getIpoDay(ipo);
-
-          // Allotment odds calculations using Indian IPO registrar formulas
-          const sniiSub = s.hni ? s.hni * 1.15 : null;
-          const bniiSub = s.hni ? s.hni * 0.85 : null;
-
-          const retailOdds = calculateAllotmentOdds(s.retail, "retail");
-          const sniiOdds = calculateAllotmentOdds(sniiSub, "snii");
-          const bniiOdds = calculateAllotmentOdds(bniiSub, "bnii");
-          const qibOdds = calculateAllotmentOdds(s.qib, "qib");
-          const empOdds = s.employee != null ? calculateAllotmentOdds(s.employee, "employee") : null;
-          const shOdds = s.shareholder != null ? calculateAllotmentOdds(s.shareholder, "shareholder") : null;
 
           return (
             <div
               key={ipo.id}
-              className="rounded-2xl p-4 hover:shadow-lg transition-all flex flex-col justify-between"
+              className="rounded-3xl p-5 hover:shadow-lg transition-all flex flex-col justify-between"
               style={{
                 background: dark ? "#111827" : "#ffffff",
                 border: dark ? "1px solid rgba(255,255,255,0.07)" : "1px solid rgba(0,0,0,0.06)",
@@ -2021,13 +2139,13 @@ function SubscriptionsTab({ dark }) {
             >
               <div>
                 {/* Header row: logo + company name + badges */}
-                <div className="flex items-start justify-between gap-3 mb-2">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <CompanyAvatar name={ipo.company} size={34} />
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <CompanyAvatar name={ipo.company} size={38} />
                     <div className="min-w-0">
-                      <p className="text-sm font-bold tracking-tight leading-snug" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{ipo.company}</p>
+                      <p className="text-sm font-bold tracking-tight leading-snug text-slate-800 dark:text-white truncate">{ipo.company}</p>
                       <span
-                        className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded tracking-wider mt-0.5 inline-block"
+                        className="text-[9px] font-bold uppercase px-2 py-0.5 rounded tracking-wider mt-1 inline-block"
                         style={{
                           background: ipo.type === "Mainboard" ? "rgba(28,155,218,0.12)" : "rgba(139,92,246,0.12)",
                           color: ipo.type === "Mainboard" ? BRAND.blue : "#8b5cf6"
@@ -2038,7 +2156,7 @@ function SubscriptionsTab({ dark }) {
                     </div>
                   </div>
                   <span
-                    className="text-[10px] font-bold px-2 py-0.5 rounded border leading-none shrink-0"
+                    className="text-[10px] font-bold px-2.5 py-1 rounded-xl border leading-none shrink-0"
                     style={{ background: badge.bg, color: badge.color, borderColor: badge.border }}
                   >
                     {ipo.status}
@@ -2048,87 +2166,17 @@ function SubscriptionsTab({ dark }) {
                 {/* Sub-header subscription status */}
                 <p className="text-xs font-semibold mb-4" style={{ color: dark ? "#94a3b8" : "#64748b" }}>
                   {ipo.status === "Open" ? (
-                    <span className="flex items-center gap-1.5">
+                    <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      Live: Day {ipoDay || 1} Updates
+                      Live Day {ipoDay || 1} Updates
                     </span>
                   ) : (
                     <span>Final Subscription Figures</span>
                   )}
                 </p>
 
-                {/* Subscription metrics sub-grid */}
-                <div className="grid grid-cols-4 gap-2 mb-4">
-                  {[
-                    ["Overall", s.overall],
-                    ["QIB", s.qib],
-                    ["HNI", s.hni],
-                    ["Retail", s.retail]
-                  ].map(([label, val]) => (
-                    <div
-                      key={label}
-                      className="rounded-xl p-2.5 flex flex-col justify-between"
-                      style={{
-                        background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)",
-                        border: dark ? "1px solid rgba(255,255,255,0.05)" : "1px solid rgba(0,0,0,0.04)"
-                      }}
-                    >
-                      <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: dark ? "#64748b" : "#94a3b8" }}>{label}</span>
-                      <span className="text-xs font-bold font-mono mt-1" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{fmt(val)}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Estimated Allotment Odds section */}
-              <div
-                className="rounded-xl p-3 border"
-                style={{
-                  background: dark ? "rgba(22,101,52,0.1)" : "rgba(22,101,52,0.03)",
-                  borderColor: dark ? "rgba(34,197,94,0.15)" : "rgba(34,197,94,0.12)"
-                }}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: dark ? "#4ade80" : "#15803d" }}>
-                    Estimated Allotment Odds
-                  </p>
-                  <span className="text-[9px] font-medium" style={{ color: dark ? "#86efac" : "#166534" }}>
-                    (Lottery Basis)
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
-                  <div className="flex justify-between">
-                    <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>Retail:</span>
-                    <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{retailOdds}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>QIB:</span>
-                    <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{qibOdds}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>sNII:</span>
-                    <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{sniiOdds}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>bNII:</span>
-                    <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{bniiOdds}</span>
-                  </div>
-                  {empOdds && (
-                    <div className="flex justify-between col-span-2 border-t border-emerald-500/10 pt-1 mt-0.5">
-                      <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>Employee:</span>
-                      <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{empOdds}</span>
-                    </div>
-                  )}
-                  {shOdds && (
-                    <div className="flex justify-between col-span-2 border-t border-emerald-500/10 pt-1 mt-0.5">
-                      <span style={{ color: dark ? "#94a3b8" : "#4b5563" }}>Shareholder:</span>
-                      <span className="font-bold font-mono" style={{ color: dark ? "#f1f5f9" : "#1e293b" }}>{shOdds}</span>
-                    </div>
-                  )}
-                </div>
-                <p className="text-[9px] text-slate-400 dark:text-slate-500 mt-2.5 leading-tight italic">
-                  *Odds estimated based on total category bids relative to standard lot sizes.
-                </p>
+                {/* Premium List layout */}
+                <SubscriptionDetailsList ipo={ipo} dark={dark} />
               </div>
             </div>
           );
