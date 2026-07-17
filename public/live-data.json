@@ -225,6 +225,154 @@
         "hni": 145.78,
         "retail": 132
       }
+    },
+    "xtranet-technologies": {
+      "gmp": 25,
+      "priceMax": 127,
+      "estListing": 152,
+      "sub": {
+        "overall": 25,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 127,
+        "hni": 166.8,
+        "retail": 110
+      }
+    },
+    "shree-balaji-textiles": {
+      "gmp": 19,
+      "priceMax": 70,
+      "estListing": 89,
+      "sub": {
+        "overall": 19,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 70,
+        "hni": 18.9,
+        "retail": 2000
+      }
+    },
+    "metalic-technoforge": {
+      "priceMax": 77,
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 77,
+        "hni": 49.96,
+        "retail": 1600
+      }
+    },
+    "millworks-technologies": {
+      "gmp": 400,
+      "priceMax": 331,
+      "estListing": 731,
+      "sub": {
+        "overall": 400,
+        "qib": 0,
+        "snii": 219.54,
+        "bnii": 331,
+        "hni": 160.34,
+        "retail": 400
+      }
+    },
+    "alpine-texworld": {
+      "gmp": 1,
+      "priceMax": 105,
+      "estListing": 106,
+      "sub": {
+        "overall": 1,
+        "qib": 0,
+        "snii": 1.4,
+        "bnii": 105,
+        "hni": 126.25,
+        "retail": 142
+      }
+    },
+    "gulf-lloyds": {
+      "gmp": 15,
+      "priceMax": 100,
+      "estListing": 115,
+      "sub": {
+        "overall": 15,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 100,
+        "hni": 18.19,
+        "retail": 1200
+      }
+    },
+    "laser-power-infra-ipol-250-00-16-82": {
+      "gmp": 39,
+      "priceMax": 214,
+      "estListing": 253,
+      "sub": {
+        "overall": 39,
+        "qib": 0,
+        "snii": 41.05,
+        "bnii": 214,
+        "hni": 742,
+        "retail": 70
+      }
+    },
+    "crazy-snacks-bse-smel-44-00-4-76": {
+      "priceMax": 42,
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 1.21,
+        "bnii": 42,
+        "hni": 31.47,
+        "retail": 3000
+      }
+    },
+    "riyaasat-lifestyle-bse-smel-84-80-20": {
+      "priceMax": 106,
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 1.32,
+        "bnii": 106,
+        "hni": 30.2,
+        "retail": 1200
+      }
+    },
+    "jivial-industries-bse-smel-156-80-20": {
+      "priceMax": 196,
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 0.93,
+        "bnii": 196,
+        "hni": 31.99,
+        "retail": 600
+      }
+    },
+    "advit-jewels-ipol-190-00-37-68": {
+      "gmp": 49,
+      "priceMax": 138,
+      "estListing": 187,
+      "sub": {
+        "overall": 49.5,
+        "qib": 0,
+        "snii": 212.63,
+        "bnii": 138,
+        "hni": 165.16,
+        "retail": 100
+      }
+    },
+    "waterways-leisure-tourism-ipol-500-00-38-12": {
+      "gmp": -51,
+      "priceMax": 808,
+      "estListing": 757,
+      "sub": {
+        "overall": -51,
+        "qib": 0,
+        "snii": 1.53,
+        "bnii": 808,
+        "hni": 585,
+        "retail": 18
+      }
     }
   }
 }

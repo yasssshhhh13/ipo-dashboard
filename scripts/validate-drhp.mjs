@@ -4,7 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const APP_JSX_PATH = path.join(__dirname, "..", "src", "App.jsx");
+const IPOS_JSON_PATH = path.join(__dirname, "..", "public", "ipos.json");
 
 function getSearchKeywords(company) {
   // E.g. "Swara Baby Products Limited" -> "Swara Baby"
@@ -90,35 +90,9 @@ async function findCorrectDrhpUrl(companyName) {
 }
 
 async function main() {
-  console.log("Reading App.jsx...");
-  let appContent = await readFile(APP_JSX_PATH, "utf-8");
-  
-  // Extract IPOS_BASE content dynamically
-  const startIndex = appContent.indexOf("const IPOS_BASE = [");
-  if (startIndex === -1) {
-    throw new Error("Could not find IPOS_BASE in App.jsx");
-  }
-
-  let braceCount = 0;
-  let endIndex = -1;
-  for (let i = startIndex + "const IPOS_BASE = ".length; i < appContent.length; i++) {
-    const char = appContent[i];
-    if (char === "[") braceCount++;
-    if (char === "]") {
-      braceCount--;
-      if (braceCount === 0) {
-        endIndex = i + 1;
-        break;
-      }
-    }
-  }
-
-  if (endIndex === -1) {
-    throw new Error("Could not find end of IPOS_BASE array in App.jsx");
-  }
-
-  const arrayString = appContent.slice(startIndex + "const IPOS_BASE = ".length, endIndex);
-  const ipos = eval(`(${arrayString})`);
+  console.log("Reading ipos.json...");
+  let fileContent = await readFile(IPOS_JSON_PATH, "utf-8");
+  const ipos = JSON.parse(fileContent);
   console.log(`Parsed ${ipos.length} baseline IPOs. Auditing DRHP links...`);
 
   let repairedCount = 0;
@@ -146,10 +120,8 @@ async function main() {
       // Automatically search SEBI filings
       const correctedUrl = await findCorrectDrhpUrl(ipo.company || ipo.name);
       if (correctedUrl) {
-        console.log(`[${ipo.name}] Replacing broken URL in App.jsx...`);
-        
-        // Exact replacement in App.jsx
-        appContent = appContent.replace(ipo.drhp, correctedUrl);
+        console.log(`[${ipo.name}] Replacing broken URL...`);
+        ipo.drhp = correctedUrl;
         repairedCount++;
       } else {
         console.warn(`[${ipo.name}] Could not resolve a corrected URL from SEBI. Keeping original.`);
@@ -158,9 +130,9 @@ async function main() {
   }
 
   if (repairedCount > 0) {
-    console.log(`\nWriting updated App.jsx...`);
-    await writeFile(APP_JSX_PATH, appContent, "utf-8");
-    console.log(`Successfully repaired ${repairedCount} DRHP links in App.jsx!`);
+    console.log(`\nWriting updated ipos.json...`);
+    await writeFile(IPOS_JSON_PATH, JSON.stringify(ipos, null, 2), "utf-8");
+    console.log(`Successfully repaired ${repairedCount} DRHP links in ipos.json!`);
   } else {
     console.log("\nNo DRHP links needed repair.");
   }

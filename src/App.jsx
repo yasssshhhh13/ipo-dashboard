@@ -21,308 +21,7 @@ const BRAND = { blue: "#1c9bda", green: "#aed768", white: "#ffffff" };
    DATA — real, researched figures. Data as of July 3, 2026.
    Estimated profit = GMP × lot size.
 ===================================================================== */
-const IPOS_BASE = [
-  { id: "knack-packaging", name: "Knack Packaging", company: "Knack Packaging Ltd.", type: "Mainboard", status: "Open",
-    open: "2026-07-01", close: "2026-07-03", listing: "2026-07-08", allotment: "2026-07-04", refund: "2026-07-07", demat: "2026-07-07",
-    priceMin: 161, priceMax: 170, faceValue: 10, lot: 88, issueSize: 439.5, freshIssue: 439.5, ofs: 0,
-    gmp: 35, trend: "up", estListing: 205, listedAt: 188, currentPrice: 188.20,
-    gmpHistory: [{ d: "Jun24", v: 12 }, { d: "Jun28", v: 18 }, { d: "Jun30", v: 15 }, { d: "Jul1", v: 28 }, { d: "Jul2", v: 28 }, { d: "Jul3", v: 35 }],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/sep-2025/knack-packaging-limited-drhp_96482.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/knack-packaging-limited-prospectus_102599.html",
-    leadManager: "Unistone Capital", exchange: "BSE, NSE",
-    sub: { overall: 18.5, qib: 27.4, hni: 21.6, retail: 9.2, employee: null, shareholder: null, retail_apps: 6.8, shni_apps: 12.4, bhni_apps: 3.8 },
-    fin: { revenue: 823.43, pat: 92.72, ebitda: 168.14, eps: 9.27, pe: 18.33, roe: 35.75, netWorth: 259.35, debt: 118.2 }, // Source: RHP FY2026 (SEBI filing Jul-2026)
-    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/knack-packaging-limited-prospectus_102599.html", filingDate: "2026-07-06", fy: "FY2026", pageNum: "142", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "Ahmedabad-based integrated packaging solutions provider manufacturing PLWPP bags for food, pet food, agrochemical and construction sectors; exports to 68+ countries.",
-    sector: "Packaging", registrar: "MUFG Intime India Pvt Ltd",
-    strengths: ["68+ country export footprint", "Integrated manufacturing (backward-linked)", "Diversified end-user base"],
-    risks: ["Raw material (polypropylene) price volatility", "Customer concentration in a few large accounts", "Working-capital intensive model"] },
-
-  { id: "ic-electricals", name: "IC Electricals", company: "IC Electricals Co. Ltd.", type: "SME", status: "Open",
-    open: "2026-07-03", close: "2026-07-07", listing: "2026-07-10", allotment: "2026-07-08", refund: "2026-07-09", demat: "2026-07-09",
-    priceMin: 94, priceMax: 99, faceValue: 10, lot: 1200, issueSize: 47.91, freshIssue: 47.91, ofs: 0,
-    gmp: 44, trend: "up", estListing: 143, listedAt: 166, currentPrice: 169,
-    gmpHistory: [{ d: "Jun27", v: 20 }, { d: "Jun30", v: 30 }, { d: "Jul1", v: 35 }, { d: "Jul2", v: 40 }, { d: "Jul3", v: 44 }],
-    drhp: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_30092025221533_DRHP_ICEL_30092025.pdf", rhp: null,
-    leadManager: "Corpwis Advisors", exchange: "NSE Emerge",
-    sub: { overall: 0.4, qib: 0, hni: 0.3, retail: 0.6, employee: null, shareholder: null },
-    fin: { revenue: 143.81, pat: 14.10, ebitda: null, eps: 10.49, pe: 9.44, roe: 23.88, netWorth: null, debt: null },
-    finMeta: { sourceDoc: "RHP", sourceUrl: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_30092025221533_DRHP_ICEL_30092025.pdf", filingDate: "2025-09-30", fy: "FY2026", pageNum: "89", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "Manufactures electronic equipment for Indian Railways (ERRUs, vigilance control devices, passenger info systems) under a B2G model, plus railway electrification EPC work.",
-    sector: "Railway Electricals", registrar: "Skyline Financial Services Pvt Ltd",
-    strengths: ["B2G model with Indian Railways", "Growing electrification order book", "Niche technical certification moat"],
-    risks: ["Concentrated government-client dependency", "Tender-based revenue is lumpy", "Working capital tied up in receivables"] },
-
-  { id: "sbi-funds", name: "SBI Funds Management", company: "SBI Funds Management Ltd.", type: "Mainboard", status: "Upcoming",
-    open: "2026-07-14", close: "2026-07-16", listing: "2026-07-21", allotment: "2026-07-17", refund: "2026-07-20", demat: "2026-07-20",
-    priceMin: 545, priceMax: 574, faceValue: 1, lot: 26, issueSize: 9813, freshIssue: 0, ofs: 9813,
-    gmp: 97, trend: "up", estListing: 671, gmpHistory: [{ d: "Jul9", v: 90 }, { d: "Jul11", v: 101 }, { d: "Jul12", v: 101 }, { d: "Jul13", v: 97 }],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/mar-2026/sbi-funds-management-limited-drhp_100517.html", rhp: null,
-    leadManager: "Kotak Mahindra Capital", exchange: "BSE, NSE",
-    sub: {
-      overall: 41.66,
-      qib: 140.11,
-      hni: 22.51,
-      retail: 3.60,
-      snii: 15.51,
-      bnii: 26.01,
-      employee: 4.65,
-      shareholder: 9.52,
-      retail_apps: 2.32,
-      shni_apps: 18.45,
-      bhni_apps: 4.99,
-      employee_apps: 1.30,
-      shareholder_apps: 1.38
-    }, fin: { revenue: 4970, pat: 3067.38, ebitda: null, eps: 15.08, pe: 38.06, roe: 43.02, netWorth: 5963, debt: 0 }, // Source: DRHP FY2026 (SEBI Mar-2026); EBITDA not applicable for AMC
-    finMeta: { sourceDoc: "DRHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/mar-2026/sbi-funds-management-limited-drhp_100517.html", filingDate: "2026-03-24", fy: "FY2026", pageNum: "182", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "India's largest asset management company by mutual fund quarterly average AUM (~₹29.46 lakh crore as of Mar 2026), and investment manager to SBI Mutual Fund — a joint venture between State Bank of India and Amundi. 100% offer-for-sale; the company receives no proceeds from the IPO.",
-    sector: "Asset Management", registrar: "KFin Technologies Ltd",
-    strengths: ["India's largest AMC by AUM", "Strong brand trust (SBI + Amundi parentage)", "Diversified fund product mix"],
-    risks: ["Pure OFS — no fresh capital to the company", "AMC earnings sensitive to market cycles", "Fee-compression pressure industry-wide"] },
-
-  { id: "kusumgar", name: "Kusumgar", company: "Kusumgar Ltd.", type: "Mainboard", status: "Upcoming",
-    open: "2026-07-08", close: "2026-07-10", listing: "2026-07-15", allotment: "2026-07-13", refund: "2026-07-14", demat: "2026-07-14",
-    priceMin: 398, priceMax: 419, faceValue: 10, lot: 35, issueSize: 650, freshIssue: 0, ofs: 650,
-    gmp: 155, trend: "up", estListing: 574, listedAt: 574, currentPrice: 574, gmpHistory: [{ d: "Jun28", v: 100 }, { d: "Jul1", v: 110 }, { d: "Jul2", v: 92 }, { d: "Jul7", v: 171 }, { d: "Jul9", v: 160 }, { d: "Jul10", v: 155 }],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/oct-2025/kusumgar-limited_97201.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/kusumgar-limited-rhp_102510.html",
-    leadManager: "Axis Capital, ICICI Securities", exchange: "BSE, NSE",
-    sub: { overall: 135.80, qib: 299.51, hni: 174.28, retail: 27.97, employee: null, shareholder: null, retail_apps: 22.45, shni_apps: 110.15, bhni_apps: 42.84 },
-    fin: { revenue: 692.03, pat: 98.20, ebitda: 187.85, eps: 9.35, pe: 44.81, roe: 19.60, netWorth: 501.00, debt: 160.00 }, // Source: RHP FY2026 (SEBI filing Jul-2026)
-    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/kusumgar-limited-rhp_102510.html", filingDate: "2026-07-06", fy: "FY2026", pageNum: "168", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "Mumbai-based manufacturer of engineered synthetic fabrics (aerospace & defence, industrial, automotive, outdoor). IPO is entirely an offer for sale.",
-    sector: "Engineered Fabrics", registrar: "Bigshare Services Pvt Ltd",
-    strengths: ["Aerospace & defence qualified supplier", "High-margin specialty fabric mix", "Decades-long promoter track record"],
-    risks: ["Entirely OFS — no fresh growth capital raised", "Niche end markets limit volume scale", "Import dependency for certain chemicals"] },
-
-  { id: "devson-catalyst", name: "Devson Catalyst", company: "Devson Catalyst Ltd.", type: "SME", status: "Upcoming",
-    open: "2026-07-09", close: "2026-07-13", listing: "2026-07-17", allotment: "2026-07-14", refund: "2026-07-16", demat: "2026-07-16",
-    priceMin: 112, priceMax: 118, faceValue: 10, lot: 1200, issueSize: 42.34, freshIssue: 42.34, ofs: 0,
-    gmp: 6, trend: "stable", estListing: 124, gmpHistory: [{ d: "Jul1", v: 0 }, { d: "Jul2", v: 6 }, { d: "Jul3", v: 6 }],
-    drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
-    leadManager: "Corpwis Advisors", exchange: "NSE Emerge",
-    sub: null, fin: { revenue: 55.78, pat: 12.52, ebitda: null, eps: 1.22, pe: 96.72, roe: null, netWorth: null, debt: null }, // Source: BSE SME filing FY2026 (prior data was 5.8× overstated)
-    finMeta: { sourceDoc: "BSE SME Filing", sourceUrl: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", filingDate: "2026-07-09", fy: "FY2026", pageNum: "112", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "Gujarat-based manufacturer of catalysts, adsorbents and ceramic balls for refineries, petrochemical, steel and fertilizer producers; exports to 15+ countries.",
-    sector: "Specialty Chemicals", registrar: "MUFG Intime India Pvt Ltd",
-    strengths: ["High ROE (45.97%)", "Import-substitution positioning", "15+ country export base"],
-    risks: ["Small-cap SME liquidity risk", "Customer concentration in refining sector", "Raw material import dependency"] },
-
-  { id: "happy-steels", name: "Happy Steel", company: "Happy Steel Ltd.", type: "SME", status: "Upcoming",
-    open: "2026-07-09", close: "2026-07-13", listing: "2026-07-17", allotment: "2026-07-14", refund: "2026-07-16", demat: "2026-07-16",
-    priceMin: 66, priceMax: 66, faceValue: 10, lot: 2000, issueSize: 15.8, freshIssue: 15.8, ofs: 0,
-    gmp: 0, trend: "stable", estListing: 66, gmpHistory: [],
-    drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
-    leadManager: "Swastika Investmart", exchange: "NSE Emerge",
-    sub: null, fin: null,
-    about: "Ludhiana (Punjab) manufacturer of forged & precision-machined axles, spline shafts and spindles for automotive OEMs and Tier-1 suppliers.",
-    sector: "Auto Components", registrar: "Bigshare Services Pvt Ltd",
-    strengths: ["OEM/Tier-1 supplier relationships", "Precision forging capability", "Export presence"],
-    risks: ["Cyclical auto-sector demand exposure", "Fixed-price band signals modest demand so far", "Raw steel price volatility"] },
-
-  { id: "kratikal-tech", name: "Kratikal Tech", company: "Kratikal Tech Ltd.", type: "SME", status: "Listed",
-    open: "2026-06-30", close: "2026-07-02", listing: "2026-07-07", allotment: "2026-07-03", refund: "2026-07-04", demat: "2026-07-04",
-    priceMin: 128, priceMax: 135, faceValue: 10, lot: 1000, issueSize: 39.69, freshIssue: 39.69, ofs: 0,
-    gmp: 34, trend: "up", estListing: 169, listedAt: 168, currentPrice: 174,
-    gmpHistory: [{ d: "Jun25", v: 14 }, { d: "Jun27", v: 22 }, { d: "Jun29", v: 28 }, { d: "Jun30", v: 32 }, { d: "Jul1", v: 41 }, { d: "Jul2", v: 34 }],
-    drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
-    leadManager: "Fedex Securities", exchange: "NSE Emerge",
-    sub: { overall: 45.2, qib: 38.6, hni: 72.4, retail: 28.1, employee: null, shareholder: null },
-    fin: { revenue: 36.72, pat: 6.14, ebitda: null, eps: 7.85, pe: 17.20, roe: 36.13, netWorth: null, debt: null }, // Source: BSE SME IPO filing FY2026
-    finMeta: { sourceDoc: "BSE SME Filing", sourceUrl: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", filingDate: "2026-06-30", fy: "FY2026", pageNum: "94", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "AI-driven SaaS cybersecurity company (Threatcop, AutoSecT) serving BFSI, fintech, telecom and healthcare clients across India, UAE and USA. CERT-In empanelled.",
-    sector: "Cybersecurity", registrar: "KFin Technologies Ltd",
-    strengths: ["CERT-In empanelled", "SaaS recurring-revenue model", "Multi-geography client base"],
-    risks: ["Intense competition from global cybersecurity vendors", "Small revenue base vs valuation", "Talent-retention risk in tech"] },
-
-  { id: "teja-engineering", name: "Teja Engineering", company: "Teja Engineering Industries Ltd.", type: "SME", status: "Listed",
-    open: "2026-06-30", close: "2026-07-02", listing: "2026-07-07", allotment: "2026-07-03", refund: "2026-07-04", demat: "2026-07-04",
-    priceMin: 220, priceMax: 220, faceValue: 10, lot: 600, issueSize: 37.36, freshIssue: 37.36, ofs: 0,
-    gmp: 3, trend: "stable", estListing: 223, listedAt: 418, currentPrice: 215,
-    gmpHistory: [{ d: "Jun27", v: 0 }, { d: "Jun29", v: 0 }, { d: "Jun30", v: 0 }, { d: "Jul1", v: 0 }, { d: "Jul2", v: 3 }],
-    drhp: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_07042025160753_DRHP.pdf", rhp: null,
-    leadManager: "B.N. Rathi Securities", exchange: "NSE Emerge",
-    sub: { overall: 1.2, qib: 0, hni: 1.4, retail: 1.0, employee: null, shareholder: null },
-    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
-    about: "Bharuch (Gujarat) engineering services firm across Oil & Gas, Power and Energy — O&M, erection & commissioning, calibration, overhaul/decommissioning.",
-    sector: "Engineering Services (O&M)", registrar: "KFin Technologies Ltd",
-    strengths: ["Long-term O&M contracts", "Diversified oil/gas/power clients", "Asset-light services model"],
-    risks: ["Weak grey-market response pre-listing", "Client concentration risk", "Margins tied to contract renewals"] },
-
-  { id: "vinit-mobile", name: "Vinit Mobile", company: "Vinit Mobile Ltd.", type: "SME", status: "Listed",
-    open: "2026-06-30", close: "2026-07-02", listing: "2026-07-07", allotment: "2026-07-03", refund: "2026-07-04", demat: "2026-07-04",
-    priceMin: 150, priceMax: 158, faceValue: 10, lot: 800, issueSize: 34.13, freshIssue: 34.13, ofs: 0,
-    gmp: 15, trend: "up", estListing: 173, listedAt: 160, currentPrice: 165,
-    gmpHistory: [{ d: "Jun27", v: 0 }, { d: "Jun29", v: 0 }, { d: "Jun30", v: 30 }, { d: "Jul1", v: 25 }, { d: "Jul2", v: 15 }],
-    drhp: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_26122025011500_VML_DRHP.pdf", rhp: null,
-    leadManager: "Comfort Securities", exchange: "BSE SME",
-    sub: { overall: 0.02, qib: 0, hni: 0.01, retail: 0.04, employee: null, shareholder: null },
-    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
-    about: "Surat-based multi-brand mobile phone retail chain with 35 company-owned stores across Gujarat and Rajasthan, plus selective B2B bulk supply.",
-    sector: "Consumer Electronics Retail", registrar: "Bigshare Services Pvt Ltd",
-    strengths: ["Established multi-brand retail footprint", "Diversified OEM relationships", "Regional market density"],
-    risks: ["Severely undersubscribed issue (0.02x)", "Thin retail margins", "High competition from e-commerce"] },
-
-  { id: "sampark-logistics", name: "Sampark India Logistics", company: "Sampark India Logistics Ltd.", type: "SME", status: "Listed",
-    open: "2026-06-30", close: "2026-07-02", listing: "2026-07-07", allotment: "2026-07-03", refund: "2026-07-04", demat: "2026-07-04",
-    priceMin: 80, priceMax: 84, faceValue: 10, lot: 1600, issueSize: 27.22, freshIssue: 27.22, ofs: 0,
-    gmp: 0, trend: "stable", estListing: 84, listedAt: 89, currentPrice: 82,
-    gmpHistory: [{ d: "Jun28", v: 3 }, { d: "Jun30", v: 2 }, { d: "Jul1", v: 1 }, { d: "Jul2", v: 0 }],
-    drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
-    leadManager: "Corpwis Advisors", exchange: "NSE Emerge",
-    sub: { overall: 2.1, qib: 1.4, hni: 3.2, retail: 1.8, employee: null, shareholder: null },
-    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
-    about: "Carrying-and-forwarding agent offering freight forwarding, warehousing and distribution via 50 branch offices across 18 states and 8 leased warehouses.",
-    sector: "Logistics", registrar: "Maashitla Securities Pvt Ltd",
-    strengths: ["Pan-India 50-branch network", "Asset-light C&F model", "Diversified client industries"],
-    risks: ["Thin net margins typical of logistics", "Fuel-cost sensitivity", "Fragmented, competitive sector"] },
-
-  { id: "atharva-polyplast", name: "Atharva Polyplast", company: "Atharva Poly-Plast Ltd.", type: "SME", status: "Listed",
-    open: "2026-06-30", close: "2026-07-02", listing: "2026-07-07", allotment: "2026-07-03", refund: "2026-07-04", demat: "2026-07-04",
-    priceMin: 55, priceMax: 60, faceValue: 10, lot: 2000, issueSize: 27.0, freshIssue: 27.0, ofs: 0,
-    gmp: 8, trend: "down", estListing: 68, listedAt: 65, currentPrice: 60,
-    gmpHistory: [{ d: "Jun22", v: 10 }, { d: "Jun27", v: 7 }, { d: "Jun29", v: 9 }, { d: "Jun30", v: 8 }, { d: "Jul1", v: 8 }, { d: "Jul2", v: 8 }],
-    drhp: "https://www.bsesme.com/PublicIssues/PublicIssues.aspx?id=1", rhp: null,
-    leadManager: "Swastika Investmart", exchange: "BSE SME",
-    sub: { overall: 3.4, qib: 2.8, hni: 5.1, retail: 2.2, employee: null, shareholder: null },
-    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
-    about: "Satara (Maharashtra) manufacturer of precision injection-moulded plastic components for furniture, home-appliance and automotive OEMs / Tier-1 suppliers.",
-    sector: "Plastics", registrar: "MUFG Intime India Pvt Ltd",
-    strengths: ["Precision moulding capability", "OEM/Tier-1 relationships", "High ROE (26.65%)"],
-    risks: ["Small-cap scale limits pricing power", "Polymer input-cost volatility", "Post-listing GMP has been softening"] },
-
-  { id: "seemax-resources", name: "Seemax Resources", company: "Seemax Resources Ltd.", type: "SME", status: "Listed",
-    open: "2026-06-30", close: "2026-07-02", listing: "2026-07-07", allotment: "2026-07-03", refund: "2026-07-04", demat: "2026-07-04",
-    priceMin: 134, priceMax: 141, faceValue: 10, lot: 1000, issueSize: 19.74, freshIssue: 19.74, ofs: 0,
-    gmp: 0, trend: "stable", estListing: 141, listedAt: 112.8, currentPrice: 138,
-    gmpHistory: [{ d: "Jun28", v: 2 }, { d: "Jun30", v: 1 }, { d: "Jul1", v: 0 }, { d: "Jul2", v: 0 }],
-    drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
-    leadManager: "Fedex Securities", exchange: "NSE Emerge",
-    sub: { overall: 1.6, qib: 0.8, hni: 2.4, retail: 1.3, employee: null, shareholder: null },
-    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
-    about: "Vadodara-based rental & trading of material handling equipment (forklifts, cranes, pallet/reach trucks); ~95% revenue from recurring rentals.",
-    sector: "Material Handling Equipment", registrar: "Cameo Corporate Services Ltd",
-    strengths: ["~95% recurring rental revenue", "Very high ROE (48.65%)", "Diversified industrial client base"],
-    risks: ["Tiny revenue base (₹14.46 Cr)", "Capital-intensive fleet ownership", "No GMP premium at listing"] },
-
-  { id: "aastha-spintex", name: "Aastha Spintex", company: "Aastha Spintex Ltd.", type: "Mainboard", status: "Listed",
-    open: "2026-06-29", close: "2026-07-01", listing: "2026-07-06", allotment: "2026-07-02", refund: "2026-07-03", demat: "2026-07-03",
-    priceMin: 125, priceMax: 136, faceValue: 10, lot: 110, issueSize: 170, freshIssue: 130, ofs: 40,
-    gmp: 2, trend: "down", estListing: 138, listedAt: 130, currentPrice: 130,
-    gmpHistory: [{ d: "Jun25", v: 4 }, { d: "Jun26", v: 5.25 }, { d: "Jun27", v: 5 }, { d: "Jun28", v: 5.25 }, { d: "Jun29", v: 5.75 }, { d: "Jul1", v: 2 }],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/oct-2025/aastha-spintex-limited-drhp_97148.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-rhp_102246.html",
-    leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
-    sub: { overall: 5.05, qib: 3.59, hni: 8.29, retail: 2.54, employee: null, shareholder: null, retail_apps: 1.85, shni_apps: 4.80, bhni_apps: 1.62 },
-    fin: { revenue: 352.17, pat: 22.92, ebitda: 50.87, eps: 8.50, pe: 16.00, roe: 23.73, netWorth: 121.05, debt: 108.95 }, // Source: RHP FY2025 (SEBI Jun-2026 filing)
-    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-rhp_102246.html", filingDate: "2026-06-29", fy: "FY2025", pageNum: "176", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "Morbi (Gujarat) manufacturer of carded, combed and compact-combed cotton yarns from an integrated spinning-and-ginning facility; funds part-acquire Falcon Yarns.",
-    sector: "Textiles", registrar: "Bigshare Services Pvt Ltd",
-    strengths: ["Integrated spinning-ginning facility", "Acquisition-funded capacity growth", "Diversified yarn product mix"],
-    risks: ["Cotton price volatility", "Highly competitive commodity textile space", "Listing-day gain has compressed to near-flat"] },
-
-  { id: "adon-agro", name: "Adon Agro", company: "Adon Agro Commodities Ltd.", type: "SME", status: "Listed",
-    open: "2026-06-29", close: "2026-07-01", listing: "2026-07-06", allotment: "2026-07-02", refund: "2026-07-03", demat: "2026-07-03",
-    priceMin: 66, priceMax: 70, faceValue: 10, lot: 2000, issueSize: 44.03, freshIssue: 44.03, ofs: 0,
-    gmp: 0, trend: "stable", estListing: 70, listedAt: 78.25, currentPrice: 68,
-    gmpHistory: [{ d: "Jun26", v: 2 }, { d: "Jun28", v: 1 }, { d: "Jun29", v: 0 }, { d: "Jul1", v: 0 }],
-    drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
-    leadManager: "Fedex Securities", exchange: "NSE Emerge",
-    sub: { overall: 0.9, qib: 0.5, hni: 1.1, retail: 0.8, employee: null, shareholder: null },
-    fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
-    about: "Navi Mumbai sourcer/importer/distributor of dry fruits, nuts, seeds and berries — sold in bulk and under retail brand 'Hunger Nuts'.",
-    sector: "Agri-Commodities", registrar: "KFin Technologies Ltd",
-    strengths: ["Growing branded retail line (Hunger Nuts)", "Diversified sourcing geography", "Rising consumer demand for dry fruits"],
-    risks: ["Import/currency exposure", "Undersubscribed issue (0.9x)", "Low-margin commodity trading core"] },
-
-  { id: "csm-technologies", name: "CSM Technologies", company: "CSM Technologies Ltd.", type: "Mainboard", status: "Listed",
-    open: "2026-06-24", close: "2026-06-29", listing: "2026-07-02", allotment: "2026-06-30", refund: "2026-07-01", demat: "2026-07-01",
-    priceMin: 107, priceMax: 113, faceValue: 10, lot: 132, issueSize: 145.78, freshIssue: 100, ofs: 45.78,
-    gmp: 0, trend: "stable", estListing: 113, listedAt: 113, currentPrice: 107.35,
-    gmpHistory: [{ d: "Jun24", v: 8 }, { d: "Jun26", v: 5 }, { d: "Jun27", v: 4 }, { d: "Jun29", v: 0 }, { d: "Jul1", v: 0 }],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/sep-2025/csm-technologies-limited-drhp_96901.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jun-2026/csm-technologies-limited-rhp_102194.html",
-    leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
-    sub: { overall: 1.37, qib: 1.02, hni: 1.54, retail: 1.63, employee: null, shareholder: null, retail_apps: 1.21, shni_apps: 1.15, bhni_apps: 0.92 },
-    fin: { revenue: 200.63, pat: 14.09, ebitda: 29.27, eps: 3.72, pe: 30.38, roe: 20.73, netWorth: 76.18, debt: 35.04 }, // Source: RHP FY2025 (SEBI Jun-2026 filing)
-    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jun-2026/csm-technologies-limited-rhp_102194.html", filingDate: "2026-06-17", fy: "FY2025", pageNum: "158", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "Bhubaneswar GovTech company, 27+ years building e-governance platforms for mining, agriculture, education and healthcare clients in India and Africa.",
-    sector: "GovTech / IT Services", registrar: "KFin Technologies Ltd",
-    strengths: ["27+ year GovTech track record", "Multi-country (India + Africa) presence", "Diversified government verticals"],
-    risks: ["Listed flat, then hit lower circuit (-5%)", "Government-tender dependent revenue", "Long sales cycles"] },
-
-  { id: "caliber-mining", name: "Caliber Mining", company: "Caliber Mining & Logistics Ltd.", type: "Mainboard", status: "Upcoming",
-    open: "2026-07-17", close: "2026-07-21", listing: "2026-07-24", allotment: "2026-07-22", refund: "2026-07-23", demat: "2026-07-23",
-    priceMin: 402, priceMax: 424, faceValue: 10, lot: 35, issueSize: 450, freshIssue: 400, ofs: 50,
-    gmp: 100, trend: "up", estListing: 524, gmpHistory: [{ d: "Jul14", v: 92 }, { d: "Jul15", v: 98 }, { d: "Jul16", v: 100 }],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/jan-2025/caliber-mining-and-logistics-limited_90669.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/caliber-mining-and-logistics-limited-rhp_102715.html",
-    leadManager: "DAM Capital Advisors Ltd", exchange: "BSE, NSE",
-    sub: null, fin: { revenue: 1677.66, pat: 157.90, ebitda: 430.91, eps: 29.47, pe: 14.39, roe: 24.38, netWorth: 647.66, debt: 1055.69 }, // Source: RHP FY2026 (SEBI Jul-2026 filing)
-    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/caliber-mining-and-logistics-limited-rhp_102715.html", filingDate: "2026-07-17", fy: "FY2026", pageNum: "204", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "Provides integrated mining services, coal extraction operations, and heavy bulk freight logistics solutions for power utilities and industrial producers.",
-    sector: "Mining & Logistics", registrar: "KFin Technologies Ltd",
-    strengths: ["Integrated end-to-end service offering", "Long-term revenue visibility from utility contracts", "High operating margin profile"],
-    risks: ["Highly dependent on government coal contracts", "Capital intensive machinery fleet operations", "Environmental regulations exposure"] },
-
-  { id: "cube-highways", name: "Cube Highways", company: "Cube Highways Trust InvIT", type: "Mainboard", status: "Upcoming",
-    open: "2026-07-22", close: "2026-07-24", listing: "2026-07-29", allotment: "2026-07-25", refund: "2026-07-28", demat: "2026-07-28",
-    priceMin: 151, priceMax: 152, faceValue: 10, lot: 95, issueSize: 5000, freshIssue: 0, ofs: 5000,
-    gmp: 0, trend: "stable", estListing: 152, gmpHistory: [{ d: "Jul14", v: 0 }, { d: "Jul16", v: 0 }],
-    drhp: "https://www.sebi.gov.in/filings/invit-public-issues.html", rhp: null,
-    leadManager: "DAM Capital, Kotak Mahindra", exchange: "BSE, NSE",
-    sub: null, fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: InvIT metrics not comparable to equity financials — set null per accuracy-first policy
-    about: "Infrastructure Investment Trust (InvIT) focused on holding and operating a diversified portfolio of toll and annuity road assets across major national highway corridors in India.",
-    sector: "InvIT / Roads", registrar: "KFin Technologies Ltd",
-    strengths: ["Stable cash flows from long-term highway assets", "High yield potential sponsored by global institutional investors", "Well-maintained road portfolio"],
-    risks: ["Toll revenue risk from traffic volatility", "Interest rate fluctuations impact debt servicing", "Regulatory road construction risks"] },
-
-  { id: "sotefin-bharat", name: "Sotefin Bharat", company: "Sotefin Bharat Ltd.", type: "SME", status: "Upcoming",
-    open: "2026-07-16", close: "2026-07-20", listing: "2026-07-23", allotment: "2026-07-21", refund: "2026-07-22", demat: "2026-07-22",
-    priceMin: 178, priceMax: 187, faceValue: 10, lot: 600, issueSize: 89.76, freshIssue: 89.76, ofs: 0,
-    gmp: 18, trend: "up", estListing: 205, gmpHistory: [{ d: "Jul14", v: 12 }, { d: "Jul16", v: 18 }],
-    drhp: "https://www.bsesme.com/PublicIssues/PublicIssues.aspx?id=1", rhp: null,
-    leadManager: "Fedex Securities", exchange: "BSE SME",
-    sub: null, fin: { revenue: null, pat: null, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: Official figures not independently confirmed — set null per accuracy-first policy
-    about: "Designs, manufactures, and installs automated smart car parking systems, mechanical lifts, and multi-level parking solutions for premium real estate developers and municipal corporations.",
-    sector: "Smart Parking Systems", registrar: "Link Intime India Private Ltd",
-    strengths: ["Niche play in rapid urban traffic infrastructure", "Proprietary design patents", "Healthy order book from metropolitan hubs"],
-    risks: ["Dependent on real estate market cycles", "High concentration of metropolitan projects", "Raw steel price sensitivity"] },
-
-  { id: "cultfit", name: "Cult.fit", company: "Cult.fit Limited", type: "Mainboard", status: "Upcoming",
-    open: null, close: null, listing: null, allotment: null, refund: null, demat: null,
-    priceMin: null, priceMax: null, faceValue: 2, lot: null, issueSize: null, freshIssue: null, ofs: null,
-    gmp: null, trend: "stable", estListing: null, gmpHistory: [],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/cult-fit-limited-drhp_102600.html", rhp: null,
-    leadManager: "Kotak Mahindra, ICICI Securities", exchange: "BSE, NSE",
-    sub: null, fin: { revenue: 1720.6, pat: -251.9, ebitda: 144.8, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: DRHP FY2026 (SEBI Jul-2026 filing)
-    finMeta: { sourceDoc: "DRHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/cult-fit-limited-drhp_102600.html", filingDate: "2026-07-06", fy: "FY2026", pageNum: "134", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "India's largest health and fitness platform providing digital and offline services across cult.fit gyms, mental health services (mind.fit), and healthy food plans (eat.fit).",
-    sector: "Health & Fitness SaaS", registrar: "Link Intime India Private Ltd",
-    strengths: ["Leading consumer fitness brand in India", "Highly scalable hybrid digital/offline model", "Strong investor parentage"],
-    risks: ["Consistently high customer acquisition costs", "Intense competition in regional gym sectors", "Path to profitability is still early stage"] },
-
-  { id: "ratnadeep-retail", name: "Ratnadeep Retail", company: "Ratnadeep Retail Limited", type: "Mainboard", status: "Upcoming",
-    open: null, close: null, listing: null, allotment: null, refund: null, demat: null,
-    priceMin: null, priceMax: null, faceValue: 10, lot: null, issueSize: null, freshIssue: null, ofs: null,
-    gmp: null, trend: "stable", estListing: null, gmpHistory: [],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/ratnadeep-retail-limited-drhp_102550.html", rhp: null,
-    leadManager: "JM Financial, Axis Capital", exchange: "BSE, NSE",
-    sub: null, fin: { revenue: 2223.14, pat: 36.70, ebitda: 111.33, eps: null, pe: null, roe: 26.89, netWorth: 136.50, debt: null }, // Source: DRHP FY2026 (SEBI Jul-2026 filing)
-    finMeta: { sourceDoc: "DRHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/ratnadeep-retail-limited-drhp_102550.html", filingDate: "2026-07-01", fy: "FY2026", pageNum: "186", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "Operates a premium supermarket chain with over 150 stores in Southern India, offering fresh foods, groceries, and personal care products.",
-    sector: "Supermarket Retail", registrar: "KFin Technologies Ltd",
-    strengths: ["Strong regional brand density in South India", "Robust supply chain and private label integration", "Consistent cash-generative store operations"],
-    risks: ["Geographical concentration risk", "Intense competition from online quick-commerce apps", "High real estate leasing costs"] },
-
-  { id: "swara-baby", name: "Swara Baby Products", company: "Swara Baby Products Limited", type: "Mainboard", status: "Upcoming",
-    open: null, close: null, listing: null, allotment: null, refund: null, demat: null,
-    priceMin: null, priceMax: null, faceValue: 10, lot: null, issueSize: null, freshIssue: null, ofs: null,
-    gmp: null, trend: "stable", estListing: null, gmpHistory: [],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/swara-baby-products-limited-drhp_102480.html", rhp: null,
-    leadManager: "Fedex Securities", exchange: "BSE, NSE",
-    sub: null, fin: { revenue: 1163.90, pat: 95.59, ebitda: 192.77, eps: null, pe: null, roe: 17.28, netWorth: 553.22, debt: null }, // Source: DRHP FY2026 (SEBI Jul-2026 filing)
-    finMeta: { sourceDoc: "DRHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/swara-baby-products-limited-drhp_102480.html", filingDate: "2026-07-02", fy: "FY2026", pageNum: "148", verifiedAt: "2026-07-17T21:40:00Z", method: "Manual Regulatory Audit", status: "Verified" },
-    about: "Manufactures hygiene baby care products, including baby diapers, wet wipes, and diaper pants, under private labels and own brands.",
-    sector: "Baby Care Products", registrar: "Bigshare Services Pvt Ltd",
-    strengths: ["Expanding baby care consumption story in India", "Strong contract manufacturing capabilities", "Low-cost high-volume producer scale"],
-    risks: ["Heavy raw material cost volatility (fluff pulp/polymers)", "High working capital requirement", "Competition from established MNC brands"] },
-];
+let IPOS_BASE = [];
 
 const DATA_AS_OF = "July 3, 2026";
 const rupee = (n) => (n == null || isNaN(n)) ? "-" : (n < 0 ? `-₹${Number(Math.abs(n)).toLocaleString("en-IN")}` : `₹${Number(n).toLocaleString("en-IN")}`);
@@ -2861,6 +2560,7 @@ const NAV = [
 ].filter((n) => n.id !== "ai" || AI_ASSISTANT_ENABLED);
 
 export default function App() {
+  const [loadingDb, setLoadingDb] = useState(true);
   const [tab, setTabRaw] = useState(() => {
     try {
       const saved = localStorage.getItem("calmcapital-tab");
@@ -2870,6 +2570,61 @@ export default function App() {
   });
   const [selected, setSelected] = useState(null);
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    fetch("/ipos.json")
+      .then((res) => res.json())
+      .then((data) => {
+        IPOS_BASE = data;
+        setLoadingDb(false);
+        setTick((t) => t + 1);
+      })
+      .catch((err) => {
+        console.error("Failed to load dynamic IPO database:", err);
+        setLoadingDb(false);
+      });
+  }, []);
+
+  if (loadingDb) {
+    return (
+      <div className="h-screen w-screen flex flex-col items-center justify-center dark" style={{
+        background: "radial-gradient(circle at 30% 50%, rgba(28,155,218,0.18), transparent 60%), radial-gradient(circle at 80% 20%, rgba(174,215,104,0.06), transparent 50%), #0a0d16",
+        color: "#e2e8f0",
+        fontFamily: "'Outfit', 'Inter', sans-serif"
+      }}>
+        <div className="flex flex-col items-center space-y-6 text-center">
+          <img src="/logo.png" alt="Calm Capital Logo" className="w-16 h-16 object-contain rounded-2xl shadow-[0_0_30px_rgba(28,155,218,0.3)] animate-spin-slow" />
+          <div className="space-y-1 animate-pulse">
+            <h1 className="text-2xl font-bold tracking-tight">Calm Capital</h1>
+            <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase">Designed by Discipline</p>
+          </div>
+          <div className="flex flex-col items-center space-y-2 pt-4">
+            <div className="w-48 h-1 bg-slate-850 rounded-full overflow-hidden relative">
+              <div className="absolute top-0 bottom-0 left-0 bg-blue-500 rounded-full animate-loading-bar" style={{ width: "30%" }}></div>
+            </div>
+            <p className="text-[11px] font-medium text-slate-500 tracking-wider uppercase">Loading IPO Intelligence...</p>
+          </div>
+        </div>
+        <style>{`
+          @keyframes loadingBar {
+            0% { left: -30%; width: 30%; }
+            50% { left: 40%; width: 40%; }
+            100% { left: 100%; width: 30%; }
+          }
+          .animate-loading-bar {
+            animation: loadingBar 1.5s infinite ease-in-out;
+          }
+          @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          .animate-spin-slow {
+            animation: spinSlow 8s infinite linear;
+          }
+        `}</style>
+      </div>
+    );
+  }
   const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
   const [sidebarOpen, setSidebarOpen] = useState(() => !isMobile());
   const [dark, setDark] = useState(() => {
