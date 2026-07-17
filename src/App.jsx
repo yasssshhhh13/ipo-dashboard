@@ -2679,7 +2679,20 @@ export default function App() {
   const [selected, setSelected] = useState(null);
   const [query, setQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(() => {
+    try {
+      const saved = localStorage.getItem("calmcapital-theme");
+      if (saved !== null) return JSON.parse(saved);
+    } catch { /* storage unavailable */ }
+    return true; // default default
+  });
+
+  // Write theme changes to local storage
+  useEffect(() => {
+    try {
+      localStorage.setItem("calmcapital-theme", JSON.stringify(dark));
+    } catch { /* storage unavailable */ }
+  }, [dark]);
   const [refreshing, setRefreshing] = useState(false);
   const [tick, setTick] = useState(0); // bumped hourly + on manual refresh to force re-derive live status/data
   const [dataUrl, setDataUrl] = useState("/live-data.json"); // same-origin file this repo's GitHub Action keeps updated — works automatically, no setup needed
@@ -3033,7 +3046,7 @@ export default function App() {
         </div>
       </div>
 
-      <IPODetail ipo={selected} onClose={() => setSelected(null)} watchlist={watchlist} />
+      <IPODetail ipo={selected} onClose={() => setSelected(null)} watchlist={watchlist} dark={dark} />
     </div>
   );
 }
