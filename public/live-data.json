@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-17T09:29:19.486Z",
+  "updatedAt": "2026-07-17T12:07:02.991Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -7,29 +7,29 @@
       "sub": {}
     },
     "caliber-mining": {
-      "gmp": 118,
+      "gmp": 114,
       "priceMax": 424,
-      "estListing": 542,
+      "estListing": 538,
       "sub": {
-        "overall": 0.97,
+        "overall": 1.28,
         "qib": 0.31,
-        "snii": 1.6,
-        "bnii": 0.9,
-        "hni": 1.14,
-        "retail": 1.29
+        "snii": 2.24,
+        "bnii": 1.4,
+        "hni": 1.68,
+        "retail": 1.67
       }
     },
     "sotefin-bharat": {
-      "gmp": 18,
+      "gmp": 13,
       "priceMax": 187,
-      "estListing": 205,
+      "estListing": 200,
       "sub": {
-        "overall": 0.57,
+        "overall": 0.8,
         "qib": 0.13,
-        "snii": 0.54,
-        "bnii": 0.47,
-        "hni": 0.5,
-        "retail": 0.84
+        "snii": 0.62,
+        "bnii": 1.43,
+        "hni": 1.16,
+        "retail": 1.02
       }
     },
     "sbi-funds": {
