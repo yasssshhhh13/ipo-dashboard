@@ -2911,12 +2911,6 @@ export default function App() {
                 );
               })}
             </nav>
-            
-            {/* Sidebar Data Freshness Footer */}
-            <div className="pt-3.5 mt-auto border-t border-slate-200 dark:border-white/5 flex flex-col gap-0.5 shrink-0">
-              <span className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">Data Freshness</span>
-              <span className="text-xs text-slate-600 dark:text-slate-450 font-semibold font-mono">As of: {formatDataAsOf()}</span>
-            </div>
           </div>
         </aside>
 
