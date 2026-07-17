@@ -1301,6 +1301,42 @@ function IPOCard({ ipo, onOpen, watchlist, dark }) {
         {/* Divider */}
         <div className="mt-3 mb-3 border-t border-slate-100 dark:border-white/5" />
 
+        {/* ── GMP Row ── */}
+        {(() => {
+          const gmpVal = ipo.gmp;
+          const hasGmp = gmpVal != null;
+          const gmpPct = hasGmp && ipo.priceMax ? (gmpVal / ipo.priceMax) * 100 : null;
+          const isPos = hasGmp && gmpVal > 0;
+          const isNeg = hasGmp && gmpVal < 0;
+          const gmpColor = isPos ? "#0f9d68" : isNeg ? "#e11d48" : "#64748b";
+          const gmpBg   = isPos
+            ? (dark ? "rgba(15,157,104,0.12)" : "rgba(15,157,104,0.08)")
+            : isNeg
+            ? (dark ? "rgba(225,29,72,0.12)"  : "rgba(225,29,72,0.08)")
+            : (dark ? "rgba(148,163,184,0.1)"  : "rgba(148,163,184,0.07)");
+
+          return (
+            <div
+              className="flex items-center justify-between rounded-xl px-3 py-2 mb-3"
+              style={{ background: gmpBg }}
+            >
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">GMP</span>
+              {hasGmp ? (
+                <span className="font-mono font-extrabold text-sm flex items-center gap-1.5" style={{ color: gmpColor }}>
+                  {isPos && <ArrowUpRight size={13} />}
+                  {isNeg && <ArrowDownRight size={13} />}
+                  {isPos ? "+" : ""}{isNeg ? "-" : ""}{isNeg ? `₹${Math.abs(gmpVal)}` : `₹${gmpVal}`}
+                  <span className="text-[11px] font-semibold opacity-75">
+                    ({isPos ? "+" : ""}{gmpPct != null ? gmpPct.toFixed(2) : "0.00"}%)
+                  </span>
+                </span>
+              ) : (
+                <span className="font-mono text-sm text-slate-400 dark:text-slate-500">N/A</span>
+              )}
+            </div>
+          );
+        })()}
+
         {/* Price / Lot / Issue size grid + profit */}
         <div className="flex items-end justify-between gap-2">
           <div className="grid grid-cols-3 gap-4 text-xs flex-1">
