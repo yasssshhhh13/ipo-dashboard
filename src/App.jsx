@@ -2911,6 +2911,12 @@ export default function App() {
                 );
               })}
             </nav>
+            
+            {/* Sidebar Data Freshness Footer */}
+            <div className="pt-3.5 mt-auto border-t border-slate-200 dark:border-white/5 flex flex-col gap-0.5 shrink-0">
+              <span className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">Data Freshness</span>
+              <span className="text-xs text-slate-600 dark:text-slate-450 font-semibold font-mono">As of: {formatDataAsOf()}</span>
+            </div>
           </div>
         </aside>
 
@@ -2935,15 +2941,14 @@ export default function App() {
             </div>
 
             <div className="ml-auto flex items-center gap-2.5 relative">
-              <div className="hidden sm:flex flex-col items-end text-right">
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-[#121625]/30 text-slate-600 dark:text-slate-300 shadow-sm cursor-default">
+              <div className="hidden sm:flex items-center">
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-[#121625]/30 text-slate-600 dark:text-slate-300 shadow-sm cursor-default">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
                   </span>
                   <span className="text-[11px] font-semibold tracking-tight">Live Prices</span>
                 </div>
-                <span className="text-[9px] text-slate-400 dark:text-slate-500 font-mono mt-0.5">Refreshed: {formatDataAsOf()}</span>
               </div>
 
               <button onClick={refresh} className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-[#121625]/30 hover:border-slate-300 dark:hover:border-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-700 shadow-sm">
