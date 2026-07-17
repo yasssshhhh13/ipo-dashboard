@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-17T18:42:30.989Z",
+  "updatedAt": "2026-07-17T19:31:54.274Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -372,6 +372,143 @@
         "bnii": 808,
         "hni": 585,
         "retail": 18
+      }
+    },
+    "sbi-funds-management": {
+      "gmp": 92,
+      "priceMax": 574,
+      "estListing": 666,
+      "sub": {
+        "overall": 92,
+        "qib": 0,
+        "snii": 41.73,
+        "bnii": 574,
+        "hni": 9812.91,
+        "retail": 26
+      }
+    },
+    "laser-power-infra": {
+      "gmp": 39,
+      "priceMax": 214,
+      "estListing": 253,
+      "sub": {
+        "overall": 39,
+        "qib": 0,
+        "snii": 41.05,
+        "bnii": 214,
+        "hni": 742,
+        "retail": 70
+      }
+    },
+    "sampark-india-logistics": {
+      "gmp": 2,
+      "priceMax": 84,
+      "estListing": 86,
+      "sub": {
+        "overall": 2.5,
+        "qib": 0,
+        "snii": 3.47,
+        "bnii": 84,
+        "hni": 27.22,
+        "retail": 1600
+      }
+    },
+    "crazy-snacks": {
+      "priceMax": 42,
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 1.21,
+        "bnii": 42,
+        "hni": 31.47,
+        "retail": 3000
+      }
+    },
+    "riyaasat-lifestyle": {
+      "priceMax": 106,
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 1.32,
+        "bnii": 106,
+        "hni": 30.2,
+        "retail": 1200
+      }
+    },
+    "jivial-industries": {
+      "priceMax": 196,
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 0.93,
+        "bnii": 196,
+        "hni": 31.99,
+        "retail": 600
+      }
+    },
+    "advit-jewels": {
+      "gmp": 49,
+      "priceMax": 138,
+      "estListing": 187,
+      "sub": {
+        "overall": 49.5,
+        "qib": 0,
+        "snii": 212.63,
+        "bnii": 138,
+        "hni": 165.16,
+        "retail": 100
+      }
+    },
+    "waterways-leisure-tourism": {
+      "gmp": -51,
+      "priceMax": 808,
+      "estListing": 757,
+      "sub": {
+        "overall": -51,
+        "qib": 0,
+        "snii": 1.53,
+        "bnii": 808,
+        "hni": 585,
+        "retail": 18
+      }
+    },
+    "shree-balaji-mala-bse-smeu": {
+      "gmp": 19,
+      "priceMax": 70,
+      "estListing": 89,
+      "sub": {
+        "overall": 19,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 70,
+        "hni": 18.9,
+        "retail": 2000
+      }
+    },
+    "shree-balaji-mala-smeu": {
+      "gmp": 19,
+      "priceMax": 70,
+      "estListing": 89,
+      "sub": {
+        "overall": 19,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 70,
+        "hni": 18.9,
+        "retail": 2000
+      }
+    },
+    "shree-balaji-mala-textiles": {
+      "gmp": 19,
+      "priceMax": 70,
+      "estListing": 89,
+      "sub": {
+        "overall": 19,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 70,
+        "hni": 18.9,
+        "retail": 2000
       }
     }
   }

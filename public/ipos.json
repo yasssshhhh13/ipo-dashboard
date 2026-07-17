@@ -191,7 +191,7 @@
     ]
   },
   {
-    "id": "sbi-funds",
+    "id": "sbi-funds-management",
     "name": "SBI Funds Management",
     "company": "SBI Funds Management Ltd.",
     "type": "Mainboard",
@@ -458,7 +458,7 @@
     ]
   },
   {
-    "id": "happy-steels",
+    "id": "happy-steel",
     "name": "Happy Steel",
     "company": "Happy Steel Ltd.",
     "type": "SME",
@@ -761,7 +761,7 @@
     ]
   },
   {
-    "id": "sampark-logistics",
+    "id": "sampark-india-logistics",
     "name": "Sampark India Logistics",
     "company": "Sampark India Logistics Ltd.",
     "type": "SME",
@@ -1472,7 +1472,7 @@
     ]
   },
   {
-    "id": "cultfit",
+    "id": "cult-fit",
     "name": "Cult.fit",
     "company": "Cult.fit Limited",
     "type": "Mainboard",
@@ -1596,7 +1596,7 @@
     ]
   },
   {
-    "id": "swara-baby",
+    "id": "swara-baby-products",
     "name": "Swara Baby Products",
     "company": "Swara Baby Products Limited",
     "type": "Mainboard",
@@ -1877,7 +1877,7 @@
     ]
   },
   {
-    "id": "shree-balaji-textiles",
+    "id": "shree-balaji-mala-textiles",
     "name": "Shree Balaji (Mala) Textiles",
     "company": "Shree Balaji (Mala) Textiles Limited",
     "type": "SME",
@@ -2053,9 +2053,9 @@
     ]
   },
   {
-    "id": "laser-power-infra-ipol-250-00-16-82",
-    "name": "Laser Power & Infra IPOL@250.00 (16.82%)",
-    "company": "Laser Power & Infra IPOL@250.00 (16.82%) Limited",
+    "id": "laser-power-infra",
+    "name": "Laser Power & Infra",
+    "company": "Laser Power & Infra Limited",
     "type": "Mainboard",
     "status": "Upcoming",
     "open": "2026-07-09",
@@ -2088,7 +2088,7 @@
     "exchange": "BSE, NSE",
     "sub": null,
     "fin": null,
-    "about": "Laser Power & Infra IPOL@250.00 (16.82%) Limited is a newly announced Mainboard IPO operating in the Energy & Power sector. The company is launching its issue on BSE, NSE.",
+    "about": "Laser Power & Infra Limited is a newly announced Mainboard IPO operating in the Energy & Power sector. The company is launching its issue on BSE, NSE.",
     "sector": "Energy & Power",
     "registrar": "To Be Announced",
     "strengths": [
@@ -2101,9 +2101,9 @@
     ]
   },
   {
-    "id": "crazy-snacks-bse-smel-44-00-4-76",
-    "name": "Crazy Snacks BSE SMEL@44.00 (4.76%)",
-    "company": "Crazy Snacks BSE SMEL@44.00 (4.76%) Limited",
+    "id": "crazy-snacks",
+    "name": "Crazy Snacks",
+    "company": "Crazy Snacks Limited",
     "type": "SME",
     "status": "Upcoming",
     "open": "2026-06-25",
@@ -2131,7 +2131,7 @@
     "exchange": "BSE SME",
     "sub": null,
     "fin": null,
-    "about": "Crazy Snacks BSE SMEL@44.00 (4.76%) Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
+    "about": "Crazy Snacks Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
     "registrar": "To Be Announced",
     "strengths": [
@@ -2144,9 +2144,9 @@
     ]
   },
   {
-    "id": "riyaasat-lifestyle-bse-smel-84-80-20",
-    "name": "Riyaasat Lifestyle BSE SMEL@84.80 (-20%)",
-    "company": "Riyaasat Lifestyle BSE SMEL@84.80 (-20%) Limited",
+    "id": "riyaasat-lifestyle",
+    "name": "Riyaasat Lifestyle",
+    "company": "Riyaasat Lifestyle Limited",
     "type": "SME",
     "status": "Upcoming",
     "open": "2026-06-18",
@@ -2174,7 +2174,7 @@
     "exchange": "BSE SME",
     "sub": null,
     "fin": null,
-    "about": "Riyaasat Lifestyle BSE SMEL@84.80 (-20%) Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
+    "about": "Riyaasat Lifestyle Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
     "registrar": "To Be Announced",
     "strengths": [
@@ -2187,9 +2187,9 @@
     ]
   },
   {
-    "id": "jivial-industries-bse-smel-156-80-20",
-    "name": "Jivial Industries BSE SMEL@156.80 (-20%)",
-    "company": "Jivial Industries BSE SMEL@156.80 (-20%) Limited",
+    "id": "jivial-industries",
+    "name": "Jivial Industries",
+    "company": "Jivial Industries Limited",
     "type": "SME",
     "status": "Upcoming",
     "open": "2026-06-23",
@@ -2217,7 +2217,7 @@
     "exchange": "BSE SME",
     "sub": null,
     "fin": null,
-    "about": "Jivial Industries BSE SMEL@156.80 (-20%) Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
+    "about": "Jivial Industries Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
     "registrar": "To Be Announced",
     "strengths": [
@@ -2230,9 +2230,9 @@
     ]
   },
   {
-    "id": "advit-jewels-ipol-190-00-37-68",
-    "name": "Advit Jewels IPOL@190.00 (37.68%)",
-    "company": "Advit Jewels IPOL@190.00 (37.68%) Limited",
+    "id": "advit-jewels",
+    "name": "Advit Jewels",
+    "company": "Advit Jewels Limited",
     "type": "Mainboard",
     "status": "Upcoming",
     "open": "2026-06-23",
@@ -2265,7 +2265,7 @@
     "exchange": "BSE, NSE",
     "sub": null,
     "fin": null,
-    "about": "Advit Jewels IPOL@190.00 (37.68%) Limited is a newly announced Mainboard IPO operating in the General sector. The company is launching its issue on BSE, NSE.",
+    "about": "Advit Jewels Limited is a newly announced Mainboard IPO operating in the General sector. The company is launching its issue on BSE, NSE.",
     "sector": "General",
     "registrar": "To Be Announced",
     "strengths": [
@@ -2278,9 +2278,9 @@
     ]
   },
   {
-    "id": "waterways-leisure-tourism-ipol-500-00-38-12",
-    "name": "Waterways Leisure Tourism IPOL@500.00 (-38.12%)",
-    "company": "Waterways Leisure Tourism IPOL@500.00 (-38.12%) Limited",
+    "id": "waterways-leisure-tourism",
+    "name": "Waterways Leisure Tourism",
+    "company": "Waterways Leisure Tourism Limited",
     "type": "Mainboard",
     "status": "Upcoming",
     "open": "2026-06-23",
@@ -2313,7 +2313,7 @@
     "exchange": "BSE, NSE",
     "sub": null,
     "fin": null,
-    "about": "Waterways Leisure Tourism IPOL@500.00 (-38.12%) Limited is a newly announced Mainboard IPO operating in the General sector. The company is launching its issue on BSE, NSE.",
+    "about": "Waterways Leisure Tourism Limited is a newly announced Mainboard IPO operating in the General sector. The company is launching its issue on BSE, NSE.",
     "sector": "General",
     "registrar": "To Be Announced",
     "strengths": [

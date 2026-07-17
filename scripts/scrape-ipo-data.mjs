@@ -61,8 +61,7 @@ const NAME_TO_ID = {
 function normalizeName(raw) {
   return raw
     .toLowerCase()
-    .replace(/\bipo\b/g, "")
-    .replace(/\b(ltd|limited|pvt|private|co|company|corporation|corp)\b\.?/g, "")
+    .replace(/\b(bse sme|nse emerge|nse sme|bse|nse|ipo|ltd|limited|pvt|private|co|company|corporation|corp)\b/g, "")
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
 }
@@ -111,11 +110,19 @@ function parseGmpCell(text) {
 }
 
 function cleanScrapedName(raw) {
-  return raw
-    .split("\n")[0]
-    .replace(/[UOCL]$/, "")
-    .replace(/\s*(BSE SME|NSE SME|IPO)\s*$/i, "")
-    .trim();
+  if (!raw) return "";
+  let cleaned = raw.split("\n")[0].trim();
+  
+  // 1. Remove L@... or @... listing suffix (e.g. L@500.00 (-38.12%) or IPOL@250.00)
+  cleaned = cleaned.replace(/\s*(BSE SME|NSE SME|BSE|NSE|IPO)?[UOCL]?\s*L?@\s*-?[\d,.]+\s*\(?[-\d,.%]*\)?/i, "");
+  
+  // 2. Remove trailing exchange name with optional status letter (e.g. BSE SMEU, NSE SMEL, IPOU)
+  cleaned = cleaned.replace(/\s*(BSE SME|NSE SME|BSE|NSE|IPO)[UOCL]?\s*$/i, "");
+  
+  // 3. Remove standalone trailing status letter if any (must have space before it)
+  cleaned = cleaned.replace(/\s+[UOCL]$/i, "");
+  
+  return cleaned.trim();
 }
 
 function parseInvestorGainDate(dateText) {
