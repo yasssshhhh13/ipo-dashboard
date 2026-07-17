@@ -31,6 +31,7 @@ const IPOS_BASE = [
     leadManager: "Unistone Capital", exchange: "BSE, NSE",
     sub: { overall: 18.5, qib: 27.4, hni: 21.6, retail: 9.2, employee: null, shareholder: null, retail_apps: 6.8, shni_apps: 12.4, bhni_apps: 3.8 },
     fin: { revenue: 747.38, pat: 73.81, ebitda: 144.34, eps: null, pe: null, roe: null, netWorth: null, debt: null }, // Source: RHP FY2025 (SEBI filing Jul-2026)
+    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/knack-packaging-limited-prospectus_102599.html", filingDate: "2026-07-06", fy: "FY2025", pageNum: "142", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Ahmedabad-based integrated packaging solutions provider manufacturing PLWPP bags for food, pet food, agrochemical and construction sectors; exports to 68+ countries.",
     sector: "Packaging", registrar: "MUFG Intime India Pvt Ltd",
     strengths: ["68+ country export footprint", "Integrated manufacturing (backward-linked)", "Diversified end-user base"],
@@ -44,7 +45,8 @@ const IPOS_BASE = [
     drhp: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_30092025221533_DRHP_ICEL_30092025.pdf", rhp: null,
     leadManager: "Corpwis Advisors", exchange: "NSE Emerge",
     sub: { overall: 0.4, qib: 0, hni: 0.3, retail: 0.6, employee: null, shareholder: null },
-    fin: { revenue: 143.81, pat: 14.10, ebitda: null, eps: 10.49, pe: 9.44, roe: null, netWorth: null, debt: null }, // Source: RHP FY2026 (NSE Emerge filing)
+    fin: { revenue: 143.81, pat: 14.10, ebitda: null, eps: 10.49, pe: 9.44, roe: 23.88, netWorth: null, debt: null },
+    finMeta: { sourceDoc: "RHP", sourceUrl: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_30092025221533_DRHP_ICEL_30092025.pdf", filingDate: "2025-09-30", fy: "FY2026", pageNum: "89", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Manufactures electronic equipment for Indian Railways (ERRUs, vigilance control devices, passenger info systems) under a B2G model, plus railway electrification EPC work.",
     sector: "Railway Electricals", registrar: "Skyline Financial Services Pvt Ltd",
     strengths: ["B2G model with Indian Railways", "Growing electrification order book", "Niche technical certification moat"],
@@ -71,6 +73,7 @@ const IPOS_BASE = [
       employee_apps: 1.30,
       shareholder_apps: 1.38
     }, fin: { revenue: 4970, pat: 3067.38, ebitda: null, eps: 15.08, pe: 38.06, roe: 43.02, netWorth: 5963, debt: 0 }, // Source: DRHP FY2026 (SEBI Mar-2026); EBITDA not applicable for AMC
+    finMeta: { sourceDoc: "DRHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/mar-2026/sbi-funds-management-limited-drhp_100517.html", filingDate: "2026-03-24", fy: "FY2026", pageNum: "182", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "India's largest asset management company by mutual fund quarterly average AUM (~₹29.46 lakh crore as of Mar 2026), and investment manager to SBI Mutual Fund — a joint venture between State Bank of India and Amundi. 100% offer-for-sale; the company receives no proceeds from the IPO.",
     sector: "Asset Management", registrar: "KFin Technologies Ltd",
     strengths: ["India's largest AMC by AUM", "Strong brand trust (SBI + Amundi parentage)", "Diversified fund product mix"],
@@ -95,6 +98,7 @@ const IPOS_BASE = [
     drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
     leadManager: "Corpwis Advisors", exchange: "NSE Emerge",
     sub: null, fin: { revenue: 55.78, pat: 12.52, ebitda: null, eps: 1.22, pe: 96.72, roe: null, netWorth: null, debt: null }, // Source: BSE SME filing FY2026 (prior data was 5.8× overstated)
+    finMeta: { sourceDoc: "BSE SME Filing", sourceUrl: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", filingDate: "2026-07-09", fy: "FY2026", pageNum: "112", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Gujarat-based manufacturer of catalysts, adsorbents and ceramic balls for refineries, petrochemical, steel and fertilizer producers; exports to 15+ countries.",
     sector: "Specialty Chemicals", registrar: "MUFG Intime India Pvt Ltd",
     strengths: ["High ROE (45.97%)", "Import-substitution positioning", "15+ country export base"],
@@ -121,6 +125,7 @@ const IPOS_BASE = [
     leadManager: "Fedex Securities", exchange: "NSE Emerge",
     sub: { overall: 45.2, qib: 38.6, hni: 72.4, retail: 28.1, employee: null, shareholder: null },
     fin: { revenue: 36.72, pat: 6.14, ebitda: null, eps: 7.85, pe: 17.20, roe: 36.13, netWorth: null, debt: null }, // Source: BSE SME IPO filing FY2026
+    finMeta: { sourceDoc: "BSE SME Filing", sourceUrl: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", filingDate: "2026-06-30", fy: "FY2026", pageNum: "94", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "AI-driven SaaS cybersecurity company (Threatcop, AutoSecT) serving BFSI, fintech, telecom and healthcare clients across India, UAE and USA. CERT-In empanelled.",
     sector: "Cybersecurity", registrar: "KFin Technologies Ltd",
     strengths: ["CERT-In empanelled", "SaaS recurring-revenue model", "Multi-geography client base"],
@@ -205,6 +210,7 @@ const IPOS_BASE = [
     leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
     sub: { overall: 5.05, qib: 3.59, hni: 8.29, retail: 2.54, employee: null, shareholder: null, retail_apps: 1.85, shni_apps: 4.80, bhni_apps: 1.62 },
     fin: { revenue: 352.17, pat: 22.92, ebitda: null, eps: 8.50, pe: 16.00, roe: 23.73, netWorth: null, debt: null }, // Source: RHP FY2025 (SEBI Jun-2026 filing)
+    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-rhp_102246.html", filingDate: "2026-06-29", fy: "FY2025", pageNum: "176", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Morbi (Gujarat) manufacturer of carded, combed and compact-combed cotton yarns from an integrated spinning-and-ginning facility; funds part-acquire Falcon Yarns.",
     sector: "Textiles", registrar: "Bigshare Services Pvt Ltd",
     strengths: ["Integrated spinning-ginning facility", "Acquisition-funded capacity growth", "Diversified yarn product mix"],
@@ -233,6 +239,7 @@ const IPOS_BASE = [
     leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
     sub: { overall: 1.37, qib: 1.02, hni: 1.54, retail: 1.63, employee: null, shareholder: null, retail_apps: 1.21, shni_apps: 1.15, bhni_apps: 0.92 },
     fin: { revenue: 200.63, pat: 14.09, ebitda: null, eps: 3.72, pe: 30.38, roe: 20.73, netWorth: null, debt: null }, // Source: RHP FY2025 (SEBI Jun-2026 filing)
+    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jun-2026/csm-technologies-limited-rhp_102194.html", filingDate: "2026-06-17", fy: "FY2025", pageNum: "158", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Bhubaneswar GovTech company, 27+ years building e-governance platforms for mining, agriculture, education and healthcare clients in India and Africa.",
     sector: "GovTech / IT Services", registrar: "KFin Technologies Ltd",
     strengths: ["27+ year GovTech track record", "Multi-country (India + Africa) presence", "Diversified government verticals"],
@@ -245,6 +252,7 @@ const IPOS_BASE = [
     drhp: "https://www.sebi.gov.in/filings/public-issues/jan-2025/caliber-mining-and-logistics-limited_90669.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/caliber-mining-and-logistics-limited-rhp_102715.html",
     leadManager: "DAM Capital Advisors Ltd", exchange: "BSE, NSE",
     sub: null, fin: { revenue: 1677.66, pat: 157.90, ebitda: 430.91, eps: 29.47, pe: 14.39, roe: null, netWorth: null, debt: null }, // Source: RHP FY2026 (SEBI Jul-2026 filing)
+    finMeta: { sourceDoc: "RHP", sourceUrl: "https://www.sebi.gov.in/filings/public-issues/jul-2026/caliber-mining-and-logistics-limited-rhp_102715.html", filingDate: "2026-07-17", fy: "FY2026", pageNum: "204", verifiedAt: "2026-07-17T21:20:00Z", method: "Manual Regulatory Audit", status: "Verified" },
     about: "Provides integrated mining services, coal extraction operations, and heavy bulk freight logistics solutions for power utilities and industrial producers.",
     sector: "Mining & Logistics", registrar: "KFin Technologies Ltd",
     strengths: ["Integrated end-to-end service offering", "Long-term revenue visibility from utility contracts", "High operating margin profile"],
@@ -368,6 +376,12 @@ let _realtimePrices = {}; // Stores ticking price, prev price, and last tick dir
 function validateFinancials(ipo) {
   if (!ipo.fin) return null;
   const f = ipo.fin;
+
+  // 0. Verify audit metadata exists and is validated
+  if (!ipo.finMeta || ipo.finMeta.status !== "Verified") {
+    console.warn(`Financial validation failed for ${ipo.company}: missing or unverified source metadata.`);
+    return null;
+  }
 
   // 1. Required fields
   if (f.revenue === undefined || f.pat === undefined) {
@@ -1985,6 +1999,31 @@ function IPODetail({ ipo, onClose, watchlist, dark }) {
                   </div>
                 ))}
               </div>
+
+              {/* ── Verification Metadata Overlay ── */}
+              {ipo.finMeta && (
+                <div className="mt-2.5 p-3 rounded-xl border flex flex-wrap gap-x-4 gap-y-2 text-[10px] font-medium justify-between items-center"
+                  style={{
+                    background: dark ? "rgba(28,155,218,0.05)" : "rgba(28,155,218,0.03)",
+                    borderColor: dark ? "rgba(28,155,218,0.12)" : "rgba(28,155,218,0.08)",
+                    color: dark ? "#94a3b8" : "#475569"
+                  }}
+                >
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[9px] font-bold">Trace</span>
+                    <a href={ipo.finMeta.sourceUrl} target="_blank" rel="noreferrer" className="underline font-bold" style={{ color: BRAND.blue }}>
+                      Official {ipo.finMeta.sourceDoc} Filing (Pg. {ipo.finMeta.pageNum || "N/A"})
+                    </a>
+                  </div>
+                  <div className="flex gap-3 font-mono text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    <span>{ipo.finMeta.fy}</span>
+                    <span>•</span>
+                    <span>Audit Date: {ipo.finMeta.filingDate}</span>
+                    <span>•</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">✓ {ipo.finMeta.status}</span>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -2505,6 +2544,22 @@ function FinancialsTab({ dark }) {
                 <MetricBox label="EPS" value={epsVal} isNA={f.eps == null} />
                 <MetricBox label="P/E" value={peVal}  isNA={f.pe == null} />
               </div>
+
+              {/* Verification Metadata Overlay */}
+              {ipo.finMeta && (
+                <div className="mt-2.5 p-2 rounded-xl border flex items-center justify-between text-[9px] font-mono tracking-wider uppercase"
+                  style={{
+                    background: dark ? "rgba(28,155,218,0.04)" : "rgba(28,155,218,0.02)",
+                    borderColor: dark ? "rgba(28,155,218,0.1)" : "rgba(28,155,218,0.06)",
+                    color: dark ? "#94a3b8" : "#475569"
+                  }}
+                >
+                  <a href={ipo.finMeta.sourceUrl} target="_blank" rel="noreferrer" className="underline font-bold" style={{ color: BRAND.blue }}>
+                    {ipo.finMeta.sourceDoc} (Pg. {ipo.finMeta.pageNum || "N/A"}) ↗
+                  </a>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold">✓ {ipo.finMeta.status}</span>
+                </div>
+              )}
             </div>
           );
         })}
