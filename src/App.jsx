@@ -2636,14 +2636,23 @@ function DematTab({ dark }) {
 /* =====================================================================
    STAT CARD
 ===================================================================== */
-function StatCard({ icon: Icon, label, value, tint }) {
+function StatCard({ icon: Icon, label, value, tint, onClick }) {
+  const clickable = typeof onClick === "function";
   return (
-    <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow">
+    <div
+      onClick={onClick}
+      role={clickable ? "button" : undefined}
+      tabIndex={clickable ? 0 : undefined}
+      onKeyDown={clickable ? (e) => (e.key === "Enter" || e.key === " ") && onClick() : undefined}
+      className={`bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-4 flex items-center justify-between shadow-sm transition-all duration-200
+        ${clickable ? "cursor-pointer hover:shadow-lg hover:-translate-y-0.5 hover:border-blue-200 dark:hover:border-blue-900 active:scale-95" : ""}`}
+    >
       <div>
         <p className="text-3xl font-extrabold text-slate-850 dark:text-white font-mono tracking-tight leading-none">{value}</p>
         <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 font-semibold tracking-wide">{label}</p>
+        {clickable && <p className="text-[9px] text-slate-400 dark:text-slate-600 mt-1 tracking-wider uppercase">View all →</p>}
       </div>
-      <div className="w-11 h-11 rounded-full flex items-center justify-center shrink-0" style={{ background: tint }}>
+      <div className="w-11 h-11 rounded-full flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110" style={{ background: tint }}>
         <Icon size={18} color="#ffffff" strokeWidth={2.2} />
       </div>
     </div>
@@ -2981,10 +2990,10 @@ export default function App() {
 
                 {/* Stat cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  <StatCard icon={ArrowUpRight} label="Open IPOs" value={counts.Open} tint={BRAND.blue} />
-                  <StatCard icon={Clock} label="Closed IPOs" value={counts.Closed} tint={BRAND.blue} />
-                  <StatCard icon={Calendar} label="Upcoming" value={counts.Upcoming} tint={BRAND.blue} />
-                  <StatCard icon={LayoutGrid} label="Listed" value={counts.Listed} tint={BRAND.blue} />
+                  <StatCard icon={ArrowUpRight} label="Open IPOs" value={counts.Open} tint={BRAND.blue} onClick={() => setTab("open")} />
+                  <StatCard icon={Clock} label="Closed IPOs" value={counts.Closed} tint={BRAND.blue} onClick={() => setTab("closed")} />
+                  <StatCard icon={Calendar} label="Upcoming" value={counts.Upcoming} tint={BRAND.blue} onClick={() => setTab("upcoming")} />
+                  <StatCard icon={LayoutGrid} label="Listed" value={counts.Listed} tint={BRAND.blue} onClick={() => setTab("listed")} />
                 </div>
 
                 {/* IPO lists grouped by status */}
