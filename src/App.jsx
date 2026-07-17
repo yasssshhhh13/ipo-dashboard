@@ -2585,46 +2585,7 @@ export default function App() {
       });
   }, []);
 
-  if (loadingDb) {
-    return (
-      <div className="h-screen w-screen flex flex-col items-center justify-center dark" style={{
-        background: "radial-gradient(circle at 30% 50%, rgba(28,155,218,0.18), transparent 60%), radial-gradient(circle at 80% 20%, rgba(174,215,104,0.06), transparent 50%), #0a0d16",
-        color: "#e2e8f0",
-        fontFamily: "'Outfit', 'Inter', sans-serif"
-      }}>
-        <div className="flex flex-col items-center space-y-6 text-center">
-          <img src="/logo.png" alt="Calm Capital Logo" className="w-16 h-16 object-contain rounded-2xl shadow-[0_0_30px_rgba(28,155,218,0.3)] animate-spin-slow" />
-          <div className="space-y-1 animate-pulse">
-            <h1 className="text-2xl font-bold tracking-tight">Calm Capital</h1>
-            <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase">Designed by Discipline</p>
-          </div>
-          <div className="flex flex-col items-center space-y-2 pt-4">
-            <div className="w-48 h-1 bg-slate-850 rounded-full overflow-hidden relative">
-              <div className="absolute top-0 bottom-0 left-0 bg-blue-500 rounded-full animate-loading-bar" style={{ width: "30%" }}></div>
-            </div>
-            <p className="text-[11px] font-medium text-slate-500 tracking-wider uppercase">Loading IPO Intelligence...</p>
-          </div>
-        </div>
-        <style>{`
-          @keyframes loadingBar {
-            0% { left: -30%; width: 30%; }
-            50% { left: 40%; width: 40%; }
-            100% { left: 100%; width: 30%; }
-          }
-          .animate-loading-bar {
-            animation: loadingBar 1.5s infinite ease-in-out;
-          }
-          @keyframes spinSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-          .animate-spin-slow {
-            animation: spinSlow 8s infinite linear;
-          }
-        `}</style>
-      </div>
-    );
-  }
+
   const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
   const [sidebarOpen, setSidebarOpen] = useState(() => !isMobile());
   const [dark, setDark] = useState(() => {
@@ -2772,6 +2733,47 @@ export default function App() {
   const refresh = () => { setRefreshing(true); syncNow().finally(() => setTimeout(() => setRefreshing(false), 900)); };
 
   const groupedFiltered = (status) => sortIposLogically(filtered.filter((i) => i.status === status));
+
+  if (loadingDb) {
+    return (
+      <div className="h-screen w-screen flex flex-col items-center justify-center dark" style={{
+        background: "radial-gradient(circle at 30% 50%, rgba(28,155,218,0.18), transparent 60%), radial-gradient(circle at 80% 20%, rgba(174,215,104,0.06), transparent 50%), #0a0d16",
+        color: "#e2e8f0",
+        fontFamily: "'Outfit', 'Inter', sans-serif"
+      }}>
+        <div className="flex flex-col items-center space-y-6 text-center">
+          <img src="/logo.png" alt="Calm Capital Logo" className="w-16 h-16 object-contain rounded-2xl shadow-[0_0_30px_rgba(28,155,218,0.3)] animate-spin-slow" />
+          <div className="space-y-1 animate-pulse">
+            <h1 className="text-2xl font-bold tracking-tight">Calm Capital</h1>
+            <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase">Designed by Discipline</p>
+          </div>
+          <div className="flex flex-col items-center space-y-2 pt-4">
+            <div className="w-48 h-1 bg-slate-850 rounded-full overflow-hidden relative">
+              <div className="absolute top-0 bottom-0 left-0 bg-blue-500 rounded-full animate-loading-bar" style={{ width: "30%" }}></div>
+            </div>
+            <p className="text-[11px] font-medium text-slate-500 tracking-wider uppercase">Loading IPO Intelligence...</p>
+          </div>
+        </div>
+        <style>{`
+          @keyframes loadingBar {
+            0% { left: -30%; width: 30%; }
+            50% { left: 40%; width: 40%; }
+            100% { left: 100%; width: 30%; }
+          }
+          .animate-loading-bar {
+            animation: loadingBar 1.5s infinite ease-in-out;
+          }
+          @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          .animate-spin-slow {
+            animation: spinSlow 8s infinite linear;
+          }
+        `}</style>
+      </div>
+    );
+  }
 
   return (
     <div className={dark ? "dark" : ""}>
