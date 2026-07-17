@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-17T10:44:27.477Z",
+  "updatedAt": "2026-07-17T12:07:02.991Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -11,25 +11,25 @@
       "priceMax": 424,
       "estListing": 538,
       "sub": {
-        "overall": 1.13,
+        "overall": 1.28,
         "qib": 0.31,
-        "snii": 1.89,
-        "bnii": 1.18,
-        "hni": 1.42,
-        "retail": 1.47
+        "snii": 2.24,
+        "bnii": 1.4,
+        "hni": 1.68,
+        "retail": 1.67
       }
     },
     "sotefin-bharat": {
-      "gmp": 18,
+      "gmp": 13,
       "priceMax": 187,
-      "estListing": 205,
+      "estListing": 200,
       "sub": {
-        "overall": 0.74,
+        "overall": 0.8,
         "qib": 0.13,
-        "snii": 0.59,
-        "bnii": 1.22,
-        "hni": 1.01,
-        "retail": 0.97
+        "snii": 0.62,
+        "bnii": 1.43,
+        "hni": 1.16,
+        "retail": 1.02
       }
     },
     "sbi-funds": {
