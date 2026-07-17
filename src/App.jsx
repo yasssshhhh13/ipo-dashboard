@@ -129,7 +129,7 @@ const IPOS_BASE = [
   { id: "teja-engineering", name: "Teja Engineering", company: "Teja Engineering Industries Ltd.", type: "SME", status: "Listed",
     open: "2026-06-30", close: "2026-07-02", listing: "2026-07-07", allotment: "2026-07-03", refund: "2026-07-04", demat: "2026-07-04",
     priceMin: 220, priceMax: 220, faceValue: 10, lot: 600, issueSize: 37.36, freshIssue: 37.36, ofs: 0,
-    gmp: 3, trend: "stable", estListing: 223, listedAt: 220, currentPrice: 215,
+    gmp: 3, trend: "stable", estListing: 223, listedAt: 418, currentPrice: 215,
     gmpHistory: [{ d: "Jun27", v: 0 }, { d: "Jun29", v: 0 }, { d: "Jun30", v: 0 }, { d: "Jul1", v: 0 }, { d: "Jul2", v: 3 }],
     drhp: "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_07042025160753_DRHP.pdf", rhp: null,
     leadManager: "B.N. Rathi Securities", exchange: "NSE Emerge",
@@ -157,7 +157,7 @@ const IPOS_BASE = [
   { id: "sampark-logistics", name: "Sampark India Logistics", company: "Sampark India Logistics Ltd.", type: "SME", status: "Listed",
     open: "2026-06-30", close: "2026-07-02", listing: "2026-07-07", allotment: "2026-07-03", refund: "2026-07-04", demat: "2026-07-04",
     priceMin: 80, priceMax: 84, faceValue: 10, lot: 1600, issueSize: 27.22, freshIssue: 27.22, ofs: 0,
-    gmp: 0, trend: "stable", estListing: 84, listedAt: 84, currentPrice: 82,
+    gmp: 0, trend: "stable", estListing: 84, listedAt: 89, currentPrice: 82,
     gmpHistory: [{ d: "Jun28", v: 3 }, { d: "Jun30", v: 2 }, { d: "Jul1", v: 1 }, { d: "Jul2", v: 0 }],
     drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
     leadManager: "Corpwis Advisors", exchange: "NSE Emerge",
@@ -185,7 +185,7 @@ const IPOS_BASE = [
   { id: "seemax-resources", name: "Seemax Resources", company: "Seemax Resources Ltd.", type: "SME", status: "Listed",
     open: "2026-06-30", close: "2026-07-02", listing: "2026-07-07", allotment: "2026-07-03", refund: "2026-07-04", demat: "2026-07-04",
     priceMin: 134, priceMax: 141, faceValue: 10, lot: 1000, issueSize: 19.74, freshIssue: 19.74, ofs: 0,
-    gmp: 0, trend: "stable", estListing: 141, listedAt: 141, currentPrice: 138,
+    gmp: 0, trend: "stable", estListing: 141, listedAt: 112.8, currentPrice: 138,
     gmpHistory: [{ d: "Jun28", v: 2 }, { d: "Jun30", v: 1 }, { d: "Jul1", v: 0 }, { d: "Jul2", v: 0 }],
     drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
     leadManager: "Fedex Securities", exchange: "NSE Emerge",
@@ -199,7 +199,7 @@ const IPOS_BASE = [
   { id: "aastha-spintex", name: "Aastha Spintex", company: "Aastha Spintex Ltd.", type: "Mainboard", status: "Listed",
     open: "2026-06-29", close: "2026-07-01", listing: "2026-07-06", allotment: "2026-07-02", refund: "2026-07-03", demat: "2026-07-03",
     priceMin: 125, priceMax: 136, faceValue: 10, lot: 110, issueSize: 170, freshIssue: 130, ofs: 40,
-    gmp: 2, trend: "down", estListing: 138, listedAt: 136, currentPrice: 130,
+    gmp: 2, trend: "down", estListing: 138, listedAt: 130, currentPrice: 130,
     gmpHistory: [{ d: "Jun25", v: 4 }, { d: "Jun26", v: 5.25 }, { d: "Jun27", v: 5 }, { d: "Jun28", v: 5.25 }, { d: "Jun29", v: 5.75 }, { d: "Jul1", v: 2 }],
     drhp: "https://www.sebi.gov.in/filings/public-issues/oct-2025/aastha-spintex-limited-drhp_97148.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-rhp_102246.html",
     leadManager: "Corporate Capital Ventures", exchange: "BSE, NSE",
@@ -213,7 +213,7 @@ const IPOS_BASE = [
   { id: "adon-agro", name: "Adon Agro", company: "Adon Agro Commodities Ltd.", type: "SME", status: "Listed",
     open: "2026-06-29", close: "2026-07-01", listing: "2026-07-06", allotment: "2026-07-02", refund: "2026-07-03", demat: "2026-07-03",
     priceMin: 66, priceMax: 70, faceValue: 10, lot: 2000, issueSize: 44.03, freshIssue: 44.03, ofs: 0,
-    gmp: 0, trend: "stable", estListing: 70, listedAt: 70, currentPrice: 68,
+    gmp: 0, trend: "stable", estListing: 70, listedAt: 78.25, currentPrice: 68,
     gmpHistory: [{ d: "Jun26", v: 2 }, { d: "Jun28", v: 1 }, { d: "Jun29", v: 0 }, { d: "Jul1", v: 0 }],
     drhp: "https://www.nseindia.com/companies-listing/corporate-filings-offer-documents", rhp: null,
     leadManager: "Fedex Securities", exchange: "NSE Emerge",
@@ -242,7 +242,7 @@ const IPOS_BASE = [
     open: "2026-07-17", close: "2026-07-21", listing: "2026-07-24", allotment: "2026-07-22", refund: "2026-07-23", demat: "2026-07-23",
     priceMin: 402, priceMax: 424, faceValue: 10, lot: 35, issueSize: 450, freshIssue: 400, ofs: 50,
     gmp: 100, trend: "up", estListing: 524, gmpHistory: [{ d: "Jul14", v: 92 }, { d: "Jul15", v: 98 }, { d: "Jul16", v: 100 }],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/dec-2023/ola-electric-mobility-limited-drhp_80231.html", rhp: null,
+    drhp: "https://www.sebi.gov.in/filings/public-issues/jan-2025/caliber-mining-and-logistics-limited_90669.html", rhp: "https://www.sebi.gov.in/filings/public-issues/jul-2026/caliber-mining-and-logistics-limited-rhp_102715.html",
     leadManager: "DAM Capital Advisors Ltd", exchange: "BSE, NSE",
     sub: null, fin: { revenue: 382.4, pat: 42.1, ebitda: 85.6, eps: 12.0, pe: 35.3, roe: 18.5, netWorth: 227.4, debt: 45.1 },
     about: "Provides integrated mining services, coal extraction operations, and heavy bulk freight logistics solutions for power utilities and industrial producers.",
@@ -254,7 +254,7 @@ const IPOS_BASE = [
     open: "2026-07-22", close: "2026-07-24", listing: "2026-07-29", allotment: "2026-07-25", refund: "2026-07-28", demat: "2026-07-28",
     priceMin: 151, priceMax: 152, faceValue: 10, lot: 95, issueSize: 5000, freshIssue: 0, ofs: 5000,
     gmp: 0, trend: "stable", estListing: 152, gmpHistory: [{ d: "Jul14", v: 0 }, { d: "Jul16", v: 0 }],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/dec-2023/brainbees-solutions-limited-drhp_80210.html", rhp: null,
+    drhp: "https://www.sebi.gov.in/filings/invit-public-issues.html", rhp: null,
     leadManager: "DAM Capital, Kotak Mahindra", exchange: "BSE, NSE",
     sub: null, fin: { revenue: 1420.5, pat: 285.4, ebitda: null, eps: null, pe: null, roe: null, netWorth: null, debt: null },
     about: "Infrastructure Investment Trust (InvIT) focused on holding and operating a diversified portfolio of toll and annuity road assets across major national highway corridors in India.",
@@ -266,7 +266,7 @@ const IPOS_BASE = [
     open: "2026-07-16", close: "2026-07-20", listing: "2026-07-23", allotment: "2026-07-21", refund: "2026-07-22", demat: "2026-07-22",
     priceMin: 178, priceMax: 187, faceValue: 10, lot: 600, issueSize: 89.76, freshIssue: 89.76, ofs: 0,
     gmp: 18, trend: "up", estListing: 205, gmpHistory: [{ d: "Jul14", v: 12 }, { d: "Jul16", v: 18 }],
-    drhp: "https://www.sebi.gov.in/filings/public-issues/jan-2024/unicommerce-esolutions-limited-drhp_80718.html", rhp: null,
+    drhp: "https://www.bsesme.com/PublicIssues/PublicIssues.aspx?id=1", rhp: null,
     leadManager: "Fedex Securities", exchange: "BSE SME",
     sub: null, fin: { revenue: 54.12, pat: 8.4, ebitda: 14.2, eps: 14.0, pe: 13.3, roe: 24.2, netWorth: 34.6, debt: 5.1 },
     about: "Designs, manufactures, and installs automated smart car parking systems, mechanical lifts, and multi-level parking solutions for premium real estate developers and municipal corporations.",
@@ -312,7 +312,7 @@ const IPOS_BASE = [
 ];
 
 const DATA_AS_OF = "July 3, 2026";
-const rupee = (n) => (n == null || isNaN(n)) ? "-" : `₹${Number(n).toLocaleString("en-IN")}`;
+const rupee = (n) => (n == null || isNaN(n)) ? "-" : (n < 0 ? `-₹${Number(Math.abs(n)).toLocaleString("en-IN")}` : `₹${Number(n).toLocaleString("en-IN")}`);
 const cr = (n) => (n == null || isNaN(n)) ? "-" : `₹${Number(n).toLocaleString("en-IN", { maximumFractionDigits: 2 })} Cr`;
 const formatDate = (dateStr) => {
   if (!dateStr) return "To Be Announced";
@@ -325,7 +325,7 @@ const profitPerLot = (i) => (!i.lot || !i.gmp) ? 0 : i.gmp * i.lot;
 const investment = (i) => { const p = price(i); return (p && i.lot) ? p * i.lot : null; };
 const gainPct = (i) => { const p = price(i); return p ? (i.gmp / p) * 100 : 0; };
 const listingGainPct = (i) => (i.listedAt && i.priceMax) ? ((i.listedAt - i.priceMax) / i.priceMax) * 100 : null;
-const currentReturnPct = (i) => (i.currentPrice && i.listedAt) ? ((i.currentPrice - i.listedAt) / i.listedAt) * 100 : null;
+const currentReturnPct = (i) => (i.currentPrice && i.priceMax) ? ((i.currentPrice - i.priceMax) / i.priceMax) * 100 : null;
 const listingProfitLossPerLot = (i) => (i.listedAt && i.priceMax && i.lot) ? (i.listedAt - i.priceMax) * i.lot : null;
 
 // A few SME IPOs don't have a confirmed direct SEBI/exchange document URL yet —
@@ -361,6 +361,7 @@ function liveStatus(ipo, today) {
 // Populated by fetchLiveData() below; getLiveIPOS() overlays it onto the
 // verified baseline so every part of the app reads through one function.
 let _liveOverlay = { updatedAt: null, byId: {} };
+let _realtimePrices = {}; // Stores ticking price, prev price, and last tick direction/timestamp for animations
 
 function getLiveIPOS() {
   const today = new Date();
@@ -372,6 +373,10 @@ function getLiveIPOS() {
       if (ipo.sub && patch.sub) {
         merged.sub = { ...ipo.sub, ...patch.sub };
       }
+    }
+    // Overlay real-time simulation price if registered
+    if (_realtimePrices[ipo.id]) {
+      merged = { ...merged, currentPrice: _realtimePrices[ipo.id].price };
     }
     return { ...merged, status: liveStatus(merged, today) };
   });
@@ -703,7 +708,7 @@ async function fetchLiveData(rawUrl) {
 function formatDataAsOf() {
   return _liveOverlay.updatedAt
     ? new Date(_liveOverlay.updatedAt).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
-    : `${DATA_AS_OF} baseline — live sync pending first Action run`;
+    : DATA_AS_OF;
 }
 
 const STATUS_COLOR = { Open: BRAND.green, Closed: "#94A3B8", Upcoming: "#F0A202", Listed: BRAND.blue };
@@ -1206,7 +1211,7 @@ function CompanyAvatar({ name, size = 40 }) {
 /* =====================================================================
    IPO CARD
 ===================================================================== */
-function IPOCard({ ipo, onOpen, watchlist }) {
+function IPOCard({ ipo, onOpen, watchlist, dark }) {
   const watched = watchlist.ids.includes(ipo.id);
   const isListed = ipo.status === "Listed";
   const isClosed = ipo.status === "Closed";
@@ -1228,83 +1233,70 @@ function IPOCard({ ipo, onOpen, watchlist }) {
       onClick={() => onOpen(ipo)}
     >
       {/* Blue left accent bar for Open IPOs */}
-      {isOpen && <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl" style={{ background: BRAND.blue }} />}
+      {isOpen && (
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#1c9bda] to-[#0a66c2]" />
+      )}
 
-      <div className="p-4 pl-5">
-        {/* Header row: avatar + company info + status badge */}
+      <div className="p-5">
+        {/* Row 1: Company Logo, Name, Sector and Bookmark */}
         <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-3 min-w-0">
+          <div className="flex items-center gap-3">
             <CompanyAvatar name={ipo.company} size={42} />
             <div className="min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <h3 className="font-bold text-slate-850 dark:text-white text-sm leading-snug">{ipo.company}</h3>
-                <span
-                  className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded font-bold"
-                  style={{ background: ipo.type === "Mainboard" ? "rgba(28,155,218,0.12)" : "rgba(139,92,246,0.12)", color: ipo.type === "Mainboard" ? BRAND.blue : "#8b5cf6" }}
-                >
-                  {ipo.type}
+                <h3 className="font-bold text-slate-800 dark:text-white text-[15px] leading-tight truncate">{ipo.company}</h3>
+                <span className="text-[9px] uppercase tracking-wide font-extrabold px-2 py-0.5 rounded-full" style={{ background: ss.bg, color: ss.color, border: `1px solid ${ss.border}` }}>
+                  {ipo.status}
                 </span>
-              </div>
-              <div className="flex items-center gap-2 mt-0.5">
-                <p className="text-xs text-slate-500 dark:text-slate-400">{ipo.sector}</p>
-                {isOpen && (
-                  <span className="flex items-center gap-1.5 text-[10px] font-semibold" style={{ color: "#10b981" }}>
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-                    </span>
-                    Live Data
+                {ipo.type === "SME" && (
+                  <span className="text-[9px] uppercase tracking-wide font-extrabold px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/25">
+                    SME
                   </span>
                 )}
               </div>
+              <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 truncate">{ipo.sector}</p>
             </div>
           </div>
-          {/* Status badge */}
-          <div className="flex flex-col items-end gap-2 shrink-0">
-            <span
-              className="text-[11px] font-semibold px-2.5 py-1 rounded-lg border"
-              style={{ background: ss.bg, color: ss.color, borderColor: ss.border }}
-            >
-              {ipo.status}
-            </span>
-            <button
-              onClick={(e) => { e.stopPropagation(); watchlist.toggle(ipo.id); }}
-              className="text-slate-400 hover:text-amber-500 transition-colors"
-              title={watched ? "Remove from watchlist" : "Add to watchlist"}
-            >
-              {watched ? <BookmarkCheck size={16} style={{ color: BRAND.blue }} /> : <Bookmark size={16} />}
-            </button>
-          </div>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); watchlist.toggle(ipo.id); }}
+            className="text-slate-300 dark:text-slate-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors cursor-pointer"
+          >
+            {watched ? <BookmarkCheck size={18} style={{ color: BRAND.blue }} /> : <Bookmark size={18} />}
+          </button>
         </div>
 
-        {/* GMP row for non-listed */}
-        {!isListed && ipo.gmp !== null && (
-          <div className="flex items-center gap-1.5 mt-3">
-            <TrendIcon trend={ipo.trend} size={12} />
-            <span className="font-mono text-sm font-bold" style={{ color: ipo.gmp > 0 ? "#0f9d68" : "#64748b" }}>
-              {rupee(ipo.gmp)}
-            </span>
-            <span className="text-xs font-semibold" style={{ color: ipo.gmp > 0 ? "#10b981" : "#94a3b8" }}>
-              GMP {ipo.gmp > 0 ? `+${gainPct(ipo).toFixed(1)}%` : `${gainPct(ipo).toFixed(1)}%`}
-            </span>
-          </div>
-        )}
-        {!isListed && ipo.gmp === null && (
-          <div className="flex items-center gap-1.5 mt-3 text-slate-400 text-xs font-medium">
-            <Minus size={12} className="text-slate-400" />
-            <span>GMP: -</span>
-          </div>
-        )}
-
         {/* Listing gain for listed */}
-        {isListed && ipo.listedAt && (
-          <div className="flex items-center gap-1.5 mt-3">
-            {listingGainPct(ipo) >= 0 ? <ArrowUpRight size={13} style={{ color: BRAND.green }} /> : <ArrowDownRight size={13} className="text-rose-500" />}
-            <span className="text-sm font-bold font-mono" style={{ color: listingGainPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>
-              Listed · {listingGainPct(ipo)?.toFixed(1)}%
-            </span>
-          </div>
-        )}
+        {isListed && ipo.listedAt && (() => {
+          const gain = listingGainPct(ipo);
+          if (gain > 0) {
+            return (
+              <div className="flex items-center gap-1.5 mt-3">
+                <ArrowUpRight size={13} style={{ color: BRAND.green }} />
+                <span className="text-sm font-bold font-mono" style={{ color: "#0f9d68" }}>
+                  Listed · {gain.toFixed(1)}%
+                </span>
+              </div>
+            );
+          } else if (gain < 0) {
+            return (
+              <div className="flex items-center gap-1.5 mt-3">
+                <ArrowDownRight size={13} className="text-rose-500" />
+                <span className="text-sm font-bold font-mono" style={{ color: "#e11d48" }}>
+                  Listed · {gain.toFixed(1)}%
+                </span>
+              </div>
+            );
+          } else {
+            return (
+              <div className="flex items-center gap-1.5 mt-3">
+                <span className="text-sm font-bold font-mono text-slate-500 dark:text-slate-400">
+                  Listed · 0.0%
+                </span>
+              </div>
+            );
+          }
+        })()}
 
         {/* Divider */}
         <div className="mt-3 mb-3 border-t border-slate-100 dark:border-white/5" />
@@ -1335,29 +1327,52 @@ function IPOCard({ ipo, onOpen, watchlist }) {
           )}
 
           {/* Listed: show P&L per lot */}
-          {isListed && ipo.listedAt && (
-            <div
-              className="rounded-xl px-3 py-2 text-right shrink-0"
-              style={{ background: listingGainPct(ipo) >= 0 ? `${BRAND.green}22` : "rgba(225,29,72,0.10)" }}
-            >
-              <p className={`text-[10px] font-semibold leading-none mb-1 ${listingGainPct(ipo) >= 0 ? "text-profit" : "text-loss"}`}>P&L / lot</p>
-              <p className={`font-mono font-bold text-sm ${listingGainPct(ipo) >= 0 ? "text-profit" : "text-loss"}`}>
-                {listingProfitLossPerLot(ipo) >= 0 ? "+" : ""}{rupee(listingProfitLossPerLot(ipo))}
-              </p>
-            </div>
-          )}
+          {isListed && ipo.listedAt && (() => {
+            const gain = listingGainPct(ipo);
+            const pnl = listingProfitLossPerLot(ipo);
+            let bg, textClass, prefix = "";
+            if (gain > 0) {
+              bg = `${BRAND.green}22`;
+              textClass = "text-profit";
+              prefix = "+";
+            } else if (gain < 0) {
+              bg = "rgba(225,29,72,0.10)";
+              textClass = "text-loss";
+            } else {
+              bg = dark ? "rgba(148,163,184,0.15)" : "rgba(148,163,184,0.12)";
+              textClass = "text-slate-500 dark:text-slate-400";
+            }
+            const tData = _realtimePrices[ipo.id];
+            const isFreshTick = tData && (Date.now() - tData.tickTime < 1200);
+            const animClass = isFreshTick ? (tData.lastTick === "up" ? "animate-tick-up" : "animate-tick-down") : "";
+            return (
+              <div className={`rounded-xl px-3 py-2 text-right shrink-0 transition-all ${animClass}`} style={{ background: bg }}>
+                <p className={`text-[10px] font-semibold leading-none mb-1 ${textClass}`}>P&L / lot</p>
+                <p className={`font-mono font-bold text-sm ${textClass}`}>
+                  {prefix}{rupee(pnl)}
+                </p>
+              </div>
+            );
+          })()}
         </div>
 
         {/* Since listing row */}
-        {isListed && ipo.currentPrice && (
-          <div className="flex items-center justify-between mt-2 text-[11px]">
-            <span className="text-slate-400">Since listing</span>
-            <span className="font-mono flex items-center gap-0.5" style={{ color: currentReturnPct(ipo) >= 0 ? "#0f9d68" : "#e11d48" }}>
-              {currentReturnPct(ipo) >= 0 ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
-              {currentReturnPct(ipo)?.toFixed(1)}%
-            </span>
-          </div>
-        )}
+        {isListed && ipo.currentPrice && (() => {
+          const ret = currentReturnPct(ipo);
+          let color = "#64748b";
+          if (ret > 0) color = "#0f9d68";
+          else if (ret < 0) color = "#e11d48";
+          
+          return (
+            <div className="flex items-center justify-between mt-2 text-[11px]">
+              <span className="text-slate-400">Current Return</span>
+              <span className="font-mono flex items-center gap-0.5" style={{ color }}>
+                {ret > 0 ? <ArrowUpRight size={12} /> : ret < 0 ? <ArrowDownRight size={12} /> : null}
+                {ret?.toFixed(1)}%
+              </span>
+            </div>
+          );
+        })()}
 
         {/* Premium IPO Timeline (4-steps) */}
         <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/5">
@@ -1387,7 +1402,7 @@ function IPOCard({ ipo, onOpen, watchlist }) {
 
           {/* Action Row */}
           <div className="flex items-center justify-between mt-3 text-[11px]">
-            <span className="text-slate-400 dark:text-slate-500">
+            <span className="text-slate-400 dark:text-slate-550">
               {ipo.status === "Listed" && ipo.listing && (
                 <span className="font-semibold text-slate-500 dark:text-slate-400">Listed on {formatDate(ipo.listing)}</span>
               )}
@@ -1409,9 +1424,16 @@ function ListedIPOCard({ ipo, onOpen, watchlist }) {
   const watched = watchlist.ids.includes(ipo.id);
   const gain = listingGainPct(ipo);
   const currentRet = currentReturnPct(ipo);
-  const gainPositive = gain != null ? gain >= 0 : true;
-  const currentPositive = currentRet != null ? currentRet >= 0 : true;
-  const gainColor = gainPositive ? "#16a34a" : "#e11d48";
+
+  // Three-state listing gain color
+  let gainColor = "#64748b";
+  if (gain > 0) gainColor = "#16a34a";
+  else if (gain < 0) gainColor = "#e11d48";
+
+  // Three-state current return since listing color
+  let currentColor = "#64748b";
+  if (currentRet > 0) currentColor = "#16a34a";
+  else if (currentRet < 0) currentColor = "#e11d48";
 
   return (
     <div
@@ -1445,7 +1467,7 @@ function ListedIPOCard({ ipo, onOpen, watchlist }) {
         {/* Big listing gain headline */}
         <div className="mt-4 mb-4">
           <p className="text-2xl font-extrabold tracking-tight" style={{ color: gainColor }}>
-            Listed{gain != null ? ` • ${gain >= 0 ? "" : ""}${gain.toFixed(1)}%` : " — awaiting data"}
+            Listed{gain != null ? ` • ${gain.toFixed(1)}%` : " — awaiting data"}
           </p>
         </div>
 
@@ -1463,20 +1485,29 @@ function ListedIPOCard({ ipo, onOpen, watchlist }) {
               className="font-mono font-bold text-sm flex items-center gap-0.5"
               style={{ color: gainColor }}
             >
-              {gain != null && (gainPositive ? <ArrowUpRight size={13} /> : <ArrowDownRight size={13} />)}
+              {gain != null && gain > 0 && <ArrowUpRight size={13} />}
+              {gain != null && gain < 0 && <ArrowDownRight size={13} />}
               {gain != null ? `${gain.toFixed(1)}%` : "—"}
             </p>
           </div>
-          <div>
-            <p className="text-slate-500 dark:text-slate-400 mb-1">Current Gain Since Listing</p>
-            <p
-              className="font-mono font-bold text-sm flex items-center gap-0.5"
-              style={{ color: currentPositive ? "#16a34a" : "#e11d48" }}
-            >
-              {currentRet != null && (currentPositive ? <ArrowUpRight size={13} /> : <ArrowDownRight size={13} />)}
-              {currentRet != null ? `${currentRet.toFixed(1)}%` : "—"}
-            </p>
-          </div>
+          {(() => {
+            const tData = _realtimePrices[ipo.id];
+            const isFreshTick = tData && (Date.now() - tData.tickTime < 1200);
+            const animClass = isFreshTick ? (tData.lastTick === "up" ? "animate-tick-up" : "animate-tick-down") : "";
+            return (
+              <div className={`p-1 rounded-xl transition-all ${animClass}`}>
+                <p className="text-slate-500 dark:text-slate-400 mb-1">Current Return</p>
+                <p
+                  className="font-mono font-bold text-sm flex items-center gap-0.5"
+                  style={{ color: currentColor }}
+                >
+                  {currentRet != null && currentRet > 0 && <ArrowUpRight size={13} />}
+                  {currentRet != null && currentRet < 0 && <ArrowDownRight size={13} />}
+                  {currentRet != null ? `${currentRet.toFixed(1)}%` : "—"}
+                </p>
+              </div>
+            );
+          })()}
         </div>
 
         {/* Divider */}
@@ -1516,7 +1547,7 @@ function ListedIPOCard({ ipo, onOpen, watchlist }) {
 /* =====================================================================
    IPO DETAIL MODAL
 ===================================================================== */
-function IPODetail({ ipo, onClose, watchlist }) {
+function IPODetail({ ipo, onClose, watchlist, dark }) {
   if (!ipo) return null;
   const watched = watchlist.ids.includes(ipo.id);
   const today = new Date();
@@ -1532,12 +1563,16 @@ function IPODetail({ ipo, onClose, watchlist }) {
 
   return (
     <div
-      className="fixed inset-0 z-40 bg-black/60 backdrop-blur-md flex items-center justify-center p-4"
+      className="fixed inset-0 z-40 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
-        style={{ background: "#111827", border: "1px solid rgba(255,255,255,0.08)" }}
+        className="rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transition-colors"
+        style={{
+          background: dark ? "#111827" : "#ffffff",
+          border: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)",
+          color: dark ? "#ffffff" : "#1e293b"
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* ── Top toolbar ── */}
@@ -1545,15 +1580,22 @@ function IPODetail({ ipo, onClose, watchlist }) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => watchlist.toggle(ipo.id)}
-              className="w-9 h-9 rounded-xl flex items-center justify-center border transition-colors"
-              style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)", color: watched ? BRAND.blue : "#94a3b8" }}
+              className="w-9 h-9 rounded-xl flex items-center justify-center border transition-colors cursor-pointer"
+              style={{
+                background: dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)",
+                borderColor: dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)",
+                color: watched ? BRAND.blue : (dark ? "#94a3b8" : "#475569")
+              }}
             >
               {watched ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
             </button>
             <button
               onClick={onClose}
-              className="w-9 h-9 rounded-xl flex items-center justify-center border transition-colors text-slate-400 hover:text-white"
-              style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)" }}
+              className="w-9 h-9 rounded-xl flex items-center justify-center border transition-colors text-slate-400 dark:hover:text-white hover:text-slate-800 cursor-pointer"
+              style={{
+                background: dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)",
+                borderColor: dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"
+              }}
             >
               <X size={16} />
             </button>
@@ -1572,7 +1614,7 @@ function IPODetail({ ipo, onClose, watchlist }) {
           <CompanyAvatar name={ipo.company} size={52} />
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2.5 flex-wrap">
-              <h2 className="text-xl font-extrabold text-white tracking-tight">{ipo.company}</h2>
+              <h2 className="text-xl font-extrabold tracking-tight" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{ipo.company}</h2>
               <span
                 className="text-[10px] font-bold uppercase px-2.5 py-1 rounded-full tracking-wider"
                 style={
@@ -1584,7 +1626,7 @@ function IPODetail({ ipo, onClose, watchlist }) {
                 {ipo.type === "Mainboard" ? "MAINBOARD" : "SME"}
               </span>
             </div>
-            <p className="text-sm mt-1" style={{ color: "#94a3b8" }}>
+            <p className="text-sm mt-1" style={{ color: dark ? "#94a3b8" : "#475569" }}>
               {ipo.sector} · Exchange: {ipo.exchange} · Lead Manager: {ipo.leadManager}
             </p>
           </div>
@@ -1592,7 +1634,7 @@ function IPODetail({ ipo, onClose, watchlist }) {
 
         <div className="px-5 pb-5 space-y-5">
           {/* About */}
-          <p className="text-sm leading-relaxed" style={{ color: "#94a3b8" }}>{ipo.about}</p>
+          <p className="text-sm leading-relaxed" style={{ color: dark ? "#94a3b8" : "#475569" }}>{ipo.about}</p>
 
           {/* ── 3 key metric cards ── */}
           <div className="grid grid-cols-3 gap-3">
@@ -1604,10 +1646,13 @@ function IPODetail({ ipo, onClose, watchlist }) {
               <div
                 key={label}
                 className="rounded-2xl p-4"
-                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                style={{
+                  background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+                  border: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)"
+                }}
               >
                 <p className="text-xs font-medium mb-1.5" style={{ color: "#64748b" }}>{label}</p>
-                <p className="text-xl font-extrabold text-white font-mono tracking-tight">{value}</p>
+                <p className="text-xl font-extrabold font-mono tracking-tight" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{value}</p>
               </div>
             ))}
           </div>
@@ -1620,22 +1665,35 @@ function IPODetail({ ipo, onClose, watchlist }) {
               ["Fresh issue", ipo.freshIssue ? `₹${ipo.freshIssue} Cr` : "-"],
               ["OFS", ipo.ofs ? `₹${ipo.ofs} Cr` : "-"],
             ].map(([l, v]) => (
-              <div key={l} className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+              <div
+                key={l}
+                className="rounded-xl p-3"
+                style={{
+                  background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.015)",
+                  border: dark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.04)"
+                }}
+              >
                 <p className="text-[10px] font-medium mb-1" style={{ color: "#64748b" }}>{l}</p>
-                <p className="font-mono text-sm font-semibold text-white">{v}</p>
+                <p className="font-mono text-sm font-semibold" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{v}</p>
               </div>
             ))}
           </div>
 
           {/* ── Important Dates timeline ── */}
-          <div className="rounded-2xl p-4" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          <div
+            className="rounded-2xl p-4"
+            style={{
+              background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+              border: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)"
+            }}
+          >
             <p className="text-[11px] font-bold uppercase tracking-widest mb-4" style={{ color: "#64748b" }}>
               Important Dates
             </p>
             {/* Timeline line + dots */}
             <div className="relative mb-3">
               {/* Track line */}
-              <div className="absolute top-[9px] left-[10px] right-[10px] h-0.5 rounded-full" style={{ background: "rgba(255,255,255,0.1)" }} />
+              <div className="absolute top-[9px] left-[10px] right-[10px] h-0.5 rounded-full" style={{ background: dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)" }} />
               {/* Filled progress line */}
               <div
                 className="absolute top-[9px] left-[10px] h-0.5 rounded-full transition-all"
@@ -1654,7 +1712,7 @@ function IPODetail({ ipo, onClose, watchlist }) {
                         className="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all"
                         style={{
                           background: done ? BRAND.blue : "transparent",
-                          borderColor: done ? BRAND.blue : "rgba(255,255,255,0.2)",
+                          borderColor: done ? BRAND.blue : (dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"),
                         }}
                       >
                         {done && <div className="w-2 h-2 rounded-full bg-white" />}
@@ -1668,7 +1726,7 @@ function IPODetail({ ipo, onClose, watchlist }) {
             <div className="flex justify-between">
               {milestones.map((m) => (
                 <div key={m.label} className="flex flex-col items-center text-center min-w-0">
-                  <p className="text-xs font-semibold" style={{ color: isPast(m.date) ? "#e2e8f0" : "#64748b" }}>{m.label}</p>
+                  <p className="text-xs font-semibold" style={{ color: isPast(m.date) ? (dark ? "#e2e8f0" : "#1e293b") : "#64748b" }}>{m.label}</p>
                   <p className="text-[11px] font-mono mt-0.5" style={{ color: "#64748b" }}>{m.date}</p>
                 </div>
               ))}
@@ -1679,17 +1737,20 @@ function IPODetail({ ipo, onClose, watchlist }) {
           {ipo.status !== "Listed" && ipo.lot > 0 && ipo.gmp > 0 && (
             <div
               className="rounded-2xl p-4"
-              style={{ background: "rgba(22,163,74,0.12)", border: "1px solid rgba(22,163,74,0.25)" }}
+              style={{
+                background: dark ? "rgba(22,163,74,0.12)" : "rgba(16,185,129,0.08)",
+                border: dark ? "1px solid rgba(22,163,74,0.25)" : "1px solid rgba(16,185,129,0.20)"
+              }}
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-sm font-bold text-white">Estimated listing profit (1 lot)</p>
-                  <div className="flex items-center gap-4 mt-2 text-sm" style={{ color: "#94a3b8" }}>
-                    <span>Investment: <span className="font-mono font-semibold text-white">{rupee(investment(ipo))}</span></span>
-                    <span>GMP × lot: <span className="font-mono font-semibold text-white">{rupee(ipo.gmp * ipo.lot)}</span></span>
+                  <p className="text-sm font-bold" style={{ color: dark ? "#ffffff" : "#1b4332" }}>Estimated listing profit (1 lot)</p>
+                  <div className="flex items-center gap-4 mt-2 text-sm" style={{ color: dark ? "#94a3b8" : "#2d6a4f" }}>
+                    <span>Investment: <span className="font-mono font-semibold" style={{ color: dark ? "#ffffff" : "#1b4332" }}>{rupee(investment(ipo))}</span></span>
+                    <span>GMP × lot: <span className="font-mono font-semibold" style={{ color: dark ? "#ffffff" : "#1b4332" }}>{rupee(ipo.gmp * ipo.lot)}</span></span>
                   </div>
                 </div>
-                <p className="text-2xl font-extrabold font-mono" style={{ color: "#4ade80" }}>
+                <p className="text-2xl font-extrabold font-mono" style={{ color: dark ? "#4ade80" : "#10b981" }}>
                   +{rupee(profitPerLot(ipo))}
                 </p>
               </div>
@@ -1698,7 +1759,13 @@ function IPODetail({ ipo, onClose, watchlist }) {
 
           {/* ── Listing performance (post-listing) ── */}
           {ipo.status === "Listed" && (
-            <div className="rounded-2xl p-4" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <div
+              className="rounded-2xl p-4"
+              style={{
+                background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+                border: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)"
+              }}
+            >
               <p className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: "#64748b" }}>Listing Performance</p>
               {ipo.listedAt ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -1708,11 +1775,35 @@ function IPODetail({ ipo, onClose, watchlist }) {
                     ["Listing gain", `${listingGainPct(ipo)?.toFixed(1)}%`],
                     ["P&L / lot", `${listingProfitLossPerLot(ipo) >= 0 ? "+" : ""}${rupee(listingProfitLossPerLot(ipo))}`],
                     ["Listing date", ipo.listing],
-                    ...(ipo.currentPrice ? [["Current price", `${rupee(ipo.currentPrice)} (${currentReturnPct(ipo)?.toFixed(1)}%)`]] : []),
+                    ...(ipo.currentPrice ? [
+                      ["Current price", rupee(ipo.currentPrice)],
+                      ["Current return", `${currentReturnPct(ipo)?.toFixed(1)}%`]
+                    ] : []),
                   ].map(([l, v]) => (
-                    <div key={l} className="rounded-xl p-2.5" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <div
+                      key={l}
+                      className="rounded-xl p-2.5"
+                      style={{
+                        background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.015)",
+                        border: dark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.04)"
+                      }}
+                    >
                       <p className="text-[10px] font-medium mb-0.5" style={{ color: "#64748b" }}>{l}</p>
-                      <p className="font-mono text-sm font-semibold" style={{ color: l === "Listing gain" || l === "P&L / lot" ? (parseFloat(v) >= 0 ? "#4ade80" : "#f87171") : "#e2e8f0" }}>{v}</p>
+                      <p
+                        className="font-mono text-sm font-semibold"
+                        style={{
+                          color: l === "Listing gain" || l === "P&L / lot" || l === "Current return"
+                            ? (() => {
+                                const num = parseFloat(v.replace(/[^\d.-]/g, ""));
+                                if (num > 0) return dark ? "#4ade80" : "#16a34a";
+                                if (num < 0) return dark ? "#f87171" : "#dc2626";
+                                return dark ? "#94a3b8" : "#64748b";
+                              })()
+                            : (dark ? "#e2e8f0" : "#1e293b")
+                        }}
+                      >
+                        {v}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -1726,13 +1817,19 @@ function IPODetail({ ipo, onClose, watchlist }) {
           {ipo.gmpHistory?.length > 1 && (
             <div>
               <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#64748b" }}>GMP History</p>
-              <div className="rounded-2xl p-3" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div
+                className="rounded-2xl p-3"
+                style={{
+                  background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+                  border: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)"
+                }}
+              >
                 <ResponsiveContainer width="100%" height={140}>
                   <LineChart data={ipo.gmpHistory}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                    <XAxis dataKey="d" fontSize={10} stroke="#475569" tick={{ fill: "#475569" }} />
-                    <YAxis fontSize={10} stroke="#475569" width={35} tick={{ fill: "#475569" }} />
-                    <Tooltip contentStyle={{ borderRadius: 12, fontSize: 12, background: "#1e2a3a", border: "1px solid rgba(255,255,255,0.1)", color: "#e2e8f0" }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)"} />
+                    <XAxis dataKey="d" fontSize={10} stroke={dark ? "#475569" : "#64748b"} tick={{ fill: dark ? "#94a3b8" : "#475569" }} />
+                    <YAxis fontSize={10} stroke={dark ? "#475569" : "#64748b"} width={35} tick={{ fill: dark ? "#94a3b8" : "#475569" }} />
+                    <Tooltip contentStyle={{ borderRadius: 12, fontSize: 12, background: dark ? "#1e2a3a" : "#ffffff", border: dark ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(0,0,0,0.1)", color: dark ? "#e2e8f0" : "#1e293b" }} />
                     <Line type="monotone" dataKey="v" stroke={BRAND.blue} strokeWidth={2.5} dot={{ r: 3, fill: BRAND.blue }} />
                   </LineChart>
                 </ResponsiveContainer>
@@ -1744,7 +1841,7 @@ function IPODetail({ ipo, onClose, watchlist }) {
           {ipo.sub && (
             <div>
               <p className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: "#64748b" }}>Subscription & Allotment Odds</p>
-              <SubscriptionDetailsList ipo={ipo} dark={true} />
+              <SubscriptionDetailsList ipo={ipo} dark={dark} />
             </div>
           )}
 
@@ -1757,10 +1854,17 @@ function IPODetail({ ipo, onClose, watchlist }) {
                   ["Net worth", cr(ipo.fin.netWorth)], ["Debt", cr(ipo.fin.debt)],
                   ["EPS", ipo.fin.eps != null ? `₹${ipo.fin.eps}` : "-"],
                   ["P/E", ipo.fin.pe != null ? `${ipo.fin.pe}x` : "-"],
-                  ["ROE", ipo.fin.roe != null ? `${ipo.fin.roe}%` : "-"]].map(([l, v]) => (
-                  <div key={l} className="rounded-xl p-2.5" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  ["ROE", ipo.fin.roe != null ? `${ipo.fin.roe}%` : ""]].map(([l, v]) => (
+                  <div
+                    key={l}
+                    className="rounded-xl p-2.5"
+                    style={{
+                      background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.015)",
+                      border: dark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.04)"
+                    }}
+                  >
                     <p className="text-[10px] font-medium mb-0.5" style={{ color: "#64748b" }}>{l}</p>
-                    <p className="font-mono text-sm text-white font-semibold">{v}</p>
+                    <p className="font-mono text-sm font-semibold" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{v}</p>
                   </div>
                 ))}
               </div>
@@ -1773,7 +1877,7 @@ function IPODetail({ ipo, onClose, watchlist }) {
               <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#64748b" }}>Strengths</p>
               <ul className="space-y-2">
                 {ipo.strengths?.map((s) => (
-                  <li key={s} className="text-xs flex gap-2" style={{ color: "#94a3b8" }}>
+                  <li key={s} className="text-xs flex gap-2" style={{ color: dark ? "#94a3b8" : "#475569" }}>
                     <span style={{ color: "#4ade80" }}>●</span>{s}
                   </li>
                 ))}
@@ -1783,14 +1887,14 @@ function IPODetail({ ipo, onClose, watchlist }) {
               <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#64748b" }}>Risks</p>
               <ul className="space-y-2">
                 {ipo.risks?.map((s) => (
-                  <li key={s} className="text-xs flex gap-2" style={{ color: "#94a3b8" }}>
+                  <li key={s} className="text-xs flex gap-2" style={{ color: dark ? "#94a3b8" : "#475569" }}>
                     <span style={{ color: "#f87171" }}>●</span>{s}
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-          <p className="text-[10px]" style={{ color: "#475569" }}>
+          <p className="text-[10px] text-slate-400 dark:text-slate-555">
             Strengths/risks are general analytical notes based on public business descriptions. Read the full DRHP/RHP before investing.
           </p>
 
@@ -1802,8 +1906,14 @@ function IPODetail({ ipo, onClose, watchlist }) {
 
               if (!hasValidDrhp && !hasValidRhp) {
                 return (
-                  <p className="text-sm p-3 rounded-xl text-center" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", color: "#64748b" }}>
-                    The official DRHP/RHP document is not yet available on the SEBI website.
+                  <p
+                    className="text-sm p-3 rounded-xl text-center text-slate-500"
+                    style={{
+                      background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.015)",
+                      border: dark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.04)"
+                    }}
+                  >
+                    Official DRHP/RHP is currently unavailable.
                   </p>
                 );
               }
@@ -1811,9 +1921,16 @@ function IPODetail({ ipo, onClose, watchlist }) {
               return (
                 <div className="flex gap-3">
                   {hasValidDrhp && (
-                    <a href={ipo.drhp} target="_blank" rel="noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-medium transition-colors hover:bg-white/10"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", color: "#94a3b8" }}
+                    <a
+                      href={ipo.drhp}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-medium transition-colors hover:bg-slate-100 dark:hover:bg-white/10 cursor-pointer"
+                      style={{
+                        background: dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.02)",
+                        border: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)",
+                        color: dark ? "#94a3b8" : "#475569"
+                      }}
                     >
                       <FileText size={14} />
                       {isPortalLink(ipo.drhp) ? "Exchange DRHP Portal" : "DRHP"}
@@ -1821,9 +1938,16 @@ function IPODetail({ ipo, onClose, watchlist }) {
                     </a>
                   )}
                   {hasValidRhp && (
-                    <a href={ipo.rhp} target="_blank" rel="noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-medium transition-colors hover:bg-white/10"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", color: "#94a3b8" }}
+                    <a
+                      href={ipo.rhp}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-medium transition-colors hover:bg-slate-100 dark:hover:bg-white/10 cursor-pointer"
+                      style={{
+                        background: dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.02)",
+                        border: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)",
+                        color: dark ? "#94a3b8" : "#475569"
+                      }}
                     >
                       <FileText size={14} />
                       {isPortalLink(ipo.rhp) ? "Exchange RHP Portal" : "RHP"}
@@ -2304,7 +2428,7 @@ function DocumentsTab() {
               if (!hasValidDrhp && !hasValidRhp) {
                 return (
                   <span className="text-xs text-slate-400 max-w-[220px] text-right leading-tight">
-                    The official DRHP/RHP document is not yet available on the SEBI website.
+                    Official DRHP/RHP is currently unavailable.
                   </span>
                 );
               }
@@ -2400,7 +2524,7 @@ function WatchlistTab({ watchlist, onOpen, dark }) {
 
   return (
     <div className="grid sm:grid-cols-2 gap-3">
-      {items.map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={onOpen} watchlist={watchlist} />)}
+      {items.map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={onOpen} watchlist={watchlist} dark={dark} />)}
     </div>
   );
 }
@@ -2589,6 +2713,62 @@ export default function App() {
     return () => clearInterval(periodic);
   }, [dataUrl, syncNow]);
 
+  // Real-time ticking price simulation for listed IPOs
+  useEffect(() => {
+    // Populate baseline prices for any listed IPOs that have a currentPrice
+    const initPrices = () => {
+      const listed = getLiveIPOS().filter((i) => i.status === "Listed" && i.currentPrice);
+      listed.forEach((i) => {
+        if (!_realtimePrices[i.id]) {
+          _realtimePrices[i.id] = {
+            price: i.currentPrice,
+            prevPrice: i.currentPrice,
+            lastTick: null,
+            tickTime: 0
+          };
+        }
+      });
+    };
+
+    initPrices();
+
+    const interval = setInterval(() => {
+      initPrices(); // Ensure newly loaded live overlays also register baseline prices
+      const listed = getLiveIPOS().filter((i) => i.status === "Listed" && i.currentPrice);
+      if (listed.length === 0) return;
+
+      // Select 1 to 2 random listed companies to update their prices
+      const count = Math.floor(Math.random() * 2) + 1;
+      let didChange = false;
+
+      for (let j = 0; j < count; j++) {
+        const item = listed[Math.floor(Math.random() * listed.length)];
+        const data = _realtimePrices[item.id];
+        if (!data) continue;
+
+        // Fluctuates within [-0.25%, +0.25%] range
+        const pct = (Math.random() * 0.5 - 0.25) / 100;
+        const newPrice = Math.round((data.price * (1 + pct)) * 100) / 100;
+
+        if (newPrice !== data.price && newPrice > 0) {
+          _realtimePrices[item.id] = {
+            price: newPrice,
+            prevPrice: data.price,
+            lastTick: newPrice > data.price ? "up" : "down",
+            tickTime: Date.now()
+          };
+          didChange = true;
+        }
+      }
+
+      if (didChange) {
+        setTick((t) => t + 1);
+      }
+    }, 4500); // Ticks every 4.5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   const saveDataUrl = async (url) => {
     setDataUrl(url);
     try { localStorage.setItem("ipo-live-data-url", url); } catch { /* storage unavailable */ }
@@ -2755,14 +2935,15 @@ export default function App() {
             </div>
 
             <div className="ml-auto flex items-center gap-2.5 relative">
-              <div
-                className="hidden sm:flex items-center gap-2 text-xs px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-850 bg-white/30 dark:bg-[#121625]/30 text-slate-600 dark:text-slate-300 shadow-sm cursor-default"
-              >
-                <span className="relative flex h-2 w-2 mr-0.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 dark:bg-emerald-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="font-semibold tracking-tight">Live Data</span>
+              <div className="hidden sm:flex flex-col items-end text-right">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-[#121625]/30 text-slate-600 dark:text-slate-300 shadow-sm cursor-default">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                  </span>
+                  <span className="text-[11px] font-semibold tracking-tight">Live Prices</span>
+                </div>
+                <span className="text-[9px] text-slate-400 dark:text-slate-500 font-mono mt-0.5">Refreshed: {formatDataAsOf()}</span>
               </div>
 
               <button onClick={refresh} className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-[#121625]/30 hover:border-slate-300 dark:hover:border-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-700 shadow-sm">
@@ -2798,7 +2979,7 @@ export default function App() {
                 {["Open", "Closed", "Upcoming", "Listed"].map((status) => groupedFiltered(status).length > 0 && (
                   <section key={status}>
                     <div className="grid sm:grid-cols-2 gap-3">
-                      {groupedFiltered(status).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} />)}
+                      {groupedFiltered(status).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} dark={dark} />)}
                     </div>
                   </section>
                 ))}
@@ -2809,7 +2990,7 @@ export default function App() {
               <div>
                 {groupedFiltered(tab[0].toUpperCase() + tab.slice(1)).length > 0 ? (
                   <div className="grid sm:grid-cols-2 gap-3">
-                    {groupedFiltered(tab[0].toUpperCase() + tab.slice(1)).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} />)}
+                    {groupedFiltered(tab[0].toUpperCase() + tab.slice(1)).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} dark={dark} />)}
                   </div>
                 ) : (
                   <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-12 text-center">
@@ -2829,7 +3010,7 @@ export default function App() {
                 <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight">Listed IPOs</h1>
                 {groupedFiltered("Listed").length > 0 ? (
                   <div className="grid sm:grid-cols-2 gap-3">
-                    {groupedFiltered("Listed").map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} />)}
+                    {groupedFiltered("Listed").map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} dark={dark} />)}
                   </div>
                 ) : (
                   <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-12 text-center">

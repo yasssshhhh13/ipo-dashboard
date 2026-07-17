@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/validate-drhp.mjs --check && vite build",
     "preview": "vite preview",
-    "scrape:ipo": "node scripts/scrape-ipo-data.mjs"
+    "scrape:ipo": "node scripts/scrape-ipo-data.mjs",
+    "validate:drhp": "node scripts/validate-drhp.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

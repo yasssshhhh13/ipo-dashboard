@@ -66,3 +66,20 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 16px 2px rgba(59, 130, 246, 0.4);
   border-color: #3b82f6 !important;
 }
+
+/* Real-time Ticker Price Flash Effects */
+@keyframes flash-up-bg {
+  0% { background-color: rgba(16, 185, 129, 0.35); }
+  100% { background-color: transparent; }
+}
+@keyframes flash-down-bg {
+  0% { background-color: rgba(244, 63, 94, 0.35); }
+  100% { background-color: transparent; }
+}
+.animate-tick-up {
+  animation: flash-up-bg 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-tick-down {
+  animation: flash-down-bg 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
