@@ -70,7 +70,7 @@ const IPOS_BASE = [
       bhni_apps: 4.99,
       employee_apps: 1.30,
       shareholder_apps: 1.38
-    }, fin: { revenue: 4970, pat: 3067.38, ebitda: null, eps: 15.08, pe: 38.06, roe: 51.44, netWorth: 5963, debt: 0 }, // Source: DRHP FY2026 (SEBI Mar-2026); EBITDA not applicable for AMC
+    }, fin: { revenue: 4970, pat: 3067.38, ebitda: null, eps: 15.08, pe: 38.06, roe: 43.02, netWorth: 5963, debt: 0 }, // Source: DRHP FY2026 (SEBI Mar-2026); EBITDA not applicable for AMC
     about: "India's largest asset management company by mutual fund quarterly average AUM (~₹29.46 lakh crore as of Mar 2026), and investment manager to SBI Mutual Fund — a joint venture between State Bank of India and Amundi. 100% offer-for-sale; the company receives no proceeds from the IPO.",
     sector: "Asset Management", registrar: "KFin Technologies Ltd",
     strengths: ["India's largest AMC by AUM", "Strong brand trust (SBI + Amundi parentage)", "Diversified fund product mix"],
@@ -363,6 +363,52 @@ function liveStatus(ipo, today) {
 let _liveOverlay = { updatedAt: null, byId: {} };
 let _realtimePrices = {}; // Stores ticking price, prev price, and last tick direction/timestamp for animations
 
+// Validates financial data objects to ensure accuracy and consistency.
+// Returns a validated fin object, or null (N/A) if verification fails.
+function validateFinancials(ipo) {
+  if (!ipo.fin) return null;
+  const f = ipo.fin;
+
+  // 1. Required fields
+  if (f.revenue === undefined || f.pat === undefined) {
+    console.warn(`Financial validation failed for ${ipo.company}: missing required fields.`);
+    return null;
+  }
+
+  // 2. Reject impossible values (PAT cannot be greater than Revenue)
+  if (f.revenue !== null && f.pat !== null && f.pat > f.revenue) {
+    console.warn(`Financial validation failed for ${ipo.company}: PAT (${f.pat}) exceeds Revenue (${f.revenue}).`);
+    return null;
+  }
+
+  // 3. Verify ROE is in a logical percentage range
+  if (f.roe !== null && f.roe !== undefined) {
+    if (typeof f.roe !== "number" || f.roe < -100 || f.roe > 200) {
+      console.warn(`Financial validation failed for ${ipo.company}: ROE (${f.roe}%) is outside logical range.`);
+      return null;
+    }
+  }
+
+  // 4. Verify P/E ratio aligns with price and EPS (with 5% tolerance for rounding differences)
+  if (f.pe !== null && f.pe !== undefined) {
+    if (typeof f.pe !== "number" || f.pe <= 0) {
+      console.warn(`Financial validation failed for ${ipo.company}: P/E (${f.pe}) must be positive.`);
+      return null;
+    }
+    const pMax = ipo.priceMax;
+    if (pMax && f.eps) {
+      const calculatedPE = pMax / f.eps;
+      const diff = Math.abs(f.pe - calculatedPE);
+      if (diff / calculatedPE > 0.05) {
+        console.warn(`Financial validation failed for ${ipo.company}: P/E (${f.pe}) is inconsistent with Price/EPS (${calculatedPE.toFixed(2)}).`);
+        return null;
+      }
+    }
+  }
+
+  return f;
+}
+
 function getLiveIPOS() {
   const today = new Date();
   return IPOS_BASE.map((ipo) => {
@@ -378,7 +424,11 @@ function getLiveIPOS() {
     if (_realtimePrices[ipo.id]) {
       merged = { ...merged, currentPrice: _realtimePrices[ipo.id].price };
     }
-    return { ...merged, status: liveStatus(merged, today) };
+    const finalIpo = { ...merged, status: liveStatus(merged, today) };
+    if (finalIpo.fin) {
+      finalIpo.fin = validateFinancials(finalIpo);
+    }
+    return finalIpo;
   });
 }
 
@@ -879,7 +929,7 @@ function AssistantPane({ embedded, tick }) {
         <input
           value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && send()}
           placeholder="Ask about any IPO…"
-          className="flex-1 bg-white/80 border border-black/10 rounded-xl px-3 py-2 text-sm text-slate-700 placeholder:text-slate-400 outline-none"
+          className="flex-1 bg-white/80 border border-black/10 rounded-xl px-3 py-2 text-base md:text-sm text-slate-700 placeholder:text-slate-400 outline-none"
           style={{ borderColor: "rgba(0,0,0,0.08)" }}
         />
         <button onClick={() => send()} disabled={loading} className="rounded-xl px-3.5 flex items-center justify-center text-white disabled:opacity-50"
@@ -1014,11 +1064,11 @@ function CalculatorTab() {
                     <div className="relative">
                       <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                       <input
-                        autoFocus
+                        autoFocus={typeof window !== "undefined" && window.innerWidth >= 768}
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder={calcFilter ? `Search ${calcFilter} IPOs…` : "Search all IPOs…"}
-                        className="w-full bg-slate-50 dark:bg-[#161c28] border border-slate-200 dark:border-white/5 rounded-xl pl-8 pr-3 py-2 text-xs outline-none text-slate-700 dark:text-slate-200 placeholder:text-slate-400"
+                        className="w-full bg-slate-50 dark:bg-[#161c28] border border-slate-200 dark:border-white/5 rounded-xl pl-8 pr-3 py-2 text-base md:text-xs outline-none text-slate-700 dark:text-slate-200 placeholder:text-slate-400"
                       />
                     </div>
                   </div>
@@ -1921,7 +1971,7 @@ function IPODetail({ ipo, onClose, watchlist, dark }) {
                   ["Net worth", cr(ipo.fin.netWorth)], ["Debt", cr(ipo.fin.debt)],
                   ["EPS", ipo.fin.eps != null ? `₹${ipo.fin.eps}` : "-"],
                   ["P/E", ipo.fin.pe != null ? `${ipo.fin.pe}x` : "-"],
-                  ["ROE", ipo.fin.roe != null ? `${ipo.fin.roe}%` : ""]].map(([l, v]) => (
+                  ["ROE", ipo.fin.roe != null ? `${ipo.fin.roe}%` : "-"]].map(([l, v]) => (
                   <div
                     key={l}
                     className="rounded-xl p-2.5"
@@ -3054,7 +3104,7 @@ export default function App() {
             <div className="relative flex-1 max-w-sm">
               <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
               <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search for company IPOs..."
-                className="w-full bg-white dark:bg-[#0e1320] border border-slate-200 dark:border-slate-800 rounded-2xl pl-9 pr-4 py-2 text-sm outline-none shadow-sm focus:glow-blue placeholder:text-slate-400 text-slate-800 dark:text-slate-200" />
+                className="w-full bg-white dark:bg-[#0e1320] border border-slate-200 dark:border-slate-800 rounded-2xl pl-9 pr-4 py-2 text-base md:text-sm outline-none shadow-sm focus:glow-blue placeholder:text-slate-400 text-slate-800 dark:text-slate-200" />
             </div>
 
             <div className="ml-auto flex items-center gap-2.5 relative">
