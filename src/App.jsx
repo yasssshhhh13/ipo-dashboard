@@ -2477,7 +2477,7 @@ function SubscriptionsTab({ dark }) {
    FINANCIALS TAB
 ===================================================================== */
 function FinancialsTab({ dark }) {
-  const withFin = getLiveIPOS().filter((i) => i.fin);
+  const withFin = sortIposLogically(getLiveIPOS().filter((i) => i.fin));
 
   const MetricBox = ({ label, value, isNA, span = 1 }) => (
     <div
@@ -2848,8 +2848,8 @@ const NAV = [
   { id: "ai", label: "AI Assistant", icon: Sparkles },
   { id: "overview", label: "Overview", icon: Home },
   { id: "open", label: "Open IPOs", icon: CircleDollarSign },
-  { id: "closed", label: "Closed IPOs", icon: Clock },
   { id: "upcoming", label: "Upcoming IPOs", icon: Calendar },
+  { id: "closed", label: "Closed IPOs", icon: Clock },
   { id: "listed", label: "Listed IPOs", icon: Building2 },
   { id: "gmp", label: "GMP Trends", icon: TrendingUp },
   { id: "subscriptions", label: "Subscriptions", icon: LayoutGrid },
@@ -3202,13 +3202,13 @@ export default function App() {
                 {/* Stat cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   <StatCard icon={ArrowUpRight} label="Open IPOs" value={counts.Open} tint={BRAND.blue} onClick={() => setTab("open")} />
-                  <StatCard icon={Clock} label="Closed IPOs" value={counts.Closed} tint={BRAND.blue} onClick={() => setTab("closed")} />
                   <StatCard icon={Calendar} label="Upcoming" value={counts.Upcoming} tint={BRAND.blue} onClick={() => setTab("upcoming")} />
+                  <StatCard icon={Clock} label="Closed IPOs" value={counts.Closed} tint={BRAND.blue} onClick={() => setTab("closed")} />
                   <StatCard icon={LayoutGrid} label="Listed" value={counts.Listed} tint={BRAND.blue} onClick={() => setTab("listed")} />
                 </div>
 
                 {/* IPO lists grouped by status */}
-                {["Open", "Closed", "Upcoming", "Listed"].map((status) => groupedFiltered(status).length > 0 && (
+                {["Open", "Upcoming", "Closed", "Listed"].map((status) => groupedFiltered(status).length > 0 && (
                   <section key={status}>
                     <div className="grid sm:grid-cols-2 gap-3">
                       {groupedFiltered(status).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} dark={dark} />)}
