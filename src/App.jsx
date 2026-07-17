@@ -2751,10 +2751,17 @@ const NAV = [
 ].filter((n) => n.id !== "ai" || AI_ASSISTANT_ENABLED);
 
 export default function App() {
-  const [tab, setTab] = useState("overview");
+  const [tab, setTabRaw] = useState(() => {
+    try {
+      const saved = localStorage.getItem("calmcapital-tab");
+      if (saved && NAV.some((n) => n.id === saved)) return saved;
+    } catch { /* storage unavailable */ }
+    return "overview";
+  });
   const [selected, setSelected] = useState(null);
   const [query, setQuery] = useState("");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
+  const [sidebarOpen, setSidebarOpen] = useState(() => !isMobile());
   const [dark, setDark] = useState(() => {
     try {
       const saved = localStorage.getItem("calmcapital-theme");
@@ -2763,12 +2770,26 @@ export default function App() {
     return true; // default default
   });
 
-  // Write theme changes to local storage
   useEffect(() => {
     try {
       localStorage.setItem("calmcapital-theme", JSON.stringify(dark));
     } catch { /* storage unavailable */ }
   }, [dark]);
+
+  // Persist active tab across refreshes
+  const setTab = (id) => {
+    setTabRaw(id);
+    try { localStorage.setItem("calmcapital-tab", id); } catch { /* storage unavailable */ }
+    // Auto-close sidebar on mobile after navigation
+    if (isMobile()) setSidebarOpen(false);
+  };
+
+  // Close sidebar when viewport shrinks to mobile
+  useEffect(() => {
+    const handler = () => { if (window.innerWidth < 768) setSidebarOpen(false); };
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
   const [refreshing, setRefreshing] = useState(false);
   const [tick, setTick] = useState(0); // bumped hourly + on manual refresh to force re-derive live status/data
   const [dataUrl, setDataUrl] = useState("/live-data.json"); // same-origin file this repo's GitHub Action keeps updated — works automatically, no setup needed
@@ -2945,8 +2966,21 @@ export default function App() {
           .dark .hover\\:bg-white:hover { background: rgba(255,255,255,0.06) !important; }
         `}</style>
 
+        {/* MOBILE SIDEBAR BACKDROP */}
+        {sidebarOpen && isMobile() && (
+          <div
+            className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
         {/* SIDEBAR */}
-        <aside className={`${sidebarOpen ? "w-60" : "w-0"} transition-all duration-300 overflow-hidden shrink-0 border-r`}
+        <aside
+          className={`${
+            isMobile()
+              ? `fixed inset-y-0 left-0 z-40 w-64 transition-transform duration-300 ease-in-out ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`
+              : `${sidebarOpen ? "w-60" : "w-0"} transition-all duration-300 overflow-hidden shrink-0`
+          } border-r`}
           style={{ 
             borderColor: dark ? "rgba(255,255,255,0.06)" : "rgba(219,234,254,0.8)",
             background: dark ? "#0a0d16" : "#f0f7ff"
