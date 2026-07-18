@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T12:00:09.986Z",
+  "updatedAt": "2026-07-18T13:39:52.019Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -264,11 +264,11 @@
       }
     },
     "millworks-technologies": {
-      "gmp": 401,
+      "gmp": 390,
       "priceMax": 331,
-      "estListing": 732,
+      "estListing": 721,
       "sub": {
-        "overall": 401,
+        "overall": 390,
         "qib": 0,
         "snii": 219.54,
         "bnii": 331,
@@ -375,11 +375,11 @@
       }
     },
     "sbi-funds-management": {
-      "gmp": 92,
+      "gmp": 93,
       "priceMax": 574,
-      "estListing": 666,
+      "estListing": 667,
       "sub": {
-        "overall": 92.5,
+        "overall": 93,
         "qib": 0,
         "snii": 41.73,
         "bnii": 574,
