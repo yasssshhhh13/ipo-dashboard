@@ -535,7 +535,7 @@ function NotificationBell({ hook, onOpenIpo }) {
       {/* Dropdown panel */}
       {open && (
         <div
-          className="absolute top-12 right-0 w-96 rounded-2xl overflow-hidden z-30 shadow-2xl"
+          className="absolute top-12 -right-3 sm:right-0 w-[calc(100vw-2rem)] sm:w-96 rounded-2xl overflow-hidden z-30 shadow-2xl"
           style={{ background: "rgba(17,24,39,0.97)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(24px)" }}
         >
           {/* Header */}
