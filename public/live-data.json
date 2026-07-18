@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T07:44:24.891Z",
+  "updatedAt": "2026-07-18T09:21:54.593Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -375,11 +375,11 @@
       }
     },
     "sbi-funds-management": {
-      "gmp": 93,
+      "gmp": 91,
       "priceMax": 574,
-      "estListing": 667,
+      "estListing": 665,
       "sub": {
-        "overall": 93,
+        "overall": 91,
         "qib": 0,
         "snii": 41.73,
         "bnii": 574,
