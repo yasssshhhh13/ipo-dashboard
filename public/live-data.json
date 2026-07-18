@@ -1,8 +1,6 @@
 {
-  "updatedAt": "2026-07-18T17:55:22.693Z",
-  "errors": [
-    "gmp: page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.investorgain.com/report/live-ipo-gmp/331/all/\", waiting until \"networkidle\"\n"
-  ],
+  "updatedAt": "2026-07-18T18:59:47.291Z",
+  "errors": [],
   "ipos": {
     "cube-highways": {
       "priceMax": 152,
@@ -377,11 +375,11 @@
       }
     },
     "sbi-funds-management": {
-      "gmp": 93,
+      "gmp": 92,
       "priceMax": 574,
-      "estListing": 667,
+      "estListing": 666,
       "sub": {
-        "overall": 93,
+        "overall": 92.5,
         "qib": 0,
         "snii": 41.73,
         "bnii": 574,
