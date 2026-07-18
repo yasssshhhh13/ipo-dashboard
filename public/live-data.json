@@ -1,6 +1,8 @@
 {
-  "updatedAt": "2026-07-18T16:55:04.683Z",
-  "errors": [],
+  "updatedAt": "2026-07-18T17:55:22.693Z",
+  "errors": [
+    "gmp: page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://www.investorgain.com/report/live-ipo-gmp/331/all/\", waiting until \"networkidle\"\n"
+  ],
   "ipos": {
     "cube-highways": {
       "priceMax": 152,
