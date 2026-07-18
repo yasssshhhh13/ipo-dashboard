@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T11:00:51.606Z",
+  "updatedAt": "2026-07-18T12:00:09.986Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -14,11 +14,11 @@
       }
     },
     "caliber-mining": {
-      "gmp": 118,
+      "gmp": 117,
       "priceMax": 424,
-      "estListing": 542,
+      "estListing": 541,
       "sub": {
-        "overall": 118,
+        "overall": 117,
         "qib": 0,
         "snii": 1.31,
         "bnii": 424,
