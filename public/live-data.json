@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T09:21:54.593Z",
+  "updatedAt": "2026-07-18T11:00:51.606Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -235,7 +235,7 @@
         "qib": 0,
         "snii": 0,
         "bnii": 127,
-        "hni": 170,
+        "hni": 166.8,
         "retail": 110
       }
     },
@@ -375,11 +375,11 @@
       }
     },
     "sbi-funds-management": {
-      "gmp": 91,
+      "gmp": 92,
       "priceMax": 574,
-      "estListing": 665,
+      "estListing": 666,
       "sub": {
-        "overall": 91,
+        "overall": 92.5,
         "qib": 0,
         "snii": 41.73,
         "bnii": 574,
@@ -519,6 +519,17 @@
         "bnii": 0,
         "hni": 0,
         "retail": 0
+      }
+    },
+    "shreedhar-spinners": {
+      "priceMax": 53,
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 6.7,
+        "bnii": 53,
+        "hni": 30.68,
+        "retail": 2000
       }
     }
   }
