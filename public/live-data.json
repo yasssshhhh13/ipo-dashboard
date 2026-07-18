@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T15:54:22.260Z",
+  "updatedAt": "2026-07-18T16:55:04.683Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -530,6 +530,17 @@
         "bnii": 53,
         "hni": 30.68,
         "retail": 2000
+      }
+    },
+    "indo-mim": {
+      "gmp": 168,
+      "sub": {
+        "overall": 168,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 0,
+        "hni": 0,
+        "retail": 0
       }
     }
   }
