@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T05:22:30.179Z",
+  "updatedAt": "2026-07-18T07:44:24.891Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -235,7 +235,7 @@
         "qib": 0,
         "snii": 0,
         "bnii": 127,
-        "hni": 166.8,
+        "hni": 170,
         "retail": 110
       }
     },
@@ -264,11 +264,11 @@
       }
     },
     "millworks-technologies": {
-      "gmp": 400,
+      "gmp": 401,
       "priceMax": 331,
-      "estListing": 731,
+      "estListing": 732,
       "sub": {
-        "overall": 400,
+        "overall": 401,
         "qib": 0,
         "snii": 219.54,
         "bnii": 331,
@@ -375,11 +375,11 @@
       }
     },
     "sbi-funds-management": {
-      "gmp": 92,
+      "gmp": 93,
       "priceMax": 574,
-      "estListing": 666,
+      "estListing": 667,
       "sub": {
-        "overall": 92,
+        "overall": 93,
         "qib": 0,
         "snii": 41.73,
         "bnii": 574,
@@ -509,6 +509,16 @@
         "bnii": 70,
         "hni": 18.9,
         "retail": 2000
+      }
+    },
+    "lohia": {
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 0,
+        "hni": 0,
+        "retail": 0
       }
     }
   }
