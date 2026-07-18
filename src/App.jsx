@@ -9,7 +9,7 @@ import {
   Sun, Moon, Menu, Bookmark, BookmarkCheck, Calculator as CalcIcon,
   LayoutGrid, Activity, PieChart as PieIcon, BarChart3, Landmark,
   ExternalLink, Clock, ArrowUpRight, ArrowDownRight,
-  Home, CircleDollarSign, ChevronsLeft
+  Home, CircleDollarSign, ChevronsLeft, PlusCircle, Award, CheckCircle, Inbox
 } from "lucide-react";
 
 /* =====================================================================
@@ -54,6 +54,10 @@ const isPortalLink = (url) => PORTAL_URLS.has(url);
 // so "Open"/"Upcoming"/"Closed"/"Listed" is always correct for whatever day
 // the dashboard is opened on — not just the day the data was last refreshed.
 function liveStatus(ipo, today) {
+  // If listed price or current price exists, it is Listed
+  if (ipo.listedAt !== null && ipo.listedAt !== undefined) return "Listed";
+  if (ipo.currentPrice !== null && ipo.currentPrice !== undefined) return "Listed";
+
   if (!ipo.open) return "Upcoming"; // DRHP filed but subscription dates not yet announced
   const d = (s) => new Date(s + "T00:00:00+05:30"); // dates are IST
   const open = d(ipo.open);
@@ -239,43 +243,123 @@ const sortDocumentsLogically = (ipos) => {
 ===================================================================== */
 function ymd(d) { return d.toISOString().slice(0, 10); }
 
-function computeDateNotifications(ipos, today) {
-  const todayStr = ymd(today);
-  const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate() + 1);
-  const tomorrowStr = ymd(tomorrow);
-  const notifs = [];
-  for (const ipo of ipos) {
-    if (ipo.open === todayStr) notifs.push({ id: `${ipo.id}-open-${todayStr}`, type: "open", ipoId: ipo.id, title: `${ipo.company} opens today`, message: ipo.priceMin ? `Price band ₹${ipo.priceMin}–₹${ipo.priceMax}` : "Bidding starts today", date: todayStr });
-    if (ipo.close === todayStr) notifs.push({ id: `${ipo.id}-close-${todayStr}`, type: "close", ipoId: ipo.id, title: `${ipo.company} closes today`, message: "Last day to apply", date: todayStr });
-    if (ipo.listing === todayStr) notifs.push({ id: `${ipo.id}-listing-${todayStr}`, type: "listing", ipoId: ipo.id, title: `${ipo.company} lists today`, message: ipo.listedAt ? `Listed at ${rupee(ipo.listedAt)}` : "Listing today", date: todayStr });
-    if (ipo.listing === tomorrowStr) notifs.push({ id: `${ipo.id}-listing-tmrw-${tomorrowStr}`, type: "listing-tomorrow", ipoId: ipo.id, title: `${ipo.company} lists tomorrow`, message: `Listing on ${ipo.listing}`, date: todayStr });
-  }
-  return notifs;
+function addDays(dateStr, days) {
+  if (!dateStr) return null;
+  const d = new Date(dateStr + "T00:00:00+05:30");
+  d.setDate(d.getDate() + days);
+  return ymd(d);
 }
 
-// Compares each sync's DRHP/RHP availability against what was last seen
-// (in localStorage) to detect newly-filed documents. On the very first
-// run ever (nothing seen yet), it silently bootstraps the snapshot instead
-// of firing a notification for every existing document at once.
-function computeDocNotifications(ipos) {
-  let seen = {};
-  try { seen = JSON.parse(localStorage.getItem("calmcapital-doc-seen") || "{}"); } catch { /* first run */ }
-  const isFirstRun = Object.keys(seen).length === 0;
-  const nextSeen = { ...seen };
-  const notifs = [];
-  const todayStr = ymd(new Date());
+function computeAllNotifications(ipos, today) {
+  const todayStr = ymd(today);
+  const candidates = [];
+
+  const checkRecent = (dateStr) => {
+    if (!dateStr) return false;
+    const d = new Date(dateStr + "T00:00:00+05:30");
+    const diffTime = today - d;
+    const diffDays = diffTime / (1000 * 60 * 60 * 24);
+    // Display only notifications from the last 5 days
+    return diffDays >= -1 && diffDays <= 5;
+  };
 
   for (const ipo of ipos) {
-    const hasDrhp = !!ipo.drhp, hasRhp = !!ipo.rhp;
-    const prev = seen[ipo.id] || {};
-    if (!isFirstRun) {
-      if (hasDrhp && !prev.drhp) notifs.push({ id: `${ipo.id}-drhp-${Date.now()}`, type: "doc", ipoId: ipo.id, title: `${ipo.company}: DRHP filed`, message: "New draft prospectus available", date: todayStr });
-      if (hasRhp && !prev.rhp) notifs.push({ id: `${ipo.id}-rhp-${Date.now()}`, type: "doc", ipoId: ipo.id, title: `${ipo.company}: RHP filed`, message: "New red herring prospectus available", date: todayStr });
+    // 1. New IPO announced
+    const announceDateStr = ipo.open ? addDays(ipo.open, -7) : null;
+    if (announceDateStr && checkRecent(announceDateStr)) {
+      candidates.push({
+        id: `${ipo.id}-announced-${announceDateStr}`,
+        type: "announced",
+        ipoId: ipo.id,
+        title: `New IPO Announced: ${ipo.company}`,
+        message: `Expected to open for subscription on ${formatDate(ipo.open)}.`,
+        date: announceDateStr,
+      });
     }
-    nextSeen[ipo.id] = { drhp: hasDrhp, rhp: hasRhp };
+
+    // 2. DRHP Filed
+    if (ipo.drhp) {
+      const drhpDateStr = ipo.finMeta?.filingDate || (ipo.open ? addDays(ipo.open, -15) : null);
+      if (drhpDateStr && checkRecent(drhpDateStr)) {
+        candidates.push({
+          id: `${ipo.id}-drhp-${drhpDateStr}`,
+          type: "drhp",
+          ipoId: ipo.id,
+          title: `${ipo.company}: DRHP Filed`,
+          message: `Draft Red Herring Prospectus is now available for review.`,
+          date: drhpDateStr,
+        });
+      }
+    }
+
+    // 3. RHP Filed
+    if (ipo.rhp) {
+      const rhpDateStr = ipo.open ? addDays(ipo.open, -3) : null;
+      if (rhpDateStr && checkRecent(rhpDateStr)) {
+        candidates.push({
+          id: `${ipo.id}-rhp-${rhpDateStr}`,
+          type: "rhp",
+          ipoId: ipo.id,
+          title: `${ipo.company}: RHP Filed`,
+          message: `Red Herring Prospectus filed. Price band set at ₹${ipo.priceMin}–₹${ipo.priceMax}.`,
+          date: rhpDateStr,
+        });
+      }
+    }
+
+    // 4. IPO Opens for Subscription
+    if (ipo.open && checkRecent(ipo.open)) {
+      candidates.push({
+        id: `${ipo.id}-open-${ipo.open}`,
+        type: "open",
+        ipoId: ipo.id,
+        title: `${ipo.company} Opens Today`,
+        message: `Subscription window is now active. Price: ₹${ipo.priceMin}–₹${ipo.priceMax}.`,
+        date: ipo.open,
+      });
+    }
+
+    // 5. Last Day to Apply
+    if (ipo.close && checkRecent(ipo.close)) {
+      candidates.push({
+        id: `${ipo.id}-close-${ipo.close}`,
+        type: "close",
+        ipoId: ipo.id,
+        title: `Last Day to Apply: ${ipo.company}`,
+        message: `Subscription closes today. Price band: ₹${ipo.priceMin}–₹${ipo.priceMax}.`,
+        date: ipo.close,
+      });
+    }
+
+    // 6. Listing Tomorrow
+    if (ipo.listing) {
+      const tmrwDateStr = addDays(ipo.listing, -1);
+      if (tmrwDateStr && checkRecent(tmrwDateStr)) {
+        candidates.push({
+          id: `${ipo.id}-listing-tomorrow-${tmrwDateStr}`,
+          type: "listing-tomorrow",
+          ipoId: ipo.id,
+          title: `${ipo.company} Lists Tomorrow`,
+          message: `Shares will list on the exchange tomorrow, ${formatDate(ipo.listing)}.`,
+          date: tmrwDateStr,
+        });
+      }
+    }
+
+    // 7. IPO Listed Today
+    if (ipo.listing && checkRecent(ipo.listing)) {
+      candidates.push({
+        id: `${ipo.id}-listing-${ipo.listing}`,
+        type: "listing",
+        ipoId: ipo.id,
+        title: `${ipo.company} Listed Today`,
+        message: `Shares have officially listed and are now trading.`,
+        date: ipo.listing,
+      });
+    }
   }
-  try { localStorage.setItem("calmcapital-doc-seen", JSON.stringify(nextSeen)); } catch { /* storage unavailable */ }
-  return notifs;
+
+  return candidates;
 }
 
 function useNotifications(tick) {
@@ -285,22 +369,55 @@ function useNotifications(tick) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem("calmcapital-notifications");
-      if (raw) setNotifications(JSON.parse(raw));
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          const valid = parsed.filter(n => n && n.id && n.type && n.title && n.message);
+          setNotifications(valid);
+        }
+      }
     } catch { /* none saved yet */ }
   }, []);
 
   useEffect(() => {
     const ipos = getLiveIPOS();
     const today = new Date();
-    const fresh = [...computeDateNotifications(ipos, today), ...computeDocNotifications(ipos)];
-    if (fresh.length === 0) return;
+    const candidates = computeAllNotifications(ipos, today);
+
     setNotifications((prev) => {
-      const existingIds = new Set(prev.map((n) => n.id));
-      const toAdd = fresh.filter((n) => !existingIds.has(n.id)).map((n) => ({ ...n, read: false, createdAt: Date.now() }));
-      if (toAdd.length === 0) return prev;
-      const merged = [...toAdd, ...prev].slice(0, 50); // cap history length
-      try { localStorage.setItem("calmcapital-notifications", JSON.stringify(merged)); } catch { /* storage unavailable */ }
-      return merged;
+      // 1. Keep existing active notifications that are still within 5 days of creation
+      const retentionMs = 5 * 24 * 60 * 60 * 1000;
+      const now = Date.now();
+      const activePrev = prev.filter((n) => now - n.createdAt <= retentionMs);
+      
+      const existingIds = new Set(activePrev.map((n) => n.id));
+      const nextList = [...activePrev];
+
+      // 2. Add new candidate notifications
+      for (const cand of candidates) {
+        if (!existingIds.has(cand.id)) {
+          nextList.push({
+            ...cand,
+            read: false,
+            createdAt: now,
+          });
+          existingIds.add(cand.id);
+        }
+      }
+
+      // 3. Chronological sort: newest events and creation times at top
+      nextList.sort((a, b) => {
+        const dateCompare = b.date.localeCompare(a.date);
+        if (dateCompare !== 0) return dateCompare;
+        return b.createdAt - a.createdAt;
+      });
+
+      // 4. Save to localStorage
+      try {
+        localStorage.setItem("calmcapital-notifications", JSON.stringify(nextList));
+      } catch { /* storage unavailable */ }
+
+      return nextList;
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tick]);
@@ -354,11 +471,13 @@ function NotificationBell({ hook, onOpenIpo }) {
 
   // Icon + color config per notification type
   const iconConfig = {
-    open:             { Icon: TrendingUp,  bg: "rgba(16,185,129,0.2)",  color: "#10b981" },
-    close:            { Icon: Clock,       bg: "rgba(28,155,218,0.2)",  color: BRAND.blue },
-    listing:          { Icon: Activity,    bg: "rgba(16,185,129,0.2)",  color: "#10b981" },
-    "listing-tomorrow": { Icon: Calendar,  bg: "rgba(245,158,11,0.2)",  color: "#f59e0b" },
-    doc:              { Icon: FileText,    bg: "rgba(100,116,139,0.2)", color: "#64748b" },
+    announced:          { Icon: PlusCircle,  bg: "rgba(28,155,218,0.2)",  color: BRAND.blue },
+    drhp:               { Icon: FileText,    bg: "rgba(100,116,139,0.2)", color: "#64748b" },
+    rhp:                { Icon: FileText,    bg: "rgba(100,116,139,0.2)", color: "#64748b" },
+    open:               { Icon: TrendingUp,  bg: "rgba(16,185,129,0.2)",  color: "#10b981" },
+    close:              { Icon: Clock,       bg: "rgba(239,68,68,0.2)",   color: "#ef4444" },
+    "listing-tomorrow": { Icon: Calendar,    bg: "rgba(245,158,11,0.2)",  color: "#f59e0b" },
+    listing:            { Icon: Activity,    bg: "rgba(16,185,129,0.2)",  color: "#10b981" },
   };
 
   return (
@@ -399,8 +518,9 @@ function NotificationBell({ hook, onOpenIpo }) {
               </div>
             ) : (
               notifications.map((n, idx) => {
-                const cfg = iconConfig[n.type] || iconConfig.doc;
-                const Icon = cfg.Icon;
+                const defaultCfg = { Icon: FileText, bg: "rgba(100,116,139,0.2)", color: "#64748b" };
+                const cfg = iconConfig[n.type] || defaultCfg;
+                const Icon = cfg.Icon || FileText;
                 return (
                   <button
                     key={n.id}
@@ -676,7 +796,7 @@ function sortedCalcIpos() {
   });
 }
 
-function CalculatorTab() {
+function CalculatorTab({ onOpen }) {
   const allIpos = sortedCalcIpos();
   const [ipoId, setIpoId] = useState(allIpos.find((i) => i.status === "Open")?.id || allIpos[0].id);
   const [lots, setLots] = useState(1);
@@ -725,7 +845,17 @@ function CalculatorTab() {
           
           {/* IPO Selector */}
           <div>
-            <p className="text-[10px] uppercase tracking-wider text-slate-450 dark:text-slate-500 font-bold mb-3">Select IPO</p>
+            <div className="flex justify-between items-center mb-3">
+              <p className="text-[10px] uppercase tracking-wider text-slate-450 dark:text-slate-500 font-bold">Select IPO</p>
+              {onOpen && (
+                <button
+                  onClick={() => onOpen(ipo)}
+                  className="text-[10px] text-blue-500 hover:text-blue-600 font-bold flex items-center gap-1 cursor-pointer transition-colors"
+                >
+                  View Details <ExternalLink size={10} />
+                </button>
+              )}
+            </div>
 
             {/* Selected IPO preview pill */}
             <button
@@ -2076,10 +2206,321 @@ function SubscriptionDetailsList({ ipo, dark }) {
 }
 
 /* =====================================================================
+   IPO ALLOTMENT TAB
+===================================================================== */
+function getRegistrarUrl(name) {
+  if (!name) return null;
+  const n = name.toLowerCase();
+  if (n.includes("link intime") || n.includes("intime india") || n.includes("mufg intime")) {
+    return "https://linkintime.co.in/initial_offer/public-issues.html";
+  }
+  if (n.includes("kfin") || n.includes("karvy")) {
+    return "https://ipostatus.kfintech.com/";
+  }
+  if (n.includes("bigshare")) {
+    return "https://ipo.bigshareonline.com/IPO_Status.html";
+  }
+  if (n.includes("skyline")) {
+    return "https://www.skylinerta.com/ipo.php";
+  }
+  if (n.includes("cameo")) {
+    return "https://ipo.cameoindia.com/";
+  }
+  if (n.includes("maashitla")) {
+    return "https://maashitla.com/allotment-status/public-issues";
+  }
+  if (n.includes("purva")) {
+    return "https://www.purvashare.com/queries/";
+  }
+  if (n.includes("adroit")) {
+    return "https://www.adroitcorporate.com/IpoStatus.aspx";
+  }
+  if (n.includes("beetal")) {
+    return "http://www.beetalfinancial.com/ipo-status";
+  }
+  return null;
+}
+
+function AllotmentCard({ ipo, onOpen, dark, todayStr }) {
+  const registrarUrl = getRegistrarUrl(ipo.registrar);
+  const isActivated = registrarUrl && ipo.allotment && todayStr >= ipo.allotment;
+  
+  const statusStyle = {
+    Open:     { bg: "rgba(16,185,129,0.12)", color: "#10b981", border: "rgba(16,185,129,0.25)" },
+    Closed:   { bg: "rgba(148,163,184,0.10)", color: "#64748b", border: "rgba(148,163,184,0.2)" },
+    Upcoming: { bg: "rgba(240,162,2,0.12)",  color: "#d97706", border: "rgba(240,162,2,0.25)" },
+    Listed:   { bg: "rgba(28,155,218,0.10)", color: BRAND.blue, border: "rgba(28,155,218,0.2)" },
+  };
+  const ss = statusStyle[ipo.status] || statusStyle.Closed;
+
+  return (
+    <div
+      onClick={() => onOpen?.(ipo)}
+      className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between h-full cursor-pointer"
+    >
+      <div>
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <CompanyAvatar name={ipo.company} size={42} />
+            <div className="min-w-0">
+              <h3 className="font-bold text-slate-800 dark:text-white text-[15px] leading-tight truncate">{ipo.company}</h3>
+              <div className="flex items-center gap-1.5 mt-1 flex-wrap">
+                <span className="text-[9px] uppercase tracking-wide font-extrabold px-2 py-0.5 rounded-full" style={{ background: ss.bg, color: ss.color, border: `1px solid ${ss.border}` }}>
+                  {ipo.status}
+                </span>
+                {ipo.type === "SME" ? (
+                  <span className="text-[9px] uppercase tracking-wide font-extrabold px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/25">
+                    SME
+                  </span>
+                ) : (
+                  <span className="text-[9px] uppercase tracking-wide font-extrabold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/25">
+                    Mainboard
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2 mt-4 pt-3 border-t border-slate-100 dark:border-white/5 text-xs">
+          <div>
+            <span className="text-slate-400 dark:text-slate-500 block">Registrar</span>
+            <span className="font-semibold text-slate-700 dark:text-slate-300 truncate block">{ipo.registrar || "To Be Announced"}</span>
+          </div>
+          <div>
+            <span className="text-slate-400 dark:text-slate-500 block">Allotment Date</span>
+            <span className="font-semibold text-slate-700 dark:text-slate-300 block">{formatDate(ipo.allotment)}</span>
+          </div>
+          <div className="col-span-2 mt-1">
+            <span className="text-slate-400 dark:text-slate-500 block">Listing Date</span>
+            <span className="font-semibold text-slate-700 dark:text-slate-300 block">{formatDate(ipo.listing)}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5 pt-3 border-t border-slate-100 dark:border-white/5" onClick={(e) => e.stopPropagation()}>
+        {isActivated ? (
+          <a
+            href={registrarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-[#1c9bda] hover:bg-[#1c9bda]/90 text-white text-xs font-bold py-2 px-4 rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+          >
+            Check Allotment
+            <ExternalLink size={13} />
+          </a>
+        ) : (
+          <div className="space-y-2">
+            <button
+              disabled
+              className="w-full bg-slate-100 dark:bg-white/5 text-slate-405 dark:text-slate-605 text-xs font-bold py-2 px-4 rounded-xl flex items-center justify-center gap-1.5 cursor-not-allowed"
+            >
+              Check Allotment
+              <ExternalLink size={13} />
+            </button>
+            <p className="text-[10px] text-slate-400 dark:text-slate-500 text-center italic leading-tight">
+              Allotment status will be available once activated by the registrar.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function AllotmentTab({ query, onOpen, watchlist, dark, tick }) {
+  const [filterType, setFilterType] = useState("Mainboard");
+  
+  const today = new Date();
+  const todayStr = ymd(today);
+  const d = (s) => new Date(s + "T00:00:00+05:30");
+  
+  const allIpos = useMemo(() => {
+    return getLiveIPOS();
+  }, [tick]);
+  
+  const filteredIpos = useMemo(() => {
+    let result = allIpos.filter((ipo) => ipo.type === filterType);
+    if (query.trim()) {
+      const q = query.toLowerCase();
+      result = result.filter(
+        (ipo) =>
+          ipo.company.toLowerCase().includes(q) ||
+          ipo.sector.toLowerCase().includes(q) ||
+          ipo.name.toLowerCase().includes(q)
+      );
+    }
+    return result;
+  }, [allIpos, filterType, query]);
+
+  const sections = useMemo(() => {
+    const todayAllotments = [];
+    const upcomingAllotments = [];
+    const recentAllotments = [];
+    
+    const RECENT_ALLOTMENT_DAYS = 10;
+    
+    for (const ipo of filteredIpos) {
+      if (!ipo.allotment) continue;
+      
+      if (ipo.allotment === todayStr) {
+        todayAllotments.push(ipo);
+      } else if (ipo.allotment > todayStr) {
+        upcomingAllotments.push(ipo);
+      } else {
+        if (ipo.listing) {
+          const listingDate = d(ipo.listing);
+          const diffDays = (today - listingDate) / (1000 * 60 * 60 * 24);
+          if (diffDays <= RECENT_ALLOTMENT_DAYS) {
+            recentAllotments.push(ipo);
+          }
+        } else {
+          recentAllotments.push(ipo);
+        }
+      }
+    }
+    
+    todayAllotments.sort((a, b) => a.company.localeCompare(b.company));
+    upcomingAllotments.sort((a, b) => a.allotment.localeCompare(b.allotment));
+    recentAllotments.sort((a, b) => b.allotment.localeCompare(a.allotment));
+
+    return {
+      today: todayAllotments,
+      upcoming: upcomingAllotments,
+      recent: recentAllotments
+    };
+  }, [filteredIpos, todayStr]);
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">
+            IPO Allotment Status
+          </h1>
+          <p className="text-xs text-slate-550 dark:text-slate-400 mt-1">
+            Check your IPO allotment directly via official registrar portals using PAN or Application details.
+          </p>
+        </div>
+
+        {/* Mainboard | SME Toggle */}
+        <div className="bg-slate-100 dark:bg-white/5 p-1 rounded-xl flex items-center border border-slate-150 dark:border-white/5 self-start sm:self-auto">
+          <button
+            onClick={() => setFilterType("Mainboard")}
+            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              filterType === "Mainboard"
+                ? "bg-[#1c9bda] text-white shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+            }`}
+          >
+            Mainboard
+          </button>
+          <button
+            onClick={() => setFilterType("SME")}
+            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              filterType === "SME"
+                ? "bg-[#1c9bda] text-white shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+            }`}
+          >
+            SME
+          </button>
+        </div>
+      </div>
+
+      {/* ── Today's Allotments ── */}
+      <section className="space-y-3">
+        <div className="flex items-center gap-2 pb-1.5 border-b border-slate-100 dark:border-white/5">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <h2 className="text-sm font-bold text-slate-850 dark:text-white tracking-tight">Today's Allotments</h2>
+          <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400">
+            {sections.today.length}
+          </span>
+        </div>
+        {sections.today.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {sections.today.map((ipo) => (
+              <AllotmentCard key={ipo.id} ipo={ipo} onOpen={onOpen} dark={dark} todayStr={todayStr} />
+            ))}
+          </div>
+        ) : (
+          <div className="bg-slate-50/50 dark:bg-white/[0.01] border border-slate-150 dark:border-white/5 rounded-2xl py-6 text-center">
+            <p className="text-xs text-slate-400 dark:text-slate-500 italic">No allotments scheduled for today.</p>
+          </div>
+        )}
+      </section>
+
+      {/* ── Upcoming Allotments ── */}
+      <section className="space-y-3">
+        <div className="flex items-center gap-2 pb-1.5 border-b border-slate-100 dark:border-white/5">
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+          <h2 className="text-sm font-bold text-slate-850 dark:text-white tracking-tight">Upcoming Allotments</h2>
+          <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400">
+            {sections.upcoming.length}
+          </span>
+        </div>
+        {sections.upcoming.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {sections.upcoming.map((ipo) => (
+              <AllotmentCard key={ipo.id} ipo={ipo} onOpen={onOpen} dark={dark} todayStr={todayStr} />
+            ))}
+          </div>
+        ) : (
+          <div className="bg-slate-50/50 dark:bg-white/[0.01] border border-slate-150 dark:border-white/5 rounded-2xl py-6 text-center">
+            <p className="text-xs text-slate-400 dark:text-slate-500 italic">No upcoming allotments scheduled.</p>
+          </div>
+        )}
+      </section>
+
+      {/* ── Recent Allotments ── */}
+      <section className="space-y-3">
+        <div className="flex items-center gap-2 pb-1.5 border-b border-slate-100 dark:border-white/5">
+          <span className="w-2.5 h-2.5 rounded-full bg-slate-400 dark:bg-slate-600"></span>
+          <h2 className="text-sm font-bold text-slate-850 dark:text-white tracking-tight">Recent Allotments</h2>
+          <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400">
+            {sections.recent.length}
+          </span>
+        </div>
+        {sections.recent.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {sections.recent.map((ipo) => (
+              <AllotmentCard key={ipo.id} ipo={ipo} onOpen={onOpen} dark={dark} todayStr={todayStr} />
+            ))}
+          </div>
+        ) : (
+          <div className="bg-slate-50/50 dark:bg-white/[0.01] border border-slate-150 dark:border-white/5 rounded-2xl py-6 text-center">
+            <p className="text-xs text-slate-400 dark:text-slate-500 italic">No recent allotments found.</p>
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}
+
+/* =====================================================================
    SUBSCRIPTIONS TAB
 ===================================================================== */
 function SubscriptionsTab({ dark }) {
-  const withSub = sortIposLogically(getLiveIPOS().filter((i) => i.sub));
+  const [filterType, setFilterType] = useState(() => {
+    try {
+      return localStorage.getItem("calmcapital-subscriptions-filter") || "Mainboard";
+    } catch {
+      return "Mainboard";
+    }
+  });
+
+  const handleFilterChange = (type) => {
+    setFilterType(type);
+    try {
+      localStorage.setItem("calmcapital-subscriptions-filter", type);
+    } catch { /* ignore */ }
+  };
+
+  const allIpos = getLiveIPOS().filter((i) => i.sub);
+  const mainboardCount = allIpos.filter((i) => i.type === "Mainboard").length;
+  const smeCount = allIpos.filter((i) => i.type === "SME").length;
+  
+  const displayedIpos = sortIposLogically(allIpos.filter((i) => i.type === filterType));
 
   const statusBadge = {
     Open:     { bg: dark ? "rgba(16,185,129,0.15)" : "rgba(16,185,129,0.1)", color: "#10b981", border: dark ? "1px solid rgba(16,185,129,0.25)" : "1px solid rgba(16,185,129,0.2)" },
@@ -2100,14 +2541,40 @@ function SubscriptionsTab({ dark }) {
 
   return (
     <div className="space-y-5">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">
-          IPO Subscriptions & Allotment Odds
-        </h1>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">
+            IPO Subscriptions & Allotment Odds
+          </h1>
+        </div>
+
+        {/* Mainboard | SME Toggle */}
+        <div className="bg-slate-100 dark:bg-white/5 p-1 rounded-xl flex items-center border border-slate-150 dark:border-white/5 self-start sm:self-auto">
+          <button
+            onClick={() => handleFilterChange("Mainboard")}
+            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              filterType === "Mainboard"
+                ? "bg-[#1c9bda] text-white shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+            }`}
+          >
+            Mainboard ({mainboardCount})
+          </button>
+          <button
+            onClick={() => handleFilterChange("SME")}
+            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              filterType === "SME"
+                ? "bg-[#1c9bda] text-white shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+            }`}
+          >
+            SME ({smeCount})
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {withSub.map((ipo) => {
+        {displayedIpos.map((ipo) => {
           const badge = statusBadge[ipo.status] || statusBadge.Closed;
           const ipoDay = getIpoDay(ipo);
 
@@ -2175,8 +2642,27 @@ function SubscriptionsTab({ dark }) {
 /* =====================================================================
    FINANCIALS TAB
 ===================================================================== */
-function FinancialsTab({ dark }) {
-  const withFin = sortIposLogically(getLiveIPOS().filter((i) => i.fin));
+function FinancialsTab({ onOpen, dark }) {
+  const [filterType, setFilterType] = useState(() => {
+    try {
+      return localStorage.getItem("calmcapital-financials-filter") || "Mainboard";
+    } catch {
+      return "Mainboard";
+    }
+  });
+
+  const handleFilterChange = (type) => {
+    setFilterType(type);
+    try {
+      localStorage.setItem("calmcapital-financials-filter", type);
+    } catch { /* ignore */ }
+  };
+
+  const allIpos = getLiveIPOS().filter((i) => i.fin);
+  const mainboardCount = allIpos.filter((i) => i.type === "Mainboard").length;
+  const smeCount = allIpos.filter((i) => i.type === "SME").length;
+  
+  const displayedIpos = sortIposLogically(allIpos.filter((i) => i.type === filterType));
 
   const MetricBox = ({ label, value, isNA, span = 1 }) => (
     <div
@@ -2198,12 +2684,40 @@ function FinancialsTab({ dark }) {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">
-        Company Financial Metrics Grid
-      </h1>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">
+            Company Financial Metrics Grid
+          </h1>
+        </div>
+
+        {/* Mainboard | SME Toggle */}
+        <div className="bg-slate-100 dark:bg-white/5 p-1 rounded-xl flex items-center border border-slate-150 dark:border-white/5 self-start sm:self-auto">
+          <button
+            onClick={() => handleFilterChange("Mainboard")}
+            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              filterType === "Mainboard"
+                ? "bg-[#1c9bda] text-white shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+            }`}
+          >
+            Mainboard ({mainboardCount})
+          </button>
+          <button
+            onClick={() => handleFilterChange("SME")}
+            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              filterType === "SME"
+                ? "bg-[#1c9bda] text-white shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+            }`}
+          >
+            SME ({smeCount})
+          </button>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {withFin.map((ipo) => {
+        {displayedIpos.map((ipo) => {
           const f = ipo.fin;
           const roeVal = f.roe != null ? `${f.roe}%` : "-";
           const epsVal = f.eps != null ? `₹${f.eps}` : "-";
@@ -2212,7 +2726,8 @@ function FinancialsTab({ dark }) {
           return (
             <div
               key={ipo.id}
-              className="rounded-2xl p-4 hover:shadow-lg transition-all"
+              onClick={() => onOpen?.(ipo)}
+              className="rounded-2xl p-4 hover:shadow-lg transition-all cursor-pointer border border-transparent hover:border-slate-350 dark:hover:border-slate-800"
               style={{
                 background: dark ? "#111827" : "#ffffff",
                 border: dark ? "1px solid rgba(255,255,255,0.07)" : "1px solid rgba(0,0,0,0.06)",
@@ -2251,7 +2766,9 @@ function FinancialsTab({ dark }) {
 
               {/* Verification Metadata Overlay */}
               {ipo.finMeta && (
-                <div className="mt-2.5 p-2 rounded-xl border flex items-center justify-between text-[9px] font-mono tracking-wider uppercase"
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="mt-2.5 p-2 rounded-xl border flex items-center justify-between text-[9px] font-mono tracking-wider uppercase"
                   style={{
                     background: dark ? "rgba(28,155,218,0.04)" : "rgba(28,155,218,0.02)",
                     borderColor: dark ? "rgba(28,155,218,0.1)" : "rgba(28,155,218,0.06)",
@@ -2275,12 +2792,68 @@ function FinancialsTab({ dark }) {
 /* =====================================================================
    DOCUMENTS TAB
 ===================================================================== */
-function DocumentsTab() {
+function DocumentsTab({ onOpen }) {
+  const [filterType, setFilterType] = useState(() => {
+    try {
+      return localStorage.getItem("calmcapital-documents-filter") || "Mainboard";
+    } catch {
+      return "Mainboard";
+    }
+  });
+
+  const handleFilterChange = (type) => {
+    setFilterType(type);
+    try {
+      localStorage.setItem("calmcapital-documents-filter", type);
+    } catch { /* ignore */ }
+  };
+
+  const allIpos = getLiveIPOS();
+  const mainboardCount = allIpos.filter((i) => i.type === "Mainboard").length;
+  const smeCount = allIpos.filter((i) => i.type === "SME").length;
+
+  const displayedIpos = sortDocumentsLogically(allIpos.filter((i) => i.type === filterType));
+
   return (
-    <div className="space-y-2">
-      <p className="text-xs text-slate-400 mb-1">Mainboard IPOs link to official SEBI filings. SME IPOs (NSE Emerge / BSE SME) aren't filed with SEBI by regulation — those link to the exchange-hosted offer document instead.</p>
-      {sortDocumentsLogically(getLiveIPOS()).map((ipo) => (
-        <div key={ipo.id} className="flex items-center justify-between glass glass-hover rounded-xl px-4 py-3">
+    <div className="space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
+        <div>
+          <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight">Official Filings & Documents</h1>
+          <p className="text-xs text-slate-450 dark:text-slate-500 mt-1">Mainboard IPOs link to official SEBI filings. SME IPOs link to exchange offer documents.</p>
+        </div>
+
+        {/* Mainboard | SME Toggle */}
+        <div className="bg-slate-100 dark:bg-white/5 p-1 rounded-xl flex items-center border border-slate-150 dark:border-white/5 self-start sm:self-auto">
+          <button
+            onClick={() => handleFilterChange("Mainboard")}
+            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              filterType === "Mainboard"
+                ? "bg-[#1c9bda] text-white shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+            }`}
+          >
+            Mainboard ({mainboardCount})
+          </button>
+          <button
+            onClick={() => handleFilterChange("SME")}
+            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              filterType === "SME"
+                ? "bg-[#1c9bda] text-white shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+            }`}
+          >
+            SME ({smeCount})
+          </button>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        {displayedIpos.map((ipo) => (
+          <div
+            key={ipo.id}
+            onClick={() => onOpen?.(ipo)}
+            className="flex items-center justify-between glass glass-hover rounded-xl px-4 py-3 cursor-pointer"
+          >
           <div className="flex items-center gap-2.5">
             <CompanyAvatar name={ipo.company} size={30} />
             <div>
@@ -2296,7 +2869,7 @@ function DocumentsTab() {
               </span>
             </div>
           </div>
-          <div className="flex gap-2 items-center justify-end">
+          <div className="flex gap-2 items-center justify-end" onClick={(e) => e.stopPropagation()}>
             {(() => {
               const hasValidDrhp = !!ipo.drhp;
               const hasValidRhp = !!ipo.rhp;
@@ -2327,6 +2900,7 @@ function DocumentsTab() {
           </div>
         </div>
       ))}
+      </div>
     </div>
   );
 }
@@ -2546,6 +3120,7 @@ const AI_ASSISTANT_ENABLED = false;
 const NAV = [
   { id: "ai", label: "AI Assistant", icon: Sparkles },
   { id: "overview", label: "Overview", icon: Home },
+  { id: "allotment", label: "IPO Allotment", icon: BookmarkCheck },
   { id: "open", label: "Open IPOs", icon: CircleDollarSign },
   { id: "upcoming", label: "Upcoming IPOs", icon: Calendar },
   { id: "closed", label: "Closed IPOs", icon: Clock },
@@ -2570,9 +3145,62 @@ export default function App() {
   });
   const [selected, setSelected] = useState(null);
   const [query, setQuery] = useState("");
+  const [upcomingType, setUpcomingType] = useState("Mainboard");
+  const [listedType, setListedType] = useState("Mainboard");
+  const [closedType, setClosedType] = useState("Mainboard");
+
+  const handleSelectIpo = (ipo) => {
+    setSelected(ipo);
+    try {
+      const url = new URL(window.location.href);
+      if (ipo) {
+        url.searchParams.set("ipo", ipo.id);
+      } else {
+        url.searchParams.delete("ipo");
+      }
+      if (window.location.search !== url.search) {
+        window.history.pushState(null, "", url.pathname + url.search);
+      }
+    } catch (e) {
+      console.error("Failed to update URL search parameters:", e);
+    }
+  };
+
+  const getIpoFromUrl = (allIpos) => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const ipoId = params.get("ipo");
+      if (ipoId) {
+        return allIpos.find((i) => i.id === ipoId) || null;
+      }
+    } catch { /* ignore */ }
+    return null;
+  };
+
+  // Sync deep link IPO details on load
+  useEffect(() => {
+    if (!loadingDb) {
+      const all = getLiveIPOS();
+      const initialSelected = getIpoFromUrl(all);
+      if (initialSelected) {
+        setSelected(initialSelected);
+      }
+    }
+  }, [loadingDb]);
+
+  // Listen to browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      const all = getLiveIPOS();
+      const currentSelected = getIpoFromUrl(all);
+      setSelected(currentSelected);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [loadingDb]);
 
   useEffect(() => {
-    fetch("/ipos.json")
+    fetch(`/ipos.json?t=${Date.now()}`)
       .then((res) => res.json())
       .then((data) => {
         IPOS_BASE = data;
@@ -2938,7 +3566,7 @@ export default function App() {
               <button onClick={refresh} className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-[#121625]/30 hover:border-slate-300 dark:hover:border-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-700 shadow-sm">
                 <RefreshCw size={14} className={refreshing ? "animate-spin" : ""} />
               </button>
-              <NotificationBell hook={notifHook} onOpenIpo={(ipoId) => { const found = getLiveIPOS().find((i) => i.id === ipoId); if (found) setSelected(found); }} />
+              <NotificationBell hook={notifHook} onOpenIpo={(ipoId) => { const found = getLiveIPOS().find((i) => i.id === ipoId); if (found) handleSelectIpo(found); }} />
               <button onClick={() => setDark((d) => !d)} className="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/30 dark:bg-[#121625]/30 hover:border-slate-300 dark:hover:border-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-700 shadow-sm">
                 {dark ? <Sun size={14} /> : <Moon size={14} />}
               </button>
@@ -2968,54 +3596,206 @@ export default function App() {
                 {["Open", "Upcoming", "Closed", "Listed"].map((status) => groupedFiltered(status).length > 0 && (
                   <section key={status}>
                     <div className="grid sm:grid-cols-2 gap-3">
-                      {groupedFiltered(status).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} dark={dark} />)}
+                      {groupedFiltered(status).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={handleSelectIpo} watchlist={watchlist} dark={dark} />)}
                     </div>
                   </section>
                 ))}
               </div>
             )}
 
-            {["open", "closed", "upcoming"].includes(tab) && (
+            {tab === "open" && (
               <div>
-                {groupedFiltered(tab[0].toUpperCase() + tab.slice(1)).length > 0 ? (
+                {groupedFiltered("Open").length > 0 ? (
                   <div className="grid sm:grid-cols-2 gap-3">
-                    {groupedFiltered(tab[0].toUpperCase() + tab.slice(1)).map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} dark={dark} />)}
+                    {groupedFiltered("Open").map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={handleSelectIpo} watchlist={watchlist} dark={dark} />)}
                   </div>
                 ) : (
                   <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-12 text-center">
                     <Calendar size={32} className="mx-auto mb-3 text-slate-300 dark:text-slate-700" />
                     <p className="text-slate-500 text-sm">
-                      {tab === "upcoming"
-                        ? "There are currently no upcoming IPOs. Please check back later."
-                        : `There are currently no ${tab} IPOs.`}
+                      There are currently no open IPOs.
                     </p>
                   </div>
                 )}
               </div>
             )}
 
-            {tab === "listed" && (
-              <div className="space-y-4">
-                <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight">Listed IPOs</h1>
-                {groupedFiltered("Listed").length > 0 ? (
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    {groupedFiltered("Listed").map((ipo) => <IPOCard key={ipo.id} ipo={ipo} onOpen={setSelected} watchlist={watchlist} dark={dark} />)}
+            {tab === "closed" && (() => {
+              const closedIpos = groupedFiltered("Closed");
+              const closedMainboardCount = closedIpos.filter(i => i.type === "Mainboard").length;
+              const closedSmeCount = closedIpos.filter(i => i.type === "SME").length;
+              const displayedClosedIpos = closedIpos.filter(i => i.type === closedType);
+
+              return (
+                <div className="space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight">Closed IPOs</h1>
+                    
+                    {/* Mainboard | SME Toggle */}
+                    <div className="bg-slate-100 dark:bg-white/5 p-1 rounded-xl flex items-center border border-slate-150 dark:border-white/5 self-start sm:self-auto">
+                      <button
+                        onClick={() => setClosedType("Mainboard")}
+                        className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          closedType === "Mainboard"
+                            ? "bg-[#1c9bda] text-white shadow-sm"
+                            : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+                        }`}
+                      >
+                        Mainboard ({closedMainboardCount})
+                      </button>
+                      <button
+                        onClick={() => setClosedType("SME")}
+                        className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          closedType === "SME"
+                            ? "bg-[#1c9bda] text-white shadow-sm"
+                            : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+                        }`}
+                      >
+                        SME ({closedSmeCount})
+                      </button>
+                    </div>
                   </div>
-                ) : (
-                  <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-12 text-center">
-                    <Building2 size={32} className="mx-auto mb-3 text-slate-300 dark:text-slate-700" />
-                    <p className="text-slate-500 text-sm">No listed IPOs found.</p>
+
+                  {displayedClosedIpos.length > 0 ? (
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      {displayedClosedIpos.map((ipo) => (
+                        <IPOCard key={ipo.id} ipo={ipo} onOpen={handleSelectIpo} watchlist={watchlist} dark={dark} />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-12 text-center">
+                      <Calendar size={32} className="mx-auto mb-3 text-slate-300 dark:text-slate-700" />
+                      <p className="text-slate-500 text-sm">
+                        There are currently no closed {closedType} IPOs.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+
+            {tab === "upcoming" && (() => {
+              const upcomingIpos = groupedFiltered("Upcoming");
+              const upcomingMainboardCount = upcomingIpos.filter(i => i.type === "Mainboard").length;
+              const upcomingSmeCount = upcomingIpos.filter(i => i.type === "SME").length;
+              const displayedUpcomingIpos = upcomingIpos.filter(i => i.type === upcomingType);
+
+              return (
+                <div className="space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight">Upcoming IPOs</h1>
+                    
+                    {/* Mainboard | SME Toggle */}
+                    <div className="bg-slate-100 dark:bg-white/5 p-1 rounded-xl flex items-center border border-slate-150 dark:border-white/5 self-start sm:self-auto">
+                      <button
+                        onClick={() => setUpcomingType("Mainboard")}
+                        className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          upcomingType === "Mainboard"
+                            ? "bg-[#1c9bda] text-white shadow-sm"
+                            : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+                        }`}
+                      >
+                        Mainboard ({upcomingMainboardCount})
+                      </button>
+                      <button
+                        onClick={() => setUpcomingType("SME")}
+                        className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          upcomingType === "SME"
+                            ? "bg-[#1c9bda] text-white shadow-sm"
+                            : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+                        }`}
+                      >
+                        SME ({upcomingSmeCount})
+                      </button>
+                    </div>
                   </div>
-                )}
-              </div>
+
+                  {displayedUpcomingIpos.length > 0 ? (
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      {displayedUpcomingIpos.map((ipo) => (
+                        <IPOCard key={ipo.id} ipo={ipo} onOpen={handleSelectIpo} watchlist={watchlist} dark={dark} />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-12 text-center">
+                      <Calendar size={32} className="mx-auto mb-3 text-slate-300 dark:text-slate-700" />
+                      <p className="text-slate-500 text-sm">
+                        There are currently no upcoming {upcomingType} IPOs. Please check back later.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+
+            {tab === "allotment" && (
+              <AllotmentTab
+                query={query}
+                onOpen={handleSelectIpo}
+                watchlist={watchlist}
+                dark={dark}
+                tick={tick}
+              />
             )}
+
+            {tab === "listed" && (() => {
+              const listedIpos = groupedFiltered("Listed");
+              const listedMainboardCount = listedIpos.filter(i => i.type === "Mainboard").length;
+              const listedSmeCount = listedIpos.filter(i => i.type === "SME").length;
+              const displayedListedIpos = listedIpos.filter(i => i.type === listedType);
+
+              return (
+                <div className="space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight">Listed IPOs</h1>
+                    
+                    {/* Mainboard | SME Toggle */}
+                    <div className="bg-slate-100 dark:bg-white/5 p-1 rounded-xl flex items-center border border-slate-150 dark:border-white/5 self-start sm:self-auto">
+                      <button
+                        onClick={() => setListedType("Mainboard")}
+                        className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          listedType === "Mainboard"
+                            ? "bg-[#1c9bda] text-white shadow-sm"
+                            : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+                        }`}
+                      >
+                        Mainboard ({listedMainboardCount})
+                      </button>
+                      <button
+                        onClick={() => setListedType("SME")}
+                        className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          listedType === "SME"
+                            ? "bg-[#1c9bda] text-white shadow-sm"
+                            : "text-slate-500 dark:text-slate-400 hover:text-slate-850 dark:hover:text-slate-200"
+                        }`}
+                      >
+                        SME ({listedSmeCount})
+                      </button>
+                    </div>
+                  </div>
+
+                  {displayedListedIpos.length > 0 ? (
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      {displayedListedIpos.map((ipo) => (
+                        <IPOCard key={ipo.id} ipo={ipo} onOpen={handleSelectIpo} watchlist={watchlist} dark={dark} />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-12 text-center">
+                      <Building2 size={32} className="mx-auto mb-3 text-slate-300 dark:text-slate-700" />
+                      <p className="text-slate-500 text-sm">No listed {listedType} IPOs found.</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
 
             {tab === "gmp" && <GMPTab tick={tick} />}
             {tab === "subscriptions" && <SubscriptionsTab dark={dark} />}
-            {tab === "financials" && <FinancialsTab dark={dark} />}
-            {tab === "docs" && <DocumentsTab />}
-            {tab === "calculator" && <CalculatorTab />}
-            {tab === "watchlist" && <WatchlistTab watchlist={watchlist} onOpen={setSelected} dark={dark} />}
+            {tab === "financials" && <FinancialsTab onOpen={handleSelectIpo} dark={dark} />}
+            {tab === "docs" && <DocumentsTab onOpen={handleSelectIpo} />}
+            {tab === "calculator" && <CalculatorTab onOpen={handleSelectIpo} />}
+            {tab === "watchlist" && <WatchlistTab watchlist={watchlist} onOpen={handleSelectIpo} dark={dark} />}
             {tab === "demat" && <DematTab dark={dark} />}
             {AI_ASSISTANT_ENABLED && tab === "ai" && <div className="glass rounded-2xl p-5"><AssistantPane embedded tick={tick} /></div>}
             </div>
@@ -3023,7 +3803,7 @@ export default function App() {
         </div>
       </div>
 
-      <IPODetail ipo={selected} onClose={() => setSelected(null)} watchlist={watchlist} dark={dark} />
+      <IPODetail ipo={selected} onClose={() => handleSelectIpo(null)} watchlist={watchlist} dark={dark} />
     </div>
   );
 }

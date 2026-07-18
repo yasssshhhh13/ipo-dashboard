@@ -157,6 +157,27 @@ function addDays(dateStr, days) {
   }
 }
 
+function calculateStatus(ipo) {
+  // If listed price or current price exists, it is Listed
+  if (ipo.listedAt !== null && ipo.listedAt !== undefined) return "Listed";
+  if (ipo.currentPrice !== null && ipo.currentPrice !== undefined) return "Listed";
+
+  if (!ipo.open) return "Upcoming";
+  const today = new Date();
+  const d = (s) => new Date(s + "T00:00:00+05:30");
+  const open = d(ipo.open);
+  if (today < open) return "Upcoming";
+  
+  if (!ipo.close) return "Open";
+  const closeEnd = new Date(d(ipo.close).getTime() + 24 * 60 * 60 * 1000 - 1);
+  if (today <= closeEnd) return "Open";
+  
+  if (!ipo.listing) return "Closed";
+  const listing = d(ipo.listing);
+  if (today < listing) return "Closed";
+  return "Listed";
+}
+
 function getSearchKeywords(company) {
   let name = company.replace(/Limited|Ltd\.|Co\.|Corporation|Trust|InvIT|Private|Pvt|and|&/gi, "").trim();
   const words = name.split(/\s+/).filter(Boolean);
@@ -407,7 +428,7 @@ async function main() {
         name: cleanedName,
         company: cleanedName + " Limited",
         type,
-        status: "Upcoming",
+        status: calculateStatus({ open, close, listing }),
         open,
         close,
         listing,
@@ -457,6 +478,44 @@ async function main() {
           ...(gmp !== undefined && priceMax !== null ? { estListing } : {}),
         };
       }
+    } else if (id) {
+      // Existing IPO! Let's update its dates and status if we parsed newer/better values from the row.
+      const existingIpo = iposBase.find(i => i.id === id);
+      if (existingIpo) {
+        let changed = false;
+
+        const open = parseInvestorGainDate(cells[7]);
+        const close = parseInvestorGainDate(cells[8]);
+        const allotment = parseInvestorGainDate(cells[9]);
+        const listing = parseInvestorGainDate(cells[10]);
+
+        if (open && existingIpo.open !== open) { existingIpo.open = open; changed = true; }
+        if (close && existingIpo.close !== close) { existingIpo.close = close; changed = true; }
+        if (allotment && existingIpo.allotment !== allotment) { existingIpo.allotment = allotment; changed = true; }
+        if (listing && existingIpo.listing !== listing) { existingIpo.listing = listing; changed = true; }
+
+        const calculatedStatus = calculateStatus(existingIpo);
+        if (existingIpo.status !== calculatedStatus) {
+          console.log(`[STATUS UPDATE] Existing IPO "${existingIpo.name}" status changing from "${existingIpo.status}" to "${calculatedStatus}"`);
+          existingIpo.status = calculatedStatus;
+          changed = true;
+        }
+
+        if (changed) {
+          console.log(`[UPDATE] Updated dates/status for existing IPO: "${existingIpo.name}"`);
+          databaseUpdated = true;
+        }
+      }
+    }
+  }
+
+  // Final sweep to update status based on current date for all items in the database
+  for (const ipo of iposBase) {
+    const calculated = calculateStatus(ipo);
+    if (ipo.status !== calculated) {
+      console.log(`[SWEEP] Updating status of "${ipo.name}" from "${ipo.status}" to "${calculated}"`);
+      ipo.status = calculated;
+      databaseUpdated = true;
     }
   }
 
