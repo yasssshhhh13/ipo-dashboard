@@ -2489,28 +2489,6 @@ function AllotmentTab({ query, onOpen, watchlist, dark, tick }) {
         )}
       </section>
 
-      {/* ── Upcoming Allotments ── */}
-      <section className="space-y-3">
-        <div className="flex items-center gap-2 pb-1.5 border-b border-slate-100 dark:border-white/5">
-          <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-          <h2 className="text-sm font-bold text-slate-850 dark:text-white tracking-tight">Upcoming Allotments</h2>
-          <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400">
-            {sections.upcoming.length}
-          </span>
-        </div>
-        {sections.upcoming.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {sections.upcoming.map((ipo) => (
-              <AllotmentCard key={ipo.id} ipo={ipo} onOpen={onOpen} dark={dark} todayStr={todayStr} />
-            ))}
-          </div>
-        ) : (
-          <div className="bg-slate-50/50 dark:bg-white/[0.01] border border-slate-150 dark:border-white/5 rounded-2xl py-6 text-center">
-            <p className="text-xs text-slate-400 dark:text-slate-500 italic">No upcoming allotments scheduled.</p>
-          </div>
-        )}
-      </section>
-
       {/* ── Recent Allotments ── */}
       <section className="space-y-3">
         <div className="flex items-center gap-2 pb-1.5 border-b border-slate-100 dark:border-white/5">
@@ -2529,6 +2507,28 @@ function AllotmentTab({ query, onOpen, watchlist, dark, tick }) {
         ) : (
           <div className="bg-slate-50/50 dark:bg-white/[0.01] border border-slate-150 dark:border-white/5 rounded-2xl py-6 text-center">
             <p className="text-xs text-slate-400 dark:text-slate-500 italic">No recent allotments found.</p>
+          </div>
+        )}
+      </section>
+
+      {/* ── Upcoming Allotments ── */}
+      <section className="space-y-3">
+        <div className="flex items-center gap-2 pb-1.5 border-b border-slate-100 dark:border-white/5">
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+          <h2 className="text-sm font-bold text-slate-850 dark:text-white tracking-tight">Upcoming Allotments</h2>
+          <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400">
+            {sections.upcoming.length}
+          </span>
+        </div>
+        {sections.upcoming.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {sections.upcoming.map((ipo) => (
+              <AllotmentCard key={ipo.id} ipo={ipo} onOpen={onOpen} dark={dark} todayStr={todayStr} />
+            ))}
+          </div>
+        ) : (
+          <div className="bg-slate-50/50 dark:bg-white/[0.01] border border-slate-150 dark:border-white/5 rounded-2xl py-6 text-center">
+            <p className="text-xs text-slate-400 dark:text-slate-500 italic">No upcoming allotments scheduled.</p>
           </div>
         )}
       </section>
