@@ -348,12 +348,36 @@ function computeAllNotifications(ipos, today) {
 
     // 7. IPO Listed Today
     if (ipo.listing && checkRecent(ipo.listing)) {
+      const issuePrice = ipo.priceMax || ipo.priceMin;
+      let title = `${ipo.company} Listed Today`;
+      let message = `Shares have officially listed and are now trading on ${formatDate(ipo.listing)}.`;
+      
+      if (ipo.listedAt && issuePrice) {
+        const gainPct = ((ipo.listedAt - issuePrice) / issuePrice) * 100;
+        const gainVal = Math.abs(gainPct).toFixed(1).replace(/\.0$/, "");
+        
+        let performanceStr = "";
+        if (gainPct > 0) {
+          performanceStr = `listed at a ${gainVal}% premium`;
+        } else if (gainPct < 0) {
+          performanceStr = `listed at a ${gainVal}% discount`;
+        } else {
+          performanceStr = `listed flat (0%)`;
+        }
+
+        title = `${ipo.company} ${performanceStr}.`;
+        const statusLabel = gainPct > 0 ? "Premium" : gainPct < 0 ? "Discount" : "Flat";
+        const sign = gainPct > 0 ? "+" : "";
+        const formattedGain = sign + gainPct.toFixed(1).replace(/\.0$/, "");
+        message = `Listing Price: ₹${ipo.listedAt} | Issue Price: ₹${issuePrice} | Listing Gain/Loss: ${formattedGain}% | Status: ${statusLabel} | Listing Date: ${formatDate(ipo.listing)}.`;
+      }
+
       candidates.push({
         id: `${ipo.id}-listing-${ipo.listing}`,
         type: "listing",
         ipoId: ipo.id,
-        title: `${ipo.company} Listed Today`,
-        message: `Shares have officially listed and are now trading.`,
+        title,
+        message,
         date: ipo.listing,
       });
     }
@@ -372,7 +396,8 @@ function useNotifications(tick) {
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) {
-          const valid = parsed.filter(n => n && n.id && n.type && n.title && n.message);
+          const allowedTypes = new Set(["announced", "drhp", "rhp", "open", "close", "listing-tomorrow", "listing"]);
+          const valid = parsed.filter(n => n && n.id && allowedTypes.has(n.type) && n.title && n.message);
           setNotifications(valid);
         }
       }
@@ -385,10 +410,24 @@ function useNotifications(tick) {
     const candidates = computeAllNotifications(ipos, today);
 
     setNotifications((prev) => {
-      // 1. Keep existing active notifications that are still within 5 days of creation
+      // 1. Keep existing active notifications that are still within 5 days of creation & event date
       const retentionMs = 5 * 24 * 60 * 60 * 1000;
       const now = Date.now();
-      const activePrev = prev.filter((n) => now - n.createdAt <= retentionMs);
+      const allowedTypes = new Set(["announced", "drhp", "rhp", "open", "close", "listing-tomorrow", "listing"]);
+      
+      const activePrev = prev.filter((n) => {
+        if (!n || !allowedTypes.has(n.type)) return false;
+        
+        const withinCreationLimit = now - n.createdAt <= retentionMs;
+        if (!withinCreationLimit) return false;
+        
+        if (n.date) {
+          const eventDate = new Date(n.date + "T00:00:00+05:30");
+          const diffDays = (today - eventDate) / (1000 * 60 * 60 * 24);
+          return diffDays >= -1 && diffDays <= 5;
+        }
+        return true;
+      });
       
       const existingIds = new Set(activePrev.map((n) => n.id));
       const nextList = [...activePrev];
@@ -3580,7 +3619,7 @@ export default function App() {
                 {/* Page title */}
                 <div>
                   <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight">
-                    Calm Capital - Institutional-Grade IPO Analysis
+                    Calm Capital — Institutional-Grade IPO Analysis
                   </h1>
                 </div>
 
