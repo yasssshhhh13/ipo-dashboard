@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T14:53:15.254Z",
+  "updatedAt": "2026-07-19T15:55:34.522Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -379,7 +379,7 @@
       "priceMax": 574,
       "estListing": 667,
       "sub": {
-        "overall": 93,
+        "overall": 93.5,
         "qib": 0,
         "snii": 41.73,
         "bnii": 574,
@@ -533,9 +533,9 @@
       }
     },
     "indo-mim": {
-      "gmp": 170,
+      "gmp": 180,
       "sub": {
-        "overall": 170,
+        "overall": 180,
         "qib": 0,
         "snii": 0,
         "bnii": 0,
