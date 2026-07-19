@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T23:52:24.819Z",
+  "updatedAt": "2026-07-19T02:25:06.093Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -533,9 +533,9 @@
       }
     },
     "indo-mim": {
-      "gmp": 168,
+      "gmp": 166,
       "sub": {
-        "overall": 168,
+        "overall": 166,
         "qib": 0,
         "snii": 0,
         "bnii": 0,
