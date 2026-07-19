@@ -260,7 +260,7 @@ function computeAllNotifications(ipos, today) {
     const diffTime = today - d;
     const diffDays = diffTime / (1000 * 60 * 60 * 24);
     // Display only notifications from the last 5 days
-    return diffDays >= -1 && diffDays <= 5;
+    return diffDays >= 0 && diffDays <= 5;
   };
 
   for (const ipo of ipos) {
@@ -333,16 +333,19 @@ function computeAllNotifications(ipos, today) {
 
     // 6. Listing Tomorrow
     if (ipo.listing) {
-      const tmrwDateStr = addDays(ipo.listing, -1);
-      if (tmrwDateStr && checkRecent(tmrwDateStr)) {
-        candidates.push({
-          id: `${ipo.id}-listing-tomorrow-${tmrwDateStr}`,
-          type: "listing-tomorrow",
-          ipoId: ipo.id,
-          title: `${ipo.company} Lists Tomorrow`,
-          message: `Shares will list on the exchange tomorrow, ${formatDate(ipo.listing)}.`,
-          date: tmrwDateStr,
-        });
+      const listingDate = new Date(ipo.listing + "T00:00:00+05:30");
+      if (today < listingDate) {
+        const tmrwDateStr = addDays(ipo.listing, -1);
+        if (tmrwDateStr && checkRecent(tmrwDateStr)) {
+          candidates.push({
+            id: `${ipo.id}-listing-tomorrow-${tmrwDateStr}`,
+            type: "listing-tomorrow",
+            ipoId: ipo.id,
+            title: `${ipo.company} Lists Tomorrow`,
+            message: `Shares will list on the exchange tomorrow, ${formatDate(ipo.listing)}.`,
+            date: tmrwDateStr,
+          });
+        }
       }
     }
 
@@ -420,11 +423,19 @@ function useNotifications(tick) {
         
         const withinCreationLimit = now - n.createdAt <= retentionMs;
         if (!withinCreationLimit) return false;
+
+        if (n.type === "listing-tomorrow") {
+          const ipo = ipos.find((i) => i.id === n.ipoId);
+          if (ipo && ipo.listing) {
+            const listingDate = new Date(ipo.listing + "T00:00:00+05:30");
+            if (today >= listingDate) return false;
+          }
+        }
         
         if (n.date) {
           const eventDate = new Date(n.date + "T00:00:00+05:30");
           const diffDays = (today - eventDate) / (1000 * 60 * 60 * 24);
-          return diffDays >= -1 && diffDays <= 5;
+          return diffDays >= 0 && diffDays <= 5;
         }
         return true;
       });
@@ -489,6 +500,7 @@ const NOTIF_COLOR = { open: BRAND.green, close: "#F0A202", listing: BRAND.blue, 
 function NotificationBell({ hook, onOpenIpo }) {
   const { notifications, unreadCount, open, toggleOpen, setOpen } = hook;
   const panelRef = useRef(null);
+  const [timeTick, setTimeTick] = useState(0);
 
   useEffect(() => {
     if (!open) return;
@@ -497,15 +509,33 @@ function NotificationBell({ hook, onOpenIpo }) {
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, [open, setOpen]);
 
+  useEffect(() => {
+    if (!open) return;
+    const interval = setInterval(() => {
+      setTimeTick((t) => t + 1);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [open]);
+
   // Relative-time formatter
   const relTime = (createdAt) => {
     if (!createdAt) return "";
     const diffMs = Date.now() - createdAt;
+    if (diffMs < 0) return "Just now";
+    
     const mins = Math.floor(diffMs / 60000);
-    if (mins < 60) return `${mins || 1}m ago`;
+    if (mins < 1) return "Just now";
+    if (mins < 60) return `${mins} min ago`;
+    
     const hrs = Math.floor(mins / 60);
-    if (hrs < 24) return `${hrs}h ago`;
-    return `${Math.floor(hrs / 24)}d ago`;
+    if (hrs < 24) {
+      if (hrs === 1) return "1 hour ago";
+      return `${hrs} hours ago`;
+    }
+    
+    const days = Math.floor(hrs / 24);
+    if (days === 1) return "Yesterday";
+    return `${days} days ago`;
   };
 
   // Icon + color config per notification type
