@@ -2165,7 +2165,7 @@ function SubscriptionDetailsList({ ipo, dark }) {
   const formatSub = (v) => (v == null ? "—" : `${Number(v).toFixed(2)}×`);
 
   const renderCategoryLine = (label, sharesSub, appsSub) => {
-    const isLotteryCategory = ["Retail", "sHNI", "bHNI", "Employee", "Shareholder"].includes(label);
+    const isLotteryCategory = ["Retail", "sHNI", "sNII", "bHNI", "bNII", "Employee", "Shareholder", "Policyholder"].includes(label);
 
     if (!isLotteryCategory) {
       // For Overall, QIB, NII: show share subscription only
@@ -2177,11 +2177,11 @@ function SubscriptionDetailsList({ ipo, dark }) {
       );
     }
 
-    // Determine if we should fall back to calculations for listed/closed IPOs
+    // Determine if we should fall back to calculations for open/listed/closed IPOs
     let finalAppsSub = appsSub;
-    const isClosedOrListed = ipo.status === "Closed" || ipo.status === "Listed";
+    const shouldCalculate = ipo.status === "Open" || ipo.status === "Closed" || ipo.status === "Listed";
 
-    if (finalAppsSub == null && isClosedOrListed && sharesSub != null && sharesSub > 0) {
+    if (finalAppsSub == null && shouldCalculate && sharesSub != null && sharesSub > 0) {
       if (isSME) {
         if (label === "Retail") {
           finalAppsSub = sharesSub; // Retail SME is exactly 1 lot max, so appsSub === sharesSub
@@ -2193,15 +2193,17 @@ function SubscriptionDetailsList({ ipo, dark }) {
         if (label === "Retail") {
           const avgLots = ipo.id === "sbi-funds" ? 1.518 : 1.30;
           finalAppsSub = sharesSub / avgLots;
-        } else if (label === "sHNI") {
+        } else if (label === "sHNI" || label === "sNII") {
           const sniiMult = ipo.id === "sbi-funds" ? 1.836 : 1.5;
           finalAppsSub = sharesSub / sniiMult;
-        } else if (label === "bHNI") {
+        } else if (label === "bHNI" || label === "bNII") {
           const bniiMult = ipo.id === "sbi-funds" ? 5.215 : 5.5;
           finalAppsSub = sharesSub / bniiMult;
         } else if (label === "Employee") {
           finalAppsSub = sharesSub / 1.5;
         } else if (label === "Shareholder") {
+          finalAppsSub = sharesSub / 2.0;
+        } else if (label === "Policyholder") {
           finalAppsSub = sharesSub / 2.0;
         }
       }
@@ -2209,8 +2211,17 @@ function SubscriptionDetailsList({ ipo, dark }) {
 
     // For Lottery categories: check if application-wise data is available
     if (finalAppsSub != null && finalAppsSub > 0) {
-      const odds = Math.round(finalAppsSub);
-      const oddsText = odds <= 1 ? "1 in 1 (Guaranteed)" : `~1 in ${odds} allotment`;
+      let oddsText = "";
+      if (finalAppsSub <= 1.0) {
+        oddsText = "Guaranteed";
+      } else {
+        const rounded = Math.round(finalAppsSub);
+        if (rounded <= 1) {
+          oddsText = `~1 in ${Number(finalAppsSub).toFixed(1)}`;
+        } else {
+          oddsText = `~1 in ${rounded}`;
+        }
+      }
       return (
         <div key={label} className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2.5 border-b border-slate-100 dark:border-white/5 last:border-0 gap-1">
           <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase">{label}</span>
@@ -2258,11 +2269,11 @@ function SubscriptionDetailsList({ ipo, dark }) {
   lines.push(renderCategoryLine("Retail", s.retail, s.retail_apps));
 
   if (!isSME) {
-    // 5. sHNI
-    lines.push(renderCategoryLine("sHNI", s.snii, s.shni_apps || s.snii_apps));
+    // 5. sNII
+    lines.push(renderCategoryLine("sNII", s.snii, s.shni_apps || s.snii_apps));
 
-    // 6. bHNI
-    lines.push(renderCategoryLine("bHNI", s.bnii, s.bhni_apps));
+    // 6. bNII
+    lines.push(renderCategoryLine("bNII", s.bnii, s.bhni_apps || s.bnii_apps));
   }
 
   // 7. Employee (if applicable)
@@ -2273,6 +2284,11 @@ function SubscriptionDetailsList({ ipo, dark }) {
   // 8. Shareholder (if applicable)
   if (s.shareholder !== undefined && s.shareholder !== null) {
     lines.push(renderCategoryLine("Shareholder", s.shareholder, s.shareholder_apps));
+  }
+
+  // 8.5. Policyholder (if applicable)
+  if (s.policyholder !== undefined && s.policyholder !== null) {
+    lines.push(renderCategoryLine("Policyholder", s.policyholder, s.policyholder_apps));
   }
 
   // 9. GMP (if available)
@@ -2614,7 +2630,7 @@ function SubscriptionsTab({ dark }) {
     } catch { /* ignore */ }
   };
 
-  const allIpos = getLiveIPOS().filter((i) => i.sub);
+  const allIpos = getLiveIPOS().filter((i) => i.status !== "Upcoming" && i.status !== "DRHP Filed");
   const mainboardCount = allIpos.filter((i) => i.type === "Mainboard").length;
   const smeCount = allIpos.filter((i) => i.type === "SME").length;
   

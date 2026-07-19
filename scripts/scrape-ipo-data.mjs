@@ -373,8 +373,11 @@ async function scrapeSubscription(page, iposBase) {
       const bnii = findValue("bNII Subscription") || findValue("Big NII Subscription");
       const hni = findValue("NII Subscription");
       const retail = findValue("RII Subscription");
+      const employee = findValue("Employee Subscription") || findValue("EMP Subscription") || findValue("Employee Individual Subscription");
+      const shareholder = findValue("Shareholder Subscription") || findValue("SHR Subscription") || findValue("Share Holder Subscription");
+      const policyholder = findValue("Policyholder Subscription") || findValue("POL Subscription") || findValue("Policy Holder Subscription");
 
-      if ([qib, hni, retail, overall, snii, bnii].every((v) => v === undefined)) {
+      if ([qib, hni, retail, overall, snii, bnii, employee, shareholder, policyholder].every((v) => v === undefined)) {
         continue;
       }
 
@@ -384,7 +387,10 @@ async function scrapeSubscription(page, iposBase) {
         snii: snii ?? 0,
         bnii: bnii ?? 0,
         hni: hni ?? 0,
-        retail: retail ?? 0
+        retail: retail ?? 0,
+        ...(employee !== undefined ? { employee } : {}),
+        ...(shareholder !== undefined ? { shareholder } : {}),
+        ...(policyholder !== undefined ? { policyholder } : {})
       };
       console.log(`[Subscription] Successfully scraped for ${id}:`, result[id]);
 
