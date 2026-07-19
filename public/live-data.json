@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T13:11:36.323Z",
+  "updatedAt": "2026-07-19T14:53:15.254Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -290,11 +290,11 @@
       }
     },
     "gulf-lloyds": {
-      "gmp": 20,
+      "gmp": 21,
       "priceMax": 100,
-      "estListing": 120,
+      "estListing": 121,
       "sub": {
-        "overall": 20,
+        "overall": 21,
         "qib": 0,
         "snii": 0,
         "bnii": 100,
@@ -499,11 +499,11 @@
       }
     },
     "shree-balaji-mala-textiles": {
-      "gmp": 19,
+      "gmp": 11,
       "priceMax": 70,
-      "estListing": 89,
+      "estListing": 81,
       "sub": {
-        "overall": 19,
+        "overall": 11,
         "qib": 0,
         "snii": 0,
         "bnii": 70,
@@ -533,9 +533,9 @@
       }
     },
     "indo-mim": {
-      "gmp": 163,
+      "gmp": 170,
       "sub": {
-        "overall": 163,
+        "overall": 170,
         "qib": 0,
         "snii": 0,
         "bnii": 0,
