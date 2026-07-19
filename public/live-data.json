@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T05:49:36.398Z",
+  "updatedAt": "2026-07-19T08:12:14.610Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -14,11 +14,11 @@
       }
     },
     "caliber-mining": {
-      "gmp": 117,
+      "gmp": 115,
       "priceMax": 424,
-      "estListing": 541,
+      "estListing": 539,
       "sub": {
-        "overall": 117,
+        "overall": 115,
         "qib": 0,
         "snii": 1.31,
         "bnii": 424,
@@ -290,11 +290,11 @@
       }
     },
     "gulf-lloyds": {
-      "gmp": 15,
+      "gmp": 20,
       "priceMax": 100,
-      "estListing": 115,
+      "estListing": 120,
       "sub": {
-        "overall": 15,
+        "overall": 20,
         "qib": 0,
         "snii": 0,
         "bnii": 100,
@@ -533,9 +533,9 @@
       }
     },
     "indo-mim": {
-      "gmp": 166,
+      "gmp": 167,
       "sub": {
-        "overall": 166,
+        "overall": 167,
         "qib": 0,
         "snii": 0,
         "bnii": 0,
