@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T17:56:52.056Z",
+  "updatedAt": "2026-07-19T19:05:10.595Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -375,11 +375,11 @@
       }
     },
     "sbi-funds-management": {
-      "gmp": 105,
+      "gmp": 107,
       "priceMax": 574,
-      "estListing": 679,
+      "estListing": 681,
       "sub": {
-        "overall": 105,
+        "overall": 107,
         "qib": 0,
         "snii": 41.73,
         "bnii": 574,
@@ -534,9 +534,9 @@
       }
     },
     "indo-mim": {
-      "gmp": 195,
+      "gmp": 199,
       "sub": {
-        "overall": 195,
+        "overall": 199,
         "qib": 0,
         "snii": 0,
         "bnii": 0,
