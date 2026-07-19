@@ -1872,7 +1872,7 @@ function IPODetail({ ipo, onClose, watchlist, dark }) {
           )}
 
           {/* ── Subscription Details & Allotment Odds Table ── */}
-          {ipo.sub && (
+          {(ipo.sub || ipo.status === "Upcoming" || ipo.status === "DRHP Filed") && (
             <div>
               <p className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: "#64748b" }}>Subscription & Allotment Odds</p>
               <SubscriptionDetailsList ipo={ipo} dark={dark} />
@@ -2128,7 +2128,36 @@ function GMPTab({ tick }) {
    SUBSCRIPTION DETAILS & ALLOTMENT PROBABILITY ENGINE
 ===================================================================== */
 function SubscriptionDetailsList({ ipo, dark }) {
-  if (!ipo.sub) return null;
+  const today = new Date();
+  const status = liveStatus(ipo, today);
+
+  if (status === "Upcoming") {
+    return (
+      <div className="bg-slate-50/50 dark:bg-white/[0.015] rounded-3xl p-6 border border-slate-200/80 dark:border-white/10 shadow-inner text-sm text-center py-8">
+        <div className="text-slate-400 dark:text-slate-550 mb-2 flex justify-center">
+          <svg className="w-8 h-8 opacity-65" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <p className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase">Subscription Metrics</p>
+        <p className="text-slate-400 dark:text-slate-500 text-xs mt-1.5 font-medium">
+          Subscription data will be available once the IPO opens for bidding.
+        </p>
+      </div>
+    );
+  }
+
+  if (!ipo.sub) {
+    return (
+      <div className="bg-slate-50/50 dark:bg-white/[0.015] rounded-3xl p-6 border border-slate-200/80 dark:border-white/10 shadow-inner text-sm text-center py-8">
+        <p className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase">Subscription Metrics</p>
+        <p className="text-slate-400 dark:text-slate-500 text-xs mt-1.5 font-medium italic">
+          Subscription data not available yet.
+        </p>
+      </div>
+    );
+  }
+
   const s = ipo.sub;
   const isSME = ipo.type === "SME";
 
@@ -2690,6 +2719,8 @@ function SubscriptionsTab({ dark }) {
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                       Live Day {ipoDay || 1} Updates
                     </span>
+                  ) : ipo.status === "Upcoming" || ipo.status === "DRHP Filed" ? (
+                    <span>Upcoming Subscription Bidding</span>
                   ) : (
                     <span>Final Subscription Figures</span>
                   )}

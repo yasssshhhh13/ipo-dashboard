@@ -299,36 +299,102 @@ async function scrapeGmp(page) {
   return { result, rows };
 }
 
-async function scrapeSubscription(page) {
+async function scrapeSubscription(page, iposBase) {
   await page.goto(SUB_URL, { waitUntil: "domcontentloaded", timeout: 45000 });
   await page.waitForTimeout(4000);
   const rows = await extractTable(page, "sub");
 
   const result = {};
-  for (const { cells } of rows) {
+  for (const { cells, href } of rows) {
     const rawName = cleanScrapedName(cells[0] || "");
     const id = resolveId(rawName);
     if (!id) continue;
 
-    const overall = toNumber(cells[1]);
-    const qib = toNumber(cells[2]);
-    const snii = toNumber(cells[3]);
-    const bnii = toNumber(cells[4]);
-    const hni = toNumber(cells[5]);
-    const retail = toNumber(cells[6]);
-    if ([qib, hni, retail, overall, snii, bnii].every((v) => v === undefined)) continue;
+    // Find in iposBase
+    const ipo = iposBase.find(i => i.id === id);
+    if (!ipo) {
+      continue;
+    }
 
-    result[id] = {
-      overall: overall ?? 0,
-      qib: qib ?? 0,
-      snii: snii ?? 0,
-      bnii: bnii ?? 0,
-      hni: hni ?? 0,
-      retail: retail ?? 0
-    };
+    // Skip if open date is not set or in the future
+    if (!ipo.open) {
+      continue;
+    }
+
+    const today = new Date();
+    const openDate = new Date(ipo.open + "T00:00:00+05:30");
+    if (today < openDate) {
+      continue;
+    }
+
+    if (!href) {
+      continue;
+    }
+
+    // Parse href to construct subscription URL
+    const match = href.match(/\/gmp\/([^/]+)\/(\d+)\/?/);
+    if (!match) {
+      continue;
+    }
+
+    const slug = match[1];
+    const numericId = match[2];
+    const subPageUrl = `https://www.investorgain.com/subscription/${slug}/${numericId}/`;
+
+    console.log(`[Subscription] Fetching detailed subscription for ${id} from: ${subPageUrl}`);
+    try {
+      await page.goto(subPageUrl, { waitUntil: "load", timeout: 20000 });
+      await page.waitForTimeout(2000);
+
+      const scripts = await page.$$eval('script[type="application/ld+json"]', (els) => {
+        return els.map(el => {
+          try {
+            return JSON.parse(el.innerText);
+          } catch(e) {
+            return null;
+          }
+        }).filter(Boolean);
+      });
+
+      const dataset = scripts.find(s => s["@type"] === "Dataset" && s.variableMeasured);
+      if (!dataset) {
+        console.log(`[Subscription] No Dataset schema found for ${id}`);
+        continue;
+      }
+
+      const findValue = (name) => {
+        const prop = dataset.variableMeasured.find(p => p.name === name);
+        return prop ? parseFloat(prop.value) : undefined;
+      };
+
+      const overall = findValue("Total Subscription");
+      const qib = findValue("QIB Subscription");
+      const snii = findValue("sNII Subscription") || findValue("Small NII Subscription");
+      const bnii = findValue("bNII Subscription") || findValue("Big NII Subscription");
+      const hni = findValue("NII Subscription");
+      const retail = findValue("RII Subscription");
+
+      if ([qib, hni, retail, overall, snii, bnii].every((v) => v === undefined)) {
+        continue;
+      }
+
+      result[id] = {
+        overall: overall ?? 0,
+        qib: qib ?? 0,
+        snii: snii ?? 0,
+        bnii: bnii ?? 0,
+        hni: hni ?? 0,
+        retail: retail ?? 0
+      };
+      console.log(`[Subscription] Successfully scraped for ${id}:`, result[id]);
+
+    } catch (err) {
+      console.error(`[Subscription] Failed to scrape sub page for ${id}:`, err.message);
+    }
   }
   return result;
 }
+
 
 async function main() {
   const browser = await chromium.launch({ headless: true });
@@ -525,7 +591,7 @@ async function main() {
   }
 
   try {
-    subPatches = await scrapeSubscription(page);
+    subPatches = await scrapeSubscription(page, iposBase);
   } catch (err) {
     console.error("Subscription scrape failed:", err.message);
     errors.push(`sub: ${err.message}`);
@@ -552,16 +618,20 @@ async function main() {
     const newGmp = gmpPatches[id] || {};
     const newSub = subPatches[id] || {};
 
+    // Remove sub from existingIpo to avoid carrying forward stale/garbage data
+    const { sub: _, ...existingIpoWithoutSub } = existingIpo;
+
     ipos[id] = {
-      ...existingIpo,
+      ...existingIpoWithoutSub,
       ...newGmp,
     };
 
-    if (existingIpo.sub || newSub) {
-      ipos[id].sub = {
-        ...(existingIpo.sub || {}),
-        ...newSub,
-      };
+    const baseIpo = iposBase.find((i) => i.id === id);
+    const isUpcoming = baseIpo ? (baseIpo.status === "Upcoming" || baseIpo.status === "DRHP Filed") : true;
+
+    // Only assign sub if the IPO is not upcoming AND we have valid scraped subscription data
+    if (!isUpcoming && newSub && Object.keys(newSub).length > 0) {
+      ipos[id].sub = newSub;
     }
   }
 
