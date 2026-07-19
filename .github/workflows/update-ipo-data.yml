@@ -27,16 +27,18 @@ jobs:
       - name: Install Playwright + Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Run scraper
-        run: node scripts/scrape-ipo-data.mjs
+      - name: Run scraper and discovery
+        run: |
+          node scripts/scrape-ipo-data.mjs
+          node scripts/discover-new-ipos.mjs
 
       - name: Commit updated data if changed
         run: |
           git config user.name "ipo-data-bot"
           git config user.email "actions@github.com"
-          if ! git diff --quiet -- public/live-data.json; then
-            git add public/live-data.json
-            git commit -m "chore: refresh live IPO data [automated]"
+          git add public/live-data.json public/ipos.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: automated update of live data and discovered IPOs"
             git push
           else
             echo "No data changes — skipping commit."

@@ -1056,7 +1056,7 @@
         "v": 2
       }
     ],
-    "drhp": "https://www.sebi.gov.in/filings/public-issues/oct-2025/aastha-spintex-limited-drhp_97148.html",
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-addendum-to-drhp_102025.html",
     "rhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-rhp_102246.html",
     "leadManager": "Corporate Capital Ventures",
     "exchange": "BSE, NSE",
@@ -1103,6 +1103,23 @@
       "Cotton price volatility",
       "Highly competitive commodity textile space",
       "Listing-day gain has compressed to near-flat"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:56:02.572Z",
+        "action": "created",
+        "details": "Imported during database migration"
+      },
+      {
+        "timestamp": "2026-07-19T19:56:02.572Z",
+        "action": "updated",
+        "changes": {
+          "drhp": {
+            "old": "https://www.sebi.gov.in/filings/public-issues/oct-2025/aastha-spintex-limited-drhp_97148.html",
+            "new": "https://www.sebi.gov.in/filings/public-issues/jun-2026/aastha-spintex-limited-addendum-to-drhp_102025.html"
+          }
+        }
+      }
     ]
   },
   {
@@ -1498,7 +1515,7 @@
     "trend": "stable",
     "estListing": null,
     "gmpHistory": [],
-    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/cult-fit-limited-drhp_102600.html",
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/cult-fit-limited-drhp_102714.html",
     "rhp": null,
     "leadManager": "Kotak Mahindra, ICICI Securities",
     "exchange": "BSE, NSE",
@@ -1535,6 +1552,23 @@
       "Consistently high customer acquisition costs",
       "Intense competition in regional gym sectors",
       "Path to profitability is still early stage"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:54:36.069Z",
+        "action": "created",
+        "details": "Imported during database migration"
+      },
+      {
+        "timestamp": "2026-07-19T19:54:36.069Z",
+        "action": "updated",
+        "changes": {
+          "drhp": {
+            "old": "https://www.sebi.gov.in/filings/public-issues/jul-2026/cult-fit-limited-drhp_102600.html",
+            "new": "https://www.sebi.gov.in/filings/public-issues/jul-2026/cult-fit-limited-drhp_102714.html"
+          }
+        }
+      }
     ]
   },
   {
@@ -1560,7 +1594,7 @@
     "trend": "stable",
     "estListing": null,
     "gmpHistory": [],
-    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/ratnadeep-retail-limited-drhp_102550.html",
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/ratnadeep-retail-limited-drhp_102720.html",
     "rhp": null,
     "leadManager": "JM Financial, Axis Capital",
     "exchange": "BSE, NSE",
@@ -1597,6 +1631,23 @@
       "Geographical concentration risk",
       "Intense competition from online quick-commerce apps",
       "High real estate leasing costs"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:54:36.069Z",
+        "action": "created",
+        "details": "Imported during database migration"
+      },
+      {
+        "timestamp": "2026-07-19T19:54:36.069Z",
+        "action": "updated",
+        "changes": {
+          "drhp": {
+            "old": "https://www.sebi.gov.in/filings/public-issues/jul-2026/ratnadeep-retail-limited-drhp_102550.html",
+            "new": "https://www.sebi.gov.in/filings/public-issues/jul-2026/ratnadeep-retail-limited-drhp_102720.html"
+          }
+        }
+      }
     ]
   },
   {
@@ -1622,7 +1673,7 @@
     "trend": "stable",
     "estListing": null,
     "gmpHistory": [],
-    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/swara-baby-products-limited-drhp_102480.html",
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/swara-baby-products-limited-drhp_102609.html",
     "rhp": null,
     "leadManager": "Fedex Securities",
     "exchange": "BSE, NSE",
@@ -1659,6 +1710,23 @@
       "Heavy raw material cost volatility (fluff pulp/polymers)",
       "High working capital requirement",
       "Competition from established MNC brands"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:54:48.712Z",
+        "action": "created",
+        "details": "Imported during database migration"
+      },
+      {
+        "timestamp": "2026-07-19T19:54:48.712Z",
+        "action": "updated",
+        "changes": {
+          "drhp": {
+            "old": "https://www.sebi.gov.in/filings/public-issues/jul-2026/swara-baby-products-limited-drhp_102480.html",
+            "new": "https://www.sebi.gov.in/filings/public-issues/jul-2026/swara-baby-products-limited-drhp_102609.html"
+          }
+        }
+      }
     ]
   },
   {
@@ -2327,6 +2395,966 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
+    ]
+  },
+  {
+    "id": "gni-infrastructure",
+    "name": "Gni Infrastructure Limited",
+    "company": "Gni Infrastructure Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/gni-infrastructure-limited-drhp_102874.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Gni Infrastructure Limited is a newly announced Mainboard IPO in the Infrastructure & Construction sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "Infrastructure & Construction",
+    "strengths": [
+      "Established presence in the Infrastructure & Construction industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:54:32.082Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "behari-lal-engineering",
+    "name": "Behari Lal Engineering Limited",
+    "company": "Behari Lal Engineering Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/behari-lal-engineering-limited-corrigendum-to-drhp_102871.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Behari Lal Engineering Limited is a newly announced Mainboard IPO in the Infrastructure & Construction sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "Infrastructure & Construction",
+    "strengths": [
+      "Established presence in the Infrastructure & Construction industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:54:36.069Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "tmc-transformers-india",
+    "name": "TMC Transformers India Limited",
+    "company": "TMC Transformers India Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/tmc-transformers-india-limited-drhp_102680.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "TMC Transformers India Limited is a newly announced Mainboard IPO in the General sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "General",
+    "strengths": [
+      "Established presence in the General industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:54:40.113Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "innoterra",
+    "name": "Innoterra Limited",
+    "company": "Innoterra Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/innoterra-limited-drhp_102678.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Innoterra Limited is a newly announced Mainboard IPO in the General sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "General",
+    "strengths": [
+      "Established presence in the General industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:54:44.875Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "pragyawan-technologies",
+    "name": "Pragyawan Technologies Limited",
+    "company": "Pragyawan Technologies Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/pragyawan-technologies-limited-drhp_102611.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Pragyawan Technologies Limited is a newly announced Mainboard IPO in the IT Services & Technology sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "IT Services & Technology",
+    "strengths": [
+      "Established presence in the IT Services & Technology industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:54:48.712Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "stalwart-people-services-india",
+    "name": "Stalwart People Services India Limited",
+    "company": "Stalwart People Services India Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/stalwart-people-services-india-limited-drhp_102607.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Stalwart People Services India Limited is a newly announced Mainboard IPO in the General sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "General",
+    "strengths": [
+      "Established presence in the General industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:54:52.816Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "functional-innovative-foods",
+    "name": "Functional & Innovative Foods Limited",
+    "company": "Functional & Innovative Foods Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/functional-and-innovative-foods-limited-drhp_102603.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Functional & Innovative Foods Limited is a newly announced Mainboard IPO in the General sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "General",
+    "strengths": [
+      "Established presence in the General industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:54:58.428Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "jesons-industries",
+    "name": "Jesons Industries Limited",
+    "company": "Jesons Industries Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/jesons-industries-limited-addendum-to-drhp_102564.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Jesons Industries Limited is a newly announced Mainboard IPO in the General sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "General",
+    "strengths": [
+      "Established presence in the General industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:02.495Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "eswari-global-metal-industries",
+    "name": "Eswari Global Metal Industries Limited",
+    "company": "Eswari Global Metal Industries Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/eswari-global-metal-industries-limited-drhp_102541.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Eswari Global Metal Industries Limited is a newly announced Mainboard IPO in the Metal & Forging sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "Metal & Forging",
+    "strengths": [
+      "Established presence in the Metal & Forging industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:06.781Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "renfra-energy-india",
+    "name": "Renfra Energy India Ltd.",
+    "company": "Renfra Energy India Ltd.",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/renfra-energy-india-ltd-drhp_102601.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Renfra Energy India Ltd. is a newly announced Mainboard IPO in the Energy & Power sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "Energy & Power",
+    "strengths": [
+      "Established presence in the Energy & Power industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:11.870Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "social-worth-technologies",
+    "name": "Social Worth Technologies Limited",
+    "company": "Social Worth Technologies Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/social-worth-technologies-limited-drhp_102477.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Social Worth Technologies Limited is a newly announced Mainboard IPO in the IT Services & Technology sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "IT Services & Technology",
+    "strengths": [
+      "Established presence in the IT Services & Technology industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:15.808Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "mann-fleet-partners",
+    "name": "Mann Fleet Partners Limited",
+    "company": "Mann Fleet Partners Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/mann-fleet-partners-limited-drhp_102474.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Mann Fleet Partners Limited is a newly announced Mainboard IPO in the General sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "General",
+    "strengths": [
+      "Established presence in the General industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:19.934Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "ujin-pharma",
+    "name": "Ujin Pharma Ltd.",
+    "company": "Ujin Pharma Ltd.",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/ujin-pharma-ltd-drhp_102424.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Ujin Pharma Ltd. is a newly announced Mainboard IPO in the Healthcare & Pharma sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "Healthcare & Pharma",
+    "strengths": [
+      "Established presence in the Healthcare & Pharma industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:29.044Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "sky-alloys-and-power",
+    "name": "Sky Alloys and Power Limited",
+    "company": "Sky Alloys and Power Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/sky-alloys-and-power-limited-drhp_102415.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Sky Alloys and Power Limited is a newly announced Mainboard IPO in the Metal & Forging sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "Metal & Forging",
+    "strengths": [
+      "Established presence in the Metal & Forging industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:33.653Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "jio-platforms",
+    "name": "Jio Platforms Ltd",
+    "company": "Jio Platforms Ltd Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/jio-platforms-ltd-drhp_102248.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Jio Platforms Ltd is a newly announced Mainboard IPO in the General sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "General",
+    "strengths": [
+      "Established presence in the General industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:38.939Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "national-stock-exchange-of-india",
+    "name": "National Stock Exchange of India Ltd",
+    "company": "National Stock Exchange of India Ltd Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/national-stock-exchange-of-india-ltd-drhp_102189.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "National Stock Exchange of India Ltd is a newly announced Mainboard IPO in the General sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "General",
+    "strengths": [
+      "Established presence in the General industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:43.460Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "varmora-granito",
+    "name": "Varmora Granito Limited",
+    "company": "Varmora Granito Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/varmora-granito-limited-addendum-to-drhp_102188.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Varmora Granito Limited is a newly announced Mainboard IPO in the General sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "General",
+    "strengths": [
+      "Established presence in the General industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:47.137Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "paras-healthcare",
+    "name": "Paras Healthcare Limited",
+    "company": "Paras Healthcare Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/paras-healthcare-limited-drhp_102187.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Paras Healthcare Limited is a newly announced Mainboard IPO in the Healthcare & Pharma sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "Healthcare & Pharma",
+    "strengths": [
+      "Established presence in the Healthcare & Pharma industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:52.433Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "pioneer-fil-med",
+    "name": "Pioneer Fil-Med Limited",
+    "company": "Pioneer Fil-Med Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/pioneer-fil-med-limited-corrigendum-to-drhp_102126.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Pioneer Fil-Med Limited is a newly announced Mainboard IPO in the Healthcare & Pharma sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "Healthcare & Pharma",
+    "strengths": [
+      "Established presence in the Healthcare & Pharma industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:55:56.521Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
+    ]
+  },
+  {
+    "id": "caliber-mining-and-logistics",
+    "name": "Caliber Mining and Logistics Limited",
+    "company": "Caliber Mining and Logistics Limited",
+    "type": "Mainboard",
+    "status": "DRHP Filed",
+    "open": null,
+    "close": null,
+    "listing": null,
+    "allotment": null,
+    "refund": null,
+    "demat": null,
+    "priceMin": null,
+    "priceMax": null,
+    "faceValue": 10,
+    "lot": null,
+    "issueSize": null,
+    "freshIssue": null,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/caliber-mining-and-logistics-limited-corrigendum-to-drhp_102053.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "registrar": "To Be Announced",
+    "exchange": "BSE, NSE",
+    "about": "Caliber Mining and Logistics Limited is a newly announced Mainboard IPO in the Logistics sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
+    "sector": "Logistics",
+    "strengths": [
+      "Established presence in the Logistics industry",
+      "Experienced promoter group and leadership team"
+    ],
+    "risks": [
+      "Subject to regulatory approvals and market conditions",
+      "Industry competitive pressures and operating scale constraints"
+    ],
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-19T19:56:02.571Z",
+        "action": "created",
+        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
+      }
     ]
   }
 ]

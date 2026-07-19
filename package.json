@@ -8,6 +8,7 @@
     "build": "node scripts/validate-drhp.mjs --check && vite build",
     "preview": "vite preview",
     "scrape:ipo": "node scripts/scrape-ipo-data.mjs",
+    "discover:ipos": "node scripts/discover-new-ipos.mjs",
     "validate:drhp": "node scripts/validate-drhp.mjs",
     "migrate:json": "node scripts/migrate-to-json.js"
   },
