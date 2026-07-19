@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T16:55:46.329Z",
+  "updatedAt": "2026-07-19T17:56:52.056Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -375,11 +375,11 @@
       }
     },
     "sbi-funds-management": {
-      "gmp": 95,
+      "gmp": 105,
       "priceMax": 574,
-      "estListing": 669,
+      "estListing": 679,
       "sub": {
-        "overall": 95,
+        "overall": 105,
         "qib": 0,
         "snii": 41.73,
         "bnii": 574,
@@ -513,13 +513,14 @@
     },
     "lohia": {
       "sub": {
-        "overall": 0,
+        "overall": 20,
         "qib": 0,
         "snii": 0,
         "bnii": 0,
         "hni": 0,
         "retail": 0
-      }
+      },
+      "gmp": 20
     },
     "shreedhar-spinners": {
       "priceMax": 53,
