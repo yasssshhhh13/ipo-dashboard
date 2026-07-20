@@ -1,21 +1,21 @@
 {
-  "updatedAt": "2026-07-20T09:58:45.154Z",
+  "updatedAt": "2026-07-20T15:10:34.861Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
       "priceMax": 152
     },
     "caliber-mining": {
-      "gmp": 110,
+      "gmp": 100,
       "priceMax": 424,
-      "estListing": 534,
+      "estListing": 524,
       "sub": {
-        "overall": 19.72,
-        "qib": 1.26,
-        "snii": 60.73,
-        "bnii": 55.1,
-        "hni": 56.97,
-        "retail": 14.3
+        "overall": 25.04,
+        "qib": 1.49,
+        "snii": 77.58,
+        "bnii": 73.89,
+        "hni": 75.12,
+        "retail": 17.03
       }
     },
     "sotefin-bharat": {
@@ -23,12 +23,12 @@
       "priceMax": 187,
       "estListing": 190,
       "sub": {
-        "overall": 3.22,
-        "qib": 2.07,
-        "snii": 2.86,
-        "bnii": 6.07,
-        "hni": 5,
-        "retail": 3.12
+        "overall": 3.99,
+        "qib": 2.82,
+        "snii": 3.59,
+        "bnii": 7.28,
+        "hni": 6.05,
+        "retail": 3.78
       }
     },
     "sbi-funds": {
@@ -59,6 +59,9 @@
       "priceMax": 419,
       "estListing": 580,
       "sub": {
+        "retail_apps": 22.45,
+        "shni_apps": 110.15,
+        "bhni_apps": 42.84,
         "overall": 135.8,
         "qib": 299.51,
         "snii": 144.05,
@@ -85,16 +88,15 @@
       "priceMax": 170,
       "estListing": 183,
       "sub": {
-        "overall": 87.17,
-        "qib": 160.22,
-        "snii": 112.09,
-        "bnii": 163.91,
-        "hni": 146.64,
-        "retail": 21.09,
-        "employee": 9.84,
         "retail_apps": 17,
         "shni_apps": 107,
-        "bhni_apps": 33
+        "bhni_apps": 33,
+        "overall": 61.11,
+        "qib": 160.03,
+        "snii": 112.04,
+        "bnii": 163.83,
+        "hni": 146.57,
+        "retail": 21.08
       }
     },
     "vinit-mobile": {
@@ -168,6 +170,9 @@
       "priceMax": 136,
       "estListing": 141,
       "sub": {
+        "retail_apps": 1.85,
+        "shni_apps": 4.8,
+        "bhni_apps": 1.62,
         "overall": 5.05,
         "qib": 3.59,
         "snii": 6.66,
@@ -190,6 +195,9 @@
     "csm-technologies": {
       "priceMax": 113,
       "sub": {
+        "retail_apps": 1.21,
+        "shni_apps": 1.15,
+        "bhni_apps": 0.92,
         "overall": 1.18,
         "qib": 1.02,
         "snii": 1.33,
@@ -199,9 +207,9 @@
       }
     },
     "xtranet-technologies": {
-      "gmp": 26,
+      "gmp": 25,
       "priceMax": 127,
-      "estListing": 153
+      "estListing": 152
     },
     "shree-balaji-textiles": {
       "gmp": 19,
@@ -212,9 +220,9 @@
       "priceMax": 77
     },
     "millworks-technologies": {
-      "gmp": 390,
+      "gmp": 395,
       "priceMax": 331,
-      "estListing": 721,
+      "estListing": 726,
       "sub": {
         "overall": 219.54,
         "qib": 194.05,
@@ -238,16 +246,16 @@
       }
     },
     "gulf-lloyds": {
-      "gmp": 15,
+      "gmp": 10,
       "priceMax": 100,
-      "estListing": 115,
+      "estListing": 110,
       "sub": {
-        "overall": 3.66,
+        "overall": 4.67,
         "qib": 0,
         "snii": 0,
         "bnii": 0,
-        "hni": 0.86,
-        "retail": 6.45
+        "hni": 1.16,
+        "retail": 8.19
       }
     },
     "laser-power-infra-ipol-250-00-16-82": {
@@ -275,23 +283,21 @@
       "estListing": 757
     },
     "sbi-funds-management": {
-      "gmp": 102,
+      "gmp": 98,
       "priceMax": 574,
-      "estListing": 676,
+      "estListing": 672,
       "sub": {
+        "retail_apps": 2.32,
+        "shni_apps": 18.45,
+        "bhni_apps": 4.99,
+        "employee_apps": 1.3,
+        "shareholder_apps": 1.38,
         "overall": 41.73,
         "qib": 140.11,
         "snii": 15.51,
         "bnii": 26.01,
         "hni": 22.51,
-        "retail": 3.76,
-        "employee": 4.65,
-        "shareholder": 9.52,
-        "retail_apps": 2.32,
-        "shni_apps": 18.45,
-        "bhni_apps": 4.99,
-        "employee_apps": 1.3,
-        "shareholder_apps": 1.38
+        "retail": 3.76
       }
     },
     "laser-power-infra": {
@@ -299,15 +305,15 @@
       "priceMax": 214,
       "estListing": 253,
       "sub": {
+        "retail_apps": 5.98,
+        "shni_apps": 35.45,
+        "bhni_apps": 10.36,
         "overall": 41.05,
         "qib": 97.25,
         "snii": 36.43,
         "bnii": 50.32,
         "hni": 45.69,
-        "retail": 6.95,
-        "retail_apps": 5.98,
-        "shni_apps": 35.45,
-        "bhni_apps": 10.36
+        "retail": 6.95
       }
     },
     "sampark-india-logistics": {
@@ -380,14 +386,14 @@
       "estListing": 89
     },
     "shree-balaji-mala-textiles": {
-      "gmp": 10,
+      "gmp": 13,
       "priceMax": 70,
-      "estListing": 80
+      "estListing": 83
     },
     "lohia": {
-      "gmp": 87,
+      "gmp": 77,
       "priceMax": 425,
-      "estListing": 512
+      "estListing": 502
     },
     "shreedhar-spinners": {
       "priceMax": 53
@@ -399,6 +405,19 @@
     },
     "silverstorm-parks-resorts": {
       "priceMax": 133
+    },
+    "happy-steel": {
+      "gmp": 10,
+      "priceMax": 66,
+      "estListing": 76,
+      "sub": {
+        "overall": 77.81,
+        "qib": 59.01,
+        "snii": 83.26,
+        "bnii": 128.77,
+        "hni": 113.6,
+        "retail": 73.25
+      }
     }
   }
 }

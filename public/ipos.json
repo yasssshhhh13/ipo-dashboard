@@ -54,12 +54,12 @@
     "leadManager": "Unistone Capital",
     "exchange": "BSE, NSE",
     "sub": {
-      "overall": 87.17,
-      "qib": 160.22,
-      "snii": 112.09,
-      "bnii": 163.91,
-      "hni": 146.64,
-      "retail": 21.09,
+      "overall": 61.11,
+      "qib": 160.03,
+      "snii": 112.04,
+      "bnii": 163.83,
+      "hni": 146.57,
+      "retail": 21.08,
       "employee": 9.84,
       "shareholder": null,
       "retail_apps": 17,
@@ -98,7 +98,8 @@
       "Raw material (polypropylene) price volatility",
       "Customer concentration in a few large accounts",
       "Working-capital intensive model"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/knack-packaging-ipo/1877/"
   },
   {
     "id": "ic-electricals",
@@ -151,12 +152,14 @@
     "leadManager": "Corpwis Advisors",
     "exchange": "NSE Emerge",
     "sub": {
-      "overall": 0.4,
-      "qib": 0,
-      "hni": 0.3,
-      "retail": 0.6,
+      "overall": 295.08,
+      "qib": 241.75,
+      "hni": 764.38,
+      "retail": 372.51,
       "employee": null,
-      "shareholder": null
+      "shareholder": null,
+      "snii": 422.38,
+      "bnii": 936.7
     },
     "fin": {
       "revenue": 143.81,
@@ -190,7 +193,8 @@
       "Concentrated government-client dependency",
       "Tender-based revenue is lumpy",
       "Working capital tied up in receivables"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/ic-electricals-ipo/1596/"
   },
   {
     "id": "sbi-funds-management",
@@ -237,10 +241,10 @@
     "leadManager": "Kotak Mahindra Capital",
     "exchange": "BSE, NSE",
     "sub": {
-      "overall": 41.66,
+      "overall": 41.73,
       "qib": 140.11,
       "hni": 22.51,
-      "retail": 3.6,
+      "retail": 3.76,
       "snii": 15.51,
       "bnii": 26.01,
       "employee": 4.65,
@@ -283,7 +287,8 @@
       "Pure OFS — no fresh capital to the company",
       "AMC earnings sensitive to market cycles",
       "Fee-compression pressure industry-wide"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/sbi-funds-management-ipo/2210/"
   },
   {
     "id": "kusumgar",
@@ -348,7 +353,9 @@
       "shareholder": null,
       "retail_apps": 22.45,
       "shni_apps": 110.15,
-      "bhni_apps": 42.84
+      "bhni_apps": 42.84,
+      "snii": 144.05,
+      "bnii": 189.4
     },
     "fin": {
       "revenue": 692.03,
@@ -382,7 +389,8 @@
       "Entirely OFS — no fresh growth capital raised",
       "Niche end markets limit volume scale",
       "Import dependency for certain chemicals"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/kusumgar-ipo/1595/"
   },
   {
     "id": "devson-catalyst",
@@ -424,7 +432,14 @@
     "rhp": null,
     "leadManager": "Corpwis Advisors",
     "exchange": "NSE Emerge",
-    "sub": null,
+    "sub": {
+      "overall": 220.35,
+      "qib": 168.56,
+      "snii": 211.19,
+      "bnii": 286.5,
+      "hni": 261.22,
+      "retail": 244.08
+    },
     "fin": {
       "revenue": 55.78,
       "pat": 12.52,
@@ -459,7 +474,8 @@
       "Raw material import dependency"
     ],
     "listedAt": 196,
-    "currentPrice": 196
+    "currentPrice": 196,
+    "investorgainUrl": "https://www.investorgain.com/ipo/devson-catalyst-ipo/2204/"
   },
   {
     "id": "happy-steel",
@@ -469,7 +485,7 @@
     "status": "Listed",
     "open": "2026-07-09",
     "close": "2026-07-13",
-    "listing": "2026-07-17",
+    "listing": "2026-07-16",
     "allotment": "2026-07-14",
     "refund": "2026-07-16",
     "demat": "2026-07-16",
@@ -488,7 +504,14 @@
     "rhp": null,
     "leadManager": "Swastika Investmart",
     "exchange": "NSE Emerge",
-    "sub": null,
+    "sub": {
+      "overall": 77.81,
+      "qib": 59.01,
+      "snii": 83.26,
+      "bnii": 128.77,
+      "hni": 113.6,
+      "retail": 73.25
+    },
     "fin": null,
     "about": "Ludhiana (Punjab) manufacturer of forged & precision-machined axles, spline shafts and spindles for automotive OEMs and Tier-1 suppliers.",
     "sector": "Auto Components",
@@ -504,7 +527,8 @@
       "Raw steel price volatility"
     ],
     "listedAt": 68,
-    "currentPrice": 68
+    "currentPrice": 68,
+    "investorgainUrl": "https://www.investorgain.com/ipo/happy-steels-ipo/2127/"
   },
   {
     "id": "kratikal-tech",
@@ -561,12 +585,14 @@
     "leadManager": "Fedex Securities",
     "exchange": "NSE Emerge",
     "sub": {
-      "overall": 45.2,
-      "qib": 38.6,
-      "hni": 72.4,
-      "retail": 28.1,
+      "overall": 154.97,
+      "qib": 145.82,
+      "hni": 324.64,
+      "retail": 218.48,
       "employee": null,
-      "shareholder": null
+      "shareholder": null,
+      "snii": 223.33,
+      "bnii": 375.29
     },
     "fin": {
       "revenue": 36.72,
@@ -600,7 +626,8 @@
       "Intense competition from global cybersecurity vendors",
       "Small revenue base vs valuation",
       "Talent-retention risk in tech"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/kratikal-tech-ipo/2096/"
   },
   {
     "id": "teja-engineering",
@@ -653,12 +680,14 @@
     "leadManager": "B.N. Rathi Securities",
     "exchange": "NSE Emerge",
     "sub": {
-      "overall": 1.2,
+      "overall": 1.37,
       "qib": 0,
-      "hni": 1.4,
-      "retail": 1,
+      "hni": 1.81,
+      "retail": 0.32,
       "employee": null,
-      "shareholder": null
+      "shareholder": null,
+      "snii": 0,
+      "bnii": 0
     },
     "fin": {
       "revenue": null,
@@ -682,7 +711,8 @@
       "Weak grey-market response pre-listing",
       "Client concentration risk",
       "Margins tied to contract renewals"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/teja-engineering-industries-ipo/1715/"
   },
   {
     "id": "vinit-mobile",
@@ -735,12 +765,14 @@
     "leadManager": "Comfort Securities",
     "exchange": "BSE SME",
     "sub": {
-      "overall": 0.02,
-      "qib": 0,
-      "hni": 0.01,
-      "retail": 0.04,
+      "overall": 1.62,
+      "qib": 1,
+      "hni": 0.8,
+      "retail": 2.18,
       "employee": null,
-      "shareholder": null
+      "shareholder": null,
+      "snii": 0.63,
+      "bnii": 0.88
     },
     "fin": {
       "revenue": null,
@@ -764,7 +796,8 @@
       "Severely undersubscribed issue (0.02x)",
       "Thin retail margins",
       "High competition from e-commerce"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/vinit-mobile-ipo/2085/"
   },
   {
     "id": "sampark-india-logistics",
@@ -813,12 +846,14 @@
     "leadManager": "Corpwis Advisors",
     "exchange": "NSE Emerge",
     "sub": {
-      "overall": 2.1,
-      "qib": 1.4,
-      "hni": 3.2,
-      "retail": 1.8,
+      "overall": 3.47,
+      "qib": 1.55,
+      "hni": 10.11,
+      "retail": 4.65,
       "employee": null,
-      "shareholder": null
+      "shareholder": null,
+      "snii": 9.89,
+      "bnii": 10.22
     },
     "fin": {
       "revenue": null,
@@ -842,7 +877,8 @@
       "Thin net margins typical of logistics",
       "Fuel-cost sensitivity",
       "Fragmented, competitive sector"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/sampark-india-logistics-ipo/1971/"
   },
   {
     "id": "atharva-polyplast",
@@ -899,12 +935,14 @@
     "leadManager": "Swastika Investmart",
     "exchange": "BSE SME",
     "sub": {
-      "overall": 3.4,
-      "qib": 2.8,
-      "hni": 5.1,
-      "retail": 2.2,
+      "overall": 7.54,
+      "qib": 3.58,
+      "hni": 18.91,
+      "retail": 11.32,
       "employee": null,
-      "shareholder": null
+      "shareholder": null,
+      "snii": 11.91,
+      "bnii": 22.44
     },
     "fin": {
       "revenue": null,
@@ -928,7 +966,8 @@
       "Small-cap scale limits pricing power",
       "Polymer input-cost volatility",
       "Post-listing GMP has been softening"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/atharva-polyplast-ipo/1922/"
   },
   {
     "id": "seemax-resources",
@@ -977,12 +1016,14 @@
     "leadManager": "Fedex Securities",
     "exchange": "NSE Emerge",
     "sub": {
-      "overall": 1.6,
-      "qib": 0.8,
-      "hni": 2.4,
-      "retail": 1.3,
+      "overall": 3.62,
+      "qib": 17.19,
+      "hni": 4.08,
+      "retail": 1.52,
       "employee": null,
-      "shareholder": null
+      "shareholder": null,
+      "snii": 5.01,
+      "bnii": 3.62
     },
     "fin": {
       "revenue": null,
@@ -1006,7 +1047,8 @@
       "Tiny revenue base (₹14.46 Cr)",
       "Capital-intensive fleet ownership",
       "No GMP premium at listing"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/seemax-resources-ipo/1968/"
   },
   {
     "id": "aastha-spintex",
@@ -1071,7 +1113,9 @@
       "shareholder": null,
       "retail_apps": 1.85,
       "shni_apps": 4.8,
-      "bhni_apps": 1.62
+      "bhni_apps": 1.62,
+      "snii": 6.66,
+      "bnii": 9.11
     },
     "fin": {
       "revenue": 352.17,
@@ -1122,7 +1166,8 @@
           }
         }
       }
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/aastha-spintex-ipo/1593/"
   },
   {
     "id": "adon-agro",
@@ -1171,12 +1216,14 @@
     "leadManager": "Fedex Securities",
     "exchange": "NSE Emerge",
     "sub": {
-      "overall": 0.9,
-      "qib": 0.5,
-      "hni": 1.1,
-      "retail": 0.8,
+      "overall": 1.35,
+      "qib": 22.47,
+      "hni": 1.41,
+      "retail": 0.84,
       "employee": null,
-      "shareholder": null
+      "shareholder": null,
+      "snii": 0.57,
+      "bnii": 1.82
     },
     "fin": {
       "revenue": null,
@@ -1200,7 +1247,8 @@
       "Import/currency exposure",
       "Undersubscribed issue (0.9x)",
       "Low-margin commodity trading core"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/adon-agro-commodities-ipo/1798/"
   },
   {
     "id": "csm-technologies",
@@ -1253,7 +1301,7 @@
     "leadManager": "Corporate Capital Ventures",
     "exchange": "BSE, NSE",
     "sub": {
-      "overall": 1.37,
+      "overall": 1.18,
       "qib": 1.02,
       "hni": 1.54,
       "retail": 1.63,
@@ -1261,7 +1309,9 @@
       "shareholder": null,
       "retail_apps": 1.21,
       "shni_apps": 1.15,
-      "bhni_apps": 0.92
+      "bhni_apps": 0.92,
+      "snii": 1.33,
+      "bnii": 1.65
     },
     "fin": {
       "revenue": 200.63,
@@ -1295,7 +1345,8 @@
       "Listed flat, then hit lower circuit (-5%)",
       "Government-tender dependent revenue",
       "Long sales cycles"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/csm-technologies-ipo/1911/"
   },
   {
     "id": "caliber-mining",
@@ -1333,11 +1384,18 @@
         "v": 100
       }
     ],
-    "drhp": "https://www.sebi.gov.in/filings/public-issues/jan-2025/caliber-mining-and-logistics-limited_90669.html",
+    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/caliber-mining-and-logistics-limited-corrigendum-to-drhp_102053.html",
     "rhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/caliber-mining-and-logistics-limited-rhp_102715.html",
     "leadManager": "DAM Capital Advisors Ltd",
     "exchange": "BSE, NSE",
-    "sub": null,
+    "sub": {
+      "overall": 25.04,
+      "qib": 1.49,
+      "snii": 77.58,
+      "bnii": 73.89,
+      "hni": 75.12,
+      "retail": 17.03
+    },
     "fin": {
       "revenue": 1677.66,
       "pat": 157.9,
@@ -1370,6 +1428,24 @@
       "Highly dependent on government coal contracts",
       "Capital intensive machinery fleet operations",
       "Environmental regulations exposure"
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/caliber-mining-ipo/1610/",
+    "auditTrail": [
+      {
+        "timestamp": "2026-07-20T15:10:44.942Z",
+        "action": "created",
+        "details": "Imported during database migration"
+      },
+      {
+        "timestamp": "2026-07-20T15:10:44.942Z",
+        "action": "updated",
+        "changes": {
+          "drhp": {
+            "old": "https://www.sebi.gov.in/filings/public-issues/jan-2025/caliber-mining-and-logistics-limited_90669.html",
+            "new": "https://www.sebi.gov.in/filings/public-issues/jun-2026/caliber-mining-and-logistics-limited-corrigendum-to-drhp_102053.html"
+          }
+        }
+      }
     ]
   },
   {
@@ -1431,7 +1507,8 @@
       "Toll revenue risk from traffic volatility",
       "Interest rate fluctuations impact debt servicing",
       "Regulatory road construction risks"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/cube-highways-trust-invit/2346/"
   },
   {
     "id": "sotefin-bharat",
@@ -1469,7 +1546,14 @@
     "rhp": null,
     "leadManager": "Fedex Securities",
     "exchange": "BSE SME",
-    "sub": null,
+    "sub": {
+      "overall": 3.99,
+      "qib": 2.82,
+      "snii": 3.59,
+      "bnii": 7.28,
+      "hni": 6.05,
+      "retail": 3.78
+    },
     "fin": {
       "revenue": null,
       "pat": null,
@@ -1492,7 +1576,8 @@
       "Dependent on real estate market cycles",
       "High concentration of metropolitan projects",
       "Raw steel price sensitivity"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/sotefin-bharat-ipo/2088/"
   },
   {
     "id": "cult-fit",
@@ -1775,11 +1860,13 @@
     "exchange": "BSE SME",
     "sub": {
       "overall": 219.54,
-      "qib": 116.5,
-      "hni": 325.2,
-      "retail": 184.8,
+      "qib": 194.05,
+      "hni": 260.37,
+      "retail": 216.6,
       "employee": null,
-      "shareholder": null
+      "shareholder": null,
+      "snii": 201.44,
+      "bnii": 289.84
     },
     "fin": {
       "revenue": 153.4,
@@ -1813,7 +1900,8 @@
       "High customer concentration risk",
       "Working capital intensive model",
       "Raw material price volatility"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/millworks-technologies-ipo/2129/"
   },
   {
     "id": "alpine-texworld",
@@ -1845,12 +1933,14 @@
     "leadManager": "D&A Financial Services Pvt. Ltd.",
     "exchange": "BSE, NSE",
     "sub": {
-      "overall": 50.57,
-      "qib": 22.4,
-      "hni": 74.8,
-      "retail": 35.2,
+      "overall": 1.4,
+      "qib": 1.09,
+      "hni": 1.09,
+      "retail": 1.54,
       "employee": null,
-      "shareholder": null
+      "shareholder": null,
+      "snii": 1.48,
+      "bnii": 0.9
     },
     "fin": {
       "revenue": 342.71,
@@ -1884,7 +1974,8 @@
       "High debt-to-equity ratio (2.35)",
       "Highly competitive commodity textile market",
       "Raw material (yarn) price sensitivity"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/alpine-texworld-ipo/1940/"
   },
   {
     "id": "metalic-technoforge",
@@ -1948,7 +2039,8 @@
       "Highly working capital intensive model",
       "Raw steel price volatility",
       "Client concentration in automotive OEM sector"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/metalic-technoforge-ipo/2255/"
   },
   {
     "id": "shree-balaji-mala-textiles",
@@ -2012,7 +2104,8 @@
       "High debt levels relative to equity (D/E = 2.25)",
       "Highly competitive wholesale textile market",
       "Working capital intensive model"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/shree-balaji-mala-ipo/1967/"
   },
   {
     "id": "xtranet-technologies",
@@ -2076,7 +2169,8 @@
       "High working capital requirement",
       "Government-client concentration risk",
       "Competition from large global IT vendors"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/xtranet-technologies-ipo/1951/"
   },
   {
     "id": "gulf-lloyds",
@@ -2110,13 +2204,20 @@
     ],
     "drhp": "https://www.sebi.gov.in/filings/public-issues.html",
     "rhp": null,
-    "leadManager": "To Be Announced",
+    "leadManager": "Interactive Financial Services Ltd.",
     "exchange": "BSE SME",
-    "sub": null,
+    "sub": {
+      "overall": 4.67,
+      "qib": 0,
+      "snii": 0,
+      "bnii": 0,
+      "hni": 1.16,
+      "retail": 8.19
+    },
     "fin": null,
     "about": "Gulf Lloyds Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
-    "registrar": "To Be Announced",
+    "registrar": "Kfin Technologies Ltd.",
     "strengths": [
       "Growing market footprint in the General sector",
       "Experienced promoter group and management team"
@@ -2124,7 +2225,8 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/gulf-lloyds-ipo/2214/"
   },
   {
     "id": "laser-power-infra",
@@ -2212,7 +2314,14 @@
     "rhp": null,
     "leadManager": "To Be Announced",
     "exchange": "BSE SME",
-    "sub": null,
+    "sub": {
+      "overall": 1.21,
+      "qib": 4.75,
+      "snii": 0.07,
+      "bnii": 1.59,
+      "hni": 1.08,
+      "retail": 1.26
+    },
     "fin": null,
     "about": "Crazy Snacks Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
@@ -2224,7 +2333,8 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/crazy-snacks-ipo/1664/"
   },
   {
     "id": "riyaasat-lifestyle",
@@ -2404,7 +2514,14 @@
     "rhp": null,
     "leadManager": "To Be Announced",
     "exchange": "BSE, NSE",
-    "sub": null,
+    "sub": {
+      "overall": 1.53,
+      "qib": 0.72,
+      "snii": 1.83,
+      "bnii": 0.94,
+      "hni": 1.23,
+      "retail": 4.4
+    },
     "fin": null,
     "about": "Waterways Leisure Tourism Limited is a newly announced Mainboard IPO operating in the General sector. The company is launching its issue on BSE, NSE.",
     "sector": "General",
@@ -2416,7 +2533,8 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/cordelia-cruises-ipo/1801/"
   },
   {
     "id": "gni-infrastructure",
@@ -3362,13 +3480,13 @@
     ],
     "drhp": "https://www.sebi.gov.in/filings/public-issues/aug-2025/lohia-corp-limited_96273.html",
     "rhp": null,
-    "leadManager": "To Be Announced",
+    "leadManager": "Motilal Oswal Investment Advisors...",
     "exchange": "BSE, NSE",
     "sub": null,
     "fin": null,
     "about": "Lohia Corp Limited is a newly announced Mainboard IPO operating in the General sector. The company is launching its issue on BSE, NSE.",
     "sector": "General",
-    "registrar": "To Be Announced",
+    "registrar": "MUFG Intime India Pvt.Ltd.",
     "strengths": [
       "Growing market footprint in the General sector",
       "Experienced promoter group and management team"
@@ -3376,7 +3494,8 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/lohia-corp-ipo/1862/"
   },
   {
     "id": "indo-mim",
@@ -3410,13 +3529,13 @@
     ],
     "drhp": "https://www.sebi.gov.in/filings/public-issues/oct-2025/indo-mim-limited_97069.html",
     "rhp": null,
-    "leadManager": "To Be Announced",
+    "leadManager": "Kotak Mahindra Capital Co.Ltd.",
     "exchange": "BSE, NSE",
     "sub": null,
     "fin": null,
     "about": "Indo-MIM Limited is a newly announced Mainboard IPO operating in the General sector. The company is launching its issue on BSE, NSE.",
     "sector": "General",
-    "registrar": "To Be Announced",
+    "registrar": "MUFG Intime India Pvt.Ltd.",
     "strengths": [
       "Growing market footprint in the General sector",
       "Experienced promoter group and management team"
@@ -3424,7 +3543,8 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/indo-mim-ipo/1594/"
   },
   {
     "id": "silverstorm-parks-resorts",
@@ -3453,13 +3573,13 @@
     "gmpHistory": [],
     "drhp": "https://www.sebi.gov.in/filings/public-issues.html",
     "rhp": null,
-    "leadManager": "To Be Announced",
+    "leadManager": "Vivro Financial Services Pvt.Ltd.",
     "exchange": "BSE SME",
     "sub": null,
     "fin": null,
     "about": "Silverstorm Parks & Resorts Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
-    "registrar": "To Be Announced",
+    "registrar": "MUFG Intime India Pvt.Ltd.",
     "strengths": [
       "Growing market footprint in the General sector",
       "Experienced promoter group and management team"
@@ -3467,6 +3587,7 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
-    ]
+    ],
+    "investorgainUrl": "https://www.investorgain.com/ipo/silverstorm-parks-resorts-ipo/2078/"
   }
 ]
