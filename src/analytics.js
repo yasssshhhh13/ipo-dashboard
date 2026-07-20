@@ -42,16 +42,32 @@ export function trackEvent(name, params = {}) {
   window.gtag("event", name, params);
 }
 
-export function trackTabView(tabId, tabLabel) {
+export function trackTabView(tabId, tabLabel, path, title) {
   if (!tabId) return;
-  const path = `/tab/${tabId}`;
-  const title = tabLabel ? `${tabLabel} | Calm Capital` : `Calm Capital — ${tabId}`;
-  trackPageView(path, title);
+  const pagePath = path || TAB_PATH_FALLBACK[tabId] || `/tab/${tabId}`;
+  const pageTitle = title || (tabLabel ? `${tabLabel} | Calm Capital` : `Calm Capital — ${tabId}`);
+  trackPageView(pagePath, pageTitle);
   trackEvent("tab_view", {
     tab_id: tabId,
     tab_name: tabLabel || tabId,
   });
 }
+
+const TAB_PATH_FALLBACK = {
+  overview: "/",
+  open: "/open",
+  upcoming: "/upcoming",
+  closed: "/closed",
+  listed: "/listed",
+  gmp: "/gmp",
+  subscriptions: "/subscriptions",
+  allotment: "/allotment",
+  financials: "/financials",
+  docs: "/docs",
+  calculator: "/calculator",
+  watchlist: "/watchlist",
+  demat: "/demat",
+};
 
 export function isAnalyticsEnabled() {
   return Boolean(MEASUREMENT_ID);

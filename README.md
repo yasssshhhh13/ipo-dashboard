@@ -25,11 +25,14 @@ everything below uses GitHub's and Vercel's website.
 2. Click **"Add New..."** → **"Project"**.
 3. Find your repo in the list and click **Import**.
 4. Vercel auto-detects this as a Vite project. Leave the build settings as-is
-   (Build Command: `vite build`, Output Directory: `dist`).
+   (Build Command: `npm run build`, Output Directory: `dist`).
 5. **Before clicking Deploy**, expand **Environment Variables** and add:
    - Name: `ANTHROPIC_API_KEY`
    - Value: your key from [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
    - Leave it set for Production, Preview, and Development.
+   - Name: `VITE_SITE_URL` — Value: your live origin with no trailing slash
+     (e.g. `https://your-app.vercel.app` or `https://calmcapital.in`). Used for
+     canonical URLs, Open Graph, and the XML sitemap.
    - (Optional for analytics) Name: `VITE_GA_MEASUREMENT_ID` — Value: your GA4 ID `G-XXXXXXXXXX` (see section 6 below).
 6. Click **Deploy**. Wait ~1 minute.
 
@@ -97,7 +100,7 @@ straight to your production URL.
 ## 6. Google Analytics (GA4) — visitor tracking
 
 Calm Capital sends GA4 `page_view` and `tab_view` events when visitors open tabs
-(Overview, Subscriptions, etc.). Analytics loads **only** when
+(Overview, Subscriptions, etc.) and IPO detail URLs. Analytics loads **only** when
 `VITE_GA_MEASUREMENT_ID` is set.
 
 ### A. Create a GA4 property
@@ -113,11 +116,12 @@ Calm Capital sends GA4 `page_view` and `tab_view` events when visitors open tabs
 
 ```
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+VITE_SITE_URL=https://calmcapital.in
 ```
 
 **Production (Vercel):** Project → **Settings** → **Environment Variables** →
-add `VITE_GA_MEASUREMENT_ID` = `G-XXXXXXXXXX` for Production (and Preview if you want).
-Then **Redeploy** so the build picks up the variable.
+add `VITE_GA_MEASUREMENT_ID` and `VITE_SITE_URL` for Production (and Preview if you want).
+Then **Redeploy** so the build picks up the variables.
 
 ### C. Verify it works
 1. Open your live site (disable ad-block for that tab if needed).
@@ -127,12 +131,26 @@ Then **Redeploy** so the build picks up the variable.
 
 ---
 
-## 7. Ongoing maintenance checklist
+## 7. Technical SEO (SPA-friendly)
+
+Calm Capital stays a **one-page app** (tabs + IPO detail modal). SEO is layered on without multi-page redesigns:
+
+- Shareable paths: `/ipo/<id>`, `/gmp`, `/subscriptions`, `/allotment`, etc.
+- Build step `generate-seo.mjs` writes per-IPO HTML shells (title, description, canonical, OG/Twitter, JSON-LD) into `dist/` so crawlers see metadata before JS.
+- `public/sitemap.xml` + `public/robots.txt` refresh on build and on the hourly data Action.
+- Cards and nav use real `href`s; clicks still open the same modal/tab instantly.
+
+Submit `https://YOUR_DOMAIN/sitemap.xml` in Google Search Console after deploy.
+
+---
+
+## 8. Ongoing maintenance checklist
 
 | What | How often | How |
 |---|---|---|
 | Anthropic API key still valid | If AI Assistant stops responding | Check [console.anthropic.com](https://console.anthropic.com) billing/key status; rotate in Vercel env vars if needed, then redeploy |
 | Google Analytics Measurement ID | Once at setup | Keep `VITE_GA_MEASUREMENT_ID` set in Vercel; check Realtime after deploys |
+| Site URL for SEO | Once at setup | Keep `VITE_SITE_URL` set to your production origin; optional GitHub Actions variable `VITE_SITE_URL` for sitemap commits |
 | GitHub Action scraper still running | Monthly | Repo → Actions tab → confirm recent green runs; investorgain.com occasionally changes its page structure and breaks selectors — see `LIVE_DATA_SETUP.md` in that repo for the fix procedure |
 | Dependency updates | Every few months | Not required to keep working, but `npm outdated` locally (or just ask me) to check for security patches |
 | Domain renewal | Yearly (if using a custom domain) | Set auto-renew at your registrar |
@@ -143,6 +161,6 @@ Then **Redeploy** so the build picks up the variable.
 ## What "production-ready" means here, specifically
 
 - **CORS**: not an issue — the browser only ever calls same-origin `/api/chat`; that function calls Anthropic server-to-server, where CORS doesn't apply.
-- **Routing**: this is a single-page app (no distinct URL routes), so there's nothing to break on refresh; `vercel.json` still adds an SPA fallback rewrite as a safeguard.
-- **Build**: `npm run build` completes with zero errors or warnings (verified before handing this off), and vendor code (`recharts`, icons, React) is split into separate cached chunks so repeat visits load faster.
-- **Secrets**: `ANTHROPIC_API_KEY` is server-only in Vercel. `VITE_GA_MEASUREMENT_ID` is a public client ID (safe to embed in the browser bundle; still set via env so you can rotate it).
+- **Routing**: path-based SPA URLs (`/ipo/...`, `/gmp`, …) with `history.pushState`; `vercel.json` SPA fallback still applies after static SEO shells.
+- **Build**: `npm run build` runs DRHP validation, Vite, then SEO shell/sitemap generation.
+- **Secrets**: `ANTHROPIC_API_KEY` is server-only in Vercel. `VITE_GA_MEASUREMENT_ID` and `VITE_SITE_URL` are public client/build values (safe to embed; set via env so you can rotate them).

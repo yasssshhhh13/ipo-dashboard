@@ -11,7 +11,17 @@ import {
   ExternalLink, Clock, ArrowUpRight, ArrowDownRight,
   Home, CircleDollarSign, ChevronsLeft, PlusCircle, Award, CheckCircle, Inbox
 } from "lucide-react";
-import { trackTabView } from "./analytics.js";
+import { trackTabView, trackPageView } from "./analytics.js";
+import {
+  TAB_PATHS,
+  parseLocation,
+  ipoPath,
+  applyIpoSeo,
+  applyTabSeo,
+  buildIpoFaqs,
+  similarIpos,
+  displayIpoName,
+} from "./seo.js";
 
 /* =====================================================================
    BRAND TOKENS
@@ -381,65 +391,146 @@ function addDays(dateStr, days) {
   return ymd(d);
 }
 
-function computeAllNotifications(ipos, today) {
-  const todayStr = ymd(today);
+function pad2(n) {
+  return String(n).padStart(2, "0");
+}
+
+/** IST calendar parts for a Date. */
+function istClockParts(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Kolkata",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const get = (t) => Number(parts.find((p) => p.type === t)?.value);
+  return { y: get("year"), m: get("month"), d: get("day"), h: get("hour"), mi: get("minute") };
+}
+
+function addCalendarDaysYmd(ymdStr, days) {
+  if (!ymdStr) return null;
+  const [y, m, d] = ymdStr.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d + days));
+  return `${dt.getUTCFullYear()}-${pad2(dt.getUTCMonth() + 1)}-${pad2(dt.getUTCDate())}`;
+}
+
+/**
+ * Notification "day" rolls at 10:00 AM IST.
+ * Before 10 AM, the active notification day is still yesterday.
+ */
+function getNotificationDayStr(now = new Date()) {
+  const p = istClockParts(now);
+  let day = `${p.y}-${pad2(p.m)}-${pad2(p.d)}`;
+  if (p.h < 10) day = addCalendarDaysYmd(day, -1);
+  return day;
+}
+
+/** Stable timestamp: event date at 10:00 AM IST (schedule alerts only). */
+function notificationStampAt(dateStr) {
+  if (!dateStr) return Date.now();
+  return new Date(`${dateStr}T10:00:00+05:30`).getTime();
+}
+
+function isRealtimeNotifType(type) {
+  return type === "announced" || type === "drhp" || type === "rhp";
+}
+
+function resolveNotifCreatedAt(cand, existing, clock = Date.now()) {
+  // Never reset an existing stamp — stops "Just now" on every visit
+  if (existing?.createdAt) return existing.createdAt;
+  // DRHP / new IPO: real discovery time (verifiedAt if known, else when first seen)
+  if (isRealtimeNotifType(cand.type)) {
+    if (cand.createdAtHint && Number.isFinite(cand.createdAtHint)) return cand.createdAtHint;
+    return clock;
+  }
+  // Open / close / listing batch: always 10 AM IST on the event day
+  return notificationStampAt(cand.date);
+}
+
+function daysBetweenYmd(a, b) {
+  const [ay, am, ad] = a.split("-").map(Number);
+  const [by, bm, bd] = b.split("-").map(Number);
+  const ms = Date.UTC(by, bm - 1, bd) - Date.UTC(ay, am - 1, ad);
+  return Math.round(ms / (1000 * 60 * 60 * 24));
+}
+
+function computeAllNotifications(ipos, now = new Date()) {
+  const notifDay = getNotificationDayStr(now);
+  const tomorrow = addCalendarDaysYmd(notifDay, 1);
+  const ist = istClockParts(now);
+  const calendarToday = `${ist.y}-${pad2(ist.m)}-${pad2(ist.d)}`;
   const candidates = [];
 
-  const checkRecent = (dateStr) => {
-    if (!dateStr) return false;
-    const d = new Date(dateStr + "T00:00:00+05:30");
-    const diffTime = today - d;
-    const diffDays = diffTime / (1000 * 60 * 60 * 24);
-    // Display only notifications from the last 5 days
-    return diffDays >= 0 && diffDays <= 5;
+  // Keep a short feed history (event days within last 5 notif-days)
+  const stillVisible = (eventDay) => {
+    if (!eventDay) return false;
+    const diff = daysBetweenYmd(eventDay, notifDay);
+    return diff >= 0 && diff <= 5;
   };
 
   for (const ipo of ipos) {
-    // 1. New IPO announced
-    const announceDateStr = ipo.open ? addDays(ipo.open, -7) : null;
-    if (announceDateStr && checkRecent(announceDateStr)) {
+    const status = String(ipo.status || "");
+
+    // ── Realtime: New IPO / DRHP (stamp = when it actually appeared, not 10 AM)
+    const verifiedMs = ipo.finMeta?.verifiedAt ? Date.parse(ipo.finMeta.verifiedAt) : NaN;
+    const filingDate = ipo.finMeta?.filingDate || null;
+    const isPipelineNew = status === "DRHP Filed" || (status === "Upcoming" && !ipo.open);
+
+    if (status === "DRHP Filed" || (isPipelineNew && filingDate && stillVisible(filingDate))) {
+      const day = filingDate || calendarToday;
       candidates.push({
-        id: `${ipo.id}-announced-${announceDateStr}`,
-        type: "announced",
+        id: `${ipo.id}-drhp`,
+        type: "drhp",
         ipoId: ipo.id,
-        title: `New IPO Announced: ${ipo.company}`,
-        message: `Expected to open for subscription on ${formatDate(ipo.open)}.`,
-        date: announceDateStr,
+        title: `${ipo.company}: DRHP Filed`,
+        message: `Draft Red Herring Prospectus is now available for review.`,
+        date: day,
+        realtime: true,
+        createdAtHint: Number.isFinite(verifiedMs) ? verifiedMs : null,
       });
     }
 
-    // 2. DRHP Filed
-    if (ipo.drhp) {
-      const drhpDateStr = ipo.finMeta?.filingDate || (ipo.open ? addDays(ipo.open, -15) : null);
-      if (drhpDateStr && checkRecent(drhpDateStr)) {
-        candidates.push({
-          id: `${ipo.id}-drhp-${drhpDateStr}`,
-          type: "drhp",
-          ipoId: ipo.id,
-          title: `${ipo.company}: DRHP Filed`,
-          message: `Draft Red Herring Prospectus is now available for review.`,
-          date: drhpDateStr,
-        });
-      }
+    if (isPipelineNew) {
+      const announceDay = filingDate || calendarToday;
+      candidates.push({
+        id: `${ipo.id}-announced`,
+        type: "announced",
+        ipoId: ipo.id,
+        title: `New IPO Announced: ${ipo.company}`,
+        message: ipo.open
+          ? `Expected to open for subscription on ${formatDate(ipo.open)}.`
+          : `Added to the IPO pipeline — subscription dates to be announced.`,
+        date: announceDay,
+        realtime: true,
+        createdAtHint: Number.isFinite(verifiedMs) ? verifiedMs : null,
+      });
     }
 
-    // 3. RHP Filed
-    if (ipo.rhp) {
-      const rhpDateStr = ipo.open ? addDays(ipo.open, -3) : null;
-      if (rhpDateStr && checkRecent(rhpDateStr)) {
+    if (ipo.rhp && (status === "Upcoming" || status === "Open")) {
+      const rhpDay = filingDate || (ipo.open ? addCalendarDaysYmd(ipo.open, -3) : null);
+      if (rhpDay && stillVisible(rhpDay)) {
         candidates.push({
-          id: `${ipo.id}-rhp-${rhpDateStr}`,
+          id: `${ipo.id}-rhp`,
           type: "rhp",
           ipoId: ipo.id,
           title: `${ipo.company}: RHP Filed`,
-          message: `Red Herring Prospectus filed. Price band set at ₹${ipo.priceMin}–₹${ipo.priceMax}.`,
-          date: rhpDateStr,
+          message: `Red Herring Prospectus filed${
+            ipo.priceMin != null ? `. Price band set at ₹${ipo.priceMin}–₹${ipo.priceMax}` : ""
+          }.`,
+          date: rhpDay,
+          realtime: true,
+          createdAtHint: Number.isFinite(verifiedMs) ? verifiedMs : null,
         });
       }
     }
 
-    // 4. IPO Opens for Subscription
-    if (ipo.open && checkRecent(ipo.open)) {
+    // ── 10 AM IST daily batch ──
+
+    // Opens today (notification day)
+    if (ipo.open && stillVisible(ipo.open) && ipo.open === notifDay) {
       candidates.push({
         id: `${ipo.id}-open-${ipo.open}`,
         type: "open",
@@ -448,57 +539,75 @@ function computeAllNotifications(ipos, today) {
         message: `Subscription window is now active. Price: ₹${ipo.priceMin}–₹${ipo.priceMax}.`,
         date: ipo.open,
       });
-    }
-
-    // 5. Last Day to Apply
-    if (ipo.close && checkRecent(ipo.close)) {
+    } else if (ipo.open && stillVisible(ipo.open) && ipo.open < notifDay) {
       candidates.push({
-        id: `${ipo.id}-close-${ipo.close}`,
-        type: "close",
+        id: `${ipo.id}-open-${ipo.open}`,
+        type: "open",
         ipoId: ipo.id,
-        title: `Last Day to Apply: ${ipo.company}`,
-        message: `Subscription closes today. Price band: ₹${ipo.priceMin}–₹${ipo.priceMax}.`,
-        date: ipo.close,
+        title: `${ipo.company} Opened`,
+        message: `Subscription opened on ${formatDate(ipo.open)}. Price: ₹${ipo.priceMin}–₹${ipo.priceMax}.`,
+        date: ipo.open,
       });
     }
 
-    // 6. Listing Tomorrow
+    // Opens tomorrow
+    if (ipo.open && ipo.open === tomorrow) {
+      candidates.push({
+        id: `${ipo.id}-opens-tomorrow-${ipo.open}`,
+        type: "opens-tomorrow",
+        ipoId: ipo.id,
+        title: `${ipo.company} Opens Tomorrow`,
+        message: `Subscription starts tomorrow, ${formatDate(ipo.open)}. Price band: ₹${ipo.priceMin}–₹${ipo.priceMax}.`,
+        date: notifDay,
+      });
+    }
+
+    // Last Day to Apply — on close notification-day, hidden after 5:00 PM IST on that calendar day
+    if (ipo.close && ipo.close === notifDay) {
+      const pastCloseDeadline =
+        calendarToday > ipo.close || (calendarToday === ipo.close && ist.h >= 17);
+      if (!pastCloseDeadline) {
+        candidates.push({
+          id: `${ipo.id}-close-${ipo.close}`,
+          type: "close",
+          ipoId: ipo.id,
+          title: `Last Day to Apply: ${ipo.company}`,
+          message: `Subscription closes today. Price band: ₹${ipo.priceMin}–₹${ipo.priceMax}.`,
+          date: ipo.close,
+        });
+      }
+    }
+
+    // Lists tomorrow
     if (ipo.listing) {
-      const listingDate = new Date(ipo.listing + "T00:00:00+05:30");
-      if (today < listingDate) {
-        const tmrwDateStr = addDays(ipo.listing, -1);
-        if (tmrwDateStr && checkRecent(tmrwDateStr)) {
+      const eve = addCalendarDaysYmd(ipo.listing, -1);
+      if (eve && stillVisible(eve) && (eve === notifDay || eve < notifDay)) {
+        if (ipo.listing > calendarToday || (ipo.listing === calendarToday && ist.h < 10)) {
           candidates.push({
-            id: `${ipo.id}-listing-tomorrow-${tmrwDateStr}`,
+            id: `${ipo.id}-listing-tomorrow-${eve}`,
             type: "listing-tomorrow",
             ipoId: ipo.id,
             title: `${ipo.company} Lists Tomorrow`,
-            message: `Shares will list on the exchange tomorrow, ${formatDate(ipo.listing)}.`,
-            date: tmrwDateStr,
+            message: `Shares will list on the exchange on ${formatDate(ipo.listing)}.`,
+            date: eve,
           });
         }
       }
     }
 
-    // 7. IPO Listed Today
-    if (ipo.listing && checkRecent(ipo.listing)) {
+    // Listed today (from 10 AM batch on listing day)
+    if (ipo.listing && stillVisible(ipo.listing)) {
       const issuePrice = ipo.priceMax || ipo.priceMin;
       let title = `${ipo.company} Listed Today`;
       let message = `Shares have officially listed and are now trading on ${formatDate(ipo.listing)}.`;
-      
+
       if (ipo.listedAt && issuePrice) {
         const gainPct = ((ipo.listedAt - issuePrice) / issuePrice) * 100;
         const gainVal = Math.abs(gainPct).toFixed(1).replace(/\.0$/, "");
-        
         let performanceStr = "";
-        if (gainPct > 0) {
-          performanceStr = `listed at a ${gainVal}% premium`;
-        } else if (gainPct < 0) {
-          performanceStr = `listed at a ${gainVal}% discount`;
-        } else {
-          performanceStr = `listed flat (0%)`;
-        }
-
+        if (gainPct > 0) performanceStr = `listed at a ${gainVal}% premium`;
+        else if (gainPct < 0) performanceStr = `listed at a ${gainVal}% discount`;
+        else performanceStr = `listed flat (0%)`;
         title = `${ipo.company} ${performanceStr}.`;
         const statusLabel = gainPct > 0 ? "Premium" : gainPct < 0 ? "Discount" : "Flat";
         const sign = gainPct > 0 ? "+" : "";
@@ -506,14 +615,16 @@ function computeAllNotifications(ipos, today) {
         message = `Listing Price: ₹${ipo.listedAt} | Issue Price: ₹${issuePrice} | Listing Gain/Loss: ${formattedGain}% | Status: ${statusLabel} | Listing Date: ${formatDate(ipo.listing)}.`;
       }
 
-      candidates.push({
-        id: `${ipo.id}-listing-${ipo.listing}`,
-        type: "listing",
-        ipoId: ipo.id,
-        title,
-        message,
-        date: ipo.listing,
-      });
+      if (ipo.listing <= notifDay) {
+        candidates.push({
+          id: `${ipo.id}-listing-${ipo.listing}`,
+          type: "listing",
+          ipoId: ipo.id,
+          title: ipo.listing === notifDay ? title : `${ipo.company} Listed`,
+          message,
+          date: ipo.listing,
+        });
+      }
     }
   }
 
@@ -524,86 +635,105 @@ function useNotifications(tick) {
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
 
+  const ALLOWED = useMemo(
+    () => new Set(["open", "opens-tomorrow", "close", "listing-tomorrow", "listing", "announced", "drhp", "rhp"]),
+    []
+  );
+
   useEffect(() => {
     try {
       const raw = localStorage.getItem("calmcapital-notifications");
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) {
-          const allowedTypes = new Set(["announced", "drhp", "rhp", "open", "close", "listing-tomorrow", "listing"]);
-          const valid = parsed.filter(n => n && n.id && allowedTypes.has(n.type) && n.title && n.message);
+          const valid = parsed
+            .filter((n) => n && n.id && ALLOWED.has(n.type) && n.title && n.message)
+            .map((n) => ({
+              ...n,
+              // Schedule alerts → 10 AM stamp; realtime (DRHP/new IPO) keep their real createdAt
+              createdAt: isRealtimeNotifType(n.type)
+                ? n.createdAt
+                : n.date
+                  ? notificationStampAt(n.date)
+                  : n.createdAt,
+            }));
           setNotifications(valid);
         }
       }
     } catch { /* none saved yet */ }
-  }, []);
+  }, [ALLOWED]);
 
   useEffect(() => {
     const ipos = getLiveIPOS();
-    const today = new Date();
-    const candidates = computeAllNotifications(ipos, today);
+    // Avoid wiping + re-creating as "Just now" before IPO data has loaded
+    if (!ipos.length) return;
+
+    const now = new Date();
+    const candidates = computeAllNotifications(ipos, now);
     const candidateIds = new Set(candidates.map((c) => c.id));
 
     setNotifications((prev) => {
-      // 1. Keep existing active notifications that are still within 5 days of creation & event date
       const retentionMs = 5 * 24 * 60 * 60 * 1000;
-      const now = Date.now();
-      const allowedTypes = new Set(["announced", "drhp", "rhp", "open", "close", "listing-tomorrow", "listing"]);
-      
-      const activePrev = prev.filter((n) => {
-        if (!n || !allowedTypes.has(n.type)) return false;
-        if (!candidateIds.has(n.id)) return false;
-        
-        const withinCreationLimit = now - n.createdAt <= retentionMs;
-        if (!withinCreationLimit) return false;
+      const clock = Date.now();
+      const prevById = new Map(prev.map((n) => [n.id, n]));
 
-        if (n.type === "listing-tomorrow") {
-          const ipo = ipos.find((i) => i.id === n.ipoId);
-          if (ipo && ipo.listing) {
-            const listingDate = new Date(ipo.listing + "T00:00:00+05:30");
-            if (today >= listingDate) return false;
-          }
-        }
-        
-        if (n.date) {
-          const eventDate = new Date(n.date + "T00:00:00+05:30");
-          const diffDays = (today - eventDate) / (1000 * 60 * 60 * 24);
-          return diffDays >= 0 && diffDays <= 5;
-        }
+      let seenRealtime = new Set();
+      try {
+        const rawSeen = localStorage.getItem("calmcapital-notif-seen-realtime");
+        if (rawSeen) seenRealtime = new Set(JSON.parse(rawSeen));
+      } catch { /* ignore */ }
+
+      const activePrev = prev.filter((n) => {
+        if (!n || !ALLOWED.has(n.type)) return false;
+        if (!candidateIds.has(n.id)) return false;
+        const stamp = isRealtimeNotifType(n.type)
+          ? n.createdAt
+          : n.date
+            ? notificationStampAt(n.date)
+            : n.createdAt;
+        if (stamp && clock - stamp > retentionMs) return false;
         return true;
       });
-      
-      const existingIds = new Set(activePrev.map((n) => n.id));
-      const nextList = [...activePrev];
 
-      // 2. Add new candidate notifications
+      const existingIds = new Set(activePrev.map((n) => n.id));
+      const nextList = activePrev.map((n) => ({
+        ...n,
+        createdAt: resolveNotifCreatedAt(n, n, clock),
+      }));
+
       for (const cand of candidates) {
-        if (!existingIds.has(cand.id)) {
-          nextList.push({
-            ...cand,
-            read: false,
-            createdAt: now,
-          });
-          existingIds.add(cand.id);
+        if (existingIds.has(cand.id)) continue;
+
+        // Realtime alerts: only create once — never re-fire as "Just now" after expiry
+        if (isRealtimeNotifType(cand.type) && seenRealtime.has(cand.id)) continue;
+
+        const createdAt = resolveNotifCreatedAt(cand, prevById.get(cand.id), clock);
+        // Skip stale discovery hints older than retention
+        if (isRealtimeNotifType(cand.type) && createdAt && clock - createdAt > retentionMs) {
+          seenRealtime.add(cand.id);
+          continue;
         }
+
+        nextList.push({
+          ...cand,
+          read: false,
+          createdAt,
+        });
+        existingIds.add(cand.id);
+        if (isRealtimeNotifType(cand.type)) seenRealtime.add(cand.id);
       }
 
-      // 3. Chronological sort: newest events and creation times at top
-      nextList.sort((a, b) => {
-        const dateCompare = b.date.localeCompare(a.date);
-        if (dateCompare !== 0) return dateCompare;
-        return b.createdAt - a.createdAt;
-      });
+      nextList.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
-      // 4. Save to localStorage
       try {
         localStorage.setItem("calmcapital-notifications", JSON.stringify(nextList));
+        localStorage.setItem("calmcapital-notif-seen-realtime", JSON.stringify([...seenRealtime]));
       } catch { /* storage unavailable */ }
 
       return nextList;
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tick]);
+  }, [tick, ALLOWED]);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -619,7 +749,7 @@ function useNotifications(tick) {
   const toggleOpen = useCallback(() => {
     setOpen((o) => {
       const next = !o;
-      if (next) markAllRead(); // mark as read when the panel is opened
+      if (next) markAllRead();
       return next;
     });
   }, [markAllRead]);
@@ -677,6 +807,7 @@ function NotificationBell({ hook, onOpenIpo }) {
     drhp:               { Icon: FileText,    bg: "rgba(100,116,139,0.2)", color: "#64748b" },
     rhp:                { Icon: FileText,    bg: "rgba(100,116,139,0.2)", color: "#64748b" },
     open:               { Icon: TrendingUp,  bg: "rgba(16,185,129,0.2)",  color: "#10b981" },
+    "opens-tomorrow":   { Icon: Calendar,    bg: "rgba(28,155,218,0.2)",  color: BRAND.blue },
     close:              { Icon: Clock,       bg: "rgba(239,68,68,0.2)",   color: "#ef4444" },
     "listing-tomorrow": { Icon: Calendar,    bg: "rgba(245,158,11,0.2)",  color: "#f59e0b" },
     listing:            { Icon: Activity,    bg: "rgba(16,185,129,0.2)",  color: "#10b981" },
@@ -1320,6 +1451,10 @@ function CompanyAvatar({ name, size = 40 }) {
         <img
           src={currentSrc}
           alt={`${name} logo`}
+          width={Math.round(size * 0.78)}
+          height={Math.round(size * 0.78)}
+          loading="lazy"
+          decoding="async"
           onError={() => setSrcIndex((i) => i + 1)}
           style={{ width: size * 0.78, height: size * 0.78, objectFit: "contain" }}
           className="select-none"
@@ -1359,16 +1494,26 @@ function IPOCard({ ipo, onOpen, watchlist, dark }) {
 
   return (
     <div
-      className="bg-white dark:bg-[#161c28] border rounded-2xl overflow-hidden relative group transition-all hover:shadow-md cursor-pointer"
+      className="bg-white dark:bg-[#161c28] border rounded-2xl overflow-hidden relative group transition-all hover:shadow-md"
       style={{ borderColor: isOpen ? "rgba(28,155,218,0.35)" : "rgba(0,0,0,0.06)", boxShadow: isOpen ? "0 0 0 1px rgba(28,155,218,0.12), 0 4px 16px -4px rgba(28,155,218,0.15)" : "0 1px 4px rgba(0,0,0,0.04)" }}
-      onClick={() => onOpen(ipo)}
     >
+      {/* Stretch link for SEO + open details (bookmark sits above this) */}
+      <a
+        href={ipoPath(ipo.id)}
+        aria-label={`View ${ipo.company} IPO details`}
+        className="absolute inset-0 z-0"
+        onClick={(e) => {
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+          e.preventDefault();
+          onOpen(ipo);
+        }}
+      />
       {/* Blue left accent bar for Open IPOs */}
       {isOpen && (
-        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#1c9bda] to-[#0a66c2]" />
+        <div className="absolute left-0 top-0 bottom-0 w-1 z-[1] bg-gradient-to-b from-[#1c9bda] to-[#0a66c2] pointer-events-none" />
       )}
 
-      <div className="p-5">
+      <div className="p-5 relative z-[1] pointer-events-none">
         {/* Row 1: Company Logo, Name, Sector and Bookmark */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -1390,8 +1535,13 @@ function IPOCard({ ipo, onOpen, watchlist, dark }) {
           </div>
 
           <button
-            onClick={(e) => { e.stopPropagation(); watchlist.toggle(ipo.id); }}
-            className="text-slate-300 dark:text-slate-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors cursor-pointer"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              watchlist.toggle(ipo.id);
+            }}
+            className="pointer-events-auto relative z-[2] text-slate-300 dark:text-slate-600 hover:text-amber-500 dark:hover:text-amber-400 transition-colors cursor-pointer"
           >
             {watched ? <BookmarkCheck size={18} style={{ color: BRAND.blue }} /> : <Bookmark size={18} />}
           </button>
@@ -1603,11 +1753,18 @@ function ListedIPOCard({ ipo, onOpen, watchlist }) {
   else if (currentRet < 0) currentColor = "#e11d48";
 
   return (
-    <div
-      className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl shadow-sm hover:shadow-md transition-all cursor-pointer overflow-hidden"
-      onClick={() => onOpen(ipo)}
-    >
-      <div className="p-5">
+    <div className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden relative">
+      <a
+        href={ipoPath(ipo.id)}
+        aria-label={`View ${ipo.company} IPO details`}
+        className="absolute inset-0 z-0"
+        onClick={(e) => {
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+          e.preventDefault();
+          onOpen(ipo);
+        }}
+      />
+      <div className="p-5 relative z-[1] pointer-events-none">
         {/* Header: Avatar + Company + Type badge */}
         <div className="flex items-center gap-3 mb-1">
           <CompanyAvatar name={ipo.company} size={44} />
@@ -1624,8 +1781,13 @@ function ListedIPOCard({ ipo, onOpen, watchlist }) {
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{ipo.sector}</p>
           </div>
           <button
-            onClick={(e) => { e.stopPropagation(); watchlist.toggle(ipo.id); }}
-            className="text-slate-400 hover:text-amber-500 transition-colors shrink-0"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              watchlist.toggle(ipo.id);
+            }}
+            className="pointer-events-auto relative z-[2] text-slate-400 hover:text-amber-500 transition-colors shrink-0"
           >
             {watched ? <BookmarkCheck size={16} style={{ color: BRAND.blue }} /> : <Bookmark size={16} />}
           </button>
@@ -1714,10 +1876,12 @@ function ListedIPOCard({ ipo, onOpen, watchlist }) {
 /* =====================================================================
    IPO DETAIL MODAL
 ===================================================================== */
-function IPODetail({ ipo, onClose, watchlist, dark }) {
+function IPODetail({ ipo, onClose, watchlist, dark, onOpen, onNavigateTab }) {
   if (!ipo) return null;
   const watched = watchlist.ids.includes(ipo.id);
   const today = new Date();
+  const faqs = buildIpoFaqs(ipo);
+  const related = similarIpos(ipo, getLiveIPOS(), 3);
 
   // Timeline: determine which milestones have passed
   const milestones = [
@@ -2150,6 +2314,97 @@ function IPODetail({ ipo, onClose, watchlist, dark }) {
               );
             })()}
           </div>
+
+          {/* Internal links */}
+          <div className="flex flex-wrap gap-2 text-xs">
+            {[
+              { tab: "allotment", label: "Allotment" },
+              { tab: "subscriptions", label: "Subscription" },
+              { tab: "financials", label: "Financials" },
+              { tab: "gmp", label: "Live GMP" },
+            ].map(({ tab: t, label }) => (
+              <a
+                key={t}
+                href={TAB_PATHS[t]}
+                onClick={(e) => {
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                  e.preventDefault();
+                  onNavigateTab?.(t);
+                }}
+                className="px-3 py-1.5 rounded-lg font-semibold no-underline"
+                style={{
+                  background: dark ? "rgba(28,155,218,0.12)" : "rgba(28,155,218,0.08)",
+                  color: BRAND.blue,
+                  border: "1px solid rgba(28,155,218,0.25)",
+                }}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+
+          {/* FAQ */}
+          {faqs.length > 0 && (
+            <div
+              className="rounded-2xl p-4 space-y-3"
+              style={{
+                background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+                border: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)",
+              }}
+            >
+              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "#64748b" }}>
+                FAQ — {displayIpoName(ipo)} IPO
+              </p>
+              {faqs.map((f) => (
+                <div key={f.question}>
+                  <p className="text-xs font-bold mb-1" style={{ color: dark ? "#e2e8f0" : "#1e293b" }}>
+                    {f.question}
+                  </p>
+                  <p className="text-xs leading-relaxed" style={{ color: dark ? "#94a3b8" : "#475569" }}>
+                    {f.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Similar IPOs */}
+          {related.length > 0 && (
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: "#64748b" }}>
+                Similar IPOs
+              </p>
+              <div className="flex flex-col gap-2">
+                {related.map((rel) => (
+                  <a
+                    key={rel.id}
+                    href={ipoPath(rel.id)}
+                    onClick={(e) => {
+                      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                      e.preventDefault();
+                      onOpen?.(rel);
+                    }}
+                    className="flex items-center gap-3 p-2.5 rounded-xl no-underline transition-colors"
+                    style={{
+                      background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.015)",
+                      border: dark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.04)",
+                    }}
+                  >
+                    <CompanyAvatar name={rel.company} size={32} />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-bold truncate" style={{ color: dark ? "#fff" : "#1e293b" }}>
+                        {rel.company}
+                      </p>
+                      <p className="text-[10px]" style={{ color: "#64748b" }}>
+                        {rel.sector} · {rel.type}
+                      </p>
+                    </div>
+                    <ChevronRight size={14} style={{ color: BRAND.blue }} />
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -2501,9 +2756,14 @@ function AllotmentCard({ ipo, onOpen, dark, todayStr }) {
   const ss = statusStyle[status] || statusStyle.Closed;
 
   return (
-    <div
-      onClick={() => onOpen?.(ipo)}
-      className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between h-full cursor-pointer"
+    <a
+      href={ipoPath(ipo.id)}
+      onClick={(e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        onOpen?.(ipo);
+      }}
+      className="bg-white dark:bg-[#161c28] border border-slate-150 dark:border-white/5 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between h-full cursor-pointer no-underline text-inherit"
     >
       <div>
         <div className="flex items-start justify-between gap-3">
@@ -2547,19 +2807,23 @@ function AllotmentCard({ ipo, onOpen, dark, todayStr }) {
 
       <div className="mt-5 pt-3 border-t border-slate-100 dark:border-white/5" onClick={(e) => e.stopPropagation()}>
         {isActivated ? (
-          <a
-            href={registrarUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full bg-[#1c9bda] hover:bg-[#1c9bda]/90 text-white text-xs font-bold py-2 px-4 rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.open(registrarUrl, "_blank", "noopener,noreferrer");
+            }}
+            className="w-full bg-[#1c9bda] hover:bg-[#1c9bda]/90 text-white text-xs font-bold py-2 px-4 rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer border-0"
           >
             Check Allotment
             <ExternalLink size={13} />
-          </a>
+          </button>
         ) : (
           <div className="space-y-2">
             <button
               disabled
+              type="button"
               className="w-full bg-slate-100 dark:bg-white/5 text-slate-405 dark:text-slate-605 text-xs font-bold py-2 px-4 rounded-xl flex items-center justify-center gap-1.5 cursor-not-allowed"
             >
               Check Allotment
@@ -2571,7 +2835,7 @@ function AllotmentCard({ ipo, onOpen, dark, todayStr }) {
           </div>
         )}
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -3380,6 +3644,10 @@ export default function App() {
   const [loadingDb, setLoadingDb] = useState(true);
   const [tab, setTabRaw] = useState(() => {
     try {
+      if (typeof window !== "undefined") {
+        const fromPath = parseLocation(window.location.pathname, window.location.search);
+        if (fromPath.tabId && NAV.some((n) => n.id === fromPath.tabId)) return fromPath.tabId;
+      }
       const saved = localStorage.getItem("calmcapital-tab");
       if (saved && NAV.some((n) => n.id === saved)) return saved;
     } catch { /* storage unavailable */ }
@@ -3390,52 +3658,89 @@ export default function App() {
   const [upcomingType, setUpcomingType] = useState("Mainboard");
   const [listedType, setListedType] = useState("Mainboard");
   const [closedType, setClosedType] = useState("Mainboard");
+  const lastTabPathRef = useRef(TAB_PATHS["overview"] || "/");
 
   const handleSelectIpo = (ipo) => {
-    setSelected(ipo);
     try {
-      const url = new URL(window.location.href);
       if (ipo) {
-        url.searchParams.set("ipo", ipo.id);
+        const parsed = parseLocation(window.location.pathname, window.location.search);
+        if (!parsed.ipoId) {
+          lastTabPathRef.current = TAB_PATHS[tab] || "/";
+        }
+        setSelected(ipo);
+        const path = ipoPath(ipo.id);
+        if ((window.location.pathname.replace(/\/+$/, "") || "/") !== path) {
+          window.history.pushState(null, "", path);
+        }
+        const meta = applyIpoSeo(ipo);
+        trackPageView(meta.path, meta.title);
       } else {
-        url.searchParams.delete("ipo");
-      }
-      if (window.location.search !== url.search) {
-        window.history.pushState(null, "", url.pathname + url.search);
+        setSelected(null);
+        const path = lastTabPathRef.current || TAB_PATHS[tab] || "/";
+        window.history.pushState(null, "", path);
+        const meta = applyTabSeo(tab);
+        trackPageView(meta.path, meta.title);
       }
     } catch (e) {
-      console.error("Failed to update URL search parameters:", e);
+      console.error("Failed to update IPO URL:", e);
+      setSelected(ipo);
     }
   };
 
-  const getIpoFromUrl = (allIpos) => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      const ipoId = params.get("ipo");
-      if (ipoId) {
-        return allIpos.find((i) => i.id === ipoId) || null;
-      }
-    } catch { /* ignore */ }
-    return null;
-  };
-
-  // Sync deep link IPO details on load
+  // Sync deep link / path on load
   useEffect(() => {
-    if (!loadingDb) {
-      const all = getLiveIPOS();
-      const initialSelected = getIpoFromUrl(all);
-      if (initialSelected) {
-        setSelected(initialSelected);
-      }
+    if (loadingDb) return;
+    const all = getLiveIPOS();
+    const parsed = parseLocation(window.location.pathname, window.location.search);
+
+    if (parsed.legacy && parsed.ipoId) {
+      window.history.replaceState(null, "", ipoPath(parsed.ipoId));
     }
+
+    if (parsed.ipoId) {
+      const found = all.find((i) => i.id === parsed.ipoId) || null;
+      setSelected(found);
+      if (found) {
+        const meta = applyIpoSeo(found);
+        trackPageView(meta.path, meta.title);
+      } else {
+        applyTabSeo(tab);
+      }
+      return;
+    }
+
+    if (parsed.tabId && NAV.some((n) => n.id === parsed.tabId)) {
+      setTabRaw(parsed.tabId);
+      lastTabPathRef.current = TAB_PATHS[parsed.tabId] || "/";
+      try { localStorage.setItem("calmcapital-tab", parsed.tabId); } catch { /* ignore */ }
+      const meta = applyTabSeo(parsed.tabId);
+      const navItem = NAV.find((n) => n.id === parsed.tabId);
+      trackTabView(parsed.tabId, navItem?.label, meta.path, meta.title);
+    } else {
+      const meta = applyTabSeo(tab);
+      trackTabView(tab, NAV.find((n) => n.id === tab)?.label, meta.path, meta.title);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadingDb]);
 
   // Listen to browser back/forward buttons
   useEffect(() => {
     const handlePopState = () => {
       const all = getLiveIPOS();
-      const currentSelected = getIpoFromUrl(all);
-      setSelected(currentSelected);
+      const parsed = parseLocation(window.location.pathname, window.location.search);
+      if (parsed.ipoId) {
+        const found = all.find((i) => i.id === parsed.ipoId) || null;
+        setSelected(found);
+        if (found) applyIpoSeo(found);
+        return;
+      }
+      setSelected(null);
+      if (parsed.tabId && NAV.some((n) => n.id === parsed.tabId)) {
+        setTabRaw(parsed.tabId);
+        lastTabPathRef.current = TAB_PATHS[parsed.tabId] || "/";
+        try { localStorage.setItem("calmcapital-tab", parsed.tabId); } catch { /* ignore */ }
+        applyTabSeo(parsed.tabId);
+      }
     };
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
@@ -3472,23 +3777,22 @@ export default function App() {
     } catch { /* storage unavailable */ }
   }, [dark]);
 
-  // Persist active tab across refreshes + GA4 SPA tab tracking
+  // Persist active tab across refreshes + path URL + GA4 SPA tab tracking
   const setTab = (id) => {
+    setSelected(null);
     setTabRaw(id);
     try { localStorage.setItem("calmcapital-tab", id); } catch { /* storage unavailable */ }
+    const path = TAB_PATHS[id] || "/";
+    lastTabPathRef.current = path;
+    try {
+      const cur = window.location.pathname.replace(/\/+$/, "") || "/";
+      if (cur !== path) window.history.pushState(null, "", path);
+    } catch { /* ignore */ }
     const navItem = NAV.find((n) => n.id === id);
-    trackTabView(id, navItem?.label);
-    // Auto-close sidebar on mobile after navigation
+    const meta = applyTabSeo(id);
+    trackTabView(id, navItem?.label, meta.path, meta.title);
     if (isMobile()) setSidebarOpen(false);
   };
-
-  // Initial tab page_view (default / restored from localStorage)
-  useEffect(() => {
-    if (loadingDb) return;
-    const navItem = NAV.find((n) => n.id === tab);
-    trackTabView(tab, navItem?.label);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadingDb]);
 
   // Close sidebar when viewport shrinks to mobile
   useEffect(() => {
@@ -3750,12 +4054,17 @@ export default function App() {
 
             <nav className="mt-4 space-y-0.5 flex-1 overflow-y-auto">
               {NAV.map((n) => {
-                const isActive = tab === n.id;
+                const isActive = tab === n.id && !selected;
                 return (
-                  <button
+                  <a
                     key={n.id}
-                    onClick={() => setTab(n.id)}
-                    className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm relative transition-colors"
+                    href={TAB_PATHS[n.id] || "/"}
+                    onClick={(e) => {
+                      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                      e.preventDefault();
+                      setTab(n.id);
+                    }}
+                    className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm relative transition-colors no-underline cursor-pointer"
                     style={isActive
                       ? {
                           background: dark ? "rgba(28,155,218,0.12)" : "rgba(28,155,218,0.08)",
@@ -3778,7 +4087,7 @@ export default function App() {
                   >
                     <n.icon size={15} strokeWidth={isActive ? 2.5 : 2} />
                     {n.label}
-                  </button>
+                  </a>
                 );
               })}
             </nav>
@@ -3833,7 +4142,7 @@ export default function App() {
                 {/* Page title */}
                 <div>
                   <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight">
-                    Calm Capital — Institutional-Grade IPO Analysis
+                    Calm Capital — Live GMP & Institutional-Grade IPO Analysis
                   </h1>
                 </div>
 
@@ -4056,7 +4365,14 @@ export default function App() {
         </div>
       </div>
 
-      <IPODetail ipo={selected} onClose={() => handleSelectIpo(null)} watchlist={watchlist} dark={dark} />
+      <IPODetail
+        ipo={selected}
+        onClose={() => handleSelectIpo(null)}
+        watchlist={watchlist}
+        dark={dark}
+        onOpen={handleSelectIpo}
+        onNavigateTab={setTab}
+      />
     </div>
   );
 }
