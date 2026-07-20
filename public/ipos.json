@@ -3452,5 +3452,48 @@
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
     ]
+  },
+  {
+    "id": "silverstorm-parks-resorts",
+    "name": "Silverstorm Parks & Resorts",
+    "company": "Silverstorm Parks & Resorts Limited",
+    "type": "SME",
+    "status": "Upcoming",
+    "open": "2026-07-24",
+    "close": "2026-07-28",
+    "listing": "2026-07-31",
+    "allotment": "2026-07-29",
+    "refund": "2026-07-29",
+    "demat": "2026-07-29",
+    "priceMin": 133,
+    "priceMax": 133,
+    "faceValue": 10,
+    "lot": 1000,
+    "issueSize": 82.43,
+    "freshIssue": 82.43,
+    "ofs": 0,
+    "gmp": 0,
+    "trend": "stable",
+    "estListing": null,
+    "listedAt": null,
+    "currentPrice": null,
+    "gmpHistory": [],
+    "drhp": "https://www.sebi.gov.in/filings/public-issues.html",
+    "rhp": null,
+    "leadManager": "To Be Announced",
+    "exchange": "BSE SME",
+    "sub": null,
+    "fin": null,
+    "about": "Silverstorm Parks & Resorts Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
+    "sector": "General",
+    "registrar": "To Be Announced",
+    "strengths": [
+      "Growing market footprint in the General sector",
+      "Experienced promoter group and management team"
+    ],
+    "risks": [
+      "Operating scale limits relative to larger peers",
+      "Highly competitive market segment and raw material cost exposure"
+    ]
   }
 ]
