@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T23:54:58.541Z",
+  "updatedAt": "2026-07-20T02:40:24.507Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -27,11 +27,11 @@
       }
     },
     "sotefin-bharat": {
-      "gmp": 13,
+      "gmp": 10,
       "priceMax": 187,
-      "estListing": 200,
+      "estListing": 197,
       "sub": {
-        "overall": 13,
+        "overall": 10,
         "qib": 0,
         "snii": 0.8,
         "bnii": 187,
@@ -290,11 +290,11 @@
       }
     },
     "gulf-lloyds": {
-      "gmp": 25,
+      "gmp": 29,
       "priceMax": 100,
-      "estListing": 125,
+      "estListing": 129,
       "sub": {
-        "overall": 25,
+        "overall": 29,
         "qib": 0,
         "snii": 0,
         "bnii": 100,
@@ -375,11 +375,11 @@
       }
     },
     "sbi-funds-management": {
-      "gmp": 104,
+      "gmp": 103,
       "priceMax": 574,
-      "estListing": 678,
+      "estListing": 677,
       "sub": {
-        "overall": 104,
+        "overall": 103,
         "qib": 0,
         "snii": 41.73,
         "bnii": 574,
