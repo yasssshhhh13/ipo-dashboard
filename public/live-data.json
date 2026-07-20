@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-07-20T15:10:34.861Z",
+  "updatedAt": "2026-07-20T17:59:51.771Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
       "priceMax": 152
     },
     "caliber-mining": {
-      "gmp": 100,
+      "gmp": 94,
       "priceMax": 424,
-      "estListing": 524,
+      "estListing": 518,
       "sub": {
         "overall": 25.04,
         "qib": 1.49,
@@ -19,9 +19,9 @@
       }
     },
     "sotefin-bharat": {
-      "gmp": 3,
+      "gmp": 1,
       "priceMax": 187,
-      "estListing": 190,
+      "estListing": 188,
       "sub": {
         "overall": 3.99,
         "qib": 2.82,
@@ -207,9 +207,9 @@
       }
     },
     "xtranet-technologies": {
-      "gmp": 25,
+      "gmp": 26,
       "priceMax": 127,
-      "estListing": 152
+      "estListing": 153
     },
     "shree-balaji-textiles": {
       "gmp": 19,
@@ -283,9 +283,9 @@
       "estListing": 757
     },
     "sbi-funds-management": {
-      "gmp": 98,
+      "gmp": 95,
       "priceMax": 574,
-      "estListing": 672,
+      "estListing": 669,
       "sub": {
         "retail_apps": 2.32,
         "shni_apps": 18.45,
@@ -391,17 +391,17 @@
       "estListing": 83
     },
     "lohia": {
-      "gmp": 77,
+      "gmp": 56,
       "priceMax": 425,
-      "estListing": 502
+      "estListing": 481
     },
     "shreedhar-spinners": {
       "priceMax": 53
     },
     "indo-mim": {
-      "gmp": 205,
+      "gmp": 195,
       "priceMax": 485,
-      "estListing": 690
+      "estListing": 680
     },
     "silverstorm-parks-resorts": {
       "priceMax": 133
