@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T19:05:10.595Z",
+  "updatedAt": "2026-07-20T06:15:30.367Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -20,20 +20,20 @@
       "sub": {
         "overall": 115,
         "qib": 0,
-        "snii": 1.31,
+        "snii": 7.1,
         "bnii": 424,
         "hni": 450,
         "retail": 35
       }
     },
     "sotefin-bharat": {
-      "gmp": 13,
+      "gmp": 2,
       "priceMax": 187,
-      "estListing": 200,
+      "estListing": 189,
       "sub": {
-        "overall": 13,
+        "overall": 2,
         "qib": 0,
-        "snii": 0.8,
+        "snii": 1.41,
         "bnii": 187,
         "hni": 89.76,
         "retail": 600
@@ -227,11 +227,11 @@
       }
     },
     "xtranet-technologies": {
-      "gmp": 25,
+      "gmp": 10,
       "priceMax": 127,
-      "estListing": 152,
+      "estListing": 137,
       "sub": {
-        "overall": 25,
+        "overall": 10,
         "qib": 0,
         "snii": 0,
         "bnii": 127,
@@ -290,13 +290,13 @@
       }
     },
     "gulf-lloyds": {
-      "gmp": 25,
+      "gmp": 29,
       "priceMax": 100,
-      "estListing": 125,
+      "estListing": 129,
       "sub": {
-        "overall": 25,
+        "overall": 29,
         "qib": 0,
-        "snii": 0,
+        "snii": 0.64,
         "bnii": 100,
         "hni": 18.19,
         "retail": 1200
@@ -375,11 +375,11 @@
       }
     },
     "sbi-funds-management": {
-      "gmp": 107,
+      "gmp": 104,
       "priceMax": 574,
-      "estListing": 681,
+      "estListing": 678,
       "sub": {
-        "overall": 107,
+        "overall": 104,
         "qib": 0,
         "snii": 41.73,
         "bnii": 574,
@@ -499,11 +499,11 @@
       }
     },
     "shree-balaji-mala-textiles": {
-      "gmp": 11,
+      "gmp": 14,
       "priceMax": 70,
-      "estListing": 81,
+      "estListing": 84,
       "sub": {
-        "overall": 11,
+        "overall": 14,
         "qib": 0,
         "snii": 0,
         "bnii": 70,
@@ -513,14 +513,16 @@
     },
     "lohia": {
       "sub": {
-        "overall": 20,
+        "overall": 50,
         "qib": 0,
         "snii": 0,
-        "bnii": 0,
-        "hni": 0,
-        "retail": 0
+        "bnii": 425,
+        "hni": 1101.28,
+        "retail": 35
       },
-      "gmp": 20
+      "gmp": 50,
+      "priceMax": 425,
+      "estListing": 475
     },
     "shreedhar-spinners": {
       "priceMax": 53,
@@ -534,14 +536,27 @@
       }
     },
     "indo-mim": {
-      "gmp": 199,
+      "gmp": 210,
       "sub": {
-        "overall": 199,
+        "overall": 210,
         "qib": 0,
         "snii": 0,
-        "bnii": 0,
-        "hni": 0,
-        "retail": 0
+        "bnii": 485,
+        "hni": 3811.21,
+        "retail": 30
+      },
+      "priceMax": 485,
+      "estListing": 695
+    },
+    "silverstorm-parks-resorts": {
+      "priceMax": 133,
+      "sub": {
+        "overall": 0,
+        "qib": 0,
+        "snii": 0,
+        "bnii": 133,
+        "hni": 82.43,
+        "retail": 1000
       }
     }
   }
