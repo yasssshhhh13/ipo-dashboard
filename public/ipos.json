@@ -54,15 +54,17 @@
     "leadManager": "Unistone Capital",
     "exchange": "BSE, NSE",
     "sub": {
-      "overall": 18.5,
-      "qib": 27.4,
-      "hni": 21.6,
-      "retail": 9.2,
-      "employee": null,
+      "overall": 87.17,
+      "qib": 160.22,
+      "snii": 112.09,
+      "bnii": 163.91,
+      "hni": 146.64,
+      "retail": 21.09,
+      "employee": 9.84,
       "shareholder": null,
-      "retail_apps": 6.8,
-      "shni_apps": 12.4,
-      "bhni_apps": 3.8
+      "retail_apps": 17,
+      "shni_apps": 107,
+      "bhni_apps": 33
     },
     "fin": {
       "revenue": 823.43,
@@ -2158,9 +2160,17 @@
     "rhp": null,
     "leadManager": "To Be Announced",
     "exchange": "BSE, NSE",
-    "sub": null,
-    "fin": null,
-    "about": "Laser Power & Infra Limited is a newly announced Mainboard IPO operating in the Energy & Power sector. The company is launching its issue on BSE, NSE.",
+    "sub": {
+      "overall": 41.05,
+      "qib": 97.25,
+      "snii": 36.43,
+      "bnii": 50.32,
+      "hni": 45.69,
+      "retail": 6.95,
+      "retail_apps": 5.98,
+      "shni_apps": 35.45,
+      "bhni_apps": 10.36
+    },
     "sector": "Energy & Power",
     "registrar": "To Be Announced",
     "strengths": [
@@ -2335,7 +2345,17 @@
     "rhp": null,
     "leadManager": "To Be Announced",
     "exchange": "BSE, NSE",
-    "sub": null,
+    "sub": {
+      "overall": 212.63,
+      "qib": 174.98,
+      "snii": 502.25,
+      "bnii": 554.12,
+      "hni": 536.38,
+      "retail": 95.3,
+      "retail_apps": 70,
+      "shni_apps": 470,
+      "bhni_apps": 110
+    },
     "fin": null,
     "about": "Advit Jewels Limited is a newly announced Mainboard IPO operating in the General sector. The company is launching its issue on BSE, NSE.",
     "sector": "General",
@@ -3304,54 +3324,6 @@
     "auditTrail": [
       {
         "timestamp": "2026-07-19T19:55:56.521Z",
-        "action": "created",
-        "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
-      }
-    ]
-  },
-  {
-    "id": "caliber-mining-and-logistics",
-    "name": "Caliber Mining and Logistics Limited",
-    "company": "Caliber Mining and Logistics Limited",
-    "type": "Mainboard",
-    "status": "Upcoming",
-    "open": null,
-    "close": null,
-    "listing": null,
-    "allotment": null,
-    "refund": null,
-    "demat": null,
-    "priceMin": null,
-    "priceMax": null,
-    "faceValue": 10,
-    "lot": null,
-    "issueSize": null,
-    "freshIssue": null,
-    "ofs": 0,
-    "gmp": 0,
-    "trend": "stable",
-    "estListing": null,
-    "listedAt": null,
-    "currentPrice": null,
-    "gmpHistory": [],
-    "drhp": "https://www.sebi.gov.in/filings/public-issues/jun-2026/caliber-mining-and-logistics-limited-corrigendum-to-drhp_102053.html",
-    "rhp": null,
-    "leadManager": "To Be Announced",
-    "registrar": "To Be Announced",
-    "exchange": "BSE, NSE",
-    "about": "Caliber Mining and Logistics Limited is a newly announced Mainboard IPO in the Logistics sector. The company has filed its DRHP with SEBI and is preparing for its public issue.",
-    "sector": "Logistics",
-    "strengths": [
-      "Established presence in the Logistics industry",
-      "Experienced promoter group and leadership team"
-    ],
-    "risks": [
-      "Subject to regulatory approvals and market conditions",
-      "Industry competitive pressures and operating scale constraints"
-    ],
-    "auditTrail": [
-      {
-        "timestamp": "2026-07-19T19:56:02.571Z",
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }

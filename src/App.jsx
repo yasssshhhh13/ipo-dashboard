@@ -11,6 +11,7 @@ import {
   ExternalLink, Clock, ArrowUpRight, ArrowDownRight,
   Home, CircleDollarSign, ChevronsLeft, PlusCircle, Award, CheckCircle, Inbox
 } from "lucide-react";
+import { trackTabView } from "./analytics.js";
 
 /* =====================================================================
    BRAND TOKENS
@@ -73,6 +74,10 @@ function liveStatus(ipo, today) {
   return "Listed";
 }
 
+function getComputedStatus(ipo, now = new Date()) {
+  return liveStatus(ipo, now);
+}
+
 // Holds the most recent investorgain.com scrape result (see LiveDataBadge).
 // Populated by fetchLiveData() below; getLiveIPOS() overlays it onto the
 // verified baseline so every part of the app reads through one function.
@@ -131,15 +136,87 @@ function validateFinancials(ipo) {
   return f;
 }
 
+/** Significant name tokens for fuzzy company matching (drops ltd/and/etc.). */
+function companyTokens(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/\b(limited|ltd|pvt|private|and|&|the|of|india|co|company|corporation|corp)\b/g, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter((t) => t.length > 1);
+}
+
+/** True when two IPO names refer to the same company (prevents DRHP stub duplicates). */
+function isSameCompanyName(a, b) {
+  const ta = companyTokens(a);
+  const tb = companyTokens(b);
+  if (!ta.length || !tb.length) return false;
+  if (ta[0] !== tb[0]) return false;
+  if (!ta[1] || !tb[1]) return ta[0] === tb[0];
+  return ta[1] === tb[1];
+}
+
+/**
+ * Drop incomplete DRHP/Upcoming stubs that duplicate a richer IPO already in the list
+ * (e.g. caliber-mining-and-logistics stub vs caliber-mining open issue).
+ */
+function dedupeIpoList(ipos) {
+  const scored = ipos.map((ipo, idx) => {
+    let score = 0;
+    if (ipo.open) score += 8;
+    if (ipo.close) score += 4;
+    if (ipo.listing) score += 2;
+    if (ipo.sub) score += 2;
+    if (ipo.priceMax) score += 1;
+    if (ipo.rhp) score += 1;
+    const status = getComputedStatus(ipo);
+    if (status === "Open" || status === "Closed" || status === "Listed") score += 10;
+    return { ipo, idx, score, status };
+  });
+
+  const drop = new Set();
+  for (let i = 0; i < scored.length; i++) {
+    if (drop.has(scored[i].ipo.id)) continue;
+    for (let j = i + 1; j < scored.length; j++) {
+      if (drop.has(scored[j].ipo.id)) continue;
+      const a = scored[i];
+      const b = scored[j];
+      if (!isSameCompanyName(a.ipo.company || a.ipo.name, b.ipo.company || b.ipo.name)) continue;
+      if (a.ipo.id === b.ipo.id) continue;
+      // Prefer the richer / live-status entry; drop the other (usually a null-date Upcoming stub)
+      if (a.score >= b.score) drop.add(b.ipo.id);
+      else drop.add(a.ipo.id);
+    }
+  }
+
+  return ipos.filter((ipo) => !drop.has(ipo.id));
+}
+
+/** Prefer real *_apps; else derive application-wise odds from share×. */
+function estimateAppsFromShares(label, sharesSub, isSME) {
+  if (sharesSub == null || !(sharesSub > 0)) return null;
+  if (isSME) return label === "Retail" ? sharesSub : sharesSub / 1.05;
+  if (label === "Retail") return sharesSub / 1.30;
+  if (label === "sHNI" || label === "sNII") return sharesSub / 1.5;
+  if (label === "bHNI" || label === "bNII") return sharesSub / 5.5;
+  if (label === "Employee") return sharesSub / 1.5;
+  if (label === "Shareholder" || label === "Policyholder") return sharesSub / 2.0;
+  return null;
+}
+
 function getLiveIPOS() {
   const today = new Date();
-  return IPOS_BASE.map((ipo) => {
+  const mergedList = IPOS_BASE.map((ipo) => {
     const patch = _liveOverlay.byId[ipo.id];
     let merged = ipo;
     if (patch) {
       merged = { ...ipo, ...patch };
-      if (ipo.sub && patch.sub) {
-        merged.sub = { ...ipo.sub, ...patch.sub };
+      if (patch.sub) {
+        // Share figures from live win. Keep baseline *_apps unless live
+        // explicitly provides them — otherwise correct final odds (e.g. SBI
+        // retail_apps 2.32) get wiped every hourly scrape.
+        merged.sub = { ...(ipo.sub || {}), ...patch.sub };
       }
     }
     // Overlay real-time simulation price if registered
@@ -152,6 +229,7 @@ function getLiveIPOS() {
     }
     return finalIpo;
   });
+  return dedupeIpoList(mergedList);
 }
 
 const sortIposLogically = (ipos) => {
@@ -163,29 +241,31 @@ const sortIposLogically = (ipos) => {
   };
 
   return [...ipos].sort((a, b) => {
-    const pA = statusPriority[a.status] || 99;
-    const pB = statusPriority[b.status] || 99;
+    const statusA = getComputedStatus(a);
+    const statusB = getComputedStatus(b);
+    const pA = statusPriority[statusA] || 99;
+    const pB = statusPriority[statusB] || 99;
     if (pA !== pB) return pA - pB;
 
-    if (a.status === "Open") {
+    if (statusA === "Open") {
       if (!a.close && !b.close) return 0;
       if (!a.close) return 1;
       if (!b.close) return -1;
       return a.close.localeCompare(b.close);
     }
-    if (a.status === "Upcoming") {
+    if (statusA === "Upcoming") {
       if (!a.open && !b.open) return 0;
       if (!a.open) return 1;
       if (!b.open) return -1;
       return a.open.localeCompare(b.open);
     }
-    if (a.status === "Closed") {
+    if (statusA === "Closed") {
       if (!a.close && !b.close) return 0;
       if (!a.close) return 1;
       if (!b.close) return -1;
       return b.close.localeCompare(a.close);
     }
-    if (a.status === "Listed") {
+    if (statusA === "Listed") {
       if (!a.listing && !b.listing) return 0;
       if (!a.listing) return 1;
       if (!b.listing) return -1;
@@ -411,6 +491,7 @@ function useNotifications(tick) {
     const ipos = getLiveIPOS();
     const today = new Date();
     const candidates = computeAllNotifications(ipos, today);
+    const candidateIds = new Set(candidates.map((c) => c.id));
 
     setNotifications((prev) => {
       // 1. Keep existing active notifications that are still within 5 days of creation & event date
@@ -420,6 +501,7 @@ function useNotifications(tick) {
       
       const activePrev = prev.filter((n) => {
         if (!n || !allowedTypes.has(n.type)) return false;
+        if (!candidateIds.has(n.id)) return false;
         
         const withinCreationLimit = now - n.createdAt <= retentionMs;
         if (!withinCreationLimit) return false;
@@ -2128,8 +2210,19 @@ function GMPTab({ tick }) {
    SUBSCRIPTION DETAILS & ALLOTMENT PROBABILITY ENGINE
 ===================================================================== */
 function SubscriptionDetailsList({ ipo, dark }) {
-  const today = new Date();
-  const status = liveStatus(ipo, today);
+  const now = new Date();
+  const status = getComputedStatus(ipo, now);
+  const d = (s) => new Date(s + "T00:00:00+05:30");
+  const getIpoDay = () => {
+    if (status !== "Open" || !ipo.open) return null;
+    const open = d(ipo.open);
+    const diffDays = Math.floor((now - open) / (1000 * 60 * 60 * 24)) + 1;
+    return Math.max(1, diffDays);
+  };
+  const ipoDay = getIpoDay();
+  const todayIst = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+  const isAfterCutoff = todayIst.getHours() >= 17;
+  const showFinalOdds = status !== "Open" || (ipoDay != null && (ipoDay > 3 || (ipoDay === 3 && isAfterCutoff)));
 
   if (status === "Upcoming") {
     return (
@@ -2177,80 +2270,74 @@ function SubscriptionDetailsList({ ipo, dark }) {
       );
     }
 
-    // Determine if we should fall back to calculations for open/listed/closed IPOs
-    let finalAppsSub = appsSub;
-    const shouldCalculate = ipo.status === "Open" || ipo.status === "Closed" || ipo.status === "Listed";
+    const hasShares = sharesSub != null && !Number.isNaN(Number(sharesSub));
 
-    if (finalAppsSub == null && shouldCalculate && sharesSub != null && sharesSub > 0) {
-      if (isSME) {
-        if (label === "Retail") {
-          finalAppsSub = sharesSub; // Retail SME is exactly 1 lot max, so appsSub === sharesSub
-        } else {
-          finalAppsSub = sharesSub / 1.05; // SME HNI averages ~1.05 lots
-        }
-      } else {
-        // Mainboard empirical estimations as a robust calculation fallback
-        if (label === "Retail") {
-          const avgLots = ipo.id === "sbi-funds" ? 1.518 : 1.30;
-          finalAppsSub = sharesSub / avgLots;
-        } else if (label === "sHNI" || label === "sNII") {
-          const sniiMult = ipo.id === "sbi-funds" ? 1.836 : 1.5;
-          finalAppsSub = sharesSub / sniiMult;
-        } else if (label === "bHNI" || label === "bNII") {
-          const bniiMult = ipo.id === "sbi-funds" ? 5.215 : 5.5;
-          finalAppsSub = sharesSub / bniiMult;
-        } else if (label === "Employee") {
-          finalAppsSub = sharesSub / 1.5;
-        } else if (label === "Shareholder") {
-          finalAppsSub = sharesSub / 2.0;
-        } else if (label === "Policyholder") {
-          finalAppsSub = sharesSub / 2.0;
-        }
+    // Prefer true application-wise fields; otherwise derive from share× using
+    // standard category lot averages so odds always display (like Laser Power).
+    let finalAppsSub = appsSub;
+    if ((finalAppsSub == null || finalAppsSub <= 0) && hasShares && sharesSub > 0 && showFinalOdds) {
+      finalAppsSub = estimateAppsFromShares(label, sharesSub, isSME);
+    }
+
+    const hasApps = finalAppsSub != null && finalAppsSub > 0;
+    const canShowOdds = showFinalOdds && hasApps;
+
+    let oddsText = null;
+    if (canShowOdds) {
+      if (finalAppsSub <= 1.0) oddsText = "Guaranteed";
+      else {
+        const rounded = Math.round(finalAppsSub);
+        oddsText = rounded <= 1
+          ? `~1 in ${Number(finalAppsSub).toFixed(1)}`
+          : `~1 in ${rounded}`;
       }
     }
 
-    // For Lottery categories: check if application-wise data is available
-    if (finalAppsSub != null && finalAppsSub > 0) {
-      let oddsText = "";
-      if (finalAppsSub <= 1.0) {
-        oddsText = "Guaranteed";
-      } else {
-        const rounded = Math.round(finalAppsSub);
-        if (rounded <= 1) {
-          oddsText = `~1 in ${Number(finalAppsSub).toFixed(1)}`;
-        } else {
-          oddsText = `~1 in ${rounded}`;
-        }
-      }
-      return (
-        <div key={label} className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2.5 border-b border-slate-100 dark:border-white/5 last:border-0 gap-1">
-          <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase">{label}</span>
-          <div className="flex flex-wrap items-center sm:justify-end gap-1.5 text-right">
-            <span className="font-mono font-bold text-slate-855 dark:text-white text-sm">
-              {Number(finalAppsSub).toFixed(2)}×
-            </span>
-            <span className="text-xs text-slate-405 dark:text-slate-500 font-medium">(applications)</span>
-            <span className="text-slate-300 dark:text-white/10 select-none hidden sm:inline">•</span>
-            <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-sm">{oddsText}</span>
-          </div>
-        </div>
-      );
-    } else {
-      // Fallback: Pending status
+    if (!hasShares && !hasApps) {
       return (
         <div key={label} className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2.5 border-b border-slate-100 dark:border-white/5 last:border-0 gap-1">
           <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase">{label}</span>
           <div className="flex flex-wrap items-center sm:justify-end gap-2 text-right">
             <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25 uppercase tracking-wider">
-              Pending
+              {showFinalOdds ? "Pending" : "Live"}
             </span>
             <span className="text-[11px] text-slate-400 dark:text-slate-550 font-medium italic">
-              Allotment odds will be updated once application-wise data is available.
+              {showFinalOdds
+                ? "Subscription data not available yet."
+                : "Final allotment odds unlock after Day 3, 5:00 PM IST."}
             </span>
           </div>
         </div>
       );
     }
+
+    return (
+      <div key={label} className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2.5 border-b border-slate-100 dark:border-white/5 last:border-0 gap-1">
+        <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase">{label}</span>
+        <div className="flex flex-wrap items-center sm:justify-end gap-1.5 text-right">
+          {hasShares && (
+            <span className="font-mono font-bold text-slate-855 dark:text-white text-sm">
+              {formatSub(sharesSub)}
+            </span>
+          )}
+          {canShowOdds && (
+            <>
+              <span className="text-slate-300 dark:text-white/10 select-none hidden sm:inline">•</span>
+              <span className="text-xs text-slate-405 dark:text-slate-500 font-medium">
+                {Number(finalAppsSub).toFixed(2)}× apps
+              </span>
+              <span className="text-slate-300 dark:text-white/10 select-none hidden sm:inline">•</span>
+              <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-sm">{oddsText}</span>
+            </>
+          )}
+          {!showFinalOdds && (
+            <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 uppercase tracking-wider">
+              Live
+            </span>
+          )}
+        </div>
+      </div>
+    );
   };
 
   const lines = [];
@@ -2358,6 +2445,7 @@ function getRegistrarUrl(name) {
 function AllotmentCard({ ipo, onOpen, dark, todayStr }) {
   const registrarUrl = getRegistrarUrl(ipo.registrar);
   const isActivated = registrarUrl && ipo.allotment && todayStr >= ipo.allotment;
+  const status = getComputedStatus(ipo);
   
   const statusStyle = {
     Open:     { bg: "rgba(16,185,129,0.12)", color: "#10b981", border: "rgba(16,185,129,0.25)" },
@@ -2365,7 +2453,7 @@ function AllotmentCard({ ipo, onOpen, dark, todayStr }) {
     Upcoming: { bg: "rgba(240,162,2,0.12)",  color: "#d97706", border: "rgba(240,162,2,0.25)" },
     Listed:   { bg: "rgba(28,155,218,0.10)", color: BRAND.blue, border: "rgba(28,155,218,0.2)" },
   };
-  const ss = statusStyle[ipo.status] || statusStyle.Closed;
+  const ss = statusStyle[status] || statusStyle.Closed;
 
   return (
     <div
@@ -2380,7 +2468,7 @@ function AllotmentCard({ ipo, onOpen, dark, todayStr }) {
               <h3 className="font-bold text-slate-800 dark:text-white text-[15px] leading-tight truncate">{ipo.company}</h3>
               <div className="flex items-center gap-1.5 mt-1 flex-wrap">
                 <span className="text-[9px] uppercase tracking-wide font-extrabold px-2 py-0.5 rounded-full" style={{ background: ss.bg, color: ss.color, border: `1px solid ${ss.border}` }}>
-                  {ipo.status}
+                  {status}
                 </span>
                 {ipo.type === "SME" ? (
                   <span className="text-[9px] uppercase tracking-wide font-extrabold px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/25">
@@ -2630,7 +2718,7 @@ function SubscriptionsTab({ dark }) {
     } catch { /* ignore */ }
   };
 
-  const allIpos = getLiveIPOS().filter((i) => i.status !== "Upcoming" && i.status !== "DRHP Filed");
+  const allIpos = getLiveIPOS().filter((i) => getComputedStatus(i) !== "Upcoming");
   const mainboardCount = allIpos.filter((i) => i.type === "Mainboard").length;
   const smeCount = allIpos.filter((i) => i.type === "SME").length;
   
@@ -2644,7 +2732,7 @@ function SubscriptionsTab({ dark }) {
   };
 
   const getIpoDay = (ipo) => {
-    if (ipo.status !== "Open" || !ipo.open) return null;
+    if (getComputedStatus(ipo) !== "Open" || !ipo.open) return null;
     const today = new Date();
     const d = (s) => new Date(s + "T00:00:00+05:30");
     const open = d(ipo.open);
@@ -2689,7 +2777,8 @@ function SubscriptionsTab({ dark }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {displayedIpos.map((ipo) => {
-          const badge = statusBadge[ipo.status] || statusBadge.Closed;
+          const status = getComputedStatus(ipo);
+          const badge = statusBadge[status] || statusBadge.Closed;
           const ipoDay = getIpoDay(ipo);
 
           return (
@@ -2724,18 +2813,18 @@ function SubscriptionsTab({ dark }) {
                     className="text-[10px] font-bold px-2.5 py-1 rounded-xl border leading-none shrink-0"
                     style={{ background: badge.bg, color: badge.color, borderColor: badge.border }}
                   >
-                    {ipo.status}
+                    {status}
                   </span>
                 </div>
 
                 {/* Sub-header subscription status */}
                 <p className="text-xs font-semibold mb-4" style={{ color: dark ? "#94a3b8" : "#64748b" }}>
-                  {ipo.status === "Open" ? (
+                  {status === "Open" ? (
                     <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                       Live Day {ipoDay || 1} Updates
                     </span>
-                  ) : ipo.status === "Upcoming" || ipo.status === "DRHP Filed" ? (
+                  ) : status === "Upcoming" || status === "DRHP Filed" ? (
                     <span>Upcoming Subscription Bidding</span>
                   ) : (
                     <span>Final Subscription Figures</span>
@@ -3346,13 +3435,23 @@ export default function App() {
     } catch { /* storage unavailable */ }
   }, [dark]);
 
-  // Persist active tab across refreshes
+  // Persist active tab across refreshes + GA4 SPA tab tracking
   const setTab = (id) => {
     setTabRaw(id);
     try { localStorage.setItem("calmcapital-tab", id); } catch { /* storage unavailable */ }
+    const navItem = NAV.find((n) => n.id === id);
+    trackTabView(id, navItem?.label);
     // Auto-close sidebar on mobile after navigation
     if (isMobile()) setSidebarOpen(false);
   };
+
+  // Initial tab page_view (default / restored from localStorage)
+  useEffect(() => {
+    if (loadingDb) return;
+    const navItem = NAV.find((n) => n.id === tab);
+    trackTabView(tab, navItem?.label);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadingDb]);
 
   // Close sidebar when viewport shrinks to mobile
   useEffect(() => {
@@ -3465,10 +3564,10 @@ export default function App() {
   const counts = useMemo(() => {
     const all = getLiveIPOS();
     return {
-      Open: all.filter((i) => i.status === "Open").length,
-      Closed: all.filter((i) => i.status === "Closed").length,
-      Upcoming: all.filter((i) => i.status === "Upcoming").length,
-      Listed: all.filter((i) => i.status === "Listed").length,
+      Open: all.filter((i) => getComputedStatus(i) === "Open").length,
+      Closed: all.filter((i) => getComputedStatus(i) === "Closed").length,
+      Upcoming: all.filter((i) => getComputedStatus(i) === "Upcoming").length,
+      Listed: all.filter((i) => getComputedStatus(i) === "Listed").length,
       avgGmpPct: (all.reduce((s, i) => s + gainPct(i), 0) / all.length).toFixed(1),
       totalIssue: all.reduce((s, i) => s + (i.issueSize || 0), 0),
     };
@@ -3476,7 +3575,8 @@ export default function App() {
 
   const refresh = () => { setRefreshing(true); syncNow().finally(() => setTimeout(() => setRefreshing(false), 900)); };
 
-  const groupedFiltered = (status) => sortIposLogically(filtered.filter((i) => i.status === status));
+  const groupedFiltered = (status) =>
+    sortIposLogically(filtered.filter((i) => getComputedStatus(i) === status));
 
   if (loadingDb) {
     return (
@@ -3645,6 +3745,9 @@ export default function App() {
                 );
               })}
             </nav>
+            <p className="mt-3 pt-3 border-t text-[9px] leading-snug" style={{ borderColor: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)", color: dark ? "#64748b" : "#94a3b8" }}>
+              We use Google Analytics to understand traffic and improve Calm Capital.
+            </p>
           </div>
         </aside>
 

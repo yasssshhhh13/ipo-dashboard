@@ -85,12 +85,16 @@
       "priceMax": 170,
       "estListing": 183,
       "sub": {
-        "overall": 61.11,
-        "qib": 160.03,
-        "snii": 112.04,
-        "bnii": 163.83,
-        "hni": 146.57,
-        "retail": 21.08
+        "overall": 87.17,
+        "qib": 160.22,
+        "snii": 112.09,
+        "bnii": 163.91,
+        "hni": 146.64,
+        "retail": 21.09,
+        "employee": 9.84,
+        "retail_apps": 17,
+        "shni_apps": 107,
+        "bhni_apps": 33
       }
     },
     "vinit-mobile": {
@@ -280,7 +284,14 @@
         "snii": 15.51,
         "bnii": 26.01,
         "hni": 22.51,
-        "retail": 3.76
+        "retail": 3.76,
+        "employee": 4.65,
+        "shareholder": 9.52,
+        "retail_apps": 2.32,
+        "shni_apps": 18.45,
+        "bhni_apps": 4.99,
+        "employee_apps": 1.3,
+        "shareholder_apps": 1.38
       }
     },
     "laser-power-infra": {
@@ -293,7 +304,10 @@
         "snii": 36.43,
         "bnii": 50.32,
         "hni": 45.69,
-        "retail": 6.95
+        "retail": 6.95,
+        "retail_apps": 5.98,
+        "shni_apps": 35.45,
+        "bhni_apps": 10.36
       }
     },
     "sampark-india-logistics": {
@@ -329,7 +343,18 @@
     "advit-jewels": {
       "gmp": 49,
       "priceMax": 138,
-      "estListing": 187
+      "estListing": 187,
+      "sub": {
+        "overall": 212.63,
+        "qib": 174.98,
+        "snii": 502.25,
+        "bnii": 554.12,
+        "hni": 536.38,
+        "retail": 95.3,
+        "retail_apps": 70,
+        "shni_apps": 470,
+        "bhni_apps": 110
+      }
     },
     "waterways-leisure-tourism": {
       "gmp": -51,

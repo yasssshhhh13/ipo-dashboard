@@ -24,6 +24,30 @@ function normalizeName(raw) {
     .trim();
 }
 
+function companyTokens(name) {
+  return normalizeName(name)
+    .replace(/\b(and|the|of|india)\b/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter((t) => t.length > 1);
+}
+
+function isSameCompanyName(a, b) {
+  const ta = companyTokens(a);
+  const tb = companyTokens(b);
+  if (!ta.length || !tb.length) return false;
+  if (ta[0] !== tb[0]) return false;
+  if (!ta[1] || !tb[1]) return true;
+  return ta[1] === tb[1];
+}
+
+/** Prefer exact id match, then fuzzy name match to avoid DRHP stub duplicates. */
+function findExistingIpo(ipos, companyName, generatedId) {
+  const byId = ipos.find((i) => i.id === generatedId);
+  if (byId) return byId;
+  return ipos.find((i) => isSameCompanyName(i.company || i.name, companyName)) || null;
+}
+
 // Clean raw scraped names
 function cleanScrapedName(raw) {
   if (!raw) return "";
@@ -208,8 +232,8 @@ async function main() {
 
       if (!id) continue;
 
-      // Check if IPO exists
-      const existingIpo = ipos.find(i => i.id === id);
+      // Check if IPO exists (exact id OR fuzzy company match)
+      const existingIpo = findExistingIpo(ipos, companyName, id);
 
       if (!existingIpo) {
         console.log(`\n[NEW DISCOVERY] Found new filing: "${companyName}". Verifying against secondary sources...`);

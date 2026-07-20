@@ -34,15 +34,16 @@ const NAME_TO_ID = {
   "kusumgar": "kusumgar",
   "kusumgar corporates": "kusumgar",
   "devson catalyst": "devson-catalyst",
-  "happy steels": "happy-steels",
-  "happy steel": "happy-steels",
-  "sbi funds management": "sbi-funds",
+  "happy steels": "happy-steel",
+  "happy steel": "happy-steel",
+  "sbi funds management": "sbi-funds-management",
+  "sbi funds": "sbi-funds-management",
   "kratikal tech": "kratikal-tech",
   "teja engineering": "teja-engineering",
   "teja engineering industries": "teja-engineering",
   "vinit mobile": "vinit-mobile",
-  "sampark india logistics": "sampark-logistics",
-  "sampark logistics": "sampark-logistics",
+  "sampark india logistics": "sampark-india-logistics",
+  "sampark logistics": "sampark-india-logistics",
   "atharva polyplast": "atharva-polyplast",
   "atharva poly plast": "atharva-polyplast",
   "seemax resources": "seemax-resources",
@@ -56,6 +57,13 @@ const NAME_TO_ID = {
   "cube highways trust": "cube-highways",
   "cube highways trust invit": "cube-highways",
   "sotefin bharat": "sotefin-bharat",
+  "advit jewels": "advit-jewels",
+  "laser power infra": "laser-power-infra",
+  "laser power": "laser-power-infra",
+  "alpine texworld": "alpine-texworld",
+  "gulf lloyds": "gulf-lloyds",
+  "millworks technologies": "millworks-technologies",
+  "crazy snacks": "crazy-snacks",
 };
 
 function normalizeName(raw) {
@@ -73,6 +81,30 @@ function resolveId(rawName) {
     if (norm.includes(key) || key.includes(norm)) return id;
   }
   return null;
+}
+
+function companyTokens(name) {
+  return normalizeName(name)
+    .replace(/\b(and|the|of|india)\b/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter((t) => t.length > 1);
+}
+
+function isSameCompanyName(a, b) {
+  const ta = companyTokens(a);
+  const tb = companyTokens(b);
+  if (!ta.length || !tb.length) return false;
+  if (ta[0] !== tb[0]) return false;
+  if (!ta[1] || !tb[1]) return true;
+  return ta[1] === tb[1];
+}
+
+/** Fuzzy match against baseline so DRHP stubs don't spawn a second open IPO. */
+function findExistingIpo(iposBase, cleanedName, generatedId) {
+  const byId = iposBase.find((i) => i.id === generatedId);
+  if (byId) return byId;
+  return iposBase.find((i) => isSameCompanyName(i.company || i.name, cleanedName)) || null;
 }
 
 // Extends extractTable to return { cells, href }
@@ -176,6 +208,21 @@ function calculateStatus(ipo) {
   const listing = d(ipo.listing);
   if (today < listing) return "Closed";
   return "Listed";
+}
+
+function validateChronology(ipo) {
+  const warnings = [];
+  const d = (s) => (s ? new Date(s + "T00:00:00+05:30") : null);
+  const open = d(ipo.open);
+  const close = d(ipo.close);
+  const allotment = d(ipo.allotment);
+  const listing = d(ipo.listing);
+
+  if (open && close && close < open) warnings.push("close date is before open date");
+  if (close && allotment && allotment < close) warnings.push("allotment date is before close date");
+  if (allotment && listing && listing < allotment) warnings.push("listing date is before allotment date");
+
+  return warnings;
 }
 
 function getSearchKeywords(company) {
@@ -301,41 +348,55 @@ async function scrapeGmp(page) {
 
 async function scrapeSubscription(page, iposBase) {
   await page.goto(SUB_URL, { waitUntil: "domcontentloaded", timeout: 45000 });
-  await page.waitForTimeout(4000);
-  const rows = await extractTable(page, "sub");
+  await page.waitForTimeout(3000);
 
+  // InvestorGain defaults to "Open" only — switch to All so Closed/Listed
+  // IPOs keep getting subscription refreshes until figures stabilize.
+  try {
+    const allClicked = await page.evaluate(() => {
+      const candidates = Array.from(document.querySelectorAll("a, button, label, span, li, div"));
+      const allBtn = candidates.find((el) => {
+        const t = (el.textContent || "").trim().toLowerCase();
+        return t === "all" || t.startsWith("all ");
+      });
+      if (allBtn) {
+        allBtn.click();
+        return true;
+      }
+      return false;
+    });
+    if (allClicked) {
+      console.log("[Subscription] Switched filter to All (Open+Closed+Listed)");
+      await page.waitForTimeout(2500);
+    }
+  } catch (err) {
+    console.warn("[Subscription] Could not switch to All filter:", err.message);
+  }
+
+  const rows = await extractTable(page, "sub");
   const result = {};
+
   for (const { cells, href } of rows) {
     const rawName = cleanScrapedName(cells[0] || "");
-    const id = resolveId(rawName);
+    let id = resolveId(rawName);
+    if (!id && rawName) {
+      const generatedId = normalizeName(rawName).replace(/\s+/g, "-");
+      const existing = findExistingIpo(iposBase, rawName, generatedId);
+      if (existing) id = existing.id;
+    }
     if (!id) continue;
 
-    // Find in iposBase
-    const ipo = iposBase.find(i => i.id === id);
-    if (!ipo) {
-      continue;
-    }
-
-    // Skip if open date is not set or in the future
-    if (!ipo.open) {
-      continue;
-    }
+    const ipo = iposBase.find((i) => i.id === id);
+    if (!ipo) continue;
+    if (!ipo.open) continue;
 
     const today = new Date();
     const openDate = new Date(ipo.open + "T00:00:00+05:30");
-    if (today < openDate) {
-      continue;
-    }
+    if (today < openDate) continue;
+    if (!href) continue;
 
-    if (!href) {
-      continue;
-    }
-
-    // Parse href to construct subscription URL
-    const match = href.match(/\/gmp\/([^/]+)\/(\d+)\/?/);
-    if (!match) {
-      continue;
-    }
+    const match = href.match(/\/gmp\/([^/]+)\/(\d+)\/?/) || href.match(/\/subscription\/([^/]+)\/(\d+)\/?/);
+    if (!match) continue;
 
     const slug = match[1];
     const numericId = match[2];
@@ -344,56 +405,89 @@ async function scrapeSubscription(page, iposBase) {
     console.log(`[Subscription] Fetching detailed subscription for ${id} from: ${subPageUrl}`);
     try {
       await page.goto(subPageUrl, { waitUntil: "load", timeout: 20000 });
-      await page.waitForTimeout(2000);
+      await page.waitForTimeout(1500);
 
-      const scripts = await page.$$eval('script[type="application/ld+json"]', (els) => {
-        return els.map(el => {
+      const parsed = await page.evaluate(() => {
+        const out = { shares: {}, apps: {} };
+
+        const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
+        for (const el of scripts) {
           try {
-            return JSON.parse(el.innerText);
-          } catch(e) {
-            return null;
+            const data = JSON.parse(el.innerText);
+            if (data && data["@type"] === "Dataset" && Array.isArray(data.variableMeasured)) {
+              const findValue = (name) => {
+                const prop = data.variableMeasured.find((p) => p.name === name);
+                return prop ? parseFloat(prop.value) : undefined;
+              };
+              out.shares.overall = findValue("Total Subscription");
+              out.shares.qib = findValue("QIB Subscription");
+              out.shares.snii = findValue("sNII Subscription") || findValue("Small NII Subscription");
+              out.shares.bnii = findValue("bNII Subscription") || findValue("Big NII Subscription");
+              out.shares.hni = findValue("NII Subscription");
+              out.shares.retail = findValue("RII Subscription");
+              out.shares.employee = findValue("Employee Subscription") || findValue("EMP Subscription") || findValue("Employee Individual Subscription");
+              out.shares.shareholder = findValue("Shareholder Subscription") || findValue("SHR Subscription") || findValue("Share Holder Subscription");
+              out.shares.policyholder = findValue("Policyholder Subscription") || findValue("POL Subscription") || findValue("Policy Holder Subscription");
+            }
+          } catch { /* ignore */ }
+        }
+
+        // Application-wise / allotment odds tables on InvestorGain often include
+        // "Applications" or "Times (Apps)" style columns — parse when present.
+        const tables = Array.from(document.querySelectorAll("table"));
+        for (const table of tables) {
+          const headers = Array.from(table.querySelectorAll("th")).map((th) => th.innerText.trim().toLowerCase());
+          if (!headers.length) continue;
+          const appsIdx = headers.findIndex((h) => h.includes("application") || h.includes("apps") || h.includes("allotment chance") || h.includes("odds"));
+          const catIdx = headers.findIndex((h) => h.includes("category") || h.includes("investor") || h === "quota");
+          if (appsIdx < 0) continue;
+
+          for (const tr of Array.from(table.querySelectorAll("tbody tr"))) {
+            const tds = Array.from(tr.querySelectorAll("td"));
+            if (!tds.length) continue;
+            const cat = (catIdx >= 0 ? tds[catIdx] : tds[0])?.innerText.trim().toLowerCase() || "";
+            const appsRaw = tds[appsIdx]?.innerText || "";
+            const m = appsRaw.replace(/,/g, "").match(/(\d+(?:\.\d+)?)/);
+            if (!m) continue;
+            const appsVal = parseFloat(m[1]);
+            if (!Number.isFinite(appsVal) || appsVal <= 0) continue;
+
+            if (cat.includes("retail") || cat.includes("rii")) out.apps.retail_apps = appsVal;
+            else if (cat.includes("snii") || cat.includes("s-nii") || cat.includes("small nii") || cat.includes("shni") || cat.includes("s-hni")) out.apps.shni_apps = appsVal;
+            else if (cat.includes("bnii") || cat.includes("b-nii") || cat.includes("big nii") || cat.includes("bhni") || cat.includes("b-hni")) out.apps.bhni_apps = appsVal;
+            else if (cat.includes("employee") || cat === "emp") out.apps.employee_apps = appsVal;
+            else if (cat.includes("shareholder") || cat === "shr") out.apps.shareholder_apps = appsVal;
+            else if (cat.includes("policyholder") || cat === "pol") out.apps.policyholder_apps = appsVal;
           }
-        }).filter(Boolean);
+        }
+
+        return out;
       });
 
-      const dataset = scripts.find(s => s["@type"] === "Dataset" && s.variableMeasured);
-      if (!dataset) {
-        console.log(`[Subscription] No Dataset schema found for ${id}`);
-        continue;
-      }
-
-      const findValue = (name) => {
-        const prop = dataset.variableMeasured.find(p => p.name === name);
-        return prop ? parseFloat(prop.value) : undefined;
-      };
-
-      const overall = findValue("Total Subscription");
-      const qib = findValue("QIB Subscription");
-      const snii = findValue("sNII Subscription") || findValue("Small NII Subscription");
-      const bnii = findValue("bNII Subscription") || findValue("Big NII Subscription");
-      const hni = findValue("NII Subscription");
-      const retail = findValue("RII Subscription");
-      const employee = findValue("Employee Subscription") || findValue("EMP Subscription") || findValue("Employee Individual Subscription");
-      const shareholder = findValue("Shareholder Subscription") || findValue("SHR Subscription") || findValue("Share Holder Subscription");
-      const policyholder = findValue("Policyholder Subscription") || findValue("POL Subscription") || findValue("Policy Holder Subscription");
-
-      if ([qib, hni, retail, overall, snii, bnii, employee, shareholder, policyholder].every((v) => v === undefined)) {
+      const s = parsed.shares || {};
+      const a = parsed.apps || {};
+      if ([s.qib, s.hni, s.retail, s.overall, s.snii, s.bnii, s.employee, s.shareholder, s.policyholder].every((v) => v === undefined)) {
         continue;
       }
 
       result[id] = {
-        overall: overall ?? 0,
-        qib: qib ?? 0,
-        snii: snii ?? 0,
-        bnii: bnii ?? 0,
-        hni: hni ?? 0,
-        retail: retail ?? 0,
-        ...(employee !== undefined ? { employee } : {}),
-        ...(shareholder !== undefined ? { shareholder } : {}),
-        ...(policyholder !== undefined ? { policyholder } : {})
+        overall: s.overall ?? 0,
+        qib: s.qib ?? 0,
+        snii: s.snii ?? 0,
+        bnii: s.bnii ?? 0,
+        hni: s.hni ?? 0,
+        retail: s.retail ?? 0,
+        ...(s.employee !== undefined ? { employee: s.employee } : {}),
+        ...(s.shareholder !== undefined ? { shareholder: s.shareholder } : {}),
+        ...(s.policyholder !== undefined ? { policyholder: s.policyholder } : {}),
+        ...(a.retail_apps !== undefined ? { retail_apps: a.retail_apps } : {}),
+        ...(a.shni_apps !== undefined ? { shni_apps: a.shni_apps } : {}),
+        ...(a.bhni_apps !== undefined ? { bhni_apps: a.bhni_apps } : {}),
+        ...(a.employee_apps !== undefined ? { employee_apps: a.employee_apps } : {}),
+        ...(a.shareholder_apps !== undefined ? { shareholder_apps: a.shareholder_apps } : {}),
+        ...(a.policyholder_apps !== undefined ? { policyholder_apps: a.policyholder_apps } : {}),
       };
       console.log(`[Subscription] Successfully scraped for ${id}:`, result[id]);
-
     } catch (err) {
       console.error(`[Subscription] Failed to scrape sub page for ${id}:`, err.message);
     }
@@ -445,6 +539,17 @@ async function main() {
     const cleanedName = cleanScrapedName(rawName || "");
     let id = resolveId(cleanedName);
     
+    // Fuzzy-match against existing baseline before treating as brand-new
+    if (!id && cleanedName) {
+      const generatedId = normalizeName(cleanedName).replace(/\s+/g, "-");
+      const existing = findExistingIpo(iposBase, cleanedName, generatedId);
+      if (existing) {
+        id = existing.id;
+        NAME_TO_ID[normalizeName(cleanedName)] = id;
+        console.log(`[DEDUP] "${cleanedName}" matched existing IPO "${existing.name}" (${id})`);
+      }
+    }
+
     if (!id && cleanedName) {
       // Discovered new IPO!
       const generatedId = normalizeName(cleanedName).replace(/\s+/g, "-");
@@ -533,6 +638,11 @@ async function main() {
         risks: ["Operating scale limits relative to larger peers", "Highly competitive market segment and raw material cost exposure"]
       };
 
+      const chronologyWarnings = validateChronology(newIpo);
+      if (chronologyWarnings.length > 0) {
+        console.warn(`[DATE WARN] "${newIpo.name}" has inconsistent IPO timeline: ${chronologyWarnings.join("; ")}`);
+      }
+
       // Search SEBI filings for the correct DRHP link
       const drhpUrl = await findCorrectDrhpUrl(newIpo.company, browser);
       if (drhpUrl) {
@@ -566,6 +676,11 @@ async function main() {
         if (allotment && existingIpo.allotment !== allotment) { existingIpo.allotment = allotment; changed = true; }
         if (listing && existingIpo.listing !== listing) { existingIpo.listing = listing; changed = true; }
 
+        const chronologyWarnings = validateChronology(existingIpo);
+        if (chronologyWarnings.length > 0) {
+          console.warn(`[DATE WARN] "${existingIpo.name}" has inconsistent IPO timeline: ${chronologyWarnings.join("; ")}`);
+        }
+
         const calculatedStatus = calculateStatus(existingIpo);
         if (existingIpo.status !== calculatedStatus) {
           console.log(`[STATUS UPDATE] Existing IPO "${existingIpo.name}" status changing from "${existingIpo.status}" to "${calculatedStatus}"`);
@@ -591,10 +706,8 @@ async function main() {
     }
   }
 
-  if (databaseUpdated) {
-    console.log(`[DATABASE UPDATE] Writing ${iposBase.length} records back to ipos.json...`);
-    await writeFile(IPOS_JSON_PATH, JSON.stringify(iposBase, null, 2), "utf-8");
-  }
+  // Defer ipos.json write until after subscription scrape so we can persist
+  // both status/date updates and final subscription figures in one pass.
 
   try {
     subPatches = await scrapeSubscription(page, iposBase);
@@ -604,6 +717,22 @@ async function main() {
   }
 
   await browser.close();
+
+  // Persist freshly scraped subscription into ipos.json so Closed/Listed IPOs
+  // keep final figures after they drop off InvestorGain's "Open" live table.
+  let baselineSubUpdated = false;
+  for (const [id, newSub] of Object.entries(subPatches)) {
+    const baseIpo = iposBase.find((i) => i.id === id);
+    if (!baseIpo || !newSub || Object.keys(newSub).length === 0) continue;
+    const prev = baseIpo.sub || {};
+    baseIpo.sub = { ...prev, ...newSub };
+    baselineSubUpdated = true;
+    console.log(`[BASELINE SUB] Persisted subscription for "${baseIpo.name}"`);
+  }
+  if (baselineSubUpdated || databaseUpdated) {
+    console.log(`[DATABASE UPDATE] Writing ${iposBase.length} records back to ipos.json...`);
+    await writeFile(IPOS_JSON_PATH, JSON.stringify(iposBase, null, 2), "utf-8");
+  }
 
   // 3. Update live-data.json
   let existingIpos = {};
@@ -617,27 +746,45 @@ async function main() {
     // Ignore
   }
 
-  const ids = new Set([...Object.keys(existingIpos), ...Object.keys(gmpPatches), ...Object.keys(subPatches)]);
+  const ids = new Set([
+    ...Object.keys(existingIpos),
+    ...Object.keys(gmpPatches),
+    ...Object.keys(subPatches),
+    ...iposBase.filter((i) => i.sub).map((i) => i.id),
+  ]);
   const ipos = {};
   for (const id of ids) {
     const existingIpo = existingIpos[id] || {};
     const newGmp = gmpPatches[id] || {};
     const newSub = subPatches[id] || {};
+    const baseIpo = iposBase.find((i) => i.id === id);
 
-    // Remove sub from existingIpo to avoid carrying forward stale/garbage data
-    const { sub: _, ...existingIpoWithoutSub } = existingIpo;
+    const { sub: existingSub, ...existingIpoWithoutSub } = existingIpo;
 
     ipos[id] = {
       ...existingIpoWithoutSub,
       ...newGmp,
     };
 
-    const baseIpo = iposBase.find((i) => i.id === id);
-    const isUpcoming = baseIpo ? (baseIpo.status === "Upcoming" || baseIpo.status === "DRHP Filed") : true;
+    const latestStatus = baseIpo ? calculateStatus(baseIpo) : "Upcoming";
+    const isUpcoming = latestStatus === "Upcoming" || latestStatus === "DRHP Filed";
 
-    // Only assign sub if the IPO is not upcoming AND we have valid scraped subscription data
-    if (!isUpcoming && newSub && Object.keys(newSub).length > 0) {
-      ipos[id].sub = newSub;
+    // Prefer fresh scrape → else previous live sub → else baseline ipos.json sub.
+    // Never drop known subscription just because the IPO left the live Open table.
+    if (!isUpcoming) {
+      if (newSub && Object.keys(newSub).length > 0) {
+        const baselineApps = {};
+        if (baseIpo?.sub) {
+          for (const k of ["retail_apps", "shni_apps", "bhni_apps", "snii_apps", "bnii_apps", "employee_apps", "shareholder_apps", "policyholder_apps"]) {
+            if (baseIpo.sub[k] != null && newSub[k] == null) baselineApps[k] = baseIpo.sub[k];
+          }
+        }
+        ipos[id].sub = { ...baselineApps, ...newSub };
+      } else if (existingSub && Object.keys(existingSub).length > 0) {
+        ipos[id].sub = existingSub;
+      } else if (baseIpo?.sub && Object.keys(baseIpo.sub).length > 0) {
+        ipos[id].sub = baseIpo.sub;
+      }
     }
   }
 

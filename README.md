@@ -30,6 +30,7 @@ everything below uses GitHub's and Vercel's website.
    - Name: `ANTHROPIC_API_KEY`
    - Value: your key from [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
    - Leave it set for Production, Preview, and Development.
+   - (Optional for analytics) Name: `VITE_GA_MEASUREMENT_ID` — Value: your GA4 ID `G-XXXXXXXXXX` (see section 6 below).
 6. Click **Deploy**. Wait ~1 minute.
 
 You'll get a URL like `https://ipo-dashboard-yourname.vercel.app` — that's
@@ -62,10 +63,9 @@ per device.
 Vercel redeploys automatically on every push — you don't need to click
 anything on Vercel's side.
 
-- **Small edit:** open the file on GitHub (click it, click the pencil ✏️
-  icon), make your change, scroll down, click **Commit changes**. Vercel
-  starts a new deploy within seconds. Watch progress on your Vercel project's
-  **Deployments** tab.
+- **Small edit:** open the file on GitHub (click it, click the pencil icon),
+  make your change, scroll down, click **Commit changes**. Vercel starts a new
+  deploy within seconds. Watch progress on your Vercel project's **Deployments** tab.
 - **Multiple/larger changes:** repeat the "uploading an existing file" step
   from Part 1 — GitHub will ask to confirm you're replacing existing files.
 - If Claude (me) makes changes for you again: I'll give you an updated
@@ -94,15 +94,49 @@ straight to your production URL.
 
 ---
 
-## 6. Ongoing maintenance checklist
+## 6. Google Analytics (GA4) — visitor tracking
+
+Calm Capital sends GA4 `page_view` and `tab_view` events when visitors open tabs
+(Overview, Subscriptions, etc.). Analytics loads **only** when
+`VITE_GA_MEASUREMENT_ID` is set.
+
+### A. Create a GA4 property
+1. Open [analytics.google.com](https://analytics.google.com) and sign in.
+2. **Admin** (gear) → **Create property** → name it `Calm Capital`.
+3. Time zone: **India**; currency: **INR**.
+4. Create a **Web** data stream with your live site URL
+   (e.g. `https://your-app.vercel.app`).
+5. Copy the **Measurement ID** (`G-XXXXXXXXXX`).
+
+### B. Add the Measurement ID
+**Local (optional):** copy `.env.example` to `.env.local` and set:
+
+```
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+**Production (Vercel):** Project → **Settings** → **Environment Variables** →
+add `VITE_GA_MEASUREMENT_ID` = `G-XXXXXXXXXX` for Production (and Preview if you want).
+Then **Redeploy** so the build picks up the variable.
+
+### C. Verify it works
+1. Open your live site (disable ad-block for that tab if needed).
+2. In GA4 go to **Reports → Realtime** — you should appear within ~30 seconds.
+3. Switch sidebar tabs; confirm `page_view` / `tab_view` events.
+4. After 24–48 hours, check **Acquisition** and **Engagement** for Users / Sessions.
+
+---
+
+## 7. Ongoing maintenance checklist
 
 | What | How often | How |
 |---|---|---|
 | Anthropic API key still valid | If AI Assistant stops responding | Check [console.anthropic.com](https://console.anthropic.com) billing/key status; rotate in Vercel env vars if needed, then redeploy |
+| Google Analytics Measurement ID | Once at setup | Keep `VITE_GA_MEASUREMENT_ID` set in Vercel; check Realtime after deploys |
 | GitHub Action scraper still running | Monthly | Repo → Actions tab → confirm recent green runs; investorgain.com occasionally changes its page structure and breaks selectors — see `LIVE_DATA_SETUP.md` in that repo for the fix procedure |
 | Dependency updates | Every few months | Not required to keep working, but `npm outdated` locally (or just ask me) to check for security patches |
 | Domain renewal | Yearly (if using a custom domain) | Set auto-renew at your registrar |
-| Vercel usage | Passive | Free tier covers this project's traffic comfortably; Vercel emails you if you're ever near a limit |
+| Vercel usage | Free | Free tier covers this project's traffic comfortably; Vercel emails you if you're ever near a limit |
 
 ---
 
@@ -111,4 +145,4 @@ straight to your production URL.
 - **CORS**: not an issue — the browser only ever calls same-origin `/api/chat`; that function calls Anthropic server-to-server, where CORS doesn't apply.
 - **Routing**: this is a single-page app (no distinct URL routes), so there's nothing to break on refresh; `vercel.json` still adds an SPA fallback rewrite as a safeguard.
 - **Build**: `npm run build` completes with zero errors or warnings (verified before handing this off), and vendor code (`recharts`, icons, React) is split into separate cached chunks so repeat visits load faster.
-- **Secrets**: the only secret is `ANTHROPIC_API_KEY`, set exclusively in Vercel's dashboard, read only inside `api/chat.js`.
+- **Secrets**: `ANTHROPIC_API_KEY` is server-only in Vercel. `VITE_GA_MEASUREMENT_ID` is a public client ID (safe to embed in the browser bundle; still set via env so you can rotate it).
