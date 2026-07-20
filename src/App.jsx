@@ -78,6 +78,57 @@ function getComputedStatus(ipo, now = new Date()) {
   return liveStatus(ipo, now);
 }
 
+/** IST calendar Y-M-D parts for a Date. */
+function istYmdParts(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Kolkata",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const get = (t) => Number(parts.find((p) => p.type === t)?.value);
+  return { y: get("year"), m: get("month"), d: get("day") };
+}
+
+/** True for Sat/Sun in the Asia/Kolkata calendar (IPO bidding holidays). */
+function isIstWeekend(y, m, d) {
+  // noon UTC avoids DST edge cases; India has no DST
+  const dow = new Date(Date.UTC(y, m - 1, d, 6, 30)).getUTCDay();
+  return dow === 0 || dow === 6;
+}
+
+/**
+ * IPO bidding day number counting only Mon–Fri (skip Sat/Sun).
+ * Example: open Friday → Fri=1, Mon=2, Tue=3.
+ */
+function getIpoBiddingDay(ipo, now = new Date()) {
+  if (!ipo?.open || getComputedStatus(ipo, now) !== "Open") return null;
+  const openParts = String(ipo.open).split("-").map(Number);
+  if (openParts.length !== 3 || openParts.some((n) => !Number.isFinite(n))) return null;
+  const [oy, om, od] = openParts;
+  const today = istYmdParts(now);
+
+  let day = 0;
+  let y = oy;
+  let m = om;
+  let d = od;
+  // Walk inclusive from open date → today IST, count weekdays only
+  for (let guard = 0; guard < 60; guard++) {
+    if (!isIstWeekend(y, m, d)) day += 1;
+    if (y === today.y && m === today.m && d === today.d) break;
+    // past today? (open in future shouldn't happen when status is Open)
+    const openKey = y * 10000 + m * 100 + d;
+    const todayKey = today.y * 10000 + today.m * 100 + today.d;
+    if (openKey > todayKey) return null;
+    // next calendar day
+    const next = new Date(Date.UTC(y, m - 1, d + 1));
+    y = next.getUTCFullYear();
+    m = next.getUTCMonth() + 1;
+    d = next.getUTCDate();
+  }
+  return Math.max(1, day);
+}
+
 // Holds the most recent investorgain.com scrape result (see LiveDataBadge).
 // Populated by fetchLiveData() below; getLiveIPOS() overlays it onto the
 // verified baseline so every part of the app reads through one function.
@@ -2212,14 +2263,7 @@ function GMPTab({ tick }) {
 function SubscriptionDetailsList({ ipo, dark }) {
   const now = new Date();
   const status = getComputedStatus(ipo, now);
-  const d = (s) => new Date(s + "T00:00:00+05:30");
-  const getIpoDay = () => {
-    if (status !== "Open" || !ipo.open) return null;
-    const open = d(ipo.open);
-    const diffDays = Math.floor((now - open) / (1000 * 60 * 60 * 24)) + 1;
-    return Math.max(1, diffDays);
-  };
-  const ipoDay = getIpoDay();
+  const ipoDay = getIpoBiddingDay(ipo, now);
   const todayIst = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
   const isAfterCutoff = todayIst.getHours() >= 17;
   const showFinalOdds = status !== "Open" || (ipoDay != null && (ipoDay > 3 || (ipoDay === 3 && isAfterCutoff)));
@@ -2412,8 +2456,8 @@ function SubscriptionDetailsList({ ipo, dark }) {
 function getRegistrarUrl(name) {
   if (!name) return null;
   const n = name.toLowerCase();
-  if (n.includes("link intime") || n.includes("intime india") || n.includes("mufg intime")) {
-    return "https://linkintime.co.in/initial_offer/public-issues.html";
+  if (n.includes("link intime") || n.includes("intime india") || n.includes("mufg intime") || n.includes("mufg")) {
+    return "https://in.mpms.mufg.com/Initial_Offer/public-issues.html";
   }
   if (n.includes("kfin") || n.includes("karvy")) {
     return "https://ipostatus.kfintech.com/";
@@ -2444,7 +2488,8 @@ function getRegistrarUrl(name) {
 
 function AllotmentCard({ ipo, onOpen, dark, todayStr }) {
   const registrarUrl = getRegistrarUrl(ipo.registrar);
-  const isActivated = registrarUrl && ipo.allotment && todayStr >= ipo.allotment;
+  // Show the registrar portal as soon as we know who it is — don't wait for allotment day.
+  const isActivated = Boolean(registrarUrl);
   const status = getComputedStatus(ipo);
   
   const statusStyle = {
@@ -2521,7 +2566,7 @@ function AllotmentCard({ ipo, onOpen, dark, todayStr }) {
               <ExternalLink size={13} />
             </button>
             <p className="text-[10px] text-slate-400 dark:text-slate-500 text-center italic leading-tight">
-              Allotment status will be available once activated by the registrar.
+              Allotment link will appear once the registrar is announced.
             </p>
           </div>
         )}
@@ -2731,15 +2776,7 @@ function SubscriptionsTab({ dark }) {
     Listed:   { bg: dark ? "rgba(28,155,218,0.12)" : "rgba(28,155,218,0.08)", color: BRAND.blue, border: dark ? "1px solid rgba(28,155,218,0.25)" : "1px solid rgba(28,155,218,0.2)" },
   };
 
-  const getIpoDay = (ipo) => {
-    if (getComputedStatus(ipo) !== "Open" || !ipo.open) return null;
-    const today = new Date();
-    const d = (s) => new Date(s + "T00:00:00+05:30");
-    const open = d(ipo.open);
-    const diffTime = today - open;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
-    return Math.max(1, diffDays);
-  };
+  const getIpoDay = (ipo) => getIpoBiddingDay(ipo);
 
   return (
     <div className="space-y-5">

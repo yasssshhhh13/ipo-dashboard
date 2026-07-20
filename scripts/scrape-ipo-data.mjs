@@ -278,47 +278,132 @@ async function findCorrectDrhpUrl(companyName, browser) {
   }
 }
 
+function isMissingRegistrar(value) {
+  if (!value) return true;
+  const n = String(value).trim().toLowerCase();
+  return !n || n === "to be announced" || n === "tba" || n === "n/a" || n === "-";
+}
+
+function cleanDetailField(value) {
+  if (!value) return null;
+  let v = String(value)
+    .replace(/\s+/g, " ")
+    .replace(/\*\*/g, "")
+    .split(/Website:|Phone:|Email:|Last Updated/i)[0]
+    .trim();
+  // Drop trailing junk from table cells / adjacent labels
+  v = v.replace(/\s*(Lead Manager|Allotment Status|DRHP|RHP).*$/i, "").trim();
+  if (!v || isMissingRegistrar(v)) return null;
+  return v;
+}
+
+function toAbsoluteInvestorGainUrl(href) {
+  if (!href) return null;
+  if (href.startsWith("http")) return href;
+  return `https://www.investorgain.com${href.startsWith("/") ? href : `/${href}`}`;
+}
+
+/** Convert GMP/subscription hrefs into the stable IPO detail page URL. */
+function toInvestorGainDetailUrl(href) {
+  const abs = toAbsoluteInvestorGainUrl(href);
+  if (!abs) return null;
+  const m =
+    abs.match(/\/(?:gmp|subscription)\/([^/]+)\/(\d+)\/?/i) ||
+    abs.match(/\/ipo\/([^/]+)\/(\d+)\/?/i);
+  if (m) return `https://www.investorgain.com/ipo/${m[1]}/${m[2]}/`;
+  return abs;
+}
+
 async function scrapeIpoDetailPage(page, href) {
-  const url = href.startsWith("http") ? href : `https://www.investorgain.com${href}`;
+  const url = toInvestorGainDetailUrl(href) || toAbsoluteInvestorGainUrl(href);
+  if (!url) return { registrar: null, leadManager: null, detailUrl: null };
   try {
     console.log(`[DETAIL SCRAPE] Fetching details from: ${url}`);
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 25000 });
-    await page.waitForTimeout(1000);
-    
+    await page.waitForTimeout(1200);
+
     const info = await page.evaluate(() => {
-      const result = { registrar: "To Be Announced", leadManager: "To Be Announced" };
-      
-      const cells = Array.from(document.querySelectorAll("td, th, p, li, div, b, strong"));
-      
-      // Registrar search
-      const regCell = cells.find(el => {
-        const txt = el.innerText.trim().toLowerCase();
-        return txt.includes("registrar:") || txt === "registrar";
-      });
-      if (regCell) {
-        const text = regCell.parentElement ? regCell.parentElement.innerText : regCell.innerText;
-        const m = text.match(/Registrar:\s*(.*)/i);
-        if (m && m[1]) result.registrar = m[1].split("\n")[0].trim();
+      const result = { registrar: null, leadManager: null };
+
+      const clean = (v) => {
+        if (!v) return null;
+        let s = String(v).replace(/\s+/g, " ").trim();
+        s = s.split(/Website:|Phone:|Email:|Last Updated/i)[0].trim();
+        s = s.replace(/\s*(Lead Manager|Allotment Status|DRHP|RHP).*$/i, "").trim();
+        const low = s.toLowerCase();
+        if (!s || low === "to be announced" || low === "tba" || low === "-" || low === "n/a") return null;
+        return s;
+      };
+
+      // Prefer labeled table rows: | Registrar | Bigshare ... |
+      const rows = Array.from(document.querySelectorAll("tr"));
+      for (const row of rows) {
+        const cells = Array.from(row.querySelectorAll("th, td")).map((c) => c.innerText.trim());
+        if (cells.length < 2) continue;
+        const label = cells[0].toLowerCase().replace(/:$/, "");
+        const value = cells.slice(1).join(" ").trim();
+        if ((label === "registrar" || label.includes("registrar")) && !result.registrar) {
+          result.registrar = clean(value);
+        }
+        if ((label.includes("lead manager") || label.includes("book running")) && !result.leadManager) {
+          result.leadManager = clean(value);
+        }
       }
 
-      // Lead Manager search
-      const lmCell = cells.find(el => {
-        const txt = el.innerText.trim().toLowerCase();
-        return txt.includes("lead manager:") || txt.includes("lead managers:") || txt === "lead manager";
-      });
-      if (lmCell) {
-        const text = lmCell.parentElement ? lmCell.parentElement.innerText : lmCell.innerText;
-        const m = text.match(/Lead Manager[s]?:\s*(.*)/i);
-        if (m && m[1]) result.leadManager = m[1].split("\n")[0].trim();
+      const bodyText = document.body ? document.body.innerText : "";
+      if (!result.registrar) {
+        const m = bodyText.match(/Registrar(?:\s+to\s+the\s+[Ii]ssue)?\s*[:\n]\s*([^\n]+)/);
+        if (m) result.registrar = clean(m[1]);
       }
-      
+      if (!result.leadManager) {
+        const m = bodyText.match(/Lead Manager[s]?\s*[:\n]\s*([^\n]+)/);
+        if (m) result.leadManager = clean(m[1]);
+      }
+
       return result;
     });
-    return info;
+
+    return {
+      registrar: cleanDetailField(info.registrar),
+      leadManager: cleanDetailField(info.leadManager),
+      detailUrl: url,
+    };
   } catch (err) {
     console.warn(`[DETAIL WARN] Failed to scrape detail page:`, err.message);
-    return { registrar: "To Be Announced", leadManager: "To Be Announced" };
+    return { registrar: null, leadManager: null, detailUrl: url };
   }
+}
+
+function applyDetailInfo(ipo, detailInfo) {
+  if (!ipo || !detailInfo) return false;
+  let changed = false;
+  if (detailInfo.detailUrl && ipo.investorgainUrl !== detailInfo.detailUrl) {
+    ipo.investorgainUrl = detailInfo.detailUrl;
+    changed = true;
+  }
+  if (detailInfo.registrar && isMissingRegistrar(ipo.registrar)) {
+    ipo.registrar = detailInfo.registrar;
+    changed = true;
+    console.log(`[REGISTRAR] "${ipo.name}" -> ${detailInfo.registrar}`);
+  }
+  if (detailInfo.leadManager && isMissingRegistrar(ipo.leadManager)) {
+    ipo.leadManager = detailInfo.leadManager;
+    changed = true;
+  }
+  return changed;
+}
+
+/** True when we still need registrar before / around allotment. */
+function needsRegistrarRefresh(ipo) {
+  if (!isMissingRegistrar(ipo?.registrar)) return false;
+  const status = (ipo.status || "").toLowerCase();
+  if (["open", "closed", "upcoming"].includes(status)) return true;
+  if (!ipo.allotment) return status === "listed";
+  // Keep trying until a few days after allotment so Closed→Listed IPOs get a link
+  const today = new Date();
+  const allot = new Date(`${ipo.allotment}T00:00:00+05:30`);
+  const daysAfter = (today - allot) / (1000 * 60 * 60 * 24);
+  return daysAfter <= 10;
 }
 
 async function scrapeGmp(page) {
@@ -595,7 +680,7 @@ async function main() {
       else if (nameLower.includes("retail") || nameLower.includes("supermarket") || nameLower.includes("mart")) sector = "Retail";
       else if (nameLower.includes("finance") || nameLower.includes("capital") || nameLower.includes("mutual") || nameLower.includes("fund")) sector = "Financial Services";
 
-      let detailInfo = { registrar: "To Be Announced", leadManager: "To Be Announced" };
+      let detailInfo = { registrar: null, leadManager: null, detailUrl: null };
       if (href) {
         detailInfo = await scrapeIpoDetailPage(page, href);
       }
@@ -627,13 +712,14 @@ async function main() {
         gmpHistory: gmp !== undefined ? [{ d: new Date().toLocaleDateString("en-US", { day: "2-digit", month: "short" }), v: gmp }] : [],
         drhp: "https://www.sebi.gov.in/filings/public-issues.html",
         rhp: null,
-        leadManager: detailInfo.leadManager,
+        leadManager: detailInfo.leadManager || "To Be Announced",
         exchange,
         sub: null,
         fin: null,
         about: `${cleanedName} Limited is a newly announced ${type} IPO operating in the ${sector} sector. The company is launching its issue on ${exchange}.`,
         sector,
-        registrar: detailInfo.registrar,
+        registrar: detailInfo.registrar || "To Be Announced",
+        investorgainUrl: detailInfo.detailUrl || toInvestorGainDetailUrl(href),
         strengths: [`Growing market footprint in the ${sector} sector`, "Experienced promoter group and management team"],
         risks: ["Operating scale limits relative to larger peers", "Highly competitive market segment and raw material cost exposure"]
       };
@@ -688,21 +774,36 @@ async function main() {
           changed = true;
         }
 
+        // Persist InvestorGain detail URL and backfill missing registrar/lead manager
+        const detailUrl = toInvestorGainDetailUrl(href);
+        if (detailUrl && existingIpo.investorgainUrl !== detailUrl) {
+          existingIpo.investorgainUrl = detailUrl;
+          changed = true;
+        }
+        if (needsRegistrarRefresh(existingIpo) && (href || existingIpo.investorgainUrl)) {
+          const detailInfo = await scrapeIpoDetailPage(page, href || existingIpo.investorgainUrl);
+          if (applyDetailInfo(existingIpo, detailInfo)) changed = true;
+        }
+
         if (changed) {
-          console.log(`[UPDATE] Updated dates/status for existing IPO: "${existingIpo.name}"`);
+          console.log(`[UPDATE] Updated dates/status/registrar for existing IPO: "${existingIpo.name}"`);
           databaseUpdated = true;
         }
       }
     }
   }
 
-  // Final sweep to update status based on current date for all items in the database
+  // Final sweep: status + registrar backfill for IPOs not on today's GMP table
   for (const ipo of iposBase) {
     const calculated = calculateStatus(ipo);
     if (ipo.status !== calculated) {
       console.log(`[SWEEP] Updating status of "${ipo.name}" from "${ipo.status}" to "${calculated}"`);
       ipo.status = calculated;
       databaseUpdated = true;
+    }
+    if (needsRegistrarRefresh(ipo) && ipo.investorgainUrl) {
+      const detailInfo = await scrapeIpoDetailPage(page, ipo.investorgainUrl);
+      if (applyDetailInfo(ipo, detailInfo)) databaseUpdated = true;
     }
   }
 
