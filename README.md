@@ -190,19 +190,3 @@ If a secret was previously committed (or pasted into chat, a script, or a remote
 3. Optionally purge history with `git filter-repo` / BFG if a real secret was committed (coordinate before force-pushing).
 
 Any GitHub Personal Access Token used for pushes (including tokens pasted into terminals or chat) should be revoked after browser-based Git Credential Manager login is working.
-
----
-
-## 10. Personal data & privacy (no user accounts)
-
-Calm Capital has **no sign-up, passwords, emails, or payment collection**. Preferences live in the browser only.
-
-| Data | Collected? | Stored | Sent externally |
-|---|---|---|---|
-| Email / phone / password / payment | No | — | — |
-| Watchlist, notifications, theme, filters | Yes (device prefs) | `localStorage` | Nowhere |
-| Search / calculator inputs | In memory only | Nowhere | Nowhere |
-| AI chat messages (when assistant enabled) | Yes | Browser memory only (not persisted by us) | Anthropic via `/api/chat` |
-| Page/tab views | Yes (if GA configured) | Google Analytics | Google (IP anonymized; path + tab only) |
-
-**Delete local data:** sidebar → **Clear my local data** (wipes Calm Capital `localStorage` keys and reloads). There is no server account to delete. Broker “Open Demat” links leave Calm Capital — those sites have their own privacy policies.
