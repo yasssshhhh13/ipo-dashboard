@@ -1,9 +1,26 @@
 /**
  * Google Analytics 4 helpers for Calm Capital.
  * Loads only when VITE_GA_MEASUREMENT_ID is set (e.g. in Vercel or .env.local).
+ *
+ * Privacy: we send only navigation metadata (path + tab id/label).
+ * No emails, names, search queries, watchlists, or chat text are sent.
  */
 
 const MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
+
+/** Keep only pathname — drop query/hash that could carry user-entered text. */
+function sanitizeAnalyticsPath(path) {
+  if (!path || typeof path !== "string") return "/";
+  try {
+    if (path.startsWith("http://") || path.startsWith("https://")) {
+      const u = new URL(path);
+      return u.pathname || "/";
+    }
+  } catch { /* fall through */ }
+  const noHash = path.split("#")[0] || "/";
+  const noQuery = noHash.split("?")[0] || "/";
+  return noQuery.startsWith("/") ? noQuery : `/${noQuery}`;
+}
 
 export function initAnalytics() {
   if (!MEASUREMENT_ID || typeof document === "undefined") return;
@@ -29,22 +46,27 @@ export function initAnalytics() {
 
 export function trackPageView(path, title) {
   if (!MEASUREMENT_ID || typeof window === "undefined" || typeof window.gtag !== "function") return;
-  const pagePath = path || window.location.pathname + window.location.search;
+  const pagePath = sanitizeAnalyticsPath(path || window.location.pathname);
   window.gtag("event", "page_view", {
     page_path: pagePath,
-    page_title: title || document.title,
-    page_location: window.location.origin + pagePath,
+    page_title: typeof title === "string" ? title.slice(0, 150) : document.title,
+    // Origin only — never include query strings or user-typed search.
+    page_location: `${window.location.origin}${pagePath}`,
   });
 }
 
 export function trackEvent(name, params = {}) {
   if (!MEASUREMENT_ID || typeof window === "undefined" || typeof window.gtag !== "function") return;
-  window.gtag("event", name, params);
+  // Allowlist event params — never forward arbitrary objects that might hold PII.
+  const safe = {};
+  if (typeof params.tab_id === "string") safe.tab_id = params.tab_id.slice(0, 64);
+  if (typeof params.tab_name === "string") safe.tab_name = params.tab_name.slice(0, 64);
+  window.gtag("event", name, safe);
 }
 
 export function trackTabView(tabId, tabLabel, path, title) {
   if (!tabId) return;
-  const pagePath = path || TAB_PATH_FALLBACK[tabId] || `/tab/${tabId}`;
+  const pagePath = sanitizeAnalyticsPath(path || TAB_PATH_FALLBACK[tabId] || `/tab/${tabId}`);
   const pageTitle = title || (tabLabel ? `${tabLabel} | Calm Capital` : `Calm Capital — ${tabId}`);
   trackPageView(pagePath, pageTitle);
   trackEvent("tab_view", {

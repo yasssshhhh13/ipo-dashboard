@@ -164,3 +164,45 @@ Submit `https://YOUR_DOMAIN/sitemap.xml` in Google Search Console after deploy.
 - **Routing**: path-based SPA URLs (`/ipo/...`, `/gmp`, …) with `history.pushState`; `vercel.json` SPA fallback still applies after static SEO shells.
 - **Build**: `npm run build` runs DRHP validation, Vite, then SEO shell/sitemap generation.
 - **Secrets**: `ANTHROPIC_API_KEY` is server-only in Vercel. `VITE_GA_MEASUREMENT_ID` and `VITE_SITE_URL` are public client/build values (safe to embed; set via env so you can rotate them).
+
+---
+
+## 9. Secrets & environment variables
+
+| Variable | Where it lives | Client-visible? | Notes |
+|---|---|---|---|
+| `ANTHROPIC_API_KEY` | Vercel env only (server) | **No** | Used only by `api/chat.js`. Never prefix with `VITE_`. |
+| `VITE_GA_MEASUREMENT_ID` | Vercel + optional `.env.local` | Yes (by design) | GA4 Measurement IDs are public identifiers, not API secrets. |
+| `VITE_SITE_URL` | Vercel + optional `.env.local` | Yes (by design) | Public site origin for SEO/canonical/sitemap. |
+
+This app does **not** use Supabase, Stripe, database URLs, JWT signing secrets, or other third-party secret keys. Do not add `NEXT_PUBLIC_` / `REACT_APP_` / `VITE_` prefixes to any future secret.
+
+Copy `.env.example` → `.env.local` for local work. `.env`, `.env.local`, and `.env.*` (except `.env.example`) are gitignored.
+
+### Git history warning — rotate if anything was ever hardcoded
+
+If a secret was previously committed (or pasted into chat, a script, or a remote URL), **assume it is compromised**. Git history retains old blobs even after you delete the file from `main`.
+
+**Rotate immediately:**
+
+1. Revoke/regenerate the credential at the provider (Anthropic, GitHub PAT, etc.).
+2. Update the new value only in Vercel / your password manager — never in source.
+3. Optionally purge history with `git filter-repo` / BFG if a real secret was committed (coordinate before force-pushing).
+
+Any GitHub Personal Access Token used for pushes (including tokens pasted into terminals or chat) should be revoked after browser-based Git Credential Manager login is working.
+
+---
+
+## 10. Personal data & privacy (no user accounts)
+
+Calm Capital has **no sign-up, passwords, emails, or payment collection**. Preferences live in the browser only.
+
+| Data | Collected? | Stored | Sent externally |
+|---|---|---|---|
+| Email / phone / password / payment | No | — | — |
+| Watchlist, notifications, theme, filters | Yes (device prefs) | `localStorage` | Nowhere |
+| Search / calculator inputs | In memory only | Nowhere | Nowhere |
+| AI chat messages (when assistant enabled) | Yes | Browser memory only (not persisted by us) | Anthropic via `/api/chat` |
+| Page/tab views | Yes (if GA configured) | Google Analytics | Google (IP anonymized; path + tab only) |
+
+**Delete local data:** sidebar → **Clear my local data** (wipes Calm Capital `localStorage` keys and reloads). There is no server account to delete. Broker “Open Demat” links leave Calm Capital — those sites have their own privacy policies.

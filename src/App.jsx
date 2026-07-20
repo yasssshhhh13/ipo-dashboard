@@ -12,6 +12,7 @@ import {
   Home, CircleDollarSign, ChevronsLeft, PlusCircle, Award, CheckCircle, Inbox
 } from "lucide-react";
 import { trackTabView, trackPageView } from "./analytics.js";
+import { clearLocalUserData } from "./privacy.js";
 import {
   TAB_PATHS,
   parseLocation,
@@ -1059,7 +1060,8 @@ function AssistantPane({ embedded, tick }) {
         .then(setSuggestions)
         .finally(() => setSuggestLoading(false));
     } catch (err) {
-      console.error("Assistant error:", err);
+      // Log message only — never dump response bodies that could contain secrets.
+      console.error("Assistant error:", err?.message || "Unknown error");
       const msg = err?.message || "Unknown error";
       setMessages((m) => [...m, { role: "assistant", content: `⚠️ Couldn't reach the assistant: ${msg}\n\nIf you're the site owner: check that ANTHROPIC_API_KEY is set in Vercel → Settings → Environment Variables, that you redeployed after adding it, and that your Anthropic account has billing/credits enabled at console.anthropic.com.` }]);
     } finally {
@@ -3682,7 +3684,7 @@ export default function App() {
         trackPageView(meta.path, meta.title);
       }
     } catch (e) {
-      console.error("Failed to update IPO URL:", e);
+      console.error("Failed to update IPO URL:", e?.message || "[REDACTED]");
       setSelected(ipo);
     }
   };
@@ -3755,7 +3757,7 @@ export default function App() {
         setTick((t) => t + 1);
       })
       .catch((err) => {
-        console.error("Failed to load dynamic IPO database:", err);
+        console.error("Failed to load dynamic IPO database:", err?.message || "[REDACTED]");
         setLoadingDb(false);
       });
   }, []);
@@ -3763,6 +3765,7 @@ export default function App() {
 
   const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
   const [sidebarOpen, setSidebarOpen] = useState(() => !isMobile());
+  const [privacyEpoch, setPrivacyEpoch] = useState(0);
   const [dark, setDark] = useState(() => {
     try {
       const saved = localStorage.getItem("calmcapital-theme");
@@ -4091,6 +4094,30 @@ export default function App() {
                 );
               })}
             </nav>
+
+            {/* Privacy: wipe device-local prefs (no server account exists) */}
+            <div className="pt-3 mt-2 border-t" style={{ borderColor: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)" }}>
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 leading-snug mb-2 px-1">
+                No accounts or passwords. Prefs stay on this device. Chat (when enabled) is sent to Anthropic and not stored by us.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  if (!window.confirm("Clear watchlist, notifications, theme, and other local data on this device?")) return;
+                  clearLocalUserData();
+                  setPrivacyEpoch((n) => n + 1);
+                  setQuery("");
+                  setSelected(null);
+                  window.location.reload();
+                }}
+                className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+                style={{ color: dark ? "#94a3b8" : "#64748b" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = dark ? "rgba(255,255,255,0.04)" : "rgba(28,155,218,0.06)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+              >
+                Clear my local data
+              </button>
+            </div>
           </div>
         </aside>
 
@@ -4359,7 +4386,7 @@ export default function App() {
             {tab === "calculator" && <CalculatorTab onOpen={handleSelectIpo} />}
             {tab === "watchlist" && <WatchlistTab watchlist={watchlist} onOpen={handleSelectIpo} dark={dark} />}
             {tab === "demat" && <DematTab dark={dark} />}
-            {AI_ASSISTANT_ENABLED && tab === "ai" && <div className="glass rounded-2xl p-5"><AssistantPane embedded tick={tick} /></div>}
+            {AI_ASSISTANT_ENABLED && tab === "ai" && <div className="glass rounded-2xl p-5"><AssistantPane key={privacyEpoch} embedded tick={tick} /></div>}
             </div>
           </main>
         </div>
