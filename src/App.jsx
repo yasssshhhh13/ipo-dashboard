@@ -3745,9 +3745,6 @@ export default function App() {
                 );
               })}
             </nav>
-            <p className="mt-3 pt-3 border-t text-[9px] leading-snug" style={{ borderColor: dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)", color: dark ? "#64748b" : "#94a3b8" }}>
-              We use Google Analytics to understand traffic and improve Calm Capital.
-            </p>
           </div>
         </aside>
 
