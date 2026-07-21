@@ -2571,10 +2571,16 @@ function GMPTab({ tick }) {
 function SubscriptionDetailsList({ ipo, dark }) {
   const now = new Date();
   const status = getComputedStatus(ipo, now);
-  const ipoDay = getIpoBiddingDay(ipo, now);
   const todayIst = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
   const isAfterCutoff = todayIst.getHours() >= 17;
-  const showFinalOdds = status !== "Open" || (ipoDay != null && (ipoDay > 3 || (ipoDay === 3 && isAfterCutoff)));
+  // Odds are "final" once bidding has effectively ended: the IPO is no longer
+  // Open, or we're on/after its close date past the 5 PM IST cutoff. Derived
+  // from the actual close date (not a hardcoded "Day 3"), so it is correct for
+  // IPOs of any bidding length. Before that we still SHOW live estimated odds.
+  const todayKey = (() => { const p = istYmdParts(now); return p.y * 10000 + p.m * 100 + p.d; })();
+  const closeKey = ipo.close ? Number(String(ipo.close).slice(0, 10).replace(/-/g, "")) : null;
+  const onOrAfterClose = closeKey != null && todayKey >= closeKey;
+  const showFinalOdds = status !== "Open" || (onOrAfterClose && isAfterCutoff);
 
   if (status === "Upcoming") {
     return (
@@ -2627,12 +2633,15 @@ function SubscriptionDetailsList({ ipo, dark }) {
     // Prefer true application-wise fields; otherwise derive from share× using
     // standard category lot averages so odds always display (like Laser Power).
     let finalAppsSub = appsSub;
-    if ((finalAppsSub == null || finalAppsSub <= 0) && hasShares && sharesSub > 0 && showFinalOdds) {
+    if ((finalAppsSub == null || finalAppsSub <= 0) && hasShares && sharesSub > 0) {
       finalAppsSub = estimateAppsFromShares(label, sharesSub, isSME);
     }
 
     const hasApps = finalAppsSub != null && finalAppsSub > 0;
-    const canShowOdds = showFinalOdds && hasApps;
+    // Always surface allotment odds when we have application data (real or
+    // derived from live subscription). During bidding they render as a live
+    // estimate; after close they firm up as final — never left blank for any IPO.
+    const canShowOdds = hasApps;
 
     let oddsText = null;
     if (canShowOdds) {
@@ -2651,12 +2660,10 @@ function SubscriptionDetailsList({ ipo, dark }) {
           <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase">{label}</span>
           <div className="flex flex-wrap items-center sm:justify-end gap-2 text-right">
             <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/25 uppercase tracking-wider">
-              {showFinalOdds ? "Pending" : "Live"}
+              Pending
             </span>
             <span className="text-[11px] text-slate-400 dark:text-slate-550 font-medium italic">
-              {showFinalOdds
-                ? "Subscription data not available yet."
-                : "Final allotment odds unlock after Day 3, 5:00 PM IST."}
+              Subscription data not available yet.
             </span>
           </div>
         </div>
