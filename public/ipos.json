@@ -99,7 +99,89 @@
       "Customer concentration in a few large accounts",
       "Working-capital intensive model"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/knack-packaging-ipo/1877/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/knack-packaging-ipo/1877/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 161,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 170,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 88,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 439.5,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 439.5,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-01",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-03",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-06",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-08",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "ic-electricals",
@@ -194,7 +276,104 @@
       "Tender-based revenue is lumpy",
       "Working capital tied up in receivables"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/ic-electricals-ipo/1596/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/ic-electricals-ipo/1596/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 94,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 99,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 1200,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 48,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 47.91,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "conflict",
+        "candidates": {
+          "2026-07-03": [
+            "investorgain"
+          ],
+          "2001-03-01": [
+            "chittorgarh"
+          ]
+        },
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-07",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-08",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "verified",
+        "value": "2026-07-10",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "sbi-funds-management",
@@ -290,7 +469,89 @@
       "AMC earnings sensitive to market cycles",
       "Fee-compression pressure industry-wide"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/sbi-funds-management-ipo/2210/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/sbi-funds-management-ipo/2210/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 545,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 574,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 26,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 9813,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 9813,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 1,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-14",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-16",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-17",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-21",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "kusumgar",
@@ -392,7 +653,89 @@
       "Niche end markets limit volume scale",
       "Import dependency for certain chemicals"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/kusumgar-ipo/1595/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/kusumgar-ipo/1595/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 398,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 419,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 35,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 650,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 650,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-08",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-10",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-13",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-15",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "devson-catalyst",
@@ -477,7 +820,106 @@
     ],
     "listedAt": 196,
     "currentPrice": 196,
-    "investorgainUrl": "https://www.investorgain.com/ipo/devson-catalyst-ipo/2204/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/devson-catalyst-ipo/2204/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 112,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 118,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 1200,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 42,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 42.34,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "conflict",
+        "candidates": {
+          "2026-07-09": [
+            "investorgain"
+          ],
+          "2001-09-01": [
+            "chittorgarh"
+          ]
+        },
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-13",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-14",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "verified",
+        "value": "2026-07-16",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "happy-steel",
@@ -530,7 +972,75 @@
     ],
     "listedAt": 68,
     "currentPrice": 68,
-    "investorgainUrl": "https://www.investorgain.com/ipo/happy-steels-ipo/2127/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/happy-steels-ipo/2127/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 66,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 66,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 2000,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 15.8,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 15.8,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-09",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-13",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-14",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-16",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "kratikal-tech",
@@ -629,7 +1139,104 @@
       "Small revenue base vs valuation",
       "Talent-retention risk in tech"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/kratikal-tech-ipo/2096/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/kratikal-tech-ipo/2096/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 128,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 135,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 1000,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 40,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 39.69,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "conflict",
+        "candidates": {
+          "2026-06-30": [
+            "investorgain"
+          ],
+          "2001-06-30": [
+            "chittorgarh"
+          ]
+        },
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-02",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-03",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "verified",
+        "value": "2026-07-07",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "teja-engineering",
@@ -714,7 +1321,104 @@
       "Client concentration risk",
       "Margins tied to contract renewals"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/teja-engineering-industries-ipo/1715/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/teja-engineering-industries-ipo/1715/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 220,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 220,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 600,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 37,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 37.36,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "conflict",
+        "candidates": {
+          "2026-06-30": [
+            "investorgain"
+          ],
+          "2001-06-30": [
+            "chittorgarh"
+          ]
+        },
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-02",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-03",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "verified",
+        "value": "2026-07-07",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "vinit-mobile",
@@ -799,7 +1503,104 @@
       "Thin retail margins",
       "High competition from e-commerce"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/vinit-mobile-ipo/2085/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/vinit-mobile-ipo/2085/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 150,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 158,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 800,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 34,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 34.13,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "conflict",
+        "candidates": {
+          "2026-06-30": [
+            "investorgain"
+          ],
+          "2001-06-30": [
+            "chittorgarh"
+          ]
+        },
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-02",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-03",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "verified",
+        "value": "2026-07-07",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "sampark-india-logistics",
@@ -880,7 +1681,104 @@
       "Fuel-cost sensitivity",
       "Fragmented, competitive sector"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/sampark-india-logistics-ipo/1971/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/sampark-india-logistics-ipo/1971/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 80,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 84,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 1600,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 27,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 27.22,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "conflict",
+        "candidates": {
+          "2026-06-30": [
+            "investorgain"
+          ],
+          "2001-06-30": [
+            "chittorgarh"
+          ]
+        },
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-02",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-03",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "verified",
+        "value": "2026-07-07",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "atharva-polyplast",
@@ -969,7 +1867,75 @@
       "Polymer input-cost volatility",
       "Post-listing GMP has been softening"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/atharva-polyplast-ipo/1922/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/atharva-polyplast-ipo/1922/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 55,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 60,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 2000,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 27,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 27,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-06-30",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-02",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-03",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-07",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "seemax-resources",
@@ -1050,7 +2016,104 @@
       "Capital-intensive fleet ownership",
       "No GMP premium at listing"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/seemax-resources-ipo/1968/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/seemax-resources-ipo/1968/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 134,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 141,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 1000,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 20,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 19.74,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "conflict",
+        "candidates": {
+          "2026-06-30": [
+            "investorgain"
+          ],
+          "2001-06-30": [
+            "chittorgarh"
+          ]
+        },
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-02",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-03",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "verified",
+        "value": "2026-07-07",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "aastha-spintex",
@@ -1169,7 +2232,89 @@
         }
       }
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/aastha-spintex-ipo/1593/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/aastha-spintex-ipo/1593/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 125,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 136,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 110,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 170,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 130,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 40,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-06-29",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-01",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-02",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-06",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "adon-agro",
@@ -1250,7 +2395,104 @@
       "Undersubscribed issue (0.9x)",
       "Low-margin commodity trading core"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/adon-agro-commodities-ipo/1798/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/adon-agro-commodities-ipo/1798/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 66,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 70,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 2000,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 44,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 44.03,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "conflict",
+        "candidates": {
+          "2026-06-29": [
+            "investorgain"
+          ],
+          "2001-06-29": [
+            "chittorgarh"
+          ]
+        },
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-01",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-02",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "verified",
+        "value": "2026-07-06",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "csm-technologies",
@@ -1348,7 +2590,89 @@
       "Government-tender dependent revenue",
       "Long sales cycles"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/csm-technologies-ipo/1911/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/csm-technologies-ipo/1911/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 107,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 113,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 132,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 145.78,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 100,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 45.78,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-06-24",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-06-29",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-06-30",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-02",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "caliber-mining",
@@ -1391,12 +2715,12 @@
     "leadManager": "DAM Capital Advisors Ltd",
     "exchange": "BSE, NSE",
     "sub": {
-      "overall": 42.32,
-      "qib": 2.19,
-      "snii": 123.21,
-      "bnii": 143.37,
-      "hni": 136.65,
-      "retail": 24.83
+      "overall": 70.82,
+      "qib": 30.1,
+      "snii": 176.79,
+      "bnii": 230.72,
+      "hni": 212.74,
+      "retail": 33.26
     },
     "fin": {
       "revenue": 1677.66,
@@ -1448,7 +2772,89 @@
           }
         }
       }
-    ]
+    ],
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 402,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 424,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 35,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 450,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 400,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 50,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-17",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-21",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-22",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-24",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "cube-highways",
@@ -1458,8 +2864,8 @@
     "status": "Upcoming",
     "open": "2026-07-22",
     "close": "2026-07-24",
-    "listing": "2026-07-29",
-    "allotment": "2026-07-27",
+    "listing": "2026-08-03",
+    "allotment": "2026-07-29",
     "refund": "2026-07-28",
     "demat": "2026-07-28",
     "priceMin": 151,
@@ -1510,7 +2916,89 @@
       "Interest rate fluctuations impact debt servicing",
       "Regulatory road construction risks"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/cube-highways-trust-invit/2346/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/cube-highways-trust-invit/2346/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 151,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 152,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 95,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 5000,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 5000,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-22",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-24",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-29",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-08-03",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "sotefin-bharat",
@@ -1579,7 +3067,99 @@
       "High concentration of metropolitan projects",
       "Raw steel price sensitivity"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/sotefin-bharat-ipo/2088/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/sotefin-bharat-ipo/2088/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 178,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 187,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 600,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 90,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 89.76,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-16",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-20",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-21",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-23",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "cult-fit",
@@ -1658,7 +3238,27 @@
           }
         }
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 2,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "ratnadeep-retail",
@@ -1737,7 +3337,27 @@
           }
         }
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "swara-baby-products",
@@ -1816,7 +3436,27 @@
           }
         }
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "millworks-technologies",
@@ -1903,7 +3543,100 @@
       "Working capital intensive model",
       "Raw material price volatility"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/millworks-technologies-ipo/2129/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/millworks-technologies-ipo/2129/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 315,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 331,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 400,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 160,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 160.34,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-14",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-16",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-17",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "verified",
+        "value": "2026-07-21",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "alpine-texworld",
@@ -1977,7 +3710,89 @@
       "Highly competitive commodity textile market",
       "Raw material (yarn) price sensitivity"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/alpine-texworld-ipo/1940/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/alpine-texworld-ipo/1940/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 100,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 105,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 142,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 126.25,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 126.25,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-14",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-16",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-17",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-21",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "metalic-technoforge",
@@ -2009,12 +3824,12 @@
     "leadManager": "Smart Horizon Capital Advisors Pvt. Ltd.",
     "exchange": "NSE Emerge",
     "sub": {
-      "overall": 0.13,
+      "overall": 0.26,
       "qib": 0,
-      "snii": 0.2,
-      "bnii": 0.02,
-      "hni": 0.08,
-      "retail": 0.23
+      "snii": 0.27,
+      "bnii": 0.08,
+      "hni": 0.14,
+      "retail": 0.45
     },
     "fin": {
       "revenue": 97.98,
@@ -2049,7 +3864,99 @@
       "Raw steel price volatility",
       "Client concentration in automotive OEM sector"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/metalic-technoforge-ipo/2255/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/metalic-technoforge-ipo/2255/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 72,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 77,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 1600,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 50,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 49.96,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-21",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-23",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-24",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-28",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "shree-balaji-mala-textiles",
@@ -2114,7 +4021,99 @@
       "Highly competitive wholesale textile market",
       "Working capital intensive model"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/shree-balaji-mala-ipo/1967/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/shree-balaji-mala-ipo/1967/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 66,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 70,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 2000,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 19,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 18.9,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-22",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-24",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-27",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-29",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "xtranet-technologies",
@@ -2179,7 +4178,89 @@
       "Government-client concentration risk",
       "Competition from large global IT vendors"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/xtranet-technologies-ipo/1951/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/xtranet-technologies-ipo/1951/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 120,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 127,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 110,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 166.8,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 166.8,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-23",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-27",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-28",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-30",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "gulf-lloyds",
@@ -2216,14 +4297,18 @@
     "leadManager": "Interactive Financial Services Ltd.",
     "exchange": "BSE SME",
     "sub": {
-      "overall": 6,
+      "overall": 7.15,
       "qib": 0,
       "snii": 0,
       "bnii": 0,
-      "hni": 1.44,
-      "retail": 10.57
+      "hni": 1.72,
+      "retail": 12.58
     },
-    "fin": null,
+    "fin": {
+      "revenue": 35.97,
+      "pat": 4.3,
+      "netWorth": 13.48
+    },
     "about": "Gulf Lloyds Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
     "registrar": "Kfin Technologies Ltd.",
@@ -2235,7 +4320,103 @@
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/gulf-lloyds-ipo/2214/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/gulf-lloyds-ipo/2214/",
+    "finMeta": {
+      "source": "chittorgarh",
+      "capturedAt": "2026-07-21T08:23:56.128Z"
+    },
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 100,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 100,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 1200,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 18,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 18.19,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-20",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-22",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-23",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-27",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "laser-power-infra",
@@ -2292,7 +4473,89 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
-    ]
+    ],
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 214,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 214,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 70,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 742,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 742,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-09",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-13",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-14",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-16",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "crazy-snacks",
@@ -2331,7 +4594,11 @@
       "hni": 1.08,
       "retail": 1.26
     },
-    "fin": null,
+    "fin": {
+      "revenue": 89.17,
+      "pat": 3.54,
+      "netWorth": 26.43
+    },
     "about": "Crazy Snacks Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
     "registrar": "To Be Announced",
@@ -2343,7 +4610,106 @@
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/crazy-snacks-ipo/1664/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/crazy-snacks-ipo/1664/",
+    "finMeta": {
+      "source": "chittorgarh",
+      "capturedAt": "2026-07-21T08:23:56.128Z"
+    },
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 42,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 42,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 3000,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 31,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 31.47,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-06-25",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-06-30",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-01",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "verified",
+        "value": "2026-07-03",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "riyaasat-lifestyle",
@@ -2375,7 +4741,11 @@
     "leadManager": "To Be Announced",
     "exchange": "BSE SME",
     "sub": null,
-    "fin": null,
+    "fin": {
+      "revenue": 20.94,
+      "pat": 1.32,
+      "netWorth": 2.15
+    },
     "about": "Riyaasat Lifestyle Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
     "registrar": "To Be Announced",
@@ -2386,7 +4756,95 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
-    ]
+    ],
+    "finMeta": {
+      "source": "chittorgarh",
+      "capturedAt": "2026-07-21T08:23:56.128Z"
+    },
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 106,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 106,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 1200,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 30.2,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 30.2,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-06-18",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-06-25",
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-06-29",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-01",
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "jivial-industries",
@@ -2418,7 +4876,11 @@
     "leadManager": "To Be Announced",
     "exchange": "BSE SME",
     "sub": null,
-    "fin": null,
+    "fin": {
+      "revenue": 8.4,
+      "pat": 1.17,
+      "netWorth": 1.53
+    },
     "about": "Jivial Industries Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
     "registrar": "To Be Announced",
@@ -2429,7 +4891,97 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
-    ]
+    ],
+    "finMeta": {
+      "source": "chittorgarh",
+      "capturedAt": "2026-07-21T08:23:56.128Z"
+    },
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 196,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 196,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 600,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 31.99,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 31.99,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-06-23",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-06-25",
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-06-29",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-01",
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "advit-jewels",
@@ -2487,7 +5039,75 @@
     "risks": [
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
-    ]
+    ],
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 138,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 138,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 100,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 165.16,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 165.16,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-06-23",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-06-25",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-06-29",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-01",
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "waterways-leisure-tourism",
@@ -2543,7 +5163,89 @@
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/cordelia-cruises-ipo/1801/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/cordelia-cruises-ipo/1801/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 808,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 808,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 18,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 585,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 585,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-06-23",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-06-25",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-06-29",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-01",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "gni-infrastructure",
@@ -2591,7 +5293,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "behari-lal-engineering",
@@ -2639,7 +5367,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "tmc-transformers-india",
@@ -2687,7 +5441,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "innoterra",
@@ -2735,7 +5515,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "pragyawan-technologies",
@@ -2783,7 +5589,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "stalwart-people-services-india",
@@ -2831,7 +5663,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "functional-innovative-foods",
@@ -2879,7 +5737,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "jesons-industries",
@@ -2927,7 +5811,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "eswari-global-metal-industries",
@@ -2975,7 +5885,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "renfra-energy-india",
@@ -3023,7 +5959,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "social-worth-technologies",
@@ -3071,7 +6033,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "mann-fleet-partners",
@@ -3119,7 +6107,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "ujin-pharma",
@@ -3167,7 +6181,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "sky-alloys-and-power",
@@ -3215,7 +6255,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "jio-platforms",
@@ -3263,7 +6329,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "national-stock-exchange-of-india",
@@ -3311,7 +6403,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "varmora-granito",
@@ -3359,7 +6477,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "paras-healthcare",
@@ -3407,7 +6551,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "pioneer-fil-med",
@@ -3455,7 +6625,33 @@
         "action": "created",
         "details": "Discovered from SEBI DRHP filing. Verified on: IPO Central"
       }
-    ]
+    ],
+    "verification": {
+      "priceMax": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "pending",
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "lohia",
@@ -3504,7 +6700,89 @@
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/lohia-corp-ipo/1862/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/lohia-corp-ipo/1862/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 404,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 425,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 35,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 1101.28,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 1101.28,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-23",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-27",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-28",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-30",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "indo-mim",
@@ -3553,7 +6831,89 @@
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/indo-mim-ipo/1594/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/indo-mim-ipo/1594/",
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 461,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "unverified",
+        "value": 485,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "unverified",
+        "value": 30,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "unverified",
+        "value": 3811.21,
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 499.1,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 3312.11,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 1,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-23",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "unverified",
+        "value": "2026-07-27",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-28",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-30",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   },
   {
     "id": "silverstorm-parks-resorts",
@@ -3585,7 +6945,11 @@
     "leadManager": "Vivro Financial Services Pvt.Ltd.",
     "exchange": "BSE SME",
     "sub": null,
-    "fin": null,
+    "fin": {
+      "revenue": 19.11,
+      "pat": 0.97,
+      "netWorth": 23.26
+    },
     "about": "Silverstorm Parks & Resorts Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
     "sector": "General",
     "registrar": "MUFG Intime India Pvt.Ltd.",
@@ -3597,6 +6961,102 @@
       "Operating scale limits relative to larger peers",
       "Highly competitive market segment and raw material cost exposure"
     ],
-    "investorgainUrl": "https://www.investorgain.com/ipo/silverstorm-parks-resorts-ipo/2078/"
+    "investorgainUrl": "https://www.investorgain.com/ipo/silverstorm-parks-resorts-ipo/2078/",
+    "finMeta": {
+      "source": "chittorgarh",
+      "capturedAt": "2026-07-21T08:23:56.128Z"
+    },
+    "verification": {
+      "priceMin": {
+        "status": "unverified",
+        "value": 133,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "priceMax": {
+        "status": "verified",
+        "value": 133,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "lot": {
+        "status": "verified",
+        "value": 1000,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "issueSize": {
+        "status": "verified",
+        "value": 82,
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "freshIssue": {
+        "status": "unverified",
+        "value": 82.43,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "ofs": {
+        "status": "unverified",
+        "value": 0,
+        "sources": [],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "faceValue": {
+        "status": "unverified",
+        "value": 10,
+        "sources": [
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "open": {
+        "status": "unverified",
+        "value": "2026-07-24",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "close": {
+        "status": "verified",
+        "value": "2026-07-28",
+        "sources": [
+          "investorgain",
+          "chittorgarh"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "allotment": {
+        "status": "unverified",
+        "value": "2026-07-29",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      },
+      "listing": {
+        "status": "unverified",
+        "value": "2026-07-31",
+        "sources": [
+          "investorgain"
+        ],
+        "updatedAt": "2026-07-21T08:23:56.128Z"
+      }
+    }
   }
 ]
