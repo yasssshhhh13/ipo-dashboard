@@ -337,7 +337,16 @@ async function scrapeIpoDetailPage(page, href) {
     await page.waitForTimeout(1200);
 
     const info = await page.evaluate(() => {
-      const result = { registrar: null, leadManager: null };
+      const result = {
+        registrar: null,
+        leadManager: null,
+        priceMin: null,
+        priceMax: null,
+        lot: null,
+        issueSize: null,
+        freshIssue: null,
+        ofs: null,
+      };
 
       const clean = (v) => {
         if (!v) return null;
@@ -374,6 +383,55 @@ async function scrapeIpoDetailPage(page, href) {
         if (m) result.leadManager = clean(m[1]);
       }
 
+      // ---- Core issue details: price band, lot size, issue size ----
+      // InvestorGain detail pages expose these as clearly-labeled table rows,
+      // e.g. | Price Band | ₹545 to ₹574 |, | Lot Size | 26 Shares |,
+      // | Total Issue Size | ₹9,813.00 Cr |. Parse them so upcoming IPOs get
+      // their numbers filled automatically once announced — no manual entry.
+      const firstNum = (s) => {
+        if (s == null) return null;
+        const m = String(s).replace(/,/g, "").match(/-?\d+(?:\.\d+)?/);
+        return m ? parseFloat(m[0]) : null;
+      };
+      const toCrore = (s) => {
+        if (s == null) return null;
+        const str = String(s).replace(/,/g, "");
+        const m = str.match(/([\d.]+)\s*(?:cr|crore|crores)\b/i);
+        if (m) return parseFloat(m[1]);
+        return firstNum(str);
+      };
+
+      for (const row of rows) {
+        const cells = Array.from(row.querySelectorAll("th, td")).map((c) => c.innerText.trim());
+        if (cells.length < 2) continue;
+        const label = cells[0].toLowerCase().replace(/:$/, "");
+        const value = cells.slice(1).join(" ").trim();
+        if (!value) continue;
+
+        if (result.priceMax == null && (label.includes("price band") || label === "price" || label.includes("ipo price") || label.includes("issue price"))) {
+          const nums = value.replace(/,/g, "").match(/\d+(?:\.\d+)?/g);
+          if (nums && nums.length >= 2) {
+            result.priceMin = parseFloat(nums[0]);
+            result.priceMax = parseFloat(nums[1]);
+          } else if (nums && nums.length === 1) {
+            result.priceMin = parseFloat(nums[0]);
+            result.priceMax = parseFloat(nums[0]);
+          }
+        }
+        if (result.lot == null && (label.includes("lot size") || label.includes("market lot") || label === "lot")) {
+          result.lot = firstNum(value);
+        }
+        if (result.issueSize == null && label.includes("issue size")) {
+          result.issueSize = toCrore(value);
+        }
+        if (result.freshIssue == null && label.includes("fresh issue")) {
+          result.freshIssue = toCrore(value);
+        }
+        if (result.ofs == null && (label.includes("offer for sale") || label === "ofs")) {
+          result.ofs = toCrore(value);
+        }
+      }
+
       return result;
     });
 
@@ -381,10 +439,26 @@ async function scrapeIpoDetailPage(page, href) {
       registrar: cleanDetailField(info.registrar),
       leadManager: cleanDetailField(info.leadManager),
       detailUrl: url,
+      priceMin: info.priceMin,
+      priceMax: info.priceMax,
+      lot: info.lot,
+      issueSize: info.issueSize,
+      freshIssue: info.freshIssue,
+      ofs: info.ofs,
     };
   } catch (err) {
     console.warn(`[DETAIL WARN] Failed to scrape detail page:`, err.message);
-    return { registrar: null, leadManager: null, detailUrl: url };
+    return {
+      registrar: null,
+      leadManager: null,
+      detailUrl: url,
+      priceMin: null,
+      priceMax: null,
+      lot: null,
+      issueSize: null,
+      freshIssue: null,
+      ofs: null,
+    };
   }
 }
 
@@ -404,7 +478,50 @@ function applyDetailInfo(ipo, detailInfo) {
     ipo.leadManager = detailInfo.leadManager;
     changed = true;
   }
+
+  // Backfill core issue details (price band, lot, issue size) discovered from
+  // the detail page. Only fill when currently missing so we never overwrite
+  // values that were already scraped or manually verified.
+  const validNum = (v) => typeof v === "number" && Number.isFinite(v) && v > 0;
+  if (validNum(detailInfo.priceMax) && ipo.priceMax == null) {
+    ipo.priceMax = detailInfo.priceMax;
+    if (ipo.priceMin == null) {
+      ipo.priceMin = validNum(detailInfo.priceMin) ? detailInfo.priceMin : detailInfo.priceMax;
+    }
+    changed = true;
+    console.log(`[PRICE] "${ipo.name}" -> band ₹${ipo.priceMin}-₹${ipo.priceMax}`);
+  }
+  if (validNum(detailInfo.lot) && ipo.lot == null) {
+    ipo.lot = detailInfo.lot;
+    changed = true;
+    console.log(`[LOT] "${ipo.name}" -> ${ipo.lot} shares`);
+  }
+  if (validNum(detailInfo.issueSize) && ipo.issueSize == null) {
+    ipo.issueSize = detailInfo.issueSize;
+    changed = true;
+    console.log(`[ISSUE SIZE] "${ipo.name}" -> ₹${ipo.issueSize} Cr`);
+  }
+  if (validNum(detailInfo.freshIssue) && ipo.freshIssue == null) {
+    ipo.freshIssue = detailInfo.freshIssue;
+    changed = true;
+  }
+  if (validNum(detailInfo.ofs) && ipo.ofs == null) {
+    ipo.ofs = detailInfo.ofs;
+    changed = true;
+  }
+  // Now that a price may exist, compute an estimated listing if we have a GMP.
+  if (ipo.estListing == null && validNum(ipo.priceMax) && typeof ipo.gmp === "number") {
+    ipo.estListing = ipo.priceMax + ipo.gmp;
+    changed = true;
+  }
   return changed;
+}
+
+/** True when a not-yet-listed IPO is still missing core issue details. */
+function needsCoreDetails(ipo) {
+  if (!ipo) return false;
+  if ((ipo.status || "").toLowerCase() === "listed") return false;
+  return ipo.priceMax == null || ipo.lot == null || ipo.issueSize == null;
 }
 
 /** True when we still need registrar before / around allotment. */
@@ -779,6 +896,20 @@ async function main() {
         if (allotment && existingIpo.allotment !== allotment) { existingIpo.allotment = allotment; changed = true; }
         if (listing && existingIpo.listing !== listing) { existingIpo.listing = listing; changed = true; }
 
+        // Backfill the price band from the GMP row (col 4 is the reliable price
+        // column, same one the live overlay uses) when it wasn't known at
+        // discovery time. Lot/issue size come from the labeled detail page below.
+        const rowPrice = toNumber(cells[4]);
+        if (rowPrice && rowPrice > 0 && existingIpo.priceMax == null) {
+          existingIpo.priceMax = rowPrice;
+          if (existingIpo.priceMin == null) existingIpo.priceMin = rowPrice;
+          if (existingIpo.estListing == null && typeof existingIpo.gmp === "number") {
+            existingIpo.estListing = rowPrice + existingIpo.gmp;
+          }
+          changed = true;
+          console.log(`[PRICE] "${existingIpo.name}" -> ₹${rowPrice} (from GMP table)`);
+        }
+
         // Auto-capture listing price from the name cell (e.g. "L@574 (17%)").
         const listingInfo = parseListingInfo(rawName);
         if (listingInfo && existingIpo.listedAt == null) {
@@ -807,7 +938,7 @@ async function main() {
           existingIpo.investorgainUrl = detailUrl;
           changed = true;
         }
-        if (needsRegistrarRefresh(existingIpo) && (href || existingIpo.investorgainUrl)) {
+        if ((needsRegistrarRefresh(existingIpo) || needsCoreDetails(existingIpo)) && (href || existingIpo.investorgainUrl)) {
           const detailInfo = await scrapeIpoDetailPage(page, href || existingIpo.investorgainUrl);
           if (applyDetailInfo(existingIpo, detailInfo)) changed = true;
         }
@@ -828,7 +959,7 @@ async function main() {
       ipo.status = calculated;
       databaseUpdated = true;
     }
-    if (needsRegistrarRefresh(ipo) && ipo.investorgainUrl) {
+    if ((needsRegistrarRefresh(ipo) || needsCoreDetails(ipo)) && ipo.investorgainUrl) {
       const detailInfo = await scrapeIpoDetailPage(page, ipo.investorgainUrl);
       if (applyDetailInfo(ipo, detailInfo)) databaseUpdated = true;
     }
