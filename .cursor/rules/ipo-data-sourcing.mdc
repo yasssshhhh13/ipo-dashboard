@@ -1,0 +1,37 @@
+---
+description: How to source and trust IPO data (never rely on a single provider)
+alwaysApply: true
+---
+
+# IPO data sourcing policy
+
+This app is an indirect competitor to InvestorGain, so we must NOT depend on any
+single provider for facts. If our only source is wrong, we are wrong.
+
+## Rules
+
+- Never treat one website as the source of truth for hard facts. Hard facts are:
+  price band (`priceMin`/`priceMax`), `lot`, `issueSize`, `freshIssue`, `ofs`,
+  `faceValue`, and the timeline dates (`open`, `close`, `allotment`, `listing`).
+- A hard fact may only be published (shown as a real value) once at least TWO
+  independent sources agree. Otherwise it stays "pending verification". This gate
+  lives in [scripts/reconcile.mjs](scripts/reconcile.mjs).
+- Cross-verify against independent + official sources:
+  Chittorgarh, NSE, BSE, and the SEBI RHP/DRHP. Adapters live in
+  [scripts/sources/](scripts/sources/). Add new sources as adapters that export
+  `fetchAll(...)` returning `{ name, fields, meta:{source,url,capturedAt} }`.
+- GMP is the ONE exception: it may stay single-source (InvestorGain) because it
+  is a grey-market estimate with no authoritative feed. Subscription figures and
+  listing price are likewise operational, not gated.
+- Every gated field must carry provenance in `ipo.verification[field]`
+  (`verified` / `conflict` / `unverified` / `pending`) so the UI can show a trust
+  badge and users can audit where a number came from.
+- When adding a source, prefer official exchanges/regulators over aggregators.
+  Source priority for tie-breaks: NSE/BSE > Chittorgarh > InvestorGain.
+- Never silently overwrite a value from a single source. Only a >=2-source
+  consensus may change an existing value.
+
+## When researching a specific IPO by hand
+
+Do your own research too: check at least two of Chittorgarh / NSE / BSE / the RHP
+before stating a number, and note the sources. Do not restate InvestorGain alone.

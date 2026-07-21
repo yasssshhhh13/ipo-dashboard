@@ -9,7 +9,8 @@ import {
   Sun, Moon, Menu, Bookmark, BookmarkCheck, Calculator as CalcIcon,
   LayoutGrid, Activity, PieChart as PieIcon, BarChart3, Landmark,
   ExternalLink, Clock, ArrowUpRight, ArrowDownRight,
-  Home, CircleDollarSign, ChevronsLeft, PlusCircle, Award, CheckCircle, Inbox
+  Home, CircleDollarSign, ChevronsLeft, PlusCircle, Award, CheckCircle, Inbox,
+  ShieldCheck, AlertTriangle, HelpCircle
 } from "lucide-react";
 import { trackTabView, trackPageView } from "./analytics.js";
 import {
@@ -50,6 +51,58 @@ const gainPct = (i) => { const p = price(i); return p ? (i.gmp / p) * 100 : 0; }
 const listingGainPct = (i) => (i.listedAt && i.priceMax) ? ((i.listedAt - i.priceMax) / i.priceMax) * 100 : null;
 const currentReturnPct = (i) => (i.currentPrice && i.priceMax) ? ((i.currentPrice - i.priceMax) / i.priceMax) * 100 : null;
 const listingProfitLossPerLot = (i) => (i.listedAt && i.priceMax && i.lot) ? (i.listedAt - i.priceMax) * i.lot : null;
+
+/* =====================================================================
+   MULTI-SOURCE VERIFICATION
+   Hard facts (price band, lot, issue size, dates, ...) are cross-checked
+   across independent sources by the scraper. Each field carries a status in
+   `ipo.verification[field]`: verified (>=2 sources agree), conflict (sources
+   disagree), unverified (single source / pre-existing), or pending (withheld
+   until confirmed). The UI reflects that trust level.
+===================================================================== */
+const SOURCE_LABEL = { nse: "NSE", bse: "BSE", chittorgarh: "Chittorgarh", investorgain: "InvestorGain", existing: "prior data" };
+const labelSources = (arr) => (arr || []).map((s) => SOURCE_LABEL[s] || s).join(", ");
+const fieldVerification = (ipo, field) => (ipo && ipo.verification && ipo.verification[field]) || null;
+const isPending = (ipo, field) => {
+  const v = fieldVerification(ipo, field);
+  return !!v && v.status === "pending";
+};
+
+// Renders the display value for a gated field, substituting a "Pending
+// verification" note while the value is still withheld.
+const gatedText = (ipo, field, formatted) => (isPending(ipo, field) ? "Pending verification" : formatted);
+
+// Small inline trust marker shown next to a gated value.
+function VerifyMark({ ipo, field }) {
+  const v = fieldVerification(ipo, field);
+  if (!v) return null;
+  if (v.status === "verified") {
+    return (
+      <span title={`Verified: ${labelSources(v.sources)} agree`} className="inline-flex items-center align-middle ml-1 text-emerald-600 dark:text-emerald-400">
+        <ShieldCheck size={12} />
+      </span>
+    );
+  }
+  if (v.status === "conflict") {
+    const parts = Object.entries(v.candidates || {})
+      .map(([val, srcs]) => `${val} (${labelSources(srcs)})`)
+      .join("  vs  ");
+    return (
+      <span title={`Sources disagree - ${parts}`} className="inline-flex items-center align-middle ml-1 text-amber-500">
+        <AlertTriangle size={12} />
+      </span>
+    );
+  }
+  if (v.status === "unverified") {
+    const srcs = labelSources(v.sources);
+    return (
+      <span title={`Unverified${srcs ? ` - only ${srcs} so far` : ""}. Awaiting a second source.`} className="inline-flex items-center align-middle ml-1 text-slate-400 dark:text-slate-500">
+        <HelpCircle size={12} />
+      </span>
+    );
+  }
+  return null;
+}
 
 // A few SME IPOs don't have a confirmed direct SEBI/exchange document URL yet —
 // for those we link to the exchange's official offer-documents portal instead
@@ -1615,16 +1668,16 @@ function IPOCard({ ipo, onOpen, watchlist, dark }) {
         <div className="flex items-end justify-between gap-2">
           <div className="grid grid-cols-3 gap-4 text-xs flex-1">
             <div>
-              <p className="text-slate-500 dark:text-slate-400 mb-0.5">Price</p>
-              <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{ipo.priceMin ? `₹${ipo.priceMin}-${ipo.priceMax}` : "-"}</p>
+              <p className="text-slate-500 dark:text-slate-400 mb-0.5 flex items-center">Price<VerifyMark ipo={ipo} field="priceMax" /></p>
+              <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{isPending(ipo, "priceMax") ? <span className="text-[11px] italic font-medium text-slate-400">Pending</span> : (ipo.priceMin ? `₹${ipo.priceMin}-${ipo.priceMax}` : "-")}</p>
             </div>
             <div>
-              <p className="text-slate-500 dark:text-slate-400 mb-0.5">Lot</p>
-              <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{ipo.lot || "-"}</p>
+              <p className="text-slate-500 dark:text-slate-400 mb-0.5 flex items-center">Lot<VerifyMark ipo={ipo} field="lot" /></p>
+              <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{isPending(ipo, "lot") ? <span className="text-[11px] italic font-medium text-slate-400">Pending</span> : (ipo.lot || "-")}</p>
             </div>
             <div>
-              <p className="text-slate-500 dark:text-slate-400 mb-0.5">Issue size</p>
-              <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{ipo.issueSize ? `₹${Number(ipo.issueSize).toLocaleString("en-IN")} Cr` : "-"}</p>
+              <p className="text-slate-500 dark:text-slate-400 mb-0.5 flex items-center">Issue size<VerifyMark ipo={ipo} field="issueSize" /></p>
+              <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{isPending(ipo, "issueSize") ? <span className="text-[11px] italic font-medium text-slate-400">Pending</span> : (ipo.issueSize ? `₹${Number(ipo.issueSize).toLocaleString("en-IN")} Cr` : "-")}</p>
             </div>
           </div>
 
@@ -1838,19 +1891,19 @@ function ListedIPOCard({ ipo, onOpen, watchlist }) {
         {/* Row 2: Price | Lot | Issue size */}
         <div className="grid grid-cols-3 gap-3 text-xs mb-4">
           <div>
-            <p className="text-slate-500 dark:text-slate-400 mb-0.5">Price</p>
+            <p className="text-slate-500 dark:text-slate-400 mb-0.5 flex items-center">Price<VerifyMark ipo={ipo} field="priceMax" /></p>
             <p className="font-mono font-bold text-slate-800 dark:text-slate-100">
-              {ipo.priceMin ? `₹${ipo.priceMin}-${ipo.priceMax}` : "—"}
+              {isPending(ipo, "priceMax") ? <span className="text-[11px] italic font-medium text-slate-400">Pending</span> : (ipo.priceMin ? `₹${ipo.priceMin}-${ipo.priceMax}` : "—")}
             </p>
           </div>
           <div>
-            <p className="text-slate-500 dark:text-slate-400 mb-0.5">Lot</p>
-            <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{ipo.lot || "—"}</p>
+            <p className="text-slate-500 dark:text-slate-400 mb-0.5 flex items-center">Lot<VerifyMark ipo={ipo} field="lot" /></p>
+            <p className="font-mono font-bold text-slate-800 dark:text-slate-100">{isPending(ipo, "lot") ? <span className="text-[11px] italic font-medium text-slate-400">Pending</span> : (ipo.lot || "—")}</p>
           </div>
           <div>
-            <p className="text-slate-500 dark:text-slate-400 mb-0.5">Issue size</p>
+            <p className="text-slate-500 dark:text-slate-400 mb-0.5 flex items-center">Issue size<VerifyMark ipo={ipo} field="issueSize" /></p>
             <p className="font-mono font-bold text-slate-800 dark:text-slate-100">
-              {ipo.issueSize ? `₹${Number(ipo.issueSize).toLocaleString("en-IN")} Cr` : "—"}
+              {isPending(ipo, "issueSize") ? <span className="text-[11px] italic font-medium text-slate-400">Pending</span> : (ipo.issueSize ? `₹${Number(ipo.issueSize).toLocaleString("en-IN")} Cr` : "—")}
             </p>
           </div>
         </div>
@@ -1963,10 +2016,12 @@ function IPODetail({ ipo, onClose, watchlist, dark, onOpen, onNavigateTab }) {
           {/* ── 3 key metric cards ── */}
           <div className="grid grid-cols-3 gap-3">
             {[
-              ["Price band", ipo.priceMin ? `₹${ipo.priceMin}-${ipo.priceMax}` : "-"],
-              ["Lot size", ipo.lot || "-"],
-              ["Issue size", ipo.issueSize ? `₹${Number(ipo.issueSize).toLocaleString("en-IN")} Cr` : "-"],
-            ].map(([label, value]) => (
+              ["Price band", ipo.priceMin ? `₹${ipo.priceMin}-${ipo.priceMax}` : "-", "priceMax"],
+              ["Lot size", ipo.lot || "-", "lot"],
+              ["Issue size", ipo.issueSize ? `₹${Number(ipo.issueSize).toLocaleString("en-IN")} Cr` : "-", "issueSize"],
+            ].map(([label, value, field]) => {
+              const pending = isPending(ipo, field);
+              return (
               <div
                 key={label}
                 className="rounded-2xl p-4"
@@ -1975,20 +2030,25 @@ function IPODetail({ ipo, onClose, watchlist, dark, onOpen, onNavigateTab }) {
                   border: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)"
                 }}
               >
-                <p className="text-xs font-medium mb-1.5" style={{ color: "#64748b" }}>{label}</p>
-                <p className="text-xl font-extrabold font-mono tracking-tight" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{value}</p>
+                <p className="text-xs font-medium mb-1.5 flex items-center" style={{ color: "#64748b" }}>{label}<VerifyMark ipo={ipo} field={field} /></p>
+                {pending ? (
+                  <p className="text-[13px] font-semibold text-slate-400 dark:text-slate-500 italic">Pending verification</p>
+                ) : (
+                  <p className="text-xl font-extrabold font-mono tracking-tight" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{value}</p>
+                )}
               </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Secondary metrics */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {[
-              ["Face value", ipo.faceValue != null ? `₹${ipo.faceValue}` : "-"],
-              ["Min. investment", ipo.lot ? rupee(investment(ipo)) : "-"],
-              ["Fresh issue", ipo.freshIssue ? `₹${ipo.freshIssue} Cr` : "-"],
-              ["OFS", ipo.ofs ? `₹${ipo.ofs} Cr` : "-"],
-            ].map(([l, v]) => (
+              ["Face value", ipo.faceValue != null ? `₹${ipo.faceValue}` : "-", "faceValue"],
+              ["Min. investment", ipo.lot ? rupee(investment(ipo)) : "-", null],
+              ["Fresh issue", ipo.freshIssue ? `₹${ipo.freshIssue} Cr` : "-", "freshIssue"],
+              ["OFS", ipo.ofs ? `₹${ipo.ofs} Cr` : "-", "ofs"],
+            ].map(([l, v, field]) => (
               <div
                 key={l}
                 className="rounded-xl p-3"
@@ -1997,8 +2057,8 @@ function IPODetail({ ipo, onClose, watchlist, dark, onOpen, onNavigateTab }) {
                   border: dark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.04)"
                 }}
               >
-                <p className="text-[10px] font-medium mb-1" style={{ color: "#64748b" }}>{l}</p>
-                <p className="font-mono text-sm font-semibold" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{v}</p>
+                <p className="text-[10px] font-medium mb-1 flex items-center" style={{ color: "#64748b" }}>{l}{field && <VerifyMark ipo={ipo} field={field} />}</p>
+                <p className="font-mono text-sm font-semibold" style={{ color: dark ? "#ffffff" : "#1e293b" }}>{field ? gatedText(ipo, field, v) : v}</p>
               </div>
             ))}
           </div>
