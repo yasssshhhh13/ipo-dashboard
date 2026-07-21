@@ -1,21 +1,21 @@
 {
-  "updatedAt": "2026-07-21T02:54:12.109Z",
+  "updatedAt": "2026-07-21T05:48:44.197Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
       "priceMax": 152
     },
     "caliber-mining": {
-      "gmp": 94,
+      "gmp": 93,
       "priceMax": 424,
-      "estListing": 518,
+      "estListing": 517,
       "sub": {
-        "overall": 25.04,
-        "qib": 1.49,
-        "snii": 77.58,
-        "bnii": 73.89,
-        "hni": 75.12,
-        "retail": 17.03
+        "overall": 42.32,
+        "qib": 2.19,
+        "snii": 123.21,
+        "bnii": 143.37,
+        "hni": 136.65,
+        "retail": 24.83
       }
     },
     "sotefin-bharat": {
@@ -40,6 +40,8 @@
       "gmp": 49,
       "priceMax": 118,
       "estListing": 167,
+      "listedAt": 196.15,
+      "currentPrice": 196.15,
       "sub": {
         "overall": 220.35,
         "qib": 168.56,
@@ -58,6 +60,8 @@
       "gmp": 161,
       "priceMax": 419,
       "estListing": 580,
+      "listedAt": 569,
+      "currentPrice": 569,
       "sub": {
         "retail_apps": 22.45,
         "shni_apps": 110.15,
@@ -74,6 +78,8 @@
       "gmp": 47,
       "priceMax": 99,
       "estListing": 146,
+      "listedAt": 166,
+      "currentPrice": 166,
       "sub": {
         "overall": 295.08,
         "qib": 241.75,
@@ -87,6 +93,8 @@
       "gmp": 13,
       "priceMax": 170,
       "estListing": 183,
+      "listedAt": 188,
+      "currentPrice": 188,
       "sub": {
         "retail_apps": 17,
         "shni_apps": 107,
@@ -101,6 +109,8 @@
     },
     "vinit-mobile": {
       "priceMax": 158,
+      "listedAt": 158,
+      "currentPrice": 158,
       "sub": {
         "overall": 1.62,
         "qib": 1,
@@ -117,6 +127,8 @@
     },
     "seemax-resources": {
       "priceMax": 141,
+      "listedAt": 112.8,
+      "currentPrice": 112.8,
       "sub": {
         "overall": 3.62,
         "qib": 17.19,
@@ -130,6 +142,8 @@
       "gmp": 10,
       "priceMax": 60,
       "estListing": 70,
+      "listedAt": 69,
+      "currentPrice": 69,
       "sub": {
         "overall": 7.54,
         "qib": 3.58,
@@ -143,6 +157,8 @@
       "gmp": 78,
       "priceMax": 135,
       "estListing": 213,
+      "listedAt": 192,
+      "currentPrice": 192,
       "sub": {
         "overall": 154.97,
         "qib": 145.82,
@@ -156,6 +172,8 @@
       "gmp": 36,
       "priceMax": 220,
       "estListing": 256,
+      "listedAt": 418,
+      "currentPrice": 418,
       "sub": {
         "overall": 1.37,
         "qib": 0,
@@ -169,6 +187,8 @@
       "gmp": 5,
       "priceMax": 136,
       "estListing": 141,
+      "listedAt": 130,
+      "currentPrice": 130,
       "sub": {
         "retail_apps": 1.85,
         "shni_apps": 4.8,
@@ -183,6 +203,8 @@
     },
     "adon-agro": {
       "priceMax": 70,
+      "listedAt": 78.25,
+      "currentPrice": 78.25,
       "sub": {
         "overall": 1.35,
         "qib": 22.47,
@@ -194,6 +216,8 @@
     },
     "csm-technologies": {
       "priceMax": 113,
+      "listedAt": 113,
+      "currentPrice": 113,
       "sub": {
         "retail_apps": 1.21,
         "shni_apps": 1.15,
@@ -217,12 +241,22 @@
       "estListing": 89
     },
     "metalic-technoforge": {
-      "priceMax": 77
+      "priceMax": 77,
+      "sub": {
+        "overall": 0.13,
+        "qib": 0,
+        "snii": 0.2,
+        "bnii": 0.02,
+        "hni": 0.08,
+        "retail": 0.23
+      }
     },
     "millworks-technologies": {
       "gmp": 395,
       "priceMax": 331,
       "estListing": 726,
+      "listedAt": 628.9,
+      "currentPrice": 628.9,
       "sub": {
         "overall": 219.54,
         "qib": 194.05,
@@ -236,6 +270,8 @@
       "gmp": 1,
       "priceMax": 105,
       "estListing": 106,
+      "listedAt": 105,
+      "currentPrice": 105,
       "sub": {
         "overall": 1.4,
         "qib": 1.09,
@@ -246,16 +282,16 @@
       }
     },
     "gulf-lloyds": {
-      "gmp": 10,
+      "gmp": 5,
       "priceMax": 100,
-      "estListing": 110,
+      "estListing": 105,
       "sub": {
-        "overall": 4.67,
+        "overall": 6,
         "qib": 0,
         "snii": 0,
         "bnii": 0,
-        "hni": 1.16,
-        "retail": 8.19
+        "hni": 1.44,
+        "retail": 10.57
       }
     },
     "laser-power-infra-ipol-250-00-16-82": {
@@ -283,9 +319,9 @@
       "estListing": 757
     },
     "sbi-funds-management": {
-      "gmp": 95,
+      "gmp": 65,
       "priceMax": 574,
-      "estListing": 669,
+      "estListing": 639,
       "listedAt": 613.3,
       "currentPrice": 613.3,
       "sub": {
@@ -306,6 +342,8 @@
       "gmp": 39,
       "priceMax": 214,
       "estListing": 253,
+      "listedAt": 250,
+      "currentPrice": 250,
       "sub": {
         "retail_apps": 5.98,
         "shni_apps": 35.45,
@@ -322,6 +360,8 @@
       "gmp": 2,
       "priceMax": 84,
       "estListing": 86,
+      "listedAt": 89,
+      "currentPrice": 89,
       "sub": {
         "overall": 3.47,
         "qib": 1.55,
@@ -333,6 +373,8 @@
     },
     "crazy-snacks": {
       "priceMax": 42,
+      "listedAt": 44,
+      "currentPrice": 44,
       "sub": {
         "overall": 1.21,
         "qib": 4.75,
@@ -368,6 +410,8 @@
       "gmp": -51,
       "priceMax": 808,
       "estListing": 757,
+      "listedAt": 500,
+      "currentPrice": 500,
       "sub": {
         "overall": 1.53,
         "qib": 0.72,
@@ -412,6 +456,8 @@
       "gmp": 10,
       "priceMax": 66,
       "estListing": 76,
+      "listedAt": 68,
+      "currentPrice": 68,
       "sub": {
         "overall": 77.81,
         "qib": 59.01,

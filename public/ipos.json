@@ -1391,12 +1391,12 @@
     "leadManager": "DAM Capital Advisors Ltd",
     "exchange": "BSE, NSE",
     "sub": {
-      "overall": 25.04,
-      "qib": 1.49,
-      "snii": 77.58,
-      "bnii": 73.89,
-      "hni": 75.12,
-      "retail": 17.03
+      "overall": 42.32,
+      "qib": 2.19,
+      "snii": 123.21,
+      "bnii": 143.37,
+      "hni": 136.65,
+      "retail": 24.83
     },
     "fin": {
       "revenue": 1677.66,
@@ -1840,8 +1840,8 @@
     "gmp": 400,
     "trend": "up",
     "estListing": 731,
-    "listedAt": null,
-    "currentPrice": null,
+    "listedAt": 628.9,
+    "currentPrice": 628.9,
     "gmpHistory": [
       {
         "d": "Jul14",
@@ -1927,8 +1927,8 @@
     "gmp": 0,
     "trend": "stable",
     "estListing": 105,
-    "listedAt": null,
-    "currentPrice": null,
+    "listedAt": 105,
+    "currentPrice": 105,
     "gmpHistory": [],
     "drhp": "https://www.sebi.gov.in/filings/public-issues/jan-2026/alpine-texworld-limited-drhp_99500.html",
     "rhp": "https://www.sebi.gov.in/filings/public-issues/jul-2026/alpine-texworld-limited-rhp_102500.html",
@@ -2008,7 +2008,14 @@
     "rhp": null,
     "leadManager": "Smart Horizon Capital Advisors Pvt. Ltd.",
     "exchange": "NSE Emerge",
-    "sub": null,
+    "sub": {
+      "overall": 0.13,
+      "qib": 0,
+      "snii": 0.2,
+      "bnii": 0.02,
+      "hni": 0.08,
+      "retail": 0.23
+    },
     "fin": {
       "revenue": 97.98,
       "pat": 12.36,
@@ -2209,12 +2216,12 @@
     "leadManager": "Interactive Financial Services Ltd.",
     "exchange": "BSE SME",
     "sub": {
-      "overall": 4.67,
+      "overall": 6,
       "qib": 0,
       "snii": 0,
       "bnii": 0,
-      "hni": 1.16,
-      "retail": 8.19
+      "hni": 1.44,
+      "retail": 10.57
     },
     "fin": null,
     "about": "Gulf Lloyds Limited is a newly announced SME IPO operating in the General sector. The company is launching its issue on BSE SME.",
