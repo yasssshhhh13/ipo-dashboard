@@ -137,7 +137,7 @@ export function getSiteUrl(override) {
   if (!fromEnv && typeof process !== "undefined" && process.env?.VITE_SITE_URL) {
     fromEnv = process.env.VITE_SITE_URL;
   }
-  return String(fromEnv || "https://calmcapital.in").replace(/\/$/, "");
+  return String(fromEnv || "https://calmcapital.space").replace(/\/$/, "");
 }
 
 export function absoluteUrl(path, siteUrl) {

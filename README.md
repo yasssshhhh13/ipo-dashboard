@@ -31,7 +31,7 @@ everything below uses GitHub's and Vercel's website.
    - Value: your key from [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
    - Leave it set for Production, Preview, and Development.
    - Name: `VITE_SITE_URL` — Value: your live origin with no trailing slash
-     (e.g. `https://your-app.vercel.app` or `https://calmcapital.in`). Used for
+     (e.g. `https://your-app.vercel.app` or `https://calmcapital.space`). Used for
      canonical URLs, Open Graph, and the XML sitemap.
    - (Optional for analytics) Name: `VITE_GA_MEASUREMENT_ID` — Value: your GA4 ID `G-XXXXXXXXXX` (see section 6 below).
 6. Click **Deploy**. Wait ~1 minute.
@@ -116,7 +116,7 @@ Calm Capital sends GA4 `page_view` and `tab_view` events when visitors open tabs
 
 ```
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-VITE_SITE_URL=https://calmcapital.in
+VITE_SITE_URL=https://calmcapital.space
 ```
 
 **Production (Vercel):** Project → **Settings** → **Environment Variables** →

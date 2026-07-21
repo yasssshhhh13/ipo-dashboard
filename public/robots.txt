@@ -4,4 +4,4 @@ Allow: /
 Disallow: /api/
 Disallow: /*.map$
 
-Sitemap: https://calmcapital.in/sitemap.xml
+Sitemap: https://calmcapital.space/sitemap.xml
