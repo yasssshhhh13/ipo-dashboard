@@ -141,6 +141,20 @@ function parseGmpCell(text) {
   return Number.isFinite(n) ? n : undefined;
 }
 
+// Once an IPO lists, InvestorGain appends the listing price to the name cell
+// as "...IPO L@574.00 (17.42%)" (L@ = "Listed at"; the % is listing gain vs
+// issue price). Capture that so listedAt is filled automatically — no manual
+// data entry. Returns { listedAt, listingGainPct } or null.
+function parseListingInfo(rawName) {
+  if (!rawName) return null;
+  const m = rawName.match(/L@\s*(-?[\d,]+(?:\.\d+)?)\s*(?:\(\s*(-?[\d,]+(?:\.\d+)?)\s*%\s*\))?/i);
+  if (!m) return null;
+  const price = parseFloat(m[1].replace(/,/g, ""));
+  if (!Number.isFinite(price) || price <= 0) return null;
+  const gainPct = m[2] != null ? parseFloat(m[2].replace(/,/g, "")) : null;
+  return { listedAt: price, listingGainPct: Number.isFinite(gainPct) ? gainPct : null };
+}
+
 function cleanScrapedName(raw) {
   if (!raw) return "";
   let cleaned = raw.split("\n")[0].trim();
@@ -420,12 +434,15 @@ async function scrapeGmp(page) {
     const gmp = parseGmpCell(cells[1]);
     const priceRaw = toNumber(cells[4]);
     const price = priceRaw && priceRaw > 0 ? priceRaw : undefined;
-    if (gmp === undefined && price === undefined) continue;
+    const listing = parseListingInfo(rawName);
+    if (gmp === undefined && price === undefined && !listing) continue;
 
     result[id] = {
       ...(gmp !== undefined ? { gmp } : {}),
       ...(price !== undefined ? { priceMax: price } : {}),
       ...(gmp !== undefined && price !== undefined ? { estListing: price + gmp } : {}),
+      // Listing price captured automatically the moment the IPO lists.
+      ...(listing ? { listedAt: listing.listedAt, currentPrice: listing.listedAt } : {}),
     };
   }
   return { result, rows };
@@ -761,6 +778,16 @@ async function main() {
         if (close && existingIpo.close !== close) { existingIpo.close = close; changed = true; }
         if (allotment && existingIpo.allotment !== allotment) { existingIpo.allotment = allotment; changed = true; }
         if (listing && existingIpo.listing !== listing) { existingIpo.listing = listing; changed = true; }
+
+        // Auto-capture listing price from the name cell (e.g. "L@574 (17%)").
+        const listingInfo = parseListingInfo(rawName);
+        if (listingInfo && existingIpo.listedAt == null) {
+          existingIpo.listedAt = listingInfo.listedAt;
+          if (existingIpo.currentPrice == null) existingIpo.currentPrice = listingInfo.listedAt;
+          changed = true;
+          console.log(`[LISTING] "${existingIpo.name}" listed at ₹${listingInfo.listedAt}` +
+            (listingInfo.listingGainPct != null ? ` (${listingInfo.listingGainPct}%)` : ""));
+        }
 
         const chronologyWarnings = validateChronology(existingIpo);
         if (chronologyWarnings.length > 0) {

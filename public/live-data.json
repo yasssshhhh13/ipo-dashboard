@@ -286,6 +286,8 @@
       "gmp": 95,
       "priceMax": 574,
       "estListing": 669,
+      "listedAt": 613.3,
+      "currentPrice": 613.3,
       "sub": {
         "retail_apps": 2.32,
         "shni_apps": 18.45,

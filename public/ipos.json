@@ -218,6 +218,8 @@
     "gmp": 97,
     "trend": "up",
     "estListing": 671,
+    "listedAt": 613.3,
+    "currentPrice": 613.3,
     "gmpHistory": [
       {
         "d": "Jul9",

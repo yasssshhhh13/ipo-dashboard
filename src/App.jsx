@@ -1548,36 +1548,28 @@ function IPOCard({ ipo, onOpen, watchlist, dark }) {
           </button>
         </div>
 
-        {/* Listing gain for listed */}
+        {/* Listing gain for listed — shows listing price, % and ₹ P&L per lot */}
         {isListed && ipo.listedAt && (() => {
           const gain = listingGainPct(ipo);
-          if (gain > 0) {
-            return (
-              <div className="flex items-center gap-1.5 mt-3">
-                <ArrowUpRight size={13} style={{ color: BRAND.green }} />
-                <span className="text-sm font-bold font-mono" style={{ color: "#0f9d68" }}>
-                  Listed · {gain.toFixed(1)}%
+          const pnl = listingProfitLossPerLot(ipo);
+          const up = gain > 0;
+          const down = gain < 0;
+          const color = up ? "#0f9d68" : down ? "#e11d48" : "#64748b";
+          const sign = up ? "+" : "";
+          return (
+            <div className="flex items-center gap-1.5 mt-3 flex-wrap">
+              {up && <ArrowUpRight size={13} style={{ color }} />}
+              {down && <ArrowDownRight size={13} style={{ color }} />}
+              <span className="text-sm font-bold font-mono" style={{ color }}>
+                Listed @ ₹{ipo.listedAt} · {sign}{gain.toFixed(1)}%
+              </span>
+              {pnl != null && ipo.lot > 0 && (
+                <span className="text-xs font-semibold font-mono" style={{ color }}>
+                  ({sign}{rupee(pnl)}/lot)
                 </span>
-              </div>
-            );
-          } else if (gain < 0) {
-            return (
-              <div className="flex items-center gap-1.5 mt-3">
-                <ArrowDownRight size={13} className="text-rose-500" />
-                <span className="text-sm font-bold font-mono" style={{ color: "#e11d48" }}>
-                  Listed · {gain.toFixed(1)}%
-                </span>
-              </div>
-            );
-          } else {
-            return (
-              <div className="flex items-center gap-1.5 mt-3">
-                <span className="text-sm font-bold font-mono text-slate-500 dark:text-slate-400">
-                  Listed · 0.0%
-                </span>
-              </div>
-            );
-          }
+              )}
+            </div>
+          );
         })()}
 
         {/* Divider */}
