@@ -230,6 +230,7 @@ async function main() {
         company: cleanedName + " Limited",
         type,
         status: calculateStatus({ open, close, listing }),
+        discoveredAt: new Date().toISOString(),
         open, close, listing, allotment, refund, demat,
         priceMin, priceMax, faceValue: 10, lot, issueSize,
         freshIssue: issueSize, ofs: 0,

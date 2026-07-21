@@ -432,9 +432,96 @@ const sortDocumentsLogically = (ipos) => {
 
 /* =====================================================================
    NOTIFICATIONS — auto-generated from live IPO data (dates + doc links),
-   persisted in localStorage, refreshed every time `tick` changes (i.e.
-   every hourly sync and manual refresh).
+   persisted in localStorage, refreshed when IPO/live data changes (not
+   on price ticks). Fired-id ledger prevents mobile re-fires on reload.
 ===================================================================== */
+const NOTIF_STORAGE_KEY = "calmcapital-notifications";
+const SEEN_PIPELINE_KEY = "calmcapital-notif-seen-pipeline";
+const SEEN_REALTIME_KEY = "calmcapital-notif-seen-realtime";
+const FIRED_NOTIF_IDS_KEY = "calmcapital-notif-fired-ids";
+/** In-memory for the current SPA session — covers mobile Safari storage hiccups. */
+const _sessionFiredNotifs = new Set();
+
+function loadFiredNotifIds() {
+  const fired = new Set(_sessionFiredNotifs);
+  try {
+    const raw = localStorage.getItem(FIRED_NOTIF_IDS_KEY);
+    if (raw) JSON.parse(raw).forEach((id) => { if (id) fired.add(id); });
+  } catch { /* ignore */ }
+  return fired;
+}
+
+function markNotifFired(id, firedSet) {
+  if (!id) return;
+  firedSet.add(id);
+  _sessionFiredNotifs.add(id);
+  try {
+    localStorage.setItem(FIRED_NOTIF_IDS_KEY, JSON.stringify([...firedSet].slice(-500)));
+  } catch { /* private mode / quota — session set still guards this tab */ }
+}
+
+function persistFiredNotifIds(firedSet) {
+  try {
+    localStorage.setItem(FIRED_NOTIF_IDS_KEY, JSON.stringify([...firedSet].slice(-500)));
+  } catch { /* ignore */ }
+}
+
+function loadSeenPipelineIds() {
+  const seen = new Set();
+  try {
+    const raw = localStorage.getItem(SEEN_PIPELINE_KEY);
+    if (raw) JSON.parse(raw).forEach((id) => { if (id) seen.add(id); });
+  } catch { /* ignore */ }
+  return seen;
+}
+
+function saveSeenPipelineIds(seen) {
+  try {
+    localStorage.setItem(SEEN_PIPELINE_KEY, JSON.stringify([...seen]));
+  } catch { /* storage unavailable */ }
+}
+
+const NOTIF_ALLOWED_TYPES = new Set([
+  "open", "opens-tomorrow", "close", "listing-tomorrow", "listing",
+  "pipeline-new", "announced", "drhp", "rhp",
+]);
+
+function hydrateNotificationsFromStorage() {
+  try {
+    const raw = localStorage.getItem(NOTIF_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    const valid = parsed
+      .filter((n) => n && n.id && NOTIF_ALLOWED_TYPES.has(n.type) && n.title && n.message)
+      .filter((n) => n.type !== "announced" && n.type !== "drhp")
+      .map((n) => ({
+        ...n,
+        createdAt: isRealtimeNotifType(n.type)
+          ? n.createdAt
+          : n.date
+            ? notificationStampAt(n.date)
+            : n.createdAt,
+      }));
+    const fired = loadFiredNotifIds();
+    const seenPipeline = loadSeenPipelineIds();
+    parsed.forEach((n) => {
+      if (n?.id) fired.add(n.id);
+      if (n?.ipoId && (n.type === "announced" || n.type === "drhp" || n.type === "pipeline-new")) {
+        seenPipeline.add(n.ipoId);
+      }
+    });
+    _sessionFiredNotifs.clear();
+    fired.forEach((id) => _sessionFiredNotifs.add(id));
+    persistFiredNotifIds(fired);
+    saveSeenPipelineIds(seenPipeline);
+
+    return valid;
+  } catch {
+    return [];
+  }
+}
+
 function ymd(d) { return d.toISOString().slice(0, 10); }
 
 function addDays(dateStr, days) {
@@ -488,7 +575,34 @@ function notificationStampAt(dateStr) {
 }
 
 function isRealtimeNotifType(type) {
-  return type === "announced" || type === "drhp" || type === "rhp";
+  return type === "pipeline-new" || type === "announced" || type === "drhp" || type === "rhp";
+}
+
+/** When a pipeline IPO was first discovered (server-side auditTrail / discoveredAt). */
+function getPipelineDiscoveredMs(ipo) {
+  if (ipo?.discoveredAt) {
+    const ms = Date.parse(ipo.discoveredAt);
+    if (Number.isFinite(ms)) return ms;
+  }
+  const created = ipo?.auditTrail?.find((a) => a.action === "created");
+  if (created?.timestamp) {
+    const ms = Date.parse(created.timestamp);
+    if (Number.isFinite(ms)) return ms;
+  }
+  return null;
+}
+
+/** Upcoming pipeline IPO with DRHP filed — belongs in Upcoming tab. */
+function isPipelineIpo(ipo) {
+  const status = getComputedStatus(ipo);
+  if (status !== "Upcoming" || ipo.open) return false;
+  return Boolean(ipo.drhp) || ipo.status === "DRHP Filed";
+}
+
+function ymdFromMs(ms) {
+  if (!Number.isFinite(ms)) return null;
+  const p = istYmdParts(new Date(ms));
+  return `${p.y}-${pad2(p.m)}-${pad2(p.d)}`;
 }
 
 function resolveNotifCreatedAt(cand, existing, clock = Date.now()) {
@@ -527,42 +641,27 @@ function computeAllNotifications(ipos, now = new Date()) {
   for (const ipo of ipos) {
     const status = String(ipo.status || "");
 
-    // ── Realtime: New IPO / DRHP (stamp = when it actually appeared, not 10 AM)
-    const verifiedMs = ipo.finMeta?.verifiedAt ? Date.parse(ipo.finMeta.verifiedAt) : NaN;
-    const filingDate = ipo.finMeta?.filingDate || null;
-    const isPipelineNew = status === "DRHP Filed" || (status === "Upcoming" && !ipo.open);
-
-    if (status === "DRHP Filed" || (isPipelineNew && filingDate && stillVisible(filingDate))) {
-      const day = filingDate || calendarToday;
-      candidates.push({
-        id: `${ipo.id}-drhp`,
-        type: "drhp",
-        ipoId: ipo.id,
-        title: `${ipo.company}: DRHP Filed`,
-        message: `Draft Red Herring Prospectus is now available for review.`,
-        date: day,
-        realtime: true,
-        createdAtHint: Number.isFinite(verifiedMs) ? verifiedMs : null,
-      });
+    // ── Realtime: New pipeline IPO (DRHP filed → Upcoming tab) — ONE alert per IPO ever
+    const discoveredMs = getPipelineDiscoveredMs(ipo);
+    if (isPipelineIpo(ipo) && discoveredMs) {
+      const eventDay = ymdFromMs(discoveredMs) || calendarToday;
+      if (stillVisible(eventDay)) {
+        candidates.push({
+          id: `${ipo.id}-pipeline-new`,
+          type: "pipeline-new",
+          ipoId: ipo.id,
+          title: `New IPO: ${ipo.company}`,
+          message: `DRHP filed — added to Upcoming. Subscription dates to be announced.`,
+          date: eventDay,
+          realtime: true,
+          createdAtHint: discoveredMs,
+        });
+      }
     }
 
-    if (isPipelineNew) {
-      const announceDay = filingDate || calendarToday;
-      candidates.push({
-        id: `${ipo.id}-announced`,
-        type: "announced",
-        ipoId: ipo.id,
-        title: `New IPO Announced: ${ipo.company}`,
-        message: ipo.open
-          ? `Expected to open for subscription on ${formatDate(ipo.open)}.`
-          : `Added to the IPO pipeline — subscription dates to be announced.`,
-        date: announceDay,
-        realtime: true,
-        createdAtHint: Number.isFinite(verifiedMs) ? verifiedMs : null,
-      });
-    }
-
-    if (ipo.rhp && (status === "Upcoming" || status === "Open")) {
+    if (ipo.rhp && (status === "Upcoming" || status === "Open" || getComputedStatus(ipo) === "Upcoming" || getComputedStatus(ipo) === "Open")) {
+      const verifiedMs = ipo.finMeta?.verifiedAt ? Date.parse(ipo.finMeta.verifiedAt) : NaN;
+      const filingDate = ipo.finMeta?.filingDate || null;
       const rhpDay = filingDate || (ipo.open ? addCalendarDaysYmd(ipo.open, -3) : null);
       if (rhpDay && stillVisible(rhpDay)) {
         candidates.push({
@@ -684,41 +783,14 @@ function computeAllNotifications(ipos, now = new Date()) {
   return candidates;
 }
 
-function useNotifications(tick) {
-  const [notifications, setNotifications] = useState([]);
+function useNotifications(liveDataVersion) {
+  const [notifications, setNotifications] = useState(() => hydrateNotificationsFromStorage());
   const [open, setOpen] = useState(false);
 
-  const ALLOWED = useMemo(
-    () => new Set(["open", "opens-tomorrow", "close", "listing-tomorrow", "listing", "announced", "drhp", "rhp"]),
-    []
-  );
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("calmcapital-notifications");
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          const valid = parsed
-            .filter((n) => n && n.id && ALLOWED.has(n.type) && n.title && n.message)
-            .map((n) => ({
-              ...n,
-              // Schedule alerts → 10 AM stamp; realtime (DRHP/new IPO) keep their real createdAt
-              createdAt: isRealtimeNotifType(n.type)
-                ? n.createdAt
-                : n.date
-                  ? notificationStampAt(n.date)
-                  : n.createdAt,
-            }));
-          setNotifications(valid);
-        }
-      }
-    } catch { /* none saved yet */ }
-  }, [ALLOWED]);
+  const ALLOWED = NOTIF_ALLOWED_TYPES;
 
   useEffect(() => {
     const ipos = getLiveIPOS();
-    // Avoid wiping + re-creating as "Just now" before IPO data has loaded
     if (!ipos.length) return;
 
     const now = new Date();
@@ -732,19 +804,36 @@ function useNotifications(tick) {
 
       let seenRealtime = new Set();
       try {
-        const rawSeen = localStorage.getItem("calmcapital-notif-seen-realtime");
+        const rawSeen = localStorage.getItem(SEEN_REALTIME_KEY);
         if (rawSeen) seenRealtime = new Set(JSON.parse(rawSeen));
       } catch { /* ignore */ }
 
+      const firedIds = loadFiredNotifIds();
+      const seenPipeline = loadSeenPipelineIds();
+
+      prev.forEach((n) => {
+        if (n?.id) firedIds.add(n.id);
+        if (n?.ipoId && (n.type === "pipeline-new" || n.type === "announced" || n.type === "drhp")) {
+          seenPipeline.add(n.ipoId);
+        }
+      });
+
       const activePrev = prev.filter((n) => {
         if (!n || !ALLOWED.has(n.type)) return false;
-        if (!candidateIds.has(n.id)) return false;
+        if (n.type === "announced" || n.type === "drhp") return false;
+        if (!candidateIds.has(n.id)) {
+          if (n.ipoId && n.type === "pipeline-new") seenPipeline.add(n.ipoId);
+          return false;
+        }
         const stamp = isRealtimeNotifType(n.type)
           ? n.createdAt
           : n.date
             ? notificationStampAt(n.date)
             : n.createdAt;
-        if (stamp && clock - stamp > retentionMs) return false;
+        if (stamp && clock - stamp > retentionMs) {
+          if (n.ipoId && n.type === "pipeline-new") seenPipeline.add(n.ipoId);
+          return false;
+        }
         return true;
       });
 
@@ -756,22 +845,36 @@ function useNotifications(tick) {
 
       for (const cand of candidates) {
         if (existingIds.has(cand.id)) continue;
+        // Never re-fire an alert that already fired on this device (mobile-safe ledger)
+        if (firedIds.has(cand.id) || _sessionFiredNotifs.has(cand.id)) continue;
 
-        // Realtime alerts: only create once — never re-fire as "Just now" after expiry
-        if (isRealtimeNotifType(cand.type) && seenRealtime.has(cand.id)) continue;
+        if (cand.type === "pipeline-new") {
+          if (seenPipeline.has(cand.ipoId)) {
+            markNotifFired(cand.id, firedIds);
+            continue;
+          }
+          // Mark fired synchronously BEFORE state update — stops Strict Mode / mobile double-fire
+          markNotifFired(cand.id, firedIds);
+          seenPipeline.add(cand.ipoId);
+          saveSeenPipelineIds(seenPipeline);
 
-        const createdAt = resolveNotifCreatedAt(cand, prevById.get(cand.id), clock);
-        // Skip stale discovery hints older than retention
-        if (isRealtimeNotifType(cand.type) && createdAt && clock - createdAt > retentionMs) {
-          seenRealtime.add(cand.id);
+          const createdAt = resolveNotifCreatedAt(cand, prevById.get(cand.id), clock);
+          nextList.push({ ...cand, read: false, createdAt });
+          existingIds.add(cand.id);
           continue;
         }
 
-        nextList.push({
-          ...cand,
-          read: false,
-          createdAt,
-        });
+        if (isRealtimeNotifType(cand.type) && seenRealtime.has(cand.id)) continue;
+
+        const createdAt = resolveNotifCreatedAt(cand, prevById.get(cand.id), clock);
+        if (isRealtimeNotifType(cand.type) && createdAt && clock - createdAt > retentionMs) {
+          seenRealtime.add(cand.id);
+          markNotifFired(cand.id, firedIds);
+          continue;
+        }
+
+        markNotifFired(cand.id, firedIds);
+        nextList.push({ ...cand, read: false, createdAt });
         existingIds.add(cand.id);
         if (isRealtimeNotifType(cand.type)) seenRealtime.add(cand.id);
       }
@@ -779,14 +882,15 @@ function useNotifications(tick) {
       nextList.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
       try {
-        localStorage.setItem("calmcapital-notifications", JSON.stringify(nextList));
-        localStorage.setItem("calmcapital-notif-seen-realtime", JSON.stringify([...seenRealtime]));
+        localStorage.setItem(NOTIF_STORAGE_KEY, JSON.stringify(nextList));
+        localStorage.setItem(SEEN_REALTIME_KEY, JSON.stringify([...seenRealtime]));
+        persistFiredNotifIds(firedIds);
+        saveSeenPipelineIds(seenPipeline);
       } catch { /* storage unavailable */ }
 
       return nextList;
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tick, ALLOWED]);
+  }, [liveDataVersion, ALLOWED]);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -794,7 +898,7 @@ function useNotifications(tick) {
     setNotifications((prev) => {
       if (prev.every((n) => n.read)) return prev;
       const updated = prev.map((n) => ({ ...n, read: true }));
-      try { localStorage.setItem("calmcapital-notifications", JSON.stringify(updated)); } catch { /* storage unavailable */ }
+      try { localStorage.setItem(NOTIF_STORAGE_KEY, JSON.stringify(updated)); } catch { /* storage unavailable */ }
       return updated;
     });
   }, []);
@@ -856,6 +960,7 @@ function NotificationBell({ hook, onOpenIpo }) {
 
   // Icon + color config per notification type
   const iconConfig = {
+    "pipeline-new":     { Icon: PlusCircle,  bg: "rgba(28,155,218,0.2)",  color: BRAND.blue },
     announced:          { Icon: PlusCircle,  bg: "rgba(28,155,218,0.2)",  color: BRAND.blue },
     drhp:               { Icon: FileText,    bg: "rgba(100,116,139,0.2)", color: "#64748b" },
     rhp:                { Icon: FileText,    bg: "rgba(100,116,139,0.2)", color: "#64748b" },
@@ -3813,6 +3918,7 @@ export default function App() {
         IPOS_BASE = data;
         setLoadingDb(false);
         setTick((t) => t + 1);
+        setLiveDataVersion((v) => v + 1);
       })
       .catch((err) => {
         console.error("Failed to load dynamic IPO database:", err?.message || "[REDACTED]");
@@ -3862,11 +3968,12 @@ export default function App() {
   }, []);
   const [refreshing, setRefreshing] = useState(false);
   const [tick, setTick] = useState(0); // bumped hourly + on manual refresh to force re-derive live status/data
+  const [liveDataVersion, setLiveDataVersion] = useState(0); // notifications only — not price ticks
   const [dataUrl, setDataUrl] = useState("/live-data.json"); // same-origin file this repo's GitHub Action keeps updated — works automatically, no setup needed
   const [lastSync, setLastSync] = useState(null);
   const [syncOk, setSyncOk] = useState(null);
   const watchlist = useWatchlist();
-  const notifHook = useNotifications(tick);
+  const notifHook = useNotifications(liveDataVersion);
 
   // Load a previously-saved investorgain live-data source URL (see LIVE_DATA_SETUP.md
   // from the automation repo — this points at your GitHub Action's public/live-data.json).
@@ -3884,6 +3991,7 @@ export default function App() {
     setSyncOk(ok);
     if (ok) setLastSync(_liveOverlay.updatedAt);
     setTick((t) => t + 1);
+    if (ok) setLiveDataVersion((v) => v + 1);
   }, [dataUrl]);
 
   // Initial sync + 30-min auto-refresh, exactly as requested.
