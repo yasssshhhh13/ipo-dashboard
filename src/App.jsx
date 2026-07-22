@@ -1740,30 +1740,33 @@ function IPOCard({ ipo, onOpen, watchlist, dark }) {
           const gmpPct = hasGmp && ipo.priceMax ? (gmpVal / ipo.priceMax) * 100 : null;
           const isPos = hasGmp && gmpVal > 0;
           const isNeg = hasGmp && gmpVal < 0;
-          const gmpColor = isPos ? "#0f9d68" : isNeg ? "#e11d48" : "#64748b";
-          const gmpBg   = isPos
-            ? (dark ? "rgba(15,157,104,0.12)" : "rgba(15,157,104,0.08)")
+          const gmpTone = isPos
+            ? "text-emerald-800 dark:text-emerald-300"
             : isNeg
-            ? (dark ? "rgba(225,29,72,0.12)"  : "rgba(225,29,72,0.08)")
-            : (dark ? "rgba(148,163,184,0.1)"  : "rgba(148,163,184,0.07)");
+            ? "text-rose-700 dark:text-rose-300"
+            : "text-slate-700 dark:text-slate-200";
+          const gmpBgClass = isPos
+            ? "bg-emerald-500/[0.12] dark:bg-emerald-400/20"
+            : isNeg
+            ? "bg-rose-500/[0.12] dark:bg-rose-400/20"
+            : "bg-slate-500/10 dark:bg-slate-400/10";
 
           return (
             <div
-              className="flex items-center justify-between rounded-xl px-3 py-2 mb-3"
-              style={{ background: gmpBg }}
+              className={`flex items-center justify-between rounded-xl px-3 py-2.5 mb-3 ${gmpBgClass}`}
             >
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">GMP</span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">GMP</span>
               {hasGmp ? (
-                <span className="font-mono font-extrabold text-sm flex items-center gap-1.5" style={{ color: gmpColor }}>
-                  {isPos && <ArrowUpRight size={13} />}
-                  {isNeg && <ArrowDownRight size={13} />}
-                  {isPos ? "+" : ""}{isNeg ? "-" : ""}{isNeg ? `₹${Math.abs(gmpVal)}` : `₹${gmpVal}`}
-                  <span className="text-[11px] font-semibold opacity-75">
+                <span className={`font-mono font-black text-[15px] leading-none flex items-center gap-1.5 tabular-nums ${gmpTone}`}>
+                  {isPos && <ArrowUpRight size={14} strokeWidth={2.75} />}
+                  {isNeg && <ArrowDownRight size={14} strokeWidth={2.75} />}
+                  <span>{isPos ? "+" : ""}{isNeg ? "-" : ""}{isNeg ? `₹${Math.abs(gmpVal)}` : `₹${gmpVal}`}</span>
+                  <span className="text-sm font-black">
                     ({isPos ? "+" : ""}{gmpPct != null ? gmpPct.toFixed(2) : "0.00"}%)
                   </span>
                 </span>
               ) : (
-                <span className="font-mono text-sm text-slate-400 dark:text-slate-500">N/A</span>
+                <span className="font-mono text-sm font-semibold text-slate-500 dark:text-slate-400">N/A</span>
               )}
             </div>
           );
@@ -2844,10 +2847,26 @@ function SubscriptionDetailsList({ ipo, dark }) {
 
   // 9. GMP (if available)
   if (ipo.gmp !== undefined && ipo.gmp !== null) {
+    const gmpVal = ipo.gmp;
+    const gmpPct = ipo.priceMax ? (gmpVal / ipo.priceMax) * 100 : null;
+    const isPos = gmpVal > 0;
+    const isNeg = gmpVal < 0;
+    const gmpTone = isPos
+      ? "text-emerald-800 dark:text-emerald-300"
+      : isNeg
+      ? "text-rose-700 dark:text-rose-300"
+      : "text-slate-700 dark:text-slate-200";
     lines.push(
       <div key="GMP" className="flex justify-between items-center py-2.5 border-b border-slate-100 dark:border-white/5 last:border-0">
-        <span className="text-slate-500 dark:text-slate-400 font-semibold text-xs tracking-wide uppercase font-semibold">GMP</span>
-        <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-sm">{rupee(ipo.gmp)}</span>
+        <span className="text-slate-600 dark:text-slate-300 font-bold text-xs tracking-wide uppercase">GMP</span>
+        <span className={`font-mono font-black text-[15px] tabular-nums flex items-center gap-1.5 ${gmpTone}`}>
+          <span>{isPos ? "+" : ""}{isNeg ? "-" : ""}{isNeg ? rupee(Math.abs(gmpVal)) : rupee(gmpVal)}</span>
+          {gmpPct != null && (
+            <span className="text-sm font-black">
+              ({isPos ? "+" : ""}{gmpPct.toFixed(2)}%)
+            </span>
+          )}
+        </span>
       </div>
     );
   }
