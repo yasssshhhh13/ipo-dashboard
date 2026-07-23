@@ -2876,7 +2876,7 @@
     "name": "Sotefin Bharat",
     "company": "Sotefin Bharat Ltd.",
     "type": "SME",
-    "status": "Closed",
+    "status": "Listed",
     "open": "2026-07-16",
     "close": "2026-07-20",
     "listing": "2026-07-23",
@@ -2893,6 +2893,8 @@
     "gmp": 18,
     "trend": "up",
     "estListing": 205,
+    "listedAt": 205,
+    "currentPrice": 205,
     "gmpHistory": [
       {
         "d": "Jul14",

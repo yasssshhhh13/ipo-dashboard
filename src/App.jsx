@@ -1894,7 +1894,10 @@ function IPOCard({ ipo, onOpen, watchlist, dark }) {
 function ListedIPOCard({ ipo, onOpen, watchlist }) {
   const watched = watchlist.ids.includes(ipo.id);
   const gain = listingGainPct(ipo);
+  const pnl = listingProfitLossPerLot(ipo);
   const currentRet = currentReturnPct(ipo);
+  const sign = gain > 0 ? "+" : gain < 0 ? "" : "";
+  const perfLabel = gain > 0 ? "premium" : gain < 0 ? "discount" : "flat";
 
   // Three-state listing gain color
   let gainColor = "#64748b";
@@ -1949,9 +1952,22 @@ function ListedIPOCard({ ipo, onOpen, watchlist }) {
 
         {/* Big listing gain headline */}
         <div className="mt-4 mb-4">
-          <p className="text-2xl font-extrabold tracking-tight" style={{ color: gainColor }}>
-            Listed{gain != null ? ` • ${gain.toFixed(1)}%` : " — awaiting data"}
-          </p>
+          {ipo.listedAt && gain != null ? (
+            <>
+              <p className="text-xl sm:text-2xl font-black tracking-tight leading-tight" style={{ color: gainColor }}>
+                Listed @ ₹{ipo.listedAt} · {sign}{gain.toFixed(1)}% {perfLabel}
+              </p>
+              {pnl != null && ipo.lot > 0 && (
+                <p className="text-sm font-bold font-mono mt-1.5" style={{ color: gainColor }}>
+                  {pnl >= 0 ? `+${rupee(pnl)}` : rupee(pnl)} per lot · Issue ₹{ipo.priceMax}
+                </p>
+              )}
+            </>
+          ) : (
+            <p className="text-2xl font-extrabold tracking-tight text-slate-500 dark:text-slate-400">
+              Listed — awaiting listing price
+            </p>
+          )}
         </div>
 
         {/* Row 1: Listing Price | Listing Gain % | Current Gain Since Listing */}

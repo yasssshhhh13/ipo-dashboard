@@ -101,6 +101,12 @@ function applyDetailInfo(ipo, detailInfo) {
   if (validNum(detailInfo.freshIssue) && ipo.freshIssue == null) { ipo.freshIssue = detailInfo.freshIssue; changed = true; }
   if (validNum(detailInfo.ofs) && ipo.ofs == null) { ipo.ofs = detailInfo.ofs; changed = true; }
   if (validNum(detailInfo.faceValue) && ipo.faceValue == null) { ipo.faceValue = detailInfo.faceValue; changed = true; }
+  if (validNum(detailInfo.listedAt) && ipo.listedAt == null) {
+    ipo.listedAt = detailInfo.listedAt;
+    if (ipo.currentPrice == null) ipo.currentPrice = detailInfo.listedAt;
+    changed = true;
+    console.log(`[LISTING] "${ipo.name}" listed at ₹${detailInfo.listedAt} (detail page)`);
+  }
   if (ipo.estListing == null && validNum(ipo.priceMax) && typeof ipo.gmp === "number") {
     ipo.estListing = ipo.priceMax + ipo.gmp;
     changed = true;
@@ -112,6 +118,14 @@ function needsCoreDetails(ipo) {
   if (!ipo) return false;
   if ((ipo.status || "").toLowerCase() === "listed") return false;
   return ipo.priceMax == null || ipo.lot == null || ipo.issueSize == null;
+}
+
+function needsListingPrice(ipo) {
+  if (ipo?.listedAt != null) return false;
+  if (!ipo?.listing || !ipo?.investorgainUrl) return false;
+  const today = new Date();
+  const listing = new Date(`${ipo.listing}T00:00:00+05:30`);
+  return today >= listing;
 }
 
 function needsRegistrarRefresh(ipo) {
@@ -331,7 +345,7 @@ async function main() {
       ipo.status = calculated;
       databaseUpdated = true;
     }
-    if ((needsRegistrarRefresh(ipo) || needsCoreDetails(ipo)) && ipo.investorgainUrl) {
+    if ((needsRegistrarRefresh(ipo) || needsCoreDetails(ipo) || needsListingPrice(ipo)) && ipo.investorgainUrl) {
       const detailInfo = await scrapeIpoDetailPage(page, ipo.investorgainUrl);
       if (applyDetailInfo(ipo, detailInfo)) databaseUpdated = true;
     }
@@ -402,6 +416,12 @@ async function main() {
     // Surface the verification block on the live overlay too, so the client sees
     // the freshest verified/pending/conflict state without a full baseline reload.
     if (baseIpo && baseIpo.verification) ipos[id].verification = baseIpo.verification;
+
+    // Always surface listing price on the live overlay once captured in baseline
+    if (baseIpo?.listedAt != null) {
+      ipos[id].listedAt = baseIpo.listedAt;
+      if (baseIpo.currentPrice != null) ipos[id].currentPrice = baseIpo.currentPrice;
+    }
 
     const latestStatus = baseIpo ? calculateStatus(baseIpo) : "Upcoming";
     const isUpcoming = latestStatus === "Upcoming" || latestStatus === "DRHP Filed";

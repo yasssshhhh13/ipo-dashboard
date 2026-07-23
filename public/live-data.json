@@ -194,6 +194,8 @@
       "gmp": 1,
       "priceMax": 187,
       "estListing": 188,
+      "listedAt": 205,
+      "currentPrice": 205,
       "verification": {
         "priceMin": {
           "status": "unverified",

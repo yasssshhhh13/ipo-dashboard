@@ -194,6 +194,7 @@ export async function scrapeIpoDetailPage(page, href) {
   const empty = {
     registrar: null, leadManager: null, detailUrl: url,
     priceMin: null, priceMax: null, lot: null, issueSize: null, freshIssue: null, ofs: null, faceValue: null,
+    listedAt: null,
   };
   if (!url) return { ...empty, detailUrl: null };
   try {
@@ -205,6 +206,7 @@ export async function scrapeIpoDetailPage(page, href) {
       const result = {
         registrar: null, leadManager: null,
         priceMin: null, priceMax: null, lot: null, issueSize: null, freshIssue: null, ofs: null, faceValue: null,
+        listedAt: null,
       };
       const clean = (v) => {
         if (!v) return null;
@@ -249,11 +251,18 @@ export async function scrapeIpoDetailPage(page, href) {
         if (result.freshIssue == null && label.includes("fresh issue")) result.freshIssue = toCr(value);
         if (result.ofs == null && (label.includes("offer for sale") || label === "ofs")) result.ofs = toCr(value);
         if (result.faceValue == null && label.includes("face value")) result.faceValue = firstNum(value);
+        if (result.listedAt == null && (label.includes("listing price") || label.includes("listed at") || label.includes("list price"))) {
+          result.listedAt = firstNum(value);
+        }
       }
 
       const bodyText = document.body ? document.body.innerText : "";
       if (!result.registrar) { const m = bodyText.match(/Registrar(?:\s+to\s+the\s+[Ii]ssue)?\s*[:\n]\s*([^\n]+)/); if (m) result.registrar = clean(m[1]); }
       if (!result.leadManager) { const m = bodyText.match(/Lead Manager[s]?\s*[:\n]\s*([^\n]+)/); if (m) result.leadManager = clean(m[1]); }
+      if (result.listedAt == null) {
+        const m = bodyText.match(/Listing Price\s*[:\n]\s*₹?\s*([\d,]+(?:\.\d+)?)/i);
+        if (m) result.listedAt = parseFloat(m[1].replace(/,/g, ""));
+      }
 
       return result;
     });
@@ -264,6 +273,7 @@ export async function scrapeIpoDetailPage(page, href) {
       detailUrl: url,
       priceMin: info.priceMin, priceMax: info.priceMax, lot: info.lot,
       issueSize: info.issueSize, freshIssue: info.freshIssue, ofs: info.ofs, faceValue: info.faceValue,
+      listedAt: info.listedAt,
     };
   } catch (err) {
     console.warn(`[DETAIL WARN] Failed to scrape detail page:`, err.message);
