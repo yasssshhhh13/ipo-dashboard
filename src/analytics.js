@@ -1,12 +1,14 @@
 /**
  * Google Analytics 4 helpers for Calm Capital.
- * Loads only when VITE_GA_MEASUREMENT_ID is set (e.g. in Vercel or .env.local).
+ * Uses VITE_GA_MEASUREMENT_ID when set; falls back to the Calm Capital GA4 property
+ * so production tracking is not silently dropped if a Vercel env var is missing.
  *
  * Privacy: we send only navigation metadata (path + tab id/label).
  * No emails, names, search queries, watchlists, or chat text are sent.
  */
 
-const MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
+const MEASUREMENT_ID =
+  import.meta.env.VITE_GA_MEASUREMENT_ID || "G-6S0W1ME2NT";
 
 /** Keep only pathname — drop query/hash that could carry user-entered text. */
 function sanitizeAnalyticsPath(path) {
