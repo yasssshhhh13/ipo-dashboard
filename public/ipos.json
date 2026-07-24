@@ -5388,6 +5388,23 @@
         "sources": [],
         "updatedAt": "2026-07-24T05:49:12.779Z"
       }
+    },
+    "fin": {
+      "revenue": 250.14,
+      "pat": 49.66,
+      "ebitda": 87.64,
+      "netWorth": 436.09,
+      "debt": 263.24
+    },
+    "finMeta": {
+      "sourceDoc": "DRHP",
+      "sourceUrl": "https://www.sebi.gov.in/filings/public-issues/jul-2026/gni-infrastructure-limited-drhp_102874.html",
+      "sourcePdf": "https://www.sebi.gov.in/sebi_data/commondocs/jul-2026/GNI%20INFRASTRUCTURE%20LIMITED%20-%20DA_p.pdf",
+      "fy": "Latest restated period",
+      "pageNum": "Draft Abridged Prospectus \u2014 Financial KPIs",
+      "verifiedAt": "2026-07-24T05:54:00Z",
+      "method": "SEBI Draft Abridged PDF + Chittorgarh cross-check where available",
+      "status": "Verified"
     }
   },
   {
