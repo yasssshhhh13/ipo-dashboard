@@ -25,21 +25,31 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def fetch_bytes(url: str) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
+def fetch_bytes(url: str, max_bytes: int = 8_000_000) -> bytes:
+    req = urllib.request.Request(normalize_url(url), headers={"User-Agent": UA})
     with urllib.request.urlopen(req, context=ctx, timeout=90) as resp:
-        return resp.read()
+        data = resp.read(max_bytes + 1)
+        if len(data) > max_bytes:
+            raise ValueError(f"PDF too large (> {max_bytes} bytes)")
+        return data
 
 
 def fetch_text(url: str) -> str:
     return fetch_bytes(url).decode("utf-8", errors="replace")
 
 
+def normalize_url(url: str) -> str:
+    """Ensure SEBI PDF URLs are fetchable (encode spaces, etc.)."""
+    url = url.replace("\\", "/").strip()
+    if not url.startswith("http"):
+        url = "https://www.sebi.gov.in/" + url.lstrip("/")
+    parts = urllib.parse.urlsplit(url)
+    path = urllib.parse.quote(urllib.parse.unquote(parts.path), safe="/%")
+    return urllib.parse.urlunsplit((parts.scheme, parts.netloc, path, parts.query, parts.fragment))
+
+
 def abs_sebi_pdf(path: str) -> str:
-    path = path.replace("\\", "/")
-    if path.startswith("http"):
-        return path
-    return "https://www.sebi.gov.in/" + path.lstrip("/")
+    return normalize_url(path if path.startswith("http") else "https://www.sebi.gov.in/" + path.lstrip("/"))
 
 
 def pdf_candidates_from_html(html: str) -> list[str]:
@@ -61,7 +71,7 @@ def pdf_candidates_from_html(html: str) -> list[str]:
     out: list[str] = []
     seen = set()
     for u in found:
-        u = urllib.parse.unquote(u)
+        u = normalize_url(u)
         if u not in seen:
             seen.add(u)
             out.append(u)
@@ -138,9 +148,11 @@ def parse_fin_from_pdf(text: str) -> dict | None:
     # --- Format A: Financial KPIs (GNI-style) ---
     income_a = line_value(r"Total Income\s*\(a\)[^0-9\-]*((?:[\d,\.\-]+\s*)+)", text)
     pat_a = line_value(
-        r"PAT\s*\(Profit for the year/\s*period\)\s*\(e\)[^0-9\-]*((?:[\d,\.\-]+\s*)+)",
+        r"PAT\s*\(Profit for the year/[\s\S]*?period\)\s*\(e\)[^0-9\-]*((?:[\d,\.\-]+\s*)+)",
         text,
     )
+    if pat_a is None:
+        pat_a = line_value(r"Profit/\(loss\) after tax\(\d+\)[^0-9\-]*((?:[\d,\.\-]+\s*)+)", text)
     ebitda_a = line_value(r"EBITDA\s*\(c\)[^0-9\-]*((?:[\d,\.\-]+\s*)+)", text)
     if income_a is not None and pat_a is not None:
         set_crore("revenue", income_a)
@@ -154,40 +166,41 @@ def parse_fin_from_pdf(text: str) -> dict | None:
     # --- Format B: Summary of Restated Consolidated Financial Information ---
     if "revenue" not in fin or "pat" not in fin:
         rev = line_value(
-            r"Revenue from operations(?:\(\d+\))?[\s\n]*((?:[\d,\.\-]+\s*){1,4})",
+            r"Revenue from operations(?:\(\d+\))?[\s\n]+((?:[\d,\.\-]+\s*){1,4})",
             text,
         )
         if rev is None:
+            # Numbers often sit between "Revenue from" and "Operations(2)" (Jio-style layout).
             rev = line_value(
-                r"Revenue from[\s\n]+Operations(?:\(\d+\))?[\s\n]*((?:[\d,\.\-]+\s*){1,4})",
+                r"Revenue from[\s\n]+((?:[\d,\.\-]+\s*){1,4})[\s\n]*Operations(?:\(\d+\))?",
                 text,
             )
         pat = line_value(
-            r"Restated Profit/\(loss\) after tax[\s\n]*((?:[\d,\.\-]+\s*){1,4})",
+            r"Restated Profit/\(loss\) after tax[\s\n]+((?:[\d,\.\-]+\s*){1,4})",
             text,
         )
         if pat is None:
-            pat = line_value(r"Profit After Tax\(\d+\)[\s\n]*((?:[\d,\.\-]+\s*){1,4})", text)
+            pat = line_value(r"Profit After Tax\(\d+\)[\s\n]+((?:[\d,\.\-]+\s*){1,4})", text)
         if pat is None:
-            pat = line_value(r"Profit/\(loss\) after tax[\s\n]*((?:[\d,\.\-]+\s*){1,4})", text)
+            pat = line_value(r"Profit/\(loss\) after tax[\s\n]+((?:[\d,\.\-]+\s*){1,4})", text)
         total_income = line_value(
-            r"Total income(?:\(\d+\))?[\s\n]*(?:₹\s*million[\s\n]*)?((?:[\d,\.\-]+\s*){1,4})",
+            r"Total income(?:\(\d+\))?[\s\n]+(?:₹\s*million[\s\n]+)?((?:[\d,\.\-]+\s*){1,4})",
             text,
         )
         if rev is not None and pat is not None:
             set_crore("revenue", total_income if total_income is not None else rev)
             set_crore("pat", pat)
-            set_crore("ebitda", line_value(r"EBITDA\(\d+\)[\s\n]*((?:[\d,\.\-]+\s*){1,4})", text))
+            set_crore("ebitda", line_value(r"EBITDA\(\d+\)[\s\n]+((?:[\d,\.\-]+\s*){1,4})", text))
             set_crore(
                 "netWorth",
-                line_value(r"Net Worth\(\d+\)[\s\n]*((?:[\d,\.\-]+\s*){1,4})", text),
+                line_value(r"Net [Ww]orth\(\d+\)[\s\n]+((?:[\d,\.\-]+\s*){1,4})", text),
             )
             debt = line_value(
-                r"Total Borrowings[^0-9\n]*[\s\n]*((?:[\d,\.\-]+\s*){1,4})",
+                r"Total Borrowings[^0-9\n]*[\s\n]+((?:[\d,\.\-]+\s*){1,4})",
                 text,
             )
             if debt is None:
-                debt = line_value(r"Total borrowings[\s\n]*((?:[\d,\.\-]+\s*){1,4})", text)
+                debt = line_value(r"Total borrowings[\s\n]+((?:[\d,\.\-]+\s*){1,4})", text)
             set_crore("debt", debt)
 
     if fin.get("revenue") is None or fin.get("pat") is None:
@@ -229,25 +242,33 @@ def extract_for_ipo(ipo: dict) -> tuple[dict, str] | None:
     tried = set()
     pdfs = [u for u in queue if u.lower().endswith(".pdf")]
     htmls = [u for u in queue if u.lower().endswith(".html")]
-    for url in sorted(pdfs, key=score_pdf_url, reverse=True):
-        if url in tried:
-            continue
-        tried.add(url)
-        if score_pdf_url(url) < 50:
-            continue
-        try:
-            fin = parse_fin_from_pdf(pdf_text(fetch_bytes(url)))
-            if fin:
-                return fin, url
-        except Exception:
-            continue
+
+    def try_pdfs(candidates: list[str], min_score: int) -> tuple[dict, str] | None:
+        for url in sorted(candidates, key=score_pdf_url, reverse=True):
+            if url in tried or score_pdf_url(url) < min_score:
+                continue
+            tried.add(url)
+            try:
+                fin = parse_fin_from_pdf(pdf_text(fetch_bytes(url)))
+                if fin:
+                    return fin, url
+            except Exception:
+                continue
+        return None
+
+    hit = try_pdfs(pdfs, 50)
+    if hit:
+        return hit
+    hit = try_pdfs(pdfs, 15)
+    if hit:
+        return hit
     for url in htmls:
         try:
             sub = sorted(pdf_candidates_from_html(fetch_text(url)), key=score_pdf_url, reverse=True)
             for sub_url in sub:
                 if sub_url in tried or not sub_url.lower().endswith(".pdf"):
                     continue
-                if score_pdf_url(sub_url) < 50:
+                if score_pdf_url(sub_url) < 15:
                     continue
                 tried.add(sub_url)
                 try:

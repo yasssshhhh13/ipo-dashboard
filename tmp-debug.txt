@@ -1,0 +1,33 @@
+Net Worth(1) 3,340,134 3,040,224 2,778,661
+Revenue from
+1,468,853 1,282,184 1,095,581
+Operations(2)
+EBITDA(3) 762,554 641,700 549,587
+Profit After Tax(4) 300,491 261,090 214,232
+Basic EPS (₹)(5) 33.63 29.21 23.96
+Diluted EPS (₹)(6) 33.59 29.17 23.93
+Return on Average Net
+9.42% 8.97% 8.02%
+Worth(7)
+Net Asset Value per
+373.66 340.11 310.85
+Equity Share (₹)(8)
+Total borrowings 707,810 730,603 543,489
+Net cash flow from
+775,563 681,557 576,616
+operating activities
+5
+Particulars As at and for the Financial Year ended March 31,
+2026 2025 2024
+Net cash flow (used in)
+(435,909) (637,264) (565,876)
+investing activities
+Net cash flow (used in)/
+generated from (254,190) 10,933 3,793
+financing activities
+Notes:
+(1) Net Worth refers to the aggregate value of the paid-up share capital and all reserves c
+
+rev=10.0
+pat=300491.0
+fin=None

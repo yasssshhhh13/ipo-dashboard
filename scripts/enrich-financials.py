@@ -16,6 +16,27 @@ IPOS_PATH = ROOT / "public" / "ipos.json"
 GENERIC_DRHP = "https://www.sebi.gov.in/filings/public-issues.html"
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
+# Chittorgarh detail pages (slug includes numeric id required by site).
+CHITTORGARH_URLS: dict[str, str] = {
+    "behari-lal-engineering": "https://www.chittorgarh.com/ipo/behari-lal-engineering-ipo/2659/",
+    "innoterra": "https://www.chittorgarh.com/ipo/innoterra-ipo/3175/",
+    "gni-infrastructure": "https://www.chittorgarh.com/ipo/gni-infrastructure-ipo/3176/",
+    "renfra-energy-india": "https://www.chittorgarh.com/ipo/renfra-energy-india-ipo/3173/",
+    "tmc-transformers-india": "https://www.chittorgarh.com/ipo/tmc-transformers-india-ipo/3177/",
+    "pragyawan-technologies": "https://www.chittorgarh.com/ipo/pragyawan-technologies-ipo/3172/",
+    "stalwart-people-services-india": "https://www.chittorgarh.com/ipo/stalwart-people-services-india-ipo/3168/",
+    "functional-innovative-foods": "https://www.chittorgarh.com/ipo/functional-innovative-foods-ipo/3174/",
+    "jesons-industries": "https://www.chittorgarh.com/ipo/jesons-industries-ipo/2004/",
+    "eswari-global-metal-industries": "https://www.chittorgarh.com/ipo/eswari-global-metal-ipo/3169/",
+    "social-worth-technologies": "https://www.chittorgarh.com/ipo/social-worth-technologies-ipo/3164/",
+    "mann-fleet-partners": "https://www.chittorgarh.com/ipo/mann-fleet-partners-ipo/3166/",
+    "ujin-pharma": "https://www.chittorgarh.com/ipo/ujin-pharma-ipo/3154/",
+    "varmora-granito": "https://www.chittorgarh.com/ipo/varmora-granito-ipo/2563/",
+    "paras-healthcare": "https://www.chittorgarh.com/ipo/paras-healthcare-ipo/2256/",
+    "pioneer-fil-med": "https://www.chittorgarh.com/ipo/pioneer-fil-med-ipo/2967/",
+    "national-stock-exchange-of-india": "https://www.chittorgarh.com/ipo/national-stock-exchange-of-india-ipo/3151/",
+}
+
 # Hand-verified from DRHP/RHP tables on InvestorGain (Jul 24, 2026).
 MANUAL = {
     "lohia": {
@@ -104,8 +125,41 @@ def fetch_html(url: str) -> str:
         return resp.read().decode("utf-8", errors="replace")
 
 
-def parse_fin_from_html(html: str) -> dict | None:
+def parse_financial_table(html: str) -> dict | None:
+    """Parse Chittorgarh Next.js financialTable (2025+ layout)."""
+    m = re.search(r"id=['\"]financialTable['\"].*?</table>", html, re.S)
+    if not m:
+        return None
     fin: dict[str, float] = {}
+    for row in re.findall(r"<tr>(.*?)</tr>", m.group(0), re.S):
+        cells = re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", row, re.S)
+        clean = [re.sub(r"<[^>]+>", "", c).strip() for c in cells]
+        if len(clean) < 2:
+            continue
+        label = clean[0].lower()
+        try:
+            val = float(clean[1].replace(",", ""))
+        except ValueError:
+            continue
+        if fin.get("revenue") is None and ("total income" in label or label == "revenue"):
+            fin["revenue"] = val
+        elif fin.get("pat") is None and "profit after tax" in label:
+            fin["pat"] = val
+        elif fin.get("ebitda") is None and "ebitda" in label:
+            fin["ebitda"] = val
+        elif fin.get("netWorth") is None and "net worth" in label:
+            fin["netWorth"] = val
+        elif fin.get("debt") is None and "total borrowing" in label:
+            fin["debt"] = val
+    return fin if is_valid_fin(fin) else None
+
+
+def parse_fin_from_html(html: str) -> dict | None:
+    fin = parse_financial_table(html)
+    if fin:
+        return fin
+
+    fin = {}
 
     def row_val(label: str) -> float | None:
         patterns = [
@@ -150,6 +204,9 @@ def chittorgarh_search_url(company: str) -> str | None:
 
 
 def find_chittorgarh_ipo_link(html: str) -> str | None:
+    m = re.search(r'href="(/ipo/[^"]+-ipo/\d+/)"', html, re.I)
+    if m:
+        return "https://www.chittorgarh.com" + m.group(1)
     m = re.search(r'href="(/ipo/[^"]+)"[^>]*>\s*[^<]*(?:Limited|Ltd)', html, re.I)
     if m:
         return "https://www.chittorgarh.com" + m.group(1)
@@ -159,6 +216,9 @@ def find_chittorgarh_ipo_link(html: str) -> str | None:
 
 def fetch_fin_for_ipo(ipo: dict) -> dict | None:
     urls = []
+    iid = ipo.get("id") or ""
+    if iid in CHITTORGARH_URLS:
+        urls.append(CHITTORGARH_URLS[iid])
     if ipo.get("investorgainUrl"):
         urls.append(ipo["investorgainUrl"])
     # Chittorgarh fallback for DRHP-only pipeline IPOs
@@ -221,8 +281,43 @@ def main() -> None:
         st = ipo.get("status") or ""
         if st not in ("Open", "Closed", "Upcoming", "Listed"):
             continue
-        if not ipo.get("investorgainUrl") and not (ipo.get("drhp") and ipo.get("drhp") != GENERIC_DRHP):
+        has_drhp = ipo.get("drhp") and ipo.get("drhp") != GENERIC_DRHP
+        if not ipo.get("investorgainUrl") and not has_drhp:
             continue
+        # Chittorgarh URL map for DRHP-only pipeline IPOs.
+        if has_drhp and not ipo.get("investorgainUrl") and ipo.get("id") in CHITTORGARH_URLS:
+            try:
+                html = fetch_html(CHITTORGARH_URLS[ipo["id"]])
+                fin = parse_fin_from_html(html)
+                if fin:
+                    enrich_pe(ipo, fin)
+                    ipo["fin"] = fin
+                    ipo["finMeta"] = build_meta(ipo, "Chittorgarh prospectus table + DRHP/RHP")
+                    scraped += 1
+                    print(f"chittorgarh {ipo.get('id')}: rev={fin.get('revenue')} pat={fin.get('pat')}")
+                    time.sleep(0.5)
+                    continue
+            except Exception:
+                pass
+        if has_drhp and not ipo.get("investorgainUrl"):
+            search = chittorgarh_search_url(ipo.get("company") or ipo.get("name") or "")
+            if search:
+                try:
+                    search_html = fetch_html(search)
+                    link = find_chittorgarh_ipo_link(search_html)
+                    if link:
+                        html = fetch_html(link)
+                        fin = parse_fin_from_html(html)
+                        if fin:
+                            enrich_pe(ipo, fin)
+                            ipo["fin"] = fin
+                            ipo["finMeta"] = build_meta(ipo, "Chittorgarh prospectus table + DRHP/RHP")
+                            scraped += 1
+                            print(f"chittorgarh {ipo.get('id')}: rev={fin.get('revenue')} pat={fin.get('pat')}")
+                            time.sleep(0.5)
+                            continue
+                except Exception:
+                    pass
         try:
             fin = fetch_fin_for_ipo(ipo)
             if not fin:

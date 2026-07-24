@@ -5553,6 +5553,22 @@
         "sources": [],
         "updatedAt": "2026-07-24T05:49:12.779Z"
       }
+    },
+    "fin": {
+      "revenue": 417.24,
+      "pat": 95.71,
+      "ebitda": 133.05,
+      "netWorth": 205.33
+    },
+    "finMeta": {
+      "sourceDoc": "DRHP",
+      "sourceUrl": "https://www.sebi.gov.in/filings/public-issues/jul-2026/tmc-transformers-india-limited-drhp_102680.html",
+      "sourcePdf": "https://www.sebi.gov.in/sebi_data/commondocs/jul-2026/TMC%20Transformers%20India%20Limited%20-%20Abri_p.pdf",
+      "fy": "Latest restated period",
+      "pageNum": "Summary financial information",
+      "verifiedAt": "2026-07-24T06:32:09Z",
+      "method": "SEBI DRHP / Draft Abridged PDF extraction",
+      "status": "Verified"
     }
   },
   {
@@ -6367,6 +6383,23 @@
         "sources": [],
         "updatedAt": "2026-07-24T05:49:12.779Z"
       }
+    },
+    "fin": {
+      "revenue": 543.53,
+      "pat": 24.96,
+      "ebitda": 68.85,
+      "netWorth": 263.0,
+      "debt": 1.1
+    },
+    "finMeta": {
+      "sourceDoc": "DRHP",
+      "sourceUrl": "https://www.sebi.gov.in/filings/public-issues/jun-2026/sky-alloys-and-power-limited-drhp_102415.html",
+      "sourcePdf": "https://www.sebi.gov.in/sebi_data/commondocs/jun-2026/Sky%20Alloys%20and%20Power%20Limited%20-%20Abri_p.pdf",
+      "fy": "Latest restated period",
+      "pageNum": "Summary financial information",
+      "verifiedAt": "2026-07-24T06:33:53Z",
+      "method": "SEBI DRHP / Draft Abridged PDF extraction",
+      "status": "Verified"
     }
   },
   {
@@ -6441,6 +6474,23 @@
         "sources": [],
         "updatedAt": "2026-07-24T05:49:12.779Z"
       }
+    },
+    "fin": {
+      "revenue": 146885.3,
+      "pat": 30049.1,
+      "ebitda": 76255.4,
+      "netWorth": 334013.4,
+      "debt": 70781.0
+    },
+    "finMeta": {
+      "sourceDoc": "DRHP",
+      "sourceUrl": "https://www.sebi.gov.in/filings/public-issues/jun-2026/jio-platforms-ltd-drhp_102248.html",
+      "sourcePdf": "https://www.sebi.gov.in/sebi_data/commondocs/jun-2026/Jio%20Platforms%20Ltd_p.PDF",
+      "fy": "Latest restated period",
+      "pageNum": "Summary financial information",
+      "verifiedAt": "2026-07-24T06:34:01Z",
+      "method": "SEBI DRHP / Draft Abridged PDF extraction",
+      "status": "Verified"
     }
   },
   {
@@ -6663,6 +6713,22 @@
         "sources": [],
         "updatedAt": "2026-07-24T05:49:12.779Z"
       }
+    },
+    "fin": {
+      "revenue": 1628.78,
+      "pat": 43.83,
+      "ebitda": 335.58,
+      "netWorth": 394.94
+    },
+    "finMeta": {
+      "sourceDoc": "DRHP",
+      "sourceUrl": "https://www.sebi.gov.in/filings/public-issues/jun-2026/paras-healthcare-limited-drhp_102187.html",
+      "sourcePdf": "https://www.sebi.gov.in/sebi_data/commondocs/jun-2026/Paras%20Healthcare%20Limited%20-%20Abridged_p.pdf",
+      "fy": "Latest restated period",
+      "pageNum": "Summary financial information",
+      "verifiedAt": "2026-07-24T06:34:23Z",
+      "method": "SEBI DRHP / Draft Abridged PDF extraction",
+      "status": "Verified"
     }
   },
   {
@@ -7864,8 +7930,13 @@
       "Highly competitive market segment and raw material cost exposure"
     ],
     "finMeta": {
-      "source": "chittorgarh",
-      "capturedAt": "2026-07-24T05:49:12.779Z"
+      "sourceDoc": "DRHP",
+      "sourceUrl": "https://www.investorgain.com/ipo/dhaval-packaging-ipo/2087/",
+      "fy": "FY2026",
+      "pageNum": "Financials",
+      "verifiedAt": "2026-07-24T06:28:23Z",
+      "method": "Chittorgarh prospectus table + regulatory filing",
+      "status": "Verified"
     },
     "verification": {
       "priceMin": {
@@ -8000,7 +8071,13 @@
     "leadManager": "Kotak Mahindra Capital Co.Ltd.",
     "exchange": "BSE, NSE",
     "sub": null,
-    "fin": null,
+    "fin": {
+      "revenue": 5436.31,
+      "pat": 319.47,
+      "ebitda": 1439.15,
+      "eps": 7.67,
+      "pe": 76.92
+    },
     "about": "Manipal Health Enterprises Limited is a newly announced Mainboard IPO operating in the General sector. The company is launching its issue on BSE, NSE.",
     "sector": "General",
     "registrar": "Kfin Technologies Ltd.",
@@ -8094,6 +8171,15 @@
         ],
         "updatedAt": "2026-07-24T05:49:12.779Z"
       }
+    },
+    "finMeta": {
+      "sourceDoc": "RHP",
+      "sourceUrl": "https://www.sebi.gov.in/filings/public-issues/apr-2026/manipal-health-enterprises-limited-drhp_100763.html",
+      "fy": "FY2026",
+      "pageNum": "Financials",
+      "verifiedAt": "2026-07-24T06:28:36Z",
+      "method": "InvestorGain / Chittorgarh prospectus table + DRHP/RHP",
+      "status": "Verified"
     }
   }
 ]
