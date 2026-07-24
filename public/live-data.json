@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-24T13:31:04.364Z",
+  "updatedAt": "2026-07-24T15:24:56.040Z",
   "errors": [],
   "ipos": {
     "cube-highways": {
@@ -9,7 +9,7 @@
           "status": "unverified",
           "value": 151,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -17,7 +17,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -25,7 +25,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -33,25 +33,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 5000,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -59,7 +59,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -67,7 +67,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -75,7 +75,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -83,7 +83,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "gmp": 1,
@@ -106,7 +106,7 @@
           "status": "unverified",
           "value": 402,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -114,7 +114,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -122,7 +122,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -130,25 +130,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 400,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 50,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -156,7 +156,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -164,7 +164,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -172,7 +172,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -180,7 +180,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "listedAt": 499,
@@ -205,7 +205,7 @@
           "status": "unverified",
           "value": 178,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -213,7 +213,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -221,7 +221,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -229,25 +229,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 89.76,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -255,7 +255,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -263,7 +263,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -271,7 +271,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -279,7 +279,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -307,7 +307,7 @@
           "status": "unverified",
           "value": 112,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -315,7 +315,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -323,7 +323,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -331,25 +331,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 42.34,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -357,7 +357,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -365,7 +365,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -373,7 +373,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -381,7 +381,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -409,7 +409,7 @@
           "status": "unverified",
           "value": 398,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -417,7 +417,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -425,7 +425,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -433,25 +433,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 650,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -459,7 +459,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -467,7 +467,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -475,7 +475,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -483,7 +483,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -509,7 +509,7 @@
           "status": "unverified",
           "value": 94,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -517,7 +517,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -525,7 +525,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -533,25 +533,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 47.91,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -559,7 +559,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -567,7 +567,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -575,7 +575,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -583,7 +583,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -606,7 +606,7 @@
           "status": "unverified",
           "value": 161,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -614,7 +614,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -622,7 +622,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -630,25 +630,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 439.5,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -656,7 +656,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -664,7 +664,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -672,7 +672,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -680,7 +680,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -704,7 +704,7 @@
           "status": "unverified",
           "value": 150,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -712,7 +712,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -720,7 +720,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -728,25 +728,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 34.13,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -754,7 +754,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -762,7 +762,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -770,7 +770,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -778,7 +778,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -804,7 +804,7 @@
           "status": "unverified",
           "value": 134,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -812,7 +812,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -820,7 +820,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -828,25 +828,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 19.74,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -854,7 +854,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -862,7 +862,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -870,7 +870,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -878,7 +878,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -901,67 +901,67 @@
           "status": "unverified",
           "value": 55,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 60,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 2000,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 27,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 27,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-30",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-07-02",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-07-03",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-07",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -984,67 +984,67 @@
           "status": "unverified",
           "value": 128,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 135,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 1000,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 39.69,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 39.69,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-30",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-07-02",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-07-03",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-07",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -1067,67 +1067,67 @@
           "status": "unverified",
           "value": 220,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 220,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 600,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 37.36,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 37.36,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-30",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-07-02",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-07-03",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-07",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -1150,67 +1150,67 @@
           "status": "unverified",
           "value": 125,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 136,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 110,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 170,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 130,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 40,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-29",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-07-01",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-07-02",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-06",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -1234,67 +1234,67 @@
           "status": "unverified",
           "value": 66,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 70,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 2000,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 44.03,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 44.03,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-29",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-07-01",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-07-02",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-06",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -1315,67 +1315,67 @@
           "status": "unverified",
           "value": 107,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 113,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 132,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 145.78,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 100,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 45.78,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-24",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-06-29",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-06-30",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-02",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -1391,15 +1391,15 @@
       }
     },
     "xtranet-technologies": {
-      "gmp": 9,
+      "gmp": 10,
       "priceMax": 127,
-      "estListing": 136,
+      "estListing": 137,
       "verification": {
         "priceMin": {
           "status": "unverified",
           "value": 120,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -1407,7 +1407,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -1415,7 +1415,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -1423,25 +1423,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 166.8,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -1449,7 +1449,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -1457,7 +1457,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -1465,7 +1465,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -1473,7 +1473,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -1497,7 +1497,7 @@
           "status": "unverified",
           "value": 72,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -1505,7 +1505,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -1513,7 +1513,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -1521,25 +1521,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 49.96,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -1547,7 +1547,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -1555,7 +1555,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -1563,7 +1563,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -1571,7 +1571,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "gmp": 6,
@@ -1596,7 +1596,7 @@
           "status": "unverified",
           "value": 315,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -1604,7 +1604,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -1612,7 +1612,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -1620,25 +1620,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 160.34,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -1646,7 +1646,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -1654,7 +1654,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -1662,7 +1662,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -1670,7 +1670,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -1693,7 +1693,7 @@
           "status": "unverified",
           "value": 100,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -1701,7 +1701,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -1709,7 +1709,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -1717,25 +1717,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 126.25,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -1743,7 +1743,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -1751,7 +1751,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -1759,7 +1759,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -1767,7 +1767,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -1788,7 +1788,7 @@
           "status": "unverified",
           "value": 100,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -1796,7 +1796,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -1804,7 +1804,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -1812,25 +1812,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 18.19,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -1838,7 +1838,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -1846,7 +1846,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -1854,7 +1854,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -1862,7 +1862,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -1909,7 +1909,7 @@
           "status": "unverified",
           "value": 545,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -1917,7 +1917,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -1925,7 +1925,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -1933,25 +1933,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 9813,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 1,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -1959,7 +1959,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -1967,7 +1967,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -1975,7 +1975,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -1983,7 +1983,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -2011,7 +2011,7 @@
           "status": "unverified",
           "value": 214,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -2019,7 +2019,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -2027,7 +2027,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -2035,25 +2035,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 742,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -2061,7 +2061,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -2069,7 +2069,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -2077,7 +2077,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -2085,7 +2085,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -2111,67 +2111,67 @@
           "status": "unverified",
           "value": 80,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 84,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 1600,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 27.22,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 27.22,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-30",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-07-02",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-07-03",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-07",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -2192,67 +2192,67 @@
           "status": "unverified",
           "value": 42,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 42,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 3000,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 31.47,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 31.47,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-25",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-06-30",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-07-01",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-03",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -2271,67 +2271,67 @@
           "status": "unverified",
           "value": 106,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 106,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 1200,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 30.2,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 30.2,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-18",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-06-25",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-06-29",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-01",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "listedAt": 84.8,
@@ -2344,67 +2344,67 @@
           "status": "unverified",
           "value": 196,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 196,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 600,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 31.99,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 31.99,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-23",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-06-25",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-06-29",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-01",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "listedAt": 156.8,
@@ -2419,67 +2419,67 @@
           "status": "unverified",
           "value": 138,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 138,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 100,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 165.16,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 165.16,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-23",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-06-25",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-06-29",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-01",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "listedAt": 187,
@@ -2507,67 +2507,67 @@
           "status": "unverified",
           "value": 808,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 808,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 18,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 585,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 585,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-06-23",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-06-25",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-06-29",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-01",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -2598,7 +2598,7 @@
           "status": "unverified",
           "value": 66,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -2606,7 +2606,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -2614,7 +2614,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -2622,25 +2622,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 18.9,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -2648,7 +2648,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -2656,7 +2656,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -2664,7 +2664,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -2672,7 +2672,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -2693,7 +2693,7 @@
           "status": "unverified",
           "value": 404,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -2701,7 +2701,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -2709,7 +2709,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -2717,25 +2717,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 1101.28,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -2743,7 +2743,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -2751,7 +2751,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -2759,7 +2759,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -2767,7 +2767,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -2783,15 +2783,15 @@
       "priceMax": 53
     },
     "indo-mim": {
-      "gmp": 177,
+      "gmp": 184,
       "priceMax": 485,
-      "estListing": 662,
+      "estListing": 669,
       "verification": {
         "priceMin": {
           "status": "unverified",
           "value": 461,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -2799,7 +2799,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -2807,7 +2807,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -2815,25 +2815,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 499.1,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 3312.11,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 1,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -2841,7 +2841,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -2849,7 +2849,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -2857,7 +2857,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -2865,7 +2865,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -2884,7 +2884,7 @@
           "status": "unverified",
           "value": 133,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -2892,7 +2892,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -2900,7 +2900,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -2908,25 +2908,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 82.43,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -2934,7 +2934,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -2942,7 +2942,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -2950,7 +2950,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -2958,7 +2958,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -2981,67 +2981,67 @@
           "status": "unverified",
           "value": 66,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
           "value": 66,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
           "value": 2000,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
           "value": 15.8,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 15.8,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
           "value": "2026-07-09",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
           "value": "2026-07-13",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
           "value": "2026-07-14",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
           "value": "2026-07-16",
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "sub": {
@@ -3060,7 +3060,7 @@
           "status": "unverified",
           "value": 69,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -3068,7 +3068,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -3076,7 +3076,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -3084,25 +3084,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 28.57,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -3110,7 +3110,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -3118,7 +3118,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -3126,7 +3126,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -3134,7 +3134,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       }
     },
@@ -3145,7 +3145,7 @@
           "status": "unverified",
           "value": 95,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -3153,7 +3153,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -3161,7 +3161,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -3169,25 +3169,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 24.03,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -3195,7 +3195,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -3203,7 +3203,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -3211,7 +3211,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -3219,11 +3219,11 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
-      "gmp": 8,
-      "estListing": 103
+      "gmp": 9,
+      "estListing": 104
     },
     "poojaa-precision-engg": {
       "priceMax": 301,
@@ -3232,7 +3232,7 @@
           "status": "unverified",
           "value": 301,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -3240,7 +3240,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -3248,7 +3248,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -3256,25 +3256,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 159.83,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -3282,7 +3282,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -3290,7 +3290,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -3298,7 +3298,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -3306,11 +3306,11 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
-      "gmp": 200,
-      "estListing": 501
+      "gmp": 210,
+      "estListing": 511
     },
     "fusion-klassroom-edutech": {
       "priceMax": 159,
@@ -3321,7 +3321,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -3329,7 +3329,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -3337,25 +3337,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 0.19,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -3363,7 +3363,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -3371,7 +3371,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -3379,7 +3379,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -3387,13 +3387,13 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMin": {
           "status": "unverified",
           "value": 151,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       },
       "listedAt": 159,
@@ -3406,7 +3406,7 @@
           "status": "unverified",
           "value": 97,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -3414,7 +3414,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -3422,7 +3422,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -3430,25 +3430,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 36.36,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -3456,7 +3456,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -3464,7 +3464,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -3472,7 +3472,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -3480,20 +3480,20 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       }
     },
     "manipal-health-enterprises": {
-      "gmp": 33,
+      "gmp": 35,
       "priceMax": 590,
-      "estListing": 623,
+      "estListing": 625,
       "verification": {
         "priceMin": {
           "status": "unverified",
           "value": 590,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "priceMax": {
           "status": "unverified",
@@ -3501,7 +3501,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "lot": {
           "status": "unverified",
@@ -3509,7 +3509,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "issueSize": {
           "status": "unverified",
@@ -3517,25 +3517,25 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "freshIssue": {
           "status": "unverified",
           "value": 9275.22,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "ofs": {
           "status": "unverified",
           "value": 0,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "faceValue": {
           "status": "unverified",
           "value": 10,
           "sources": [],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "open": {
           "status": "unverified",
@@ -3543,7 +3543,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "close": {
           "status": "unverified",
@@ -3551,7 +3551,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "allotment": {
           "status": "unverified",
@@ -3559,7 +3559,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         },
         "listing": {
           "status": "unverified",
@@ -3567,7 +3567,7 @@
           "sources": [
             "investorgain"
           ],
-          "updatedAt": "2026-07-24T13:30:13.790Z"
+          "updatedAt": "2026-07-24T15:24:07.447Z"
         }
       }
     }
