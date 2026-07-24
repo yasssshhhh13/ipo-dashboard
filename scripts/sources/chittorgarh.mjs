@@ -6,6 +6,7 @@
 // financials. It contributes votes to the consensus reconciler.
 
 import { isSameCompanyName } from "../lib/match.mjs";
+import { isVerifiedFin } from "../lib/financials.mjs";
 
 // Report pages that list current + recent IPOs with links to each detail page.
 const LIST_URLS = [
@@ -17,7 +18,8 @@ const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 // Cap detail-page visits per run so the CI job stays bounded. We only deep-scrape
 // IPOs that match one we already track.
-const MAX_DETAIL_VISITS = 25;
+// Deep-scrape enough tracked IPOs to cover active pipeline financials each run.
+const MAX_DETAIL_VISITS = 80;
 
 async function collectListLinks(page) {
   const links = [];
@@ -117,18 +119,19 @@ async function scrapeDetail(page, url) {
         if (fields.listing == null && (label === "listing date" || label.includes("listed on") || label.includes("listing at date"))) fields.listing = parseDate(value);
       }
 
-      // Prospectus financials (revenue / PAT / EBITDA) when present in a
-      // "Financial Information" table. Best-effort; only capture clean numbers.
+      // Prospectus financials — first data column = most recent period.
       const fin = {};
       for (const row of rows) {
         const cells = Array.from(row.querySelectorAll("th, td")).map((c) => c.innerText.trim());
         if (cells.length < 2) continue;
         const label = cells[0].toLowerCase();
-        const val = firstNum(cells[cells.length - 1]);
+        const val = firstNum(cells[1]);
         if (val == null) continue;
         if (fin.revenue == null && (label.includes("revenue") || label.includes("total income"))) fin.revenue = val;
         if (fin.pat == null && (label.includes("profit after tax") || label === "pat" || label.includes("net profit"))) fin.pat = val;
+        if (fin.ebitda == null && label.includes("ebitda")) fin.ebitda = val;
         if (fin.netWorth == null && label.includes("net worth")) fin.netWorth = val;
+        if (fin.debt == null && label.includes("total borrowing")) fin.debt = val;
       }
 
       return { fields, fin: Object.keys(fin).length ? fin : null };
@@ -160,12 +163,22 @@ export async function fetchAll(browser, iposBase) {
       const url = toAbsolute(l.href);
       if (!url || seen.has(url)) continue;
       seen.add(url);
-      relevant.push({ ...l, url });
-      if (relevant.length >= MAX_DETAIL_VISITS) break;
+      relevant.push({ ...l, url, match });
     }
-    console.log(`[Chittorgarh] deep-scraping ${relevant.length} tracked IPOs`);
 
-    for (const l of relevant) {
+    const priority = (entry) => {
+      const ipo = entry.match;
+      if (isVerifiedFin(ipo)) return 3;
+      const st = ipo.status || "";
+      if (st === "Open" || st === "Closed") return 0;
+      if (st === "Upcoming") return 1;
+      return 2;
+    };
+    relevant.sort((a, b) => priority(a) - priority(b));
+    const toScrape = relevant.slice(0, MAX_DETAIL_VISITS);
+    console.log(`[Chittorgarh] deep-scraping ${toScrape.length} tracked IPOs`);
+
+    for (const l of toScrape) {
       const detail = await scrapeDetail(page, l.url);
       if (!detail) continue;
       out.push({

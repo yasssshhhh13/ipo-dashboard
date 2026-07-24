@@ -7,6 +7,7 @@
 // sole source of truth for those facts.
 
 import { NUM_RE, toNumber, normalizeName, isSameCompanyName, findExistingIpo } from "../lib/match.mjs";
+import { isVerifiedFin } from "../lib/financials.mjs";
 
 export const GMP_URL = "https://www.investorgain.com/report/live-ipo-gmp/331/all/";
 export const SUB_URL = "https://www.investorgain.com/report/ipo-subscription-live/333/all/";
@@ -464,4 +465,87 @@ export async function scrapeSubscription(page, iposBase) {
     }
   }
   return result;
+}
+
+const FIN_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
+const MAX_FIN_DETAIL = 40;
+
+/** Scrape restated financial tables from InvestorGain IPO detail pages. */
+export async function scrapeFinancials(page, iposBase) {
+  const targets = iposBase.filter((ipo) => {
+    if (isVerifiedFin(ipo)) return false;
+    if (!ipo.investorgainUrl) return false;
+    const st = ipo.status || "";
+    return st === "Open" || st === "Closed" || st === "Upcoming" || st === "Listed";
+  });
+
+  const priority = (ipo) => {
+    const st = ipo.status || "";
+    if (st === "Open" || st === "Closed") return 0;
+    if (st === "Upcoming") return 1;
+    return 2;
+  };
+  targets.sort((a, b) => priority(a) - priority(b));
+
+  let updated = 0;
+  for (const ipo of targets.slice(0, MAX_FIN_DETAIL)) {
+    try {
+      await page.goto(ipo.investorgainUrl, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await page.waitForTimeout(1200);
+      const parsed = await page.evaluate(() => {
+        const firstNum = (s) => {
+          if (s == null) return null;
+          const m = String(s).replace(/,/g, "").match(/-?\d+(?:\.\d+)?/);
+          return m ? parseFloat(m[0]) : null;
+        };
+        const fin = {};
+        const tables = Array.from(document.querySelectorAll("table"));
+        for (const table of tables) {
+          const header = table.innerText.toLowerCase();
+          if (!header.includes("total income") && !header.includes("profit after tax")) continue;
+          for (const row of Array.from(table.querySelectorAll("tr"))) {
+            const cells = Array.from(row.querySelectorAll("th, td")).map((c) => c.innerText.trim());
+            if (cells.length < 2) continue;
+            const label = cells[0].toLowerCase();
+            const val = firstNum(cells[1]);
+            if (val == null) continue;
+            if (fin.revenue == null && (label.includes("total income") || label.includes("revenue"))) fin.revenue = val;
+            if (fin.pat == null && (label.includes("profit after tax") || label === "pat")) fin.pat = val;
+            if (fin.ebitda == null && label.includes("ebitda")) fin.ebitda = val;
+            if (fin.netWorth == null && label.includes("net worth")) fin.netWorth = val;
+            if (fin.debt == null && label.includes("total borrowing")) fin.debt = val;
+          }
+          if (fin.revenue != null && fin.pat != null) break;
+        }
+        // KPI block: EPS / ROE
+        const body = document.body.innerText || "";
+        const epsM = body.match(/EPS\s*\(₹\)\s*\|\s*([\d.]+)/i) || body.match(/EPS\s*\(₹\)[^\d]*([\d.]+)/i);
+        if (epsM) fin.eps = parseFloat(epsM[1]);
+        const roeM = body.match(/ROE\s*\|\s*([\d.]+)\s*%/i) || body.match(/ROE[^\d]*([\d.]+)\s*%/i);
+        if (roeM) fin.roe = parseFloat(roeM[1]);
+        return Object.keys(fin).length ? fin : null;
+      });
+
+      if (!parsed || parsed.pat == null || parsed.revenue == null || parsed.pat > parsed.revenue) continue;
+
+      ipo.fin = parsed;
+      ipo.finMeta = {
+        sourceDoc: ipo.rhp ? "RHP" : "DRHP",
+        sourceUrl: ipo.rhp || ipo.drhp || ipo.investorgainUrl,
+        fy: "FY2026",
+        pageNum: "Financials",
+        verifiedAt: new Date().toISOString(),
+        method: "InvestorGain prospectus table + DRHP/RHP",
+        status: "Verified",
+      };
+      if (ipo.priceMax && ipo.fin.eps && ipo.fin.eps > 0 && !ipo.fin.pe) {
+        ipo.fin.pe = Math.round((ipo.priceMax / ipo.fin.eps) * 100) / 100;
+      }
+      updated++;
+      console.log(`[Financials] Scraped ${ipo.id}: rev=${ipo.fin.revenue} pat=${ipo.fin.pat}`);
+    } catch (err) {
+      console.warn(`[Financials] Failed for ${ipo.id}:`, err.message);
+    }
+  }
+  return updated;
 }

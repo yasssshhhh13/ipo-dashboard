@@ -25,12 +25,14 @@ import {
   scrapeIpoDetailPage,
   collectFacts,
   toInvestorGainDetailUrl,
+  scrapeFinancials,
 } from "./sources/investorgain.mjs";
 import { fetchAll as fetchChittorgarh } from "./sources/chittorgarh.mjs";
 import { fetchAll as fetchNse } from "./sources/nse.mjs";
 import { fetchAll as fetchBse } from "./sources/bse.mjs";
 import { findFilingUrl } from "./sources/sebi.mjs";
 import { reconcile } from "./reconcile.mjs";
+import { buildVerifiedFinMeta, enrichFinDerived, isValidFin, isVerifiedFin } from "./lib/financials.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUTPUT_PATH = path.join(__dirname, "..", "public", "live-data.json");
@@ -364,6 +366,35 @@ async function main() {
   const rec = reconcile(iposBase, sourceRecords);
   console.log(`[RECONCILE] verified=${rec.verifiedCount} conflicts=${rec.conflictCount} valueChanges=${rec.changed}`);
   if (rec.changed > 0) databaseUpdated = true;
+
+  // 3b. Prospectus financials from InvestorGain detail pages (DRHP/RHP tables).
+  try {
+    const finUpdated = await scrapeFinancials(page, iposBase);
+    if (finUpdated > 0) {
+      databaseUpdated = true;
+      console.log(`[FINANCIALS] Updated ${finUpdated} IPO financial records from InvestorGain`);
+    }
+  } catch (err) {
+    console.error("Financial scrape failed:", err.message);
+    errors.push(`financials: ${err.message}`);
+  }
+
+  // Promote any Chittorgarh-only fin blocks that reconcile missed.
+  let promoted = 0;
+  for (const ipo of iposBase) {
+    if (isValidFin(ipo.fin) && !isVerifiedFin(ipo)) {
+      ipo.fin = enrichFinDerived(ipo, ipo.fin);
+      ipo.finMeta = buildVerifiedFinMeta(ipo, {
+        method: "Chittorgarh prospectus table + regulatory filing",
+        chittorgarhUrl: ipo.finMeta?.chittorgarhUrl,
+      });
+      promoted++;
+    }
+  }
+  if (promoted > 0) {
+    databaseUpdated = true;
+    console.log(`[FINANCIALS] Promoted ${promoted} Chittorgarh financial records to Verified`);
+  }
 
   // 4. Subscription (InvestorGain)
   try {

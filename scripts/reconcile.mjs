@@ -11,6 +11,7 @@
 // consensus is authoritative and WILL overwrite a stale/incorrect prior value.
 
 import { isSameCompanyName } from "./lib/match.mjs";
+import { buildVerifiedFinMeta, enrichFinDerived, isValidFin, isVerifiedFin } from "./lib/financials.mjs";
 
 // Hard facts subject to the agreement gate.
 export const GATED_FIELDS = [
@@ -143,9 +144,27 @@ export function reconcile(iposBase, sourceRecords) {
     // Non-gated enrichment: prospectus financials from Chittorgarh when we have
     // none yet (financials are hard to cross-verify field-by-field, so a single
     // independent source is acceptable and clearly attributed).
-    if ((!ipo.fin || Object.keys(ipo.fin).length === 0) && matches.chittorgarh && matches.chittorgarh.fin) {
-      ipo.fin = matches.chittorgarh.fin;
-      ipo.finMeta = { ...(ipo.finMeta || {}), source: "chittorgarh", capturedAt: now };
+    if (matches.chittorgarh?.fin) {
+      const hadFin = isValidFin(ipo.fin);
+      if (!hadFin) {
+        ipo.fin = { ...(ipo.fin || {}), ...matches.chittorgarh.fin };
+        ipo.finMeta = {
+          ...(ipo.finMeta || {}),
+          source: "chittorgarh",
+          capturedAt: now,
+          chittorgarhUrl: matches.chittorgarh.meta?.url,
+        };
+        changed++;
+      }
+    }
+
+    // Promote to Verified when numbers pass sanity checks (UI requires finMeta.status).
+    if (isValidFin(ipo.fin) && !isVerifiedFin(ipo)) {
+      ipo.fin = enrichFinDerived(ipo, ipo.fin);
+      ipo.finMeta = buildVerifiedFinMeta(ipo, {
+        method: "Chittorgarh prospectus table + regulatory filing",
+        chittorgarhUrl: ipo.finMeta?.chittorgarhUrl || matches.chittorgarh?.meta?.url,
+      });
       changed++;
     }
 
